@@ -70,7 +70,9 @@ class popoon_components_actions_slidemladmin extends popoon_components_action {
             $title  = $dom->createElementNs("http://www.oscom.org/2003/SlideML/1.0/","title");
             $title->appendChild($dom->createTextNode("Slide Title"));
             $content  = $dom->createElementNs("http://www.oscom.org/2003/SlideML/1.0/","content");
-            $content->appendChild($dom->createTextNode("Slide Content"));
+            $p = $dom->createElementNs("http://www.w3.org/1999/xhtml","p");
+            $p->appendChild($dom->createTextNode("Slide Content"));
+            $content->appendChild($p);
             
             $newslide->appendChild($title);
             $newslide->appendChild($content);
