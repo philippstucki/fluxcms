@@ -61,9 +61,17 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         
     function cleanXHTML($xml) {
         /* for some strange reasons, libxml makes an upercase HTML, which the w3c validator doesn't like */
+        if ($this->getParameterDefault("stripScriptCDATA") == "true") {
+            $xml = $this->stripScriptCDATA($xml);
+        }
         return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
     }
 
+    function stripScriptCDATA($xml) {
+        $xml = preg_replace("#(<script[^>]+>)<!\[CDATA\[#","$1",$xml);
+        return preg_replace("#\]\]>(</script>)#","$1",$xml);
+    }
+        
     function obfuscateMail($xml) {
 	 if ($this->getParameter('default','obfuscateMail') == 'true') {
                 return str_replace('mailto:','&#109;&#97;&#105;&#108;&#116;&#111;&#58;',str_replace('@','&#64;',$xml));
