@@ -29,42 +29,64 @@ include_once("popoon/components/transformer.php");
 * @package  popoon
 */
 class popoon_components_transformers_searchhighlighter extends popoon_components_transformer {
-    
+
     public $XmlFormat = "Own";
-    
-    
+
+    /**
+    * The tags inside of which highlighting is forbidden.
+    * @var array
+    * @see highlightConditional()
+    */
+    public $tabuTagNames = array('title', 'meta', 'script', 'style',);
+
+
     function __construct(&$sitemap) {
         parent::__construct($sitemap);
     }
-    
+
     function DomStart(&$xml)
-    {   
-        if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {	
+    {
+        if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {
            if (isset($_GET['q'])) {
 		$query = $_GET['q'];
 	     }	else if (isset($_SERVER['HTTP_REFERER'])  && strpos($_SERVER['HTTP_REFERER'],"q=")) {
-		
+
                 $ref = parse_url($_SERVER['HTTP_REFERER']);
                 parse_str($ref['query'],$para);
                 $query =  $para['q'];
 	    }
-           
+
                 if (isset($query)) {
                     parent::DomStart($xml);
                     popoon_sitemap::var2XMLString($xml);
                     $strings = explode(" ", $query);
                     $search = array();
                     foreach ($strings as $st) {
-                        $search[] = '#(>[^<]*)('.$st .')#i';
+                        $search[] = '#(<([^>\s/]+)>[^<]*)('.trim($st).')#i';
                     }
-                    $repl = '$1<span class="searchHighlight">$2</span>';
-                    $xml = preg_replace($search,$repl,$xml);
+
+                    $xml = preg_replace_callback($search, array($this, 'highlightConditional') ,$xml);
                 }
-            
+
         }
-        
-        
+
     }
+
+    protected function highlightConditional($matches){
+
+        $beforeWanted = $matches[1];
+        $tagName = strtolower($matches[2]);
+        $wanted  = $matches[3];
+
+        if(!in_array($tagName, $this->tabuTagNames)){
+            return $beforeWanted . '<span class="searchHighlight">'.$wanted.'</span>';
+        }
+        else {
+            return $beforeWanted . $wanted;
+        }
+
+    }
+
 }
 
 
