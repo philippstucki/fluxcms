@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xslt.php,v 1.28 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 @include_once("bitlib/functions/debug.php");
 
@@ -26,7 +26,7 @@
 *
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xslt.php,v 1.28 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_transformers_xslt extends popoon_components_transformer {
@@ -50,10 +50,13 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         $this->printDebug("XSL-File: ".$xslfile);    
         
         $xslDom = new DomDocument();
-        
-
         if (!$xslDom->load($xslfile)) {
-            print "$xslfile could not be loaded";
+            if (!file_exists($xslfile)) {
+                throw new PopoonFileNotFoundException($xslfile);
+            } else {
+                throw new PopoonXMLParseErrorException($xslfile);  
+            }
+          
         }
 
         $xsl = new XsltProcessor();
