@@ -63,7 +63,11 @@
                 if (!isset($this->config->dboptions)) {
                     $this->config->dboptions = NULL;
                 }
+		
                 $this->db = MDB2::connect($this->config->dsn,$this->config->dboptions);
+		if (MDB2::isError($this->db)) {
+			throw new PopoonDBException($this->db);
+		}
                 return $this->db;
          }
              
