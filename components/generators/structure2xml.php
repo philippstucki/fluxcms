@@ -194,6 +194,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
             
             // send http cache headers so the sent page expires immediately 
             $lastChangedDate = gmdate("r", $this->queries["_queryInfo"]["maxLastChanged"]);
+            if (isset($this->sitemap)) {
             $this->sitemap->setHeader("Last-Modified", $lastChangedDate);
             $this->sitemap->setHeader('Expires', $lastChangedDate);
             
@@ -201,6 +202,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
             // FIXME: if there is no bitlib2 code anymore, this if can go away
             if (method_exists($this->sitemap,"setLastModified")) {
                 $this->sitemap->setLastModified($this->queries["_queryInfo"]["maxLastChanged"] );
+            }
             }
         }
         if ($returnDb2XmlObject) {
