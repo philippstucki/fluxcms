@@ -19,7 +19,6 @@
 //
 // $Id$
 
-@include_once("bitlib/functions/debug.php");
 
 /**
 * Translates xmlfile 
@@ -47,7 +46,6 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         parent::DomStart($xml);
         
         $xslfile = $this->getAttrib("src");
-        $this->printDebug("XSL-File: ".$xslfile);    
         
         $xslDom = new DomDocument();
         if (!$xslDom->load($xslfile)) {
@@ -94,6 +92,7 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         
     }
 }
+
 
 
 ?>
