@@ -38,12 +38,6 @@ class popoon_classes_structure2xml {
         {
             $sql2xml->setOptions(array("user_options" => array("xml_seperator"=>$this->getAttrib("xml_seperator"))));
         }
-        /*I'm not sure, if we need the structure.xml in the output....  normaly we don't */
-        if (isset($PageOptions["All"]["include_structure_xml"]) && $PageOptions["All"]["include_structure_xml"])
-        {
-            $sql2xml->add($configXml);
-        }
-        
         $sql2xml->setOptions(array("user_options" => array("print_empty_ids"=>False)));
         
         
@@ -89,12 +83,12 @@ class popoon_classes_structure2xml {
                             $query["maxLastChanged"]  = $this->db->extended->getOne($query['queryLastChanged']);
                             
                         } 
-                        
                         if ( $cachedXML = $this->api->simpleCacheCheck("","st2xml_data",$query['query'],"file", $query["maxLastChanged"])) {
                             $sql2xml->addWithInput("File",$cachedXML);
                         } 
                         else {
                             $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
+                           
                             $sql2xml->add($query['query']);
                             $ctx = new DomXpath($sql2xml->Format->xmldoc);
                             $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
