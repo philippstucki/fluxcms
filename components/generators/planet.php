@@ -31,11 +31,35 @@ class popoon_components_generators_planet extends popoon_components_generator {
         }
         
         $startEntry = $this->getParameterDefault("startEntry");
+        $search = $this->getParameterDefault("search");
         
-        $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
-        $xml .= '<planet>';
         
         $db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
+
+        $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
+        $xml .= '<planet>';
+        $xml .= '<search>';
+        if ($search) {
+            $where = " where match(content_encoded , entries.description ) against('". $search . "')";
+          
+            $xml .= '<string>'.$search .'</string>';
+           
+        } else {
+            $where = "";
+        }
+        
+        
+        $from = 'from entries
+        left join feeds on entries.feedsID = feeds.ID
+        left join blogs on feeds.blogsID = blogs.ID
+        ' . $where ;
+        
+        $count = $db->getOne('select count(entries.ID) ' . $from);
+        
+        $xml .= '<count>'.$count.'</count>';
+        $xml .= '<start>'.$startEntry.'</start>';
+        $xml .= '</search>';
+        
         $cdataFields = array("title","link","description","content_encoded","blog_Title");
         $res = $db->query('
         SELECT entries.ID,
@@ -48,9 +72,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         
         blogs.link as blog_Link,
         if(length(blogs.title) > '. ($this->maxBlogTitleLength + 5) .' , concat(left(blogs.title,'. ($this->maxBlogTitleLength ) .')," ..."), blogs.Title) as blog_Title
-        from entries
-        left join feeds on entries.feedsID = feeds.ID
-        left join blogs on feeds.blogsID = blogs.ID
+        ' . $from . '
         order by entries.dc_date DESC 
         limit '.$startEntry . ',10');
         
