@@ -9,6 +9,55 @@
      */
     class HTTP_WebDAV_Server_bxcmsng extends HTTP_WebDAV_Server_Filesystem_MDB2
     {
+        
+               /**
+         * Serve a webdav request
+         *
+         * @access public
+         * @param  string  
+         */
+        function ServeRequest($base = false) 
+        {
+            // special treatment for litmus compliance test
+            // reply on its identifier header
+            // not needed for the test itself but eases debugging
+            foreach(apache_request_headers() as $key => $value) {
+                if(stristr($key,"litmus")) {
+                    error_log("Litmus test $value");
+                    header("X-Litmus-reply: ".$value);
+                }
+            }
+
+            // set root directory, defaults to webserver document root if not set
+            if ($base) { 
+                $this->base = realpath($base); // TODO throw if not a directory
+            } else if(!$this->base) {
+                $this->base = $_SERVER['DOCUMENT_ROOT'];
+            }
+            
+            // establish connection to property/locking db
+            
+     
+
+            
+            require_once("MDB2.php");
+            $this->db = MDB2::connect($GLOBALS['POOL']->config->dsn,$GLOBALS['POOL']->config->dboptions);
+            
+            if (MDB2::isError($this->db)) {
+                die( $this->db->getMessage());
+            }
+           
+            //mysql_select_db($this->db_name) or die(mysql_error());
+            // TODO throw on connection problems
+
+            // let the base class do all the work
+            parent::ServeRequest();
+        }
+         
+   
+        
+        
+        
         /**
          * PROPFIND method handler
          *
@@ -62,6 +111,33 @@
             return true;
         }
         
+        /**
+         * PROPPATCH method handler
+         *
+         * @param  array  general parameter passing array
+         * @return bool   true on success
+         */
+        function proppatch(&$options) 
+        {
+            global $prefs, $tab;
+
+            $msg = "";
+            
+            $path = $options["path"];
+            
+            $dir = dirname($path)."/";
+            $base = basename($path);
+            
+            foreach($options["props"] as $key => $prop) {
+                if($ns == "DAV:") {
+                    $options["props"][$key][$status] = "403 Forbidden";
+                } else {
+                    bx_resources::setProperty($options['path'],$prop['name'],$prop['ns'], $prop['val']);
+                }
+            }
+                        
+            return "";
+        }
         
            /**
          * MKCOL method handler
@@ -172,7 +248,7 @@
             //$options["new"] = ! file_exists($fspath);
             $options["new"] = false;
             $fp = fopen($fspath, "w");
-            
+             bx_resources::setProperty($options["path"],"mime-type","bx","text/html");
             return $fp;
         }
         
