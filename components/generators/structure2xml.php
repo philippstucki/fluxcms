@@ -56,7 +56,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     function init($attribs) {
         parent::init($attribs);
         if ($this->dsn) {
-            $this->db= bx_plugins_dbform_common::getDbFromDsn($this->dsn);
+            $this->db= bx_helpers_db::getDbFromDsn($this->dsn);
         }
         
     }
@@ -215,7 +215,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     function Structures2Sql ($configFile,$sqlOptions=array(),$rootpath= "/structure")
     {
         
-        $configClass = bx_plugins_dbform_common::getConfigClass($configFile);
+        $configClass = bx_helpers_db::getConfigClass($configFile);
         
         $dbMainStructure = $configClass->getValues( $rootpath);
         if (is_array($dbMainStructure['children']))
@@ -262,7 +262,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     function Structure2Sql ( $configFile ,&$tableInfo,$sqlOptions=array(),$rootpath = "/bxconfig/structure")
     {
         //if it's a string, then it musst be a file, otherwise it's already a config class
-        $configClass = bx_plugins_dbform_common::getConfigClass($configFile);
+        $configClass = bx_helpers_db::getConfigClass($configFile);
         
         $dbMasterValues = $configClass->getValues( $rootpath);
         // if dont is set, then stop the query building... and return nothing, not used at the moment
@@ -506,7 +506,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
         
         //here comes the new cache code
         
-        $config = bx_plugins_dbform_common::getConfigClass($configXml);
+        $config = bx_helpers_db::getConfigClass($configXml);
         if (!$this->queryCacheOptions) {
             $this->queryCacheOptions = $PageOptions;
         } 
