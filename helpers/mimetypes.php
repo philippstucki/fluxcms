@@ -30,10 +30,12 @@ class popoon_helpers_mimetypes {
             return "text/html";
             case "txt":
             return "text/plain";
+            case "pdf":
+            return "application/pdf";
             
             default:
             if (file_exists($src)) {
-                $m =  `file -b $src`;
+                $m =  `file -ib $src`;
                 return $m;
             } else {
                 return "text/plain";
