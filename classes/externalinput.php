@@ -14,16 +14,8 @@ class popoon_classes_externalinput {
         // fix &entitiy\n;
         $string = preg_replace('#(&\#*\w+)[\s\r\n]+;#U',"$1;",$string);
         $string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
-        //remove really unwanted tags
-        
-        do {
-            $oldstring = $string;
-            $string = preg_replace('#</*(script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base)[^>]*>#i',"",$string);
-        } while ($oldstring != $string);
         
         
-        //remove namespaced elements (we do not need them...)
-        $string = preg_replace('#</*\w+:\w[^>]*>#i',"",$string);
         // remove any attribute starting with "on" or xmlns
         $string = preg_replace('#(<[^>]+[\s\r\n\"\'])(on|xmlns)[^>]*>#iU',"$1>",$string);
         // remove javascript: and vbscript: protocol
@@ -33,6 +25,15 @@ class popoon_classes_externalinput {
         // only works in ie...
         $string = preg_replace('#(<[^>]+)style[\s\r\n]*=[\s\r\n]*([\`\'\"]*).*expression[\s\r\n]*\([^>]*>#iU',"$1>",$string);
         $string = preg_replace('#(<[^>]+)style[\s\r\n]*=[\s\r\n]*([\`\'\"]*).*j[\s\n\r]*a[\s\n\r]*v[\s\n\r]*a[\s\n\r]*s[\s\n\r]*c[\s\n\r]*r[\s\n\r]*i[\s\n\r]*p[\s\n\r]*t[\s\n\r]*:[^>]*>#iU',"$1>",$string);
+        //remove namespaced elements (we do not need them...)
+        $string = preg_replace('#</*\w+:\w[^>]*>#i',"",$string);
+        //remove really unwanted tags
+        
+        do {
+            $oldstring = $string;
+            $string = preg_replace('#</*(script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base)[^>]*>#i',"",$string);
+        } while ($oldstring != $string);
+        
         return $string;
     }
 }   
