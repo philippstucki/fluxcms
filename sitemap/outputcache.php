@@ -81,13 +81,20 @@
 *   nice to know, when the page was really last modified and not, when the cache was last created ;)
 */
 
+
+
 class popoon_sitemap_outputcache {
+
+    public $compression = true;
     
     function __construct(popoon_classes_config $options = NULL) {
         require_once('Cache/Output.php');
         $this->options = $options;
         $options->cacheParams['max_userdata_linelength'] = 0;
         $this->cache = new Cache_Output($options->cacheContainer, $options->cacheParams );
+        if ($this->compression) {
+            $this->compression = $this->getSupportedCompression();   
+        }
     }
     
     function start($uri) {
@@ -96,7 +103,7 @@ class popoon_sitemap_outputcache {
         {
             unset($idParams['SID']);
         }
-        $this->id = str_replace("/","_",$uri).$this->cache->generateID($idParams);
+        $this->id = str_replace("/","_",$uri).$this->cache->generateID($idParams).$this->compression;
         $this->cacheGroup = 'outputcache';
         if ( $content = $this->cache->start($this->id,$this->cacheGroup) ) {
             if ($this->options->outputCacheSave === true ) {
@@ -150,23 +157,23 @@ class popoon_sitemap_outputcache {
         $etag =  md5($content);
         $sitemap->setHeader("ETag", '"'.$etag.'"');
         if ($this->options->outputCacheSave !== 304) {
-        $metadata = $this->cache->get($this->id.'.meta','outputcache.meta');
-        $lastModified = null;
-        if ($metadata) {
-            if (isset($metadata['Etag'] )&& $metadata['Etag'] == $etag) {
-                $sitemap->setHeaderIfNotExists("Last-Modified",$metadata['Last-Modified']);
-                $lastModified = true;
-            } 
-        }
-        if (!$lastModified) {
-            $metadata['Etag'] = $etag;
-            $sitemap->setHeaderIfNotExists("Last-Modified",gmdate('D, d M Y H:i:s T'));
-            $metadata['Last-Modified'] = $sitemap->header['Last-Modified'];
-            $this->cache->container->save($this->id.'.meta', $metadata, 0 ,"outputcache.meta","" );
-        }
+            $metadata = $this->cache->get($this->id.'.meta','outputcache.meta');
+            $lastModified = null;
+            if ($metadata) {
+                if (isset($metadata['Etag'] )&& $metadata['Etag'] == $etag) {
+                    $sitemap->setHeaderIfNotExists("Last-Modified",$metadata['Last-Modified']);
+                    $lastModified = true;
+                } 
+            }
+            if (!$lastModified) {
+                $metadata['Etag'] = $etag;
+                $sitemap->setHeaderIfNotExists("Last-Modified",gmdate('D, d M Y H:i:s T'));
+                $metadata['Last-Modified'] = $sitemap->header['Last-Modified'];
+                $this->cache->container->save($this->id.'.meta', $metadata, 0 ,"outputcache.meta","" );
+            }
         } else {
-		 $sitemap->setHeaderIfNotExists("Last-Modified", $sitemap->header['Last-Modified']);
-       }
+            $sitemap->setHeaderIfNotExists("Last-Modified", $sitemap->header['Last-Modified']);
+        }
         // we don't want phps cache-control stuff, when we do caching
         // there is a "problem" if session_start is used, then PHP adds no-cache http headers
         // we do not want that in outputCaching.
@@ -174,26 +181,55 @@ class popoon_sitemap_outputcache {
         header("Pragma: ");
         header("Cache-Control: ");
         header("Expires: ");
+
+        if ($this->compression) {
+                    $sitemap->setHeader("Content-Encoding",$this->compression);
+                    $sitemap->setHeader("Vary","Accept-Encoding");
+        }
         
         foreach ($sitemap->header as $key => $value) {
-            
             if (substr($key,0,1) != "_") { 
                 header("$key: $value");
             }
         }
-        
         if ($this->check304($etag, $sitemap->header['Last-Modified'])) {
             header( 'HTTP/1.1 304 Not Modified' );
             
             if ($this->options->outputCacheSave !== 304) {
-                $this->cache->container->save($this->id, $content, $expire ,$this->cacheGroup, serialize($sitemap->header));
+                $this->cache->extSave($this->id, $this->compressContent(content), serialize($sitemap->header), $expire ,$this->cacheGroup);
             }
             die();
         } else {
+            $content = $this->compressContent($content);
             print $content;
             if ($this->options->outputCacheSave !== 304) {
-                $this->cache->container->save($this->id, $content, $expire ,$this->cacheGroup, serialize($sitemap->header));
+                $this->cache->extSave($this->id, $content, serialize($sitemap->header), $expire ,$this->cacheGroup);
             }
         }
     }
+    
+    function compressContent($content) {
+        if ($this->compression) {    
+            $len = strlen($content);            
+            $crc = crc32($content);
+            $content = gzcompress($content, 9);
+            return "\x1f\x8b\x08\x00\x00\x00\x00\x00"  . substr($content, 0, strlen($content) - 4) . pack('V', $crc) . pack('V', $len);
+        }        
+        return $content;
+    }
+    
+    function getSupportedCompression() {
+        // check what the client accepts
+        if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
+            return 'x-gzip';
+        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'))
+            return 'gzip';
+        }
+            
+        // no compression
+        return '';
+        
+    } 
+    
 }
