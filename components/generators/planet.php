@@ -85,7 +85,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
             
             from blogs left join feeds on feeds.blogsID = blogs.ID
             left join entries on entries.feedsID = feeds.ID
-            where entries.dc_date > 0
+            where entries.dc_date > 0 and feeds.section = 'default'
             group by blogs.link
             order by maxDate DESC"
             
