@@ -60,6 +60,9 @@
                 break;
              case "db":
                 require_once("MDB2.php");
+                if (!isset($this->config->dboptions)) {
+                    $this->config->dboptions = NULL;
+                }
                 $this->db = MDB2::connect($this->config->dsn,$this->config->dboptions);
                 return $this->db;
          }
