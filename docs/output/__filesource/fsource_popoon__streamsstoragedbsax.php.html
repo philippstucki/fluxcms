@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for dbsax.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file dbsax.php</h1>
+<p>Documentation is available at <a href="../popoon/_streams_storage_dbsax_php.html">dbsax.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a>&nbsp;</li>
+<li><a name="a3"></a><span class="src-key">class </span><a href="../popoon/dbsaxStream.html">dbsaxStream</a> <span class="src-sym">{</span></li>
+<li><a name="a4"></a>    </li>
+<li><a name="a5"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$html">$html</a><span class="src-sym">;</span></li>
+<li><a name="a6"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$position">$position</a> = <span class="src-num">0</span><span class="src-sym">;</span></li>
+<li><a name="a7"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$dbposition">$dbposition</a> = <span class="src-num">0</span><span class="src-sym">;</span></li>
+<li><a name="a8"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$xml">$xml</a> = <span class="src-str">&quot;&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a9"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$table">$table</a> = <span class="src-str">&quot;blogs&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a10"></a>    <span class="src-key">var </span><a href="../popoon/dbsaxStream.html#var$rowField">$rowField</a> = <span class="src-str">&quot;blog&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a11"></a>    </li>
+<li><a name="a12"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_open">stream_open</a> <span class="src-sym">(</span><span class="src-var">$path</span><span class="src-sym">, </span><span class="src-var">$mode</span><span class="src-sym">, </span><span class="src-var">$options</span><span class="src-sym">, </span><span class="src-sym">&amp;</span><span class="src-var">$opened_path</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a13"></a>        <span class="src-inc">include_once</span><span class="src-sym">(</span><span class="src-str">&quot;MDB2.php&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a14"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">db </span>= <span class="src-id">MDB2</span><span class="src-sym">::</span><span class="src-id">Connect</span><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'BX_config'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'dsn'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a15"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id">MDB2</span><span class="src-sym">::</span><span class="src-id">isError</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">db</span><span class="src-sym">) ) </span><span class="src-sym">{</span></li>
+<li><a name="a16"></a>            <a href="http://www.php.net/trigger_error">trigger_error</a><span class="src-sym">(</span><span class="src-str">&quot;could not connect to DB in dbsax stream&quot;</span><span class="src-sym">, </span><span class="src-id">E_USER_WARNING</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a17"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a18"></a>        <span class="src-sym">}</span></li>
+<li><a name="a19"></a>        <span class="src-key">if</span><span class="src-sym">( </span><a href="http://www.php.net/strpos">strpos</a><span class="src-sym">(</span><span class="src-var">$mode</span><span class="src-sym">,</span><span class="src-str">&quot;r&quot;</span><span class="src-sym">) </span>!== <span class="src-id">false</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a20"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">res </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">db</span><span class="src-sym">-&gt;</span><span class="src-id">query</span><span class="src-sym">(</span><span class="src-str">&quot;select * from &quot; </span>. <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$table">table</a><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a21"></a>            <span class="src-key">if </span><span class="src-sym">(</span><span class="src-id">MDB2</span><span class="src-sym">::</span><span class="src-id">isError</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">res</span><span class="src-sym">) ) </span><span class="src-sym">{</span></li>
+<li><a name="a22"></a>                <a href="http://www.php.net/trigger_error">trigger_error</a><span class="src-sym">(</span><span class="src-str">&quot;Query returned error in dbsax stream&quot;</span><span class="src-sym">, </span><span class="src-id">E_USER_WARNING</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a23"></a>                <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a24"></a>            <span class="src-sym">}</span></li>
+<li><a name="a25"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">numRows </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">res</span><span class="src-sym">-&gt;</span><span class="src-id">numRows</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a26"></a>            </li>
+<li><a name="a27"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a28"></a>            <a href="http://www.php.net/trigger_error">trigger_error</a><span class="src-sym">(</span><span class="src-str">&quot;Only read support currently in dbsax stream&quot;</span><span class="src-sym">, </span><span class="src-id">E_USER_ERROR</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a29"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a30"></a>        <span class="src-sym">}</span></li>
+<li><a name="a31"></a>        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a32"></a>    <span class="src-sym">}</span></li>
+<li><a name="a33"></a>    </li>
+<li><a name="a34"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_read">stream_read</a><span class="src-sym">(</span><span class="src-var">$count</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a35"></a>        <span class="src-key">while </span><span class="src-sym">(</span><a href="http://www.php.net/strlen">strlen</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$xml">xml</a><span class="src-sym">) </span>&lt; <span class="src-var">$count</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a36"></a>            <span class="src-var">$xml </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#methodgetXml">getXml</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a37"></a>            <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/strlen">strlen</a><span class="src-sym">(</span><span class="src-var">$xml</span><span class="src-sym">) </span>== <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a38"></a>                <span class="src-key">break</span><span class="src-sym">;</span></li>
+<li><a name="a39"></a>            <span class="src-sym">}</span></li>
+<li><a name="a40"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$xml">xml</a> .= <span class="src-var">$xml</span><span class="src-sym">;</span></li>
+<li><a name="a41"></a>        <span class="src-sym">}</span></li>
+<li><a name="a42"></a>        <span class="src-var">$ret </span>= <a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$xml">xml</a><span class="src-sym">,</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-var">$count</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a43"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$xml">xml</a> = <a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$xml">xml</a><span class="src-sym">,</span><span class="src-var">$count</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a44"></a>        <span class="src-key">return </span><span class="src-var">$ret</span><span class="src-sym">;</span></li>
+<li><a name="a45"></a>    <span class="src-sym">}</span></li>
+<li><a name="a46"></a>    </li>
+<li><a name="a47"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_write">stream_write</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a48"></a>        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a49"></a>    <span class="src-sym">}</span></li>
+<li><a name="a50"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_stat">stream_stat</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a51"></a>        <span class="src-key">return </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a52"></a>    <span class="src-sym">}</span></li>
+<li><a name="a53"></a>    </li>
+<li><a name="a54"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodgetXml">getXml</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a55"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$dbposition">dbposition</a> == <span class="src-num">0</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a56"></a>            <span class="src-var">$xml </span>= <span class="src-str">'&lt;'</span>.<span class="src-str">'?xml version=&quot;1.0&quot; ?&gt;'</span><span class="src-sym">;</span></li>
+<li><a name="a57"></a>            <span class="src-var">$xml </span>.= <span class="src-str">'&lt;'</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$table">table</a>.<span class="src-str">'&gt;'</span><span class="src-sym">;</span></li>
+<li><a name="a58"></a>            </li>
+<li><a name="a59"></a>        <span class="src-sym">}</span></li>
+<li><a name="a60"></a>        </li>
+<li><a name="a61"></a>        <span class="src-var">$row </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">res</span><span class="src-sym">-&gt;</span><span class="src-id">fetchRow</span><span class="src-sym">(</span><span class="src-id">MDB2_FETCHMODE_ASSOC</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a62"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$dbposition">dbposition</a>++<span class="src-sym">;</span></li>
+<li><a name="a63"></a>        <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/is_array">is_array</a><span class="src-sym">(</span><span class="src-var">$row</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a64"></a>            <span class="src-var">$xml </span>.= <span class="src-str">'&lt;'</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$rowField">rowField</a>.<span class="src-str">'&gt;'</span><span class="src-sym">;</span></li>
+<li><a name="a65"></a>            <span class="src-comm">//TODO: Better errorhandling;</span></li>
+<li><a name="a66"></a>            </li>
+<li><a name="a67"></a>            </li>
+<li><a name="a68"></a>            <span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$row </span><span class="src-key">as </span><span class="src-var">$key </span>=&gt; <span class="src-var">$value</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a69"></a>                <span class="src-var">$xml </span>.= <span class="src-str">'&lt;'</span>.<span class="src-var">$key</span>.<span class="src-str">'&gt;'</span><span class="src-sym">;</span></li>
+<li><a name="a70"></a>                <span class="src-var">$xml </span>.= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a71"></a>                <span class="src-var">$xml </span>.= <span class="src-str">'&lt;/'</span>.<span class="src-var">$key</span>.<span class="src-str">'&gt;'</span><span class="src-sym">;</span></li>
+<li><a name="a72"></a>            <span class="src-sym">}</span></li>
+<li><a name="a73"></a>            </li>
+<li><a name="a74"></a>            </li>
+<li><a name="a75"></a>            <span class="src-var">$xml </span>.= <span class="src-str">'&lt;/'</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$rowField">rowField</a>.<span class="src-str">'&gt;'</span>.<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a76"></a>        <span class="src-sym">} </span></li>
+<li><a name="a77"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$dbposition">dbposition</a> == <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">numRows</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a78"></a>            <span class="src-var">$xml </span>.= <span class="src-str">'&lt;/'</span>. <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$table">table</a> . <span class="src-str">'&gt;'</span><span class="src-sym">;   </span></li>
+<li><a name="a79"></a>        <span class="src-sym">}</span></li>
+<li><a name="a80"></a>        <span class="src-key">return </span><span class="src-var">$xml</span><span class="src-sym">;</span></li>
+<li><a name="a81"></a>    <span class="src-sym">}</span></li>
+<li><a name="a82"></a>    </li>
+<li><a name="a83"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_eof">stream_eof</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a84"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/dbsaxStream.html#var$dbposition">dbposition</a> &gt;= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">numRows</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a85"></a>            <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a86"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a87"></a>            <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a88"></a>        <span class="src-sym">}</span></li>
+<li><a name="a89"></a>    <span class="src-sym">}</span></li>
+<li><a name="a90"></a>    </li>
+<li><a name="a91"></a>    <span class="src-key">function </span><a href="../popoon/dbsaxStream.html#methodstream_close">stream_close</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a92"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">db</span><span class="src-sym">-&gt;</span><span class="src-id">disconnect</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a93"></a>        <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a94"></a>    <span class="src-sym">}</span></li>
+<li><a name="a95"></a>    </li>
+<li><a name="a96"></a><span class="src-sym">}</span></li>
+<li><a name="a97"></a>&nbsp;</li>
+<li><a name="a98"></a>&nbsp;</li>
+<li><a name="a99"></a>&nbsp;</li>
+<li><a name="a100"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:32:02 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<?php // -*-html-*-  $Id: homepage.tmpl,v 1.1 2003/04/16 20:30:27 chregu Exp $ 
+$username = $user->getId());
+?>
+
+<?= sprintf(_('Automatically created homepage for %s. This page is needed to store the users preferences. The [/Calendar] subpage enables simple weblogging, at your [/Preferences] page you can customize various settings or change your password.'), $username) ?>
+
+* <?= '[ ' . SUBPAGE_SEPARATOR . _('Calendar') . ' ]' ?>
+* <?= '[ ' . SUBPAGE_SEPARATOR . _('Preferences') . ' ]' ?>
+
+<?= sprintf('<'.'?plugin BackLinks ?'.'>') ?>
+<?= sprintf('<'.'?plugin-form FullTextSearch s=%s ?'.'>', $username) ?>
+----
+<?= _('CategoryHomepage') ?>

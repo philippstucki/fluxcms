@@ -1,0 +1,14 @@
+<?php // -*-html-*-
+  rcs_id('$Id: browse-footer.tmpl,v 1.1 2003/04/16 20:30:27 chregu Exp $');
+?>
+<hr class="printer" noshade="noshade" />
+<p class="editdate"><?= $Theme->getLastModifiedMessage($revision) ?></p>
+<?php
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<hr class="toolbar" noshade="noshade" />
+<div class="toolbar">
+<?= Template('actionbar') ?>
+</div>
+<?php } ?>

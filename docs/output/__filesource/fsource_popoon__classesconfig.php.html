@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for config.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file config.php</h1>
+<p>Documentation is available at <a href="../popoon/_classes_config_php.html">config.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a>&nbsp;</li>
+<li><a name="a3"></a><span class="src-doc">/** Class for storing Popoon Config parameter</span></li>
+<li><a name="a4"></a><span class="src-doc"> * </span></li>
+<li><a name="a5"></a><span class="src-doc"> *  Parameter about Caching et al. are also stored here</span></li>
+<li><a name="a6"></a><span class="src-doc"> *</span></li>
+<li><a name="a7"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc">   Christian Stocker &lt;chregu@bitflux.ch&gt;</span></li>
+<li><a name="a8"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@version</span><span class="src-doc">  $Id: fsource_popoon__classesconfig.php.html,v 1.1 2004/03/08 07:37:47 chregu Exp $</span></li>
+<li><a name="a9"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@example</span><span class="src-doc"> classes/config_cache.php</span></li>
+<li><a name="a10"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc">  popoon</span></li>
+<li><a name="a11"></a><span class="src-doc"> */</span></li>
+<li><a name="a12"></a> <span class="src-key">class </span><a href="../popoon/popoon_classes_config.html">popoon_classes_config</a> <span class="src-key">implements </span><span class="src-id">ArrayAccess </span><span class="src-sym">{</span></li>
+<li><a name="a13"></a>     </li>
+<li><a name="a14"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a15"></a><span class="src-doc">      * the class instance</span></li>
+<li><a name="a16"></a><span class="src-doc">      *</span></li>
+<li><a name="a17"></a><span class="src-doc">      * this is a singleton class, therefore we save the instance</span></li>
+<li><a name="a18"></a><span class="src-doc">      * in this static var</span></li>
+<li><a name="a19"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@static</span><span class="src-doc"> popoon_classes_config</span></li>
+<li><a name="a20"></a><span class="src-doc">      */</span></li>
+<li><a name="a21"></a>     <span class="src-key">static </span><span class="src-var">$instance </span>= <span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a22"></a>     </li>
+<li><a name="a23"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a24"></a><span class="src-doc">      * Values set with setPopoonValue</span></li>
+<li><a name="a25"></a><span class="src-doc">      * </span></li>
+<li><a name="a26"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> getPopoonValue</span></li>
+<li><a name="a27"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> setPopoonValue</span></li>
+<li><a name="a28"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">array </span></li>
+<li><a name="a29"></a><span class="src-doc">      */</span></li>
+<li><a name="a30"></a>     <span class="src-key">private </span><a href="../popoon/popoon_classes_config.html#var$popoonValues">$popoonValues</a> = <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a31"></a>     </li>
+<li><a name="a32"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a33"></a><span class="src-doc">      * Values set with setValue</span></li>
+<li><a name="a34"></a><span class="src-doc">      * </span></li>
+<li><a name="a35"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> getValue</span></li>
+<li><a name="a36"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> setValue</span></li>
+<li><a name="a37"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">array </span></li>
+<li><a name="a38"></a><span class="src-doc">      */</span></li>
+<li><a name="a39"></a>     <span class="src-key">private </span><a href="../popoon/popoon_classes_config.html#var$values">$values</a> = <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a40"></a>     </li>
+<li><a name="a41"></a>     </li>
+<li><a name="a42"></a>     <span class="src-key">private </span><a href="../popoon/popoon_classes_config.html#var$outputCacheCallback">$outputCacheCallback</a> = <span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a43"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a44"></a><span class="src-doc">      * the cache container according to PEAR::Cache</span></li>
+<li><a name="a45"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">string </span></li>
+<li><a name="a46"></a><span class="src-doc">      */</span></li>
+<li><a name="a47"></a>     <span class="src-key">public </span><a href="../popoon/popoon_classes_config.html#var$cacheContainer">$cacheContainer</a> = <span class="src-str">'file'</span><span class="src-sym">;</span></li>
+<li><a name="a48"></a>     </li>
+<li><a name="a49"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a50"></a><span class="src-doc">      * cache parameter for PEAR::Cache</span></li>
+<li><a name="a51"></a><span class="src-doc">      * </span></li>
+<li><a name="a52"></a><span class="src-doc">      * we can't set them here to a default value, because we need BX_TEMP_DIR and that</span></li>
+<li><a name="a53"></a><span class="src-doc">      * doesn't work. It's set in the constructor</span></li>
+<li><a name="a54"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> __construct</span></li>
+<li><a name="a55"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">array </span></li>
+<li><a name="a56"></a><span class="src-doc">      */</span></li>
+<li><a name="a57"></a>     <span class="src-key">public </span><a href="../popoon/popoon_classes_config.html#var$cacheParams">$cacheParams</a>  = <span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a58"></a>     </li>
+<li><a name="a59"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a60"></a><span class="src-doc">      * The expire time of the output cache</span></li>
+<li><a name="a61"></a><span class="src-doc">      * </span></li>
+<li><a name="a62"></a><span class="src-doc">      * After this time, the cache entry gets regenerated</span></li>
+<li><a name="a63"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">int </span><span class="src-doc">in seconds.</span></li>
+<li><a name="a64"></a><span class="src-doc">      */</span></li>
+<li><a name="a65"></a>     <span class="src-key">public </span><a href="../popoon/popoon_classes_config.html#var$outputCacheExpire">$outputCacheExpire</a> = <span class="src-num">3600</span><span class="src-sym">;</span></li>
+<li><a name="a66"></a>     </li>
+<li><a name="a67"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a68"></a><span class="src-doc">      * if the output should be saved</span></li>
+<li><a name="a69"></a><span class="src-doc">      *</span></li>
+<li><a name="a70"></a><span class="src-doc">      * if this is false, then the output is not cached</span></li>
+<li><a name="a71"></a><span class="src-doc">      * and generated the next time</span></li>
+<li><a name="a72"></a><span class="src-doc">      * useful, if you want turn of outputcaching within the sitemap</span></li>
+<li><a name="a73"></a><span class="src-doc">      *</span></li>
+<li><a name="a74"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">bool </span></li>
+<li><a name="a75"></a><span class="src-doc">      */</span></li>
+<li><a name="a76"></a>     <span class="src-key">private </span><a href="../popoon/popoon_classes_config.html#var$outputCacheSave">$outputCacheSave</a> = <span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a77"></a>     </li>
+<li><a name="a78"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a79"></a><span class="src-doc">      * The constructor</span></li>
+<li><a name="a80"></a><span class="src-doc">      * </span></li>
+<li><a name="a81"></a><span class="src-doc">      * As this is a singleton class, we don't allow the class to be called</span></li>
+<li><a name="a82"></a><span class="src-doc">      * directly. use getInstance</span></li>
+<li><a name="a83"></a><span class="src-doc">      *</span></li>
+<li><a name="a84"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> getInstance</span></li>
+<li><a name="a85"></a><span class="src-doc">      */</span></li>
+<li><a name="a86"></a>     <span class="src-key">private </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#method__construct">__construct</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a87"></a>         </li>
+<li><a name="a88"></a>         <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$cacheParams">cacheParams</a> = <span class="src-key">array</span><span class="src-sym">(</span></li>
+<li><a name="a89"></a>                            <span class="src-str">'cache_dir' </span>=&gt; <span class="src-id">BX_TEMP_DIR </span>. <span class="src-str">'/cache'</span><span class="src-sym">,</span></li>
+<li><a name="a90"></a>                            <span class="src-str">'encoding_mode'</span>=&gt;<span class="src-str">'slash'</span></li>
+<li><a name="a91"></a>                            <span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a92"></a>     <span class="src-sym">}</span></li>
+<li><a name="a93"></a>     <span class="src-doc">/**</span></li>
+<li><a name="a94"></a><span class="src-doc">      * Gets a singleton instance of the this class</span></li>
+<li><a name="a95"></a><span class="src-doc">      *</span></li>
+<li><a name="a96"></a><span class="src-doc">      * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">popoon_classes_config </span><span class="src-doc">an instance of this class</span></li>
+<li><a name="a97"></a><span class="src-doc">      */</span></li>
+<li><a name="a98"></a>     <span class="src-key">public </span><span class="src-key">static </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodgetInstance">getInstance</a> <span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a99"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span><span class="src-id"><a href="../popoon/popoon_classes_config.html">popoon_classes_config</a></span><span class="src-sym">::</span><span class="src-var">$instance</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a100"></a>            <span class="src-id">popoon_classes_config</span><span class="src-sym">::</span><span class="src-var">$instance </span>= <span class="src-key">new </span><span class="src-id">popoon_classes_config</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a101"></a>        <span class="src-sym">} </span></li>
+<li><a name="a102"></a>        <span class="src-key">return </span><span class="src-id"><a href="../popoon/popoon_classes_config.html">popoon_classes_config</a></span><span class="src-sym">::</span><span class="src-var">$instance</span><span class="src-sym">;</span></li>
+<li><a name="a103"></a>    <span class="src-sym">}</span></li>
+<li><a name="a104"></a>    </li>
+<li><a name="a105"></a>   <span class="src-doc">/** </span></li>
+<li><a name="a106"></a><span class="src-doc">    * gets a popoon Value</span></li>
+<li><a name="a107"></a><span class="src-doc">    *</span></li>
+<li><a name="a108"></a><span class="src-doc">    * returns a value set before with setPopoonValue().</span></li>
+<li><a name="a109"></a><span class="src-doc">    *</span></li>
+<li><a name="a110"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$name </span><span class="src-doc">name of the value</span></li>
+<li><a name="a111"></a><span class="src-doc">	* </span><span class="src-doc-coretag">@see</span><span class="src-doc"> setPopoonValue</span></li>
+<li><a name="a112"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">mixed </span><span class="src-doc">the value</span></li>
+<li><a name="a113"></a><span class="src-doc">    */</span></li>
+<li><a name="a114"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodgetPopoonValue">getPopoonValue</a><span class="src-sym">( </span><span class="src-var">$name</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a115"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$popoonValues">popoonValues</a><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a116"></a>            <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$popoonValues">popoonValues</a><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a117"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a118"></a>            <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a119"></a>        <span class="src-sym">}</span></li>
+<li><a name="a120"></a>    <span class="src-sym">}</span></li>
+<li><a name="a121"></a>    </li>
+<li><a name="a122"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a123"></a><span class="src-doc">     * Sets a value in the popoon context</span></li>
+<li><a name="a124"></a><span class="src-doc">     *</span></li>
+<li><a name="a125"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$name </span><span class="src-doc">name of the value</span></li>
+<li><a name="a126"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> getPopoonValue</span></li>
+<li><a name="a127"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">void </span></li>
+<li><a name="a128"></a><span class="src-doc">     */ </span></li>
+<li><a name="a129"></a>    </li>
+<li><a name="a130"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodsetPopoonValue">setPopoonValue</a><span class="src-sym">( </span><span class="src-var">$name</span><span class="src-sym">, </span><span class="src-var">$value</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a131"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$popoonValues">popoonValues</a><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">] </span>= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a132"></a>    <span class="src-sym">}</span></li>
+<li><a name="a133"></a>    </li>
+<li><a name="a134"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a135"></a><span class="src-doc">    * Gets a value for a module</span></li>
+<li><a name="a136"></a><span class="src-doc">    *</span></li>
+<li><a name="a137"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$module </span><span class="src-doc">name of the module</span></li>
+<li><a name="a138"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$name </span><span class="src-doc">name of the value</span></li>
+<li><a name="a139"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">mixed </span><span class="src-doc">the value</span></li>
+<li><a name="a140"></a><span class="src-doc">    */</span></li>
+<li><a name="a141"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodgetValue">getValue</a><span class="src-sym">(</span><span class="src-var">$module</span><span class="src-sym">,</span><span class="src-var">$name</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a142"></a>        </li>
+<li><a name="a143"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a144"></a>           <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a145"></a>        <span class="src-sym">}</span></li>
+<li><a name="a146"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a147"></a>           <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a148"></a>        <span class="src-sym">}</span></li>
+<li><a name="a149"></a>        <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">;</span></li>
+<li><a name="a150"></a>    <span class="src-sym">}</span></li>
+<li><a name="a151"></a>    </li>
+<li><a name="a152"></a>    </li>
+<li><a name="a153"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a154"></a><span class="src-doc">    * Sets a value for a module</span></li>
+<li><a name="a155"></a><span class="src-doc">    *</span></li>
+<li><a name="a156"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$module </span><span class="src-doc">name of the module</span></li>
+<li><a name="a157"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$name </span><span class="src-doc">name of the value</span></li>
+<li><a name="a158"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">mixed </span><span class="src-doc-var">$value </span></li>
+<li><a name="a159"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">void </span></li>
+<li><a name="a160"></a><span class="src-doc">    */</span></li>
+<li><a name="a161"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodsetValue">setValue</a><span class="src-sym">(</span><span class="src-var">$module</span><span class="src-sym">,</span><span class="src-var">$name</span><span class="src-sym">,</span><span class="src-var">$value</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a162"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a163"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a164"></a>        <span class="src-sym">}</span></li>
+<li><a name="a165"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$values">values</a><span class="src-sym">[</span><span class="src-var">$module</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">] </span>= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a166"></a>    <span class="src-sym">}</span></li>
+<li><a name="a167"></a>     </li>
+<li><a name="a168"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a169"></a><span class="src-doc">     * Checks, if popoon should do Output Caching</span></li>
+<li><a name="a170"></a><span class="src-doc">     * </span></li>
+<li><a name="a171"></a><span class="src-doc">     * This currently only checks, if an outputCacheCallback</span></li>
+<li><a name="a172"></a><span class="src-doc">     * is set and if this returns true</span></li>
+<li><a name="a173"></a><span class="src-doc">     *</span></li>
+<li><a name="a174"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> setOutputCacheCallback</span></li>
+<li><a name="a175"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> doOutputCacheCallback</span></li>
+<li><a name="a176"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">bool </span></li>
+<li><a name="a177"></a><span class="src-doc">     */</span></li>
+<li><a name="a178"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methoddoOutputCache">doOutputCache</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a179"></a>        </li>
+<li><a name="a180"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$outputCacheCallback">outputCacheCallback</a> &amp;&amp; <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#methoddoOutputCacheCallback">doOutputCacheCallback</a><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a181"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$outputCacheSave">outputCacheSave</a> = <span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a182"></a>            <span class="src-key">return </span><span class="src-id">true</span><span class="src-sym">;</span></li>
+<li><a name="a183"></a>        <span class="src-sym">}</span></li>
+<li><a name="a184"></a>        <span class="src-key">return </span><span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a185"></a>    <span class="src-sym">}</span></li>
+<li><a name="a186"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a187"></a><span class="src-doc">     * Disables saving of outputCaching</span></li>
+<li><a name="a188"></a><span class="src-doc">     * </span></li>
+<li><a name="a189"></a><span class="src-doc">     * If this method is called, the outputCache Handler does not</span></li>
+<li><a name="a190"></a><span class="src-doc">     *  save the result</span></li>
+<li><a name="a191"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> doOutputCacheSave</span></li>
+<li><a name="a192"></a><span class="src-doc">     */</span></li>
+<li><a name="a193"></a>     </li>
+<li><a name="a194"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methoddisableOutputCaching">disableOutputCaching</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a195"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$outputCacheSave">outputCacheSave</a> = <span class="src-id">false</span><span class="src-sym">;</span></li>
+<li><a name="a196"></a>    <span class="src-sym">}</span></li>
+<li><a name="a197"></a>    </li>
+<li><a name="a198"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a199"></a><span class="src-doc">     * Check, if we should save the outputcache</span></li>
+<li><a name="a200"></a><span class="src-doc">     *</span></li>
+<li><a name="a201"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> disableOutputCaching</span></li>
+<li><a name="a202"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">bool </span></li>
+<li><a name="a203"></a><span class="src-doc">     */</span></li>
+<li><a name="a204"></a>     </li>
+<li><a name="a205"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methoddoOutputCacheSave">doOutputCacheSave</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a206"></a>           <span class="src-key">return  </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">OutputCachesave</span><span class="src-sym">;</span></li>
+<li><a name="a207"></a>    <span class="src-sym">}</span></li>
+<li><a name="a208"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a209"></a><span class="src-doc">     *  Sets outputcache handler</span></li>
+<li><a name="a210"></a><span class="src-doc">     *</span></li>
+<li><a name="a211"></a><span class="src-doc">     * This function will be called within doOutputCache</span></li>
+<li><a name="a212"></a><span class="src-doc">     * It's only set, if the function exists</span></li>
+<li><a name="a213"></a><span class="src-doc">     * otherwise it throws an exception</span></li>
+<li><a name="a214"></a><span class="src-doc">     *</span></li>
+<li><a name="a215"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> doOutputCache</span></li>
+<li><a name="a216"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@example</span><span class="src-doc"> classes/config_cache.php</span></li>
+<li><a name="a217"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">string </span><span class="src-doc-var">$callback </span><span class="src-doc">the function to be called</span></li>
+<li><a name="a218"></a><span class="src-doc">     */</span></li>
+<li><a name="a219"></a>     </li>
+<li><a name="a220"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodsetOutputCacheCallback">setOutputCacheCallback</a> <span class="src-sym">(</span><span class="src-var">$callback</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a221"></a>        <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/function_exists">function_exists</a><span class="src-sym">(</span><span class="src-var">$callback</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a222"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$outputCacheCallback">outputCacheCallback</a> = <span class="src-var">$callback</span><span class="src-sym">;</span></li>
+<li><a name="a223"></a>        <span class="src-sym">} </span><span class="src-key">else </span><span class="src-sym">{</span></li>
+<li><a name="a224"></a>            <span class="src-comm">// I'm not sure, if we really want an exception here</span></li>
+<li><a name="a225"></a>            throw <span class="src-key">new </span><span class="src-id">Exception</span><span class="src-sym">(</span><span class="src-str">'Function ' </span>. <span class="src-var">$callback </span>. <span class="src-str">' is not defined'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a226"></a>        <span class="src-sym">}</span></li>
+<li><a name="a227"></a>    <span class="src-sym">}</span></li>
+<li><a name="a228"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a229"></a><span class="src-doc">     * Calls the outputCache Handler</span></li>
+<li><a name="a230"></a><span class="src-doc">     *</span></li>
+<li><a name="a231"></a><span class="src-doc">     * This function should return true or false. True if we should use OutputCaching</span></li>
+<li><a name="a232"></a><span class="src-doc">     * , false if not</span></li>
+<li><a name="a233"></a><span class="src-doc">     *</span></li>
+<li><a name="a234"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> setOutputCacheCallback</span></li>
+<li><a name="a235"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">bool </span></li>
+<li><a name="a236"></a><span class="src-doc">     */</span></li>
+<li><a name="a237"></a>    <span class="src-key">private </span><span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methoddoOutputCacheCallback">doOutputCacheCallback</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a238"></a>        <span class="src-key">return  </span><a href="http://www.php.net/call_user_func">call_user_func</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_classes_config.html#var$outputCacheCallback">outputCacheCallback</a><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a239"></a>    <span class="src-sym">}</span></li>
+<li><a name="a240"></a>    </li>
+<li><a name="a241"></a>     <span class="src-comm">//ArrayAccess interface</span></li>
+<li><a name="a241"></a>    </li>
+<li><a name="a242"></a>    <span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodoffsetGet">offsetGet</a><span class="src-sym">(</span><span class="src-var">$off</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a243"></a>       <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$off</span><span class="src-sym">;</span></li>
+<li><a name="a244"></a>    <span class="src-sym">}</span></li>
+<li><a name="a245"></a>    </li>
+<li><a name="a246"></a>    <span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodoffsetSet">offsetSet</a><span class="src-sym">(</span><span class="src-var">$off</span><span class="src-sym">,</span><span class="src-var">$value</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a247"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$off </span>= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a248"></a>    <span class="src-sym">}</span></li>
+<li><a name="a249"></a>    </li>
+<li><a name="a250"></a>    <span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodoffsetExists">offsetExists</a><span class="src-sym">(</span><span class="src-var">$off</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a251"></a>        <span class="src-key">return </span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$off</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a252"></a>    <span class="src-sym">}</span></li>
+<li><a name="a253"></a>    </li>
+<li><a name="a254"></a>    <span class="src-key">function </span><a href="../popoon/popoon_classes_config.html#methodoffsetUnset">offsetUnset</a><span class="src-sym">(</span><span class="src-var">$off</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a255"></a>        unset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$off</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a256"></a>    <span class="src-sym">}</span></li>
+<li><a name="a257"></a>    </li>
+<li><a name="a258"></a><span class="src-sym">}</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:51 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+    >
+    
+    
+    <xsl:template match="map:include">
+        <xsl:variable name="thisNode" select="."/>
+        <xsl:for-each select="/map:sitemap/map:include-definitions/map:include-definition[@label = current()/@label]">
+            <xsl:apply-templates>
+                <xsl:with-param name="children" select="$thisNode/*"/>
+            </xsl:apply-templates>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match="map:children">
+        <xsl:param name="children"/>
+        <xsl:choose>
+            <xsl:when test="current()/@label">
+                <xsl:for-each select="$children[@label = current()/@label]">
+                    <xsl:apply-templates select="."/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="$children[not(@label)]">
+                    <xsl:apply-templates select="."/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
+    <xsl:template match="*">
+        <xsl:param name="children"/>
+        <xsl:copy>
+            <xsl:for-each select="@*">
+                <xsl:copy/>
+            </xsl:for-each>
+            <xsl:apply-templates >
+                <xsl:with-param name="children" select="$children"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+        
+    </xsl:template>
+    
+    <xsl:template match="map:include-definitions">
+    </xsl:template>
+    
+    
+</xsl:stylesheet>

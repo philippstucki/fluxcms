@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class generator_directory</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class generator_directory</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This class returns xml from directory listing</p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: generator_directory.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Mike Hommey &lt;<a href="mailto:mh@glandium.org">mh@glandium.org</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_directory_php.html">/components/generators/directory.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a33">33</a></span>)
+		</p>
+		
+				
+		<pre>generator
+   |
+   --generator_directory</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$mimeType" title="details" class="var-name">$mimeType</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">generator_directory</span>
+										<a href="#generator_directory" title="details" class="method-name">generator_directory</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#checkValidity" title="details" class="method-name">checkValidity</a>
+											(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">object DomDocument</span>
+										<a href="#DomStart" title="details" class="method-name">DomStart</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateKey" title="details" class="method-name">generateKey</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#generateValidity" title="details" class="method-name">generateValidity</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#read_directory" title="details" class="method-name">read_directory</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$dom</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$parent</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$directory</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$depth</span> = <span class="var-default">1</span>])
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$mimeType" id="$mimeType"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$mimeType</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a34">34</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgenerator_directory" id="generator_directory"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor generator_directory</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a39">39</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor, does nothing at the moment</p>
+	
+	<div class="method-signature">
+		<span class="method-result">generator_directory</span>
+		<span class="method-name">
+			generator_directory
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodcheckValidity" id="checkValidity"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkValidity</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a152">152</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check validity of a validityObject from cache</p>
+<p class="description"><p>This implements only the most simple form: If there's no fresher version, take that from cache.  I guess we'll need some more refined criteria..</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if the validityObject indicates that the cached version can be used, false otherwise.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			checkValidity
+		</span>
+					(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object validityObject</span>
+				<span class="var-name">$validityObject</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodDomStart" id="DomStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">DomStart</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a50">50</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">generates an xml-DomDocument out of the xml-file</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> XML-Document</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object DomDocument</span>
+		<span class="method-name">
+			DomStart
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgenerateKey" id="generateKey"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateKey</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a121">121</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate cacheKey</p>
+<p class="description"><p>Calls the method inherited from 'Component'</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> generateKeyDefault()</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateKey
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$attribs</span><span class="var-description">: attributes</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$keyBefore</span><span class="var-description">: last cacheKey</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgenerateValidity" id="generateValidity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateValidity</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a135">135</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate validityObject</p>
+<p class="description"><p>This is common to all &quot;readers&quot;, you'll find the same code there.  I'm thinking about making a method in the class component named generateValidityFile() or alike  instead of having the same code everywhere..</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> contains the components attributes plus file modification time and time of last access.</li>
+				<li><span class="field">see:</span> checkvalidity()</li>
+				<li><span class="field">author:</span> Hannes Gassert &lt;<a href="mailto:hannes.gassert@unifr.ch">hannes.gassert@unifr.ch</a>&gt;</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			generateValidity
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodread_directory" id="read_directory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">read_directory</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdirectory.php.html#a74">74</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			read_directory
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$dom</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$parent</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$directory</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$depth</span> = <span class="var-default">1</span>])
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:32:06 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

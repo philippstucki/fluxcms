@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class popoon_components_generators_db2xml</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class popoon_components_generators_db2xml</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Module for generating XML-Document with the help of the db2xml Class</p>
+<p class="description"><p>db2xml is formerly known as sql2xml :)</p><p>It takes an sql query or everything else db2xml wants as an argument   in the src attribute..</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: popoon_components_generators_db2xml.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_db2xml_php.html">/components/generators/db2xml.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdb2xml.php.html#a35">35</a></span>)
+		</p>
+		
+				
+		<pre><a href="../popoon/popoon_component.html">popoon_component</a>
+   |
+   --<a href="../popoon/popoon_components_generator.html">popoon_components_generator</a>
+      |
+      --popoon_components_generators_db2xml</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$multipleInput" title="details" class="var-name">$multipleInput</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">popoon_components_generators_db2xml</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#DomStart" title="details" class="method-name">DomStart</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$multipleInput" id="$multipleInput"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$multipleInput</span>
+			 = <span class="var-default"> &quot;no&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdb2xml.php.html#a37">37</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../popoon/popoon_components_generator.html">popoon_components_generator</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_components_generator.html#var$entities">popoon_components_generator::$entities</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../popoon/popoon_component.html">popoon_component</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$debug">popoon_component::$debug</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasDomInput">popoon_component::$hasDomInput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasDomOutput">popoon_component::$hasDomOutput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasSaxInput">popoon_component::$hasSaxInput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasSaxOutput">popoon_component::$hasSaxOutput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasXmlStringInput">popoon_component::$hasXmlStringInput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$hasXmlStringOutput">popoon_component::$hasXmlStringOutput</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/popoon_component.html#var$params">popoon_component::$params</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdb2xml.php.html#a39">39</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">popoon_components_generators_db2xml</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../popoon/popoon_components_generator.html#method__construct">popoon_components_generator::__construct()</a></dt>
+						<dd>Constructor</dd>
+					</dl>
+		
+	</div>
+<a name="methodDomStart" id="DomStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">DomStart</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsdb2xml.php.html#a43">43</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			DomStart
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../popoon/popoon_components_generator.html#methodDomStart">popoon_components_generator::DomStart()</a></dt>
+						<dd>Does the generation of the xml Document</dd>
+					</dl>
+		
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../popoon/popoon_components_generator.html">popoon_components_generator</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../popoon/popoon_components_generator.html#method__construct">popoon_components_generator::__construct()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_components_generator.html#methodDomStart">popoon_components_generator::DomStart()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_components_generator.html#methodentity_decode">popoon_components_generator::entity_decode()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_components_generator.html#methodinit">popoon_components_generator::init()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_components_generator.html#methodsetEntities">popoon_components_generator::setEntities()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../popoon/popoon_component.html">popoon_component</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../popoon/popoon_component.html#method__construct">popoon_component::__construct()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodcheckValidityDefault">popoon_component::checkValidityDefault()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgenerateKeyDefault">popoon_component::generateKeyDefault()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgenerateValidityDefault">popoon_component::generateValidityDefault()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgetAttrib">popoon_component::getAttrib()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgetParameter">popoon_component::getParameter()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgetParameterAll">popoon_component::getParameterAll()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodgetParameterDefault">popoon_component::getParameterDefault()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodinit">popoon_component::init()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodprintDebug">popoon_component::printDebug()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodprintDebugArray">popoon_component::printDebugArray()</a></span><br>
+													<span class="method-name"><a href="../popoon/popoon_component.html#methodsetParameter">popoon_component::setParameter()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:59 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

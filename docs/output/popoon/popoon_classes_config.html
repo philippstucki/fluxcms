@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class popoon_classes_config</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class popoon_classes_config</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class for storing Popoon Config parameter</p>
+<p class="description"><p>Parameter about Caching et al. are also stored here</p></p>
+	<ul class="tags">
+				<li><span class="field">example:</span> <a href="../__examplesource/exsource__inc_popoon_docs_examples_classes_config_cache.php_e3f8b861c021d0dd11937872ec93c916.html">example</a></li>
+				<li><span class="field">version:</span> $Id: popoon_classes_config.html,v 1.1 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_classes_config_php.html">/classes/config.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a12">12</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$cacheContainer" title="details" class="var-name">$cacheContainer</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$cacheParams" title="details" class="var-name">$cacheParams</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$instance" title="details" class="var-name">$instance</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$outputCacheCallback" title="details" class="var-name">$outputCacheCallback</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$outputCacheExpire" title="details" class="var-name">$outputCacheExpire</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">bool</span>
+					<a href="#$outputCacheSave" title="details" class="var-name">$outputCacheSave</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$popoonValues" title="details" class="var-name">$popoonValues</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$values" title="details" class="var-name">$values</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">popoon_classes_config</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#disableOutputCaching" title="details" class="method-name">disableOutputCaching</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#doOutputCache" title="details" class="method-name">doOutputCache</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#doOutputCacheCallback" title="details" class="method-name">doOutputCacheCallback</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#doOutputCacheSave" title="details" class="method-name">doOutputCacheSave</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../popoon/popoon_classes_config.html">popoon_classes_config</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getPopoonValue" title="details" class="method-name">getPopoonValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getValue" title="details" class="method-name">getValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$module</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#offsetExists" title="details" class="method-name">offsetExists</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#offsetGet" title="details" class="method-name">offsetGet</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#offsetSet" title="details" class="method-name">offsetSet</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#offsetUnset" title="details" class="method-name">offsetUnset</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setOutputCacheCallback" title="details" class="method-name">setOutputCacheCallback</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$callback</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setPopoonValue" title="details" class="method-name">setPopoonValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setValue" title="details" class="method-name">setValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$module</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$cacheContainer" id="$cacheContainer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$cacheContainer</span>
+			 = <span class="var-default"> 'file'</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a47">47</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the cache container according to PEAR::Cache</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cacheParams" id="$cacheParams"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$cacheParams</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a57">57</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">cache parameter for PEAR::Cache</p>
+<p class="description"><p>we can't set them here to a default value, because we need BX_TEMP_DIR and that  doesn't work. It's set in the constructor</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#method__construct">popoon_classes_config::__construct()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$instance" id="$instance"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$instance</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a21">21</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the class instance</p>
+<p class="description"><p>this is a singleton class, therefore we save the instance  in this static var</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> popoon_classes_config</li>
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$outputCacheCallback" id="$outputCacheCallback"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$outputCacheCallback</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a42">42</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$outputCacheExpire" id="$outputCacheExpire"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$outputCacheExpire</span>
+			 = <span class="var-default"> 3600</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a65">65</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The expire time of the output cache</p>
+<p class="description"><p>After this time, the cache entry gets regenerated</p></p>
+	<ul class="tags">
+				<li><span class="field">var:</span> in seconds.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$outputCacheSave" id="$outputCacheSave"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$outputCacheSave</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a76">76</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">if the output should be saved</p>
+<p class="description"><p>if this is false, then the output is not cached  and generated the next time  useful, if you want turn of outputcaching within the sitemap</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$popoonValues" id="$popoonValues"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$popoonValues</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a30">30</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Values set with setPopoonValue</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodsetPopoonValue">popoon_classes_config::setPopoonValue()</a></li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodgetPopoonValue">popoon_classes_config::getPopoonValue()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$values" id="$values"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$values</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a39">39</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Values set with setValue</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodsetValue">popoon_classes_config::setValue()</a></li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodgetValue">popoon_classes_config::getValue()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a86">86</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The constructor</p>
+<p class="description"><p>As this is a singleton class, we don't allow the class to be called  directly. use getInstance</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodgetInstance">popoon_classes_config::getInstance()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">popoon_classes_config</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddisableOutputCaching" id="disableOutputCaching"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">disableOutputCaching</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a194">194</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disables saving of outputCaching</p>
+<p class="description"><p>If this method is called, the outputCache Handler does not   save the result</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methoddoOutputCacheSave">popoon_classes_config::doOutputCacheSave()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disableOutputCaching
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoOutputCache" id="doOutputCache"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doOutputCache</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a178">178</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks, if popoon should do Output Caching</p>
+<p class="description"><p>This currently only checks, if an outputCacheCallback  is set and if this returns true</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methoddoOutputCacheCallback">popoon_classes_config::doOutputCacheCallback()</a></li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodsetOutputCacheCallback">popoon_classes_config::setOutputCacheCallback()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			doOutputCache
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoOutputCacheCallback" id="doOutputCacheCallback"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">doOutputCacheCallback</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a237">237</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Calls the outputCache Handler</p>
+<p class="description"><p>This function should return true or false. True if we should use OutputCaching  , false if not</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodsetOutputCacheCallback">popoon_classes_config::setOutputCacheCallback()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			doOutputCacheCallback
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoOutputCacheSave" id="doOutputCacheSave"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doOutputCacheSave</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a205">205</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check, if we should save the outputcache</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methoddisableOutputCaching">popoon_classes_config::disableOutputCaching()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			doOutputCacheSave
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getInstance</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a98">98</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets a singleton instance of the this class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an instance of this class</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../popoon/popoon_classes_config.html">popoon_classes_config</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetPopoonValue" id="getPopoonValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPopoonValue</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a114">114</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">gets a popoon Value</p>
+<p class="description"><p>returns a value set before with setPopoonValue().</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value</li>
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodsetPopoonValue">popoon_classes_config::setPopoonValue()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getPopoonValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the value</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetValue" id="getValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getValue</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a141">141</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets a value for a module</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$module</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$module</span><span class="var-description">: name of the module</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the value</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodoffsetExists" id="offsetExists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">offsetExists</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a250">250</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			offsetExists
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodoffsetGet" id="offsetGet"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">offsetGet</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a242">242</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			offsetGet
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodoffsetSet" id="offsetSet"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">offsetSet</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a246">246</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			offsetSet
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodoffsetUnset" id="offsetUnset"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">offsetUnset</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a254">254</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			offsetUnset
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$off</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetOutputCacheCallback" id="setOutputCacheCallback"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setOutputCacheCallback</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a220">220</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets outputcache handler</p>
+<p class="description"><p>This function will be called within doOutputCache  It's only set, if the function exists  otherwise it throws an exception</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">example:</span> <a href="../__examplesource/exsource__inc_popoon_docs_examples_classes_config_cache.php_e3f8b861c021d0dd11937872ec93c916.html">example</a></li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methoddoOutputCache">popoon_classes_config::doOutputCache()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setOutputCacheCallback
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$callback</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$callback</span><span class="var-description">: the function to be called</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetPopoonValue" id="setPopoonValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setPopoonValue</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a130">130</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a value in the popoon context</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_classes_config.html#methodgetPopoonValue">popoon_classes_config::getPopoonValue()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPopoonValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the value</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetValue" id="setValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setValue</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__classesconfig.php.html#a161">161</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a value for a module</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$module</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$module</span><span class="var-description">: name of the module</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the value</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:51 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

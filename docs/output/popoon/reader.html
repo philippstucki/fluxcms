@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class reader</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class reader</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class for generating xml document</p>
+<p class="description"><p>generators are used to generate the initial XML in &lt;map:generate&gt;  Not much here at the moment. maybe in the future...   I'm not sure, if we really need this</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: reader.html,v 1.1 2004/02/24 10:36:12 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_reader_php.html">/components/reader.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsreader.php.html#a35">35</a></span>)
+		</p>
+		
+				
+		<pre>component
+   |
+   --reader</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/reader_info.html">reader_info</a></td>
+					<td>
+											This class gives some info about popoon and variables and phpinfo()
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/reader_php.html">reader_php</a></td>
+					<td>
+											Includes a php file
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/reader_phpsource.html">reader_phpsource</a></td>
+					<td>
+											Shows the source of a php-file
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/reader_resource.html">reader_resource</a></td>
+					<td>
+											
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/reader_textsource.html">reader_textsource</a></td>
+					<td>
+											Shows the source of a (xml) file
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">reader</span>
+										<a href="#reader" title="details" class="method-name">reader</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#start" title="details" class="method-name">start</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodreader" id="reader"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor reader</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsreader.php.html#a43">43</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+<p class="description"><p>Does nothing the moment</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">reader</span>
+		<span class="method-name">
+			reader
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsreader.php.html#a55">55</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initiator, called after construction of object</p>
+<p class="description"><p>This method will be called in the start element with the attributes from this element</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$attribs</span>
+				<span class="var-name">$attribs</span><span class="var-description">: array    associative array with element attributes</span>			</li>
+				</ul>
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/reader_info.html#methodinit">reader_info::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/reader_php.html#methodinit">reader_php::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/reader_phpsource.html#methodinit">reader_phpsource::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/reader_resource.html#methodinit">reader_resource::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/reader_textsource.html#methodinit">reader_textsource::init()</a>
+								: Initiator, called after construction of object
+							</li>
+				</ul>
+	</div>
+<a name="methodstart" id="start"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">start</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsreader.php.html#a70">70</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Does the generation of the xml Document</p>
+<p class="description"><p>The XML-Document is passed by reference, to save copying of large XML-DOcuments   The generated XML-Document can be a DomDocument-Object or a XML-String, but preferred   is DomDocument.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			start
+		</span>
+				()
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/reader_info.html#methodstart">reader_info::start()</a>
+							</li>
+					<li>
+				<a href="../popoon/reader_php.html#methodstart">reader_php::start()</a>
+								: Just runs the php file
+							</li>
+					<li>
+				<a href="../popoon/reader_phpsource.html#methodstart">reader_phpsource::start()</a>
+								: Just runs the php file
+							</li>
+					<li>
+				<a href="../popoon/reader_resource.html#methodstart">reader_resource::start()</a>
+								: Prints file content
+							</li>
+					<li>
+				<a href="../popoon/reader_textsource.html#methodstart">reader_textsource::start()</a>
+							</li>
+				</ul>
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 24 Feb 2004 09:49:16 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

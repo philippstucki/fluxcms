@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class generator_usercomments</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class generator_usercomments</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Usercomment Generator: A Wrapper around phorum5</p>
+<p class="description"><p>This generator let's you have &quot;User Contributed Notes&quot; as  e.g. on php.net for each page(URI) you published.  It was written for the bxcms-docusite.  This isn't much more than  a wrapper class for the functionality  provided by phorum5(http://phorum.org/)  Each URL is assigned a forum, so the first thing we need to do is get a forum_id for  the REQUEST_URI. If there's one, we display the corresponding thread, otherwise a simple  form is enough.</p><p>I also made a set of template for phorum5 which make for produce xml output (in fact a mix of simple docbook  and some forum-specific markup), for use with this generator.  Phorum5 was alpha when I wrote this and, as most software, not written to be embedded in some other software.  Therefore you need to add two lines in phorum5/common.php:</p><p>$PHORUM = array(); <ul><li>$GLOBALS['PHORUM'] =&amp; $PHORUM;</li><li>$PHORUM =&amp; $GLOBALS['PHORUM'];</li></ul>  This double reference is necessary because phorum does not actually run in the global namespace  and because it's inconsistently programmed.</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: generator_usercomments.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Hannes Gassert &lt;<a href="mailto:hannes@mediagonal.ch">hannes@mediagonal.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_usercomments_php.html">/components/generators/usercomments.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a55">55</a></span>)
+		</p>
+		
+				
+		<pre>generator
+   |
+   --generator_usercomments</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">object PEAR</span>
+					<a href="#$db" title="details" class="var-name">$db</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$dbInfo" title="details" class="var-name">$dbInfo</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$defaultListLength" title="details" class="var-name">$defaultListLength</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$disabledFunctions" title="details" class="var-name">$disabledFunctions</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$envBackup" title="details" class="var-name">$envBackup</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">id</span>
+					<a href="#$forumId" title="details" class="var-name">$forumId</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$forumId" title="details" class="var-name">$forumId</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$isEmptyForum" title="details" class="var-name">$isEmptyForum</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$langAbbrev2langName" title="details" class="var-name">$langAbbrev2langName</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$phorumDataFields" title="details" class="var-name">$phorumDataFields</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$threaded" title="details" class="var-name">$threaded</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$URL" title="details" class="var-name">$URL</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$usePersistentDbConn" title="details" class="var-name">$usePersistentDbConn</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$utf8encode" title="details" class="var-name">$utf8encode</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">generator_usercomments</span>
+										<a href="#generator_usercomments" title="details" class="method-name">generator_usercomments</a>
+											(<span class="var-type">object sitemap</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#checkPhorumDbError" title="details" class="method-name">checkPhorumDbError</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$pearDbObject</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">XML..</span>
+										<a href="#DomStart" title="details" class="method-name">DomStart</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">some</span>
+										<a href="#doPost" title="details" class="method-name">doPost</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">some</span>
+										<a href="#doRead" title="details" class="method-name">doRead</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#getConnection" title="details" class="method-name">getConnection</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getForumId" title="details" class="method-name">getForumId</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$URL</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#includeDisableFunctions" title="details" class="method-name">includeDisableFunctions</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$disabledFunctions</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$retvar</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">some</span>
+										<a href="#listThreads" title="details" class="method-name">listThreads</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#prepareEnvironment" title="details" class="method-name">prepareEnvironment</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#restoreEnvironment" title="details" class="method-name">restoreEnvironment</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setLanguage" title="details" class="method-name">setLanguage</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#setThreaded" title="details" class="method-name">setThreaded</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#showForm" title="details" class="method-name">showForm</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$db" id="$db"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">object PEAR</span>
+			<span class="var-name">$db</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a159">159</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> DB object</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$dbInfo" id="$dbInfo"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$dbInfo</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a165">165</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> information about the database, taken from phorum config</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$defaultListLength" id="$defaultListLength"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$defaultListLength</span>
+			 = <span class="var-default"> 30</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a76">76</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Default value for entry in phorum_forums list_length</p>
+<p class="description"><p>Can be overridden by &lt;map:parameter name='listlength'</p></p>
+	<ul class="tags">
+				<li><span class="field">var:</span> how many threads to list on one page</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$disabledFunctions" id="$disabledFunctions"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$disabledFunctions</span>
+			 = <span class="var-default">array('header', 'exit')</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a82">82</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> bad functions that included files are not supposed to use, since they would break out from being embedded in this generator.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$envBackup" id="$envBackup"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$envBackup</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a141">141</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> information taken from the current environment, which we'll change and restore afterwards</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$forumId" id="$forumId"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">id</span>
+			<span class="var-name">$forumId</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a147">147</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> of the thread beloning to the URI requested</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$forumId" id="$forumId"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$forumId</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a99">99</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">forumId of a thread</p>
+<p class="description"><p>All threads belong into a forum, forumId says to which one.  We assign a forumId to each URL, this assignment is stored in the database table phorum_url2forum_id</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$isEmptyForum" id="$isEmptyForum"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$isEmptyForum</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a153">153</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> indicates if we have a thread to display or not.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$langAbbrev2langName" id="$langAbbrev2langName"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$langAbbrev2langName</span>
+			 = <span class="var-default">array('en' =&gt; 'english',<br />                                     'de_OT' =&gt; 'german_other',<br />                                     ''   =&gt; 'german_polite')</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a126">126</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Maps language abbrevs to names. Should be configurable in sitemap.xml via a map:parameter or alike</p>
+<p class="description"><p>This value can be configured by system the administrator.</p></p>
+	<ul class="tags">
+				<li><span class="field">var:</span> this is for mapping language abbreviations such as 'en' to the name of a phorum language set.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$phorumDataFields" id="$phorumDataFields"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$phorumDataFields</span>
+			 = <span class="var-default">array('thread', 'parent_id', 'author', 'email', 'subject', 'body')</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a135">135</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> variables to get from post.php to read.php via get for the purpose of redisplaying their values in case of a partially filled in form.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$threaded" id="$threaded"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$threaded</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a115">115</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Threaded or flat forum</p>
+<p class="description"><p>phorum5 supports threaded discussions as well as simple, &quot;flat&quot; fora.  You can specify through a &lt;map:parameter name=&quot;threaded&quot; value={&quot;true&quot;, &quot;false&quot;} entry in sitemap.xml  what you want to have. Note that you must not change your sitemap entry from true to false (or vice versa)  once after there are fora in the database.</p><p>The value of this variable is written into the phorum_forums table.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../popoon/generator_usercomments.html#methodgetForumId">generator_usercomments::getForumId()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$URL" id="$URL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$URL</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a171">171</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> URL of request being handled</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$usePersistentDbConn" id="$usePersistentDbConn"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$usePersistentDbConn</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a66">66</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">How to connect to the phorum database. Should be configurable via an attribute or something in sitemap.xml</p>
+<p class="description"><p>This value can be configured by system the administrator.</p></p>
+	<ul class="tags">
+				<li><span class="field">var:</span> wheter or not to make the db connection persistent</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$utf8encode" id="$utf8encode"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$utf8encode</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a88">88</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> wether or not to apply utf8_encode() to the data we get from phorum. by the way: i hate these encoding all the time..</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgenerator_usercomments" id="generator_usercomments"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor generator_usercomments</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a181">181</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+<p class="description"><p>The standard constructor.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">generator_usercomments</span>
+		<span class="method-name">
+			generator_usercomments
+		</span>
+					(<span class="var-type">object sitemap</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object sitemap</span>
+				<span class="var-name">&$sitemap</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcheckPhorumDbError" id="checkPhorumDbError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkPhorumDbError</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a729">729</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Central error handler for phorum database errors.</p>
+<p class="description"><p>Just another indirection in the error handling system to save some lines of code.  Seems to me like a perversion of the nice error handling system.. (?)</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			checkPhorumDbError
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$pearDbObject</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodDomStart" id="DomStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">DomStart</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a255">255</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">makes phorum generate an xml string from the data it has, using it's own templating mechanism.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">XML..</span>
+		<span class="method-name">
+			DomStart
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoPost" id="doPost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doPost</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a360">360</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Answers to a request for posting a new comment</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> kind of xml</li>
+				<li><span class="field">see:</span> <a href="../popoon/generator_usercomments.html#methodincludeDisableFunctions">generator_usercomments::includeDisableFunctions()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">some</span>
+		<span class="method-name">
+			doPost
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoRead" id="doRead"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">doRead</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a346">346</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Answers to a request for reading a thread</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> kind of xml</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">some</span>
+		<span class="method-name">
+			doRead
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetConnection" id="getConnection"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getConnection</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a492">492</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tries to connect to the phorum-DB</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			getConnection
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetForumId" id="getForumId"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getForumId</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a415">415</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fetches thread ID belonging to the URL requested.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> thread id from database</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getForumId
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$URL</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodincludeDisableFunctions" id="includeDisableFunctions"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">includeDisableFunctions</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a660">660</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">eval()s the code in $file while commenting out all calls to the functions $functions</p>
+<p class="description"><p>THIS IS SO GOD DAMNED DIRTY!!  Note that this behaves in fact quite different from include() and that the regular expression applied can  easily cause syntax errors!</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> value of variabled named $retvar</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			includeDisableFunctions
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$disabledFunctions</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$retvar</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: filename of php file to be included</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$disabledFunctions</span><span class="var-description">: one or more functions to be disabled</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$retvar</span><span class="var-description">: name of variable whose value should be returned.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a195">195</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initiator, called after construction of object</p>
+<p class="description"><p>We call the parent init method, connect to the phorum database and try to get the threadID.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$attribs</span>
+				<span class="var-name">$attribs</span><span class="var-description">: array associative array with element attributes</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodlistThreads" id="listThreads"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">listThreads</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a334">334</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Answers to a request for listing all threads in a forum</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> kind of xml</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">some</span>
+		<span class="method-name">
+			listThreads
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodprepareEnvironment" id="prepareEnvironment"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">prepareEnvironment</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a526">526</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Change some environment variables to accomodate phorum5</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/generator_usercomments.html#methodrestoreEnvironment">generator_usercomments::restoreEnvironment()</a>, $this-&gt;envBackup</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			prepareEnvironment
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodrestoreEnvironment" id="restoreEnvironment"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">restoreEnvironment</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a602">602</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Restore some environment variables</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/generator_usercomments.html#methodprepareEnvironment">generator_usercomments::prepareEnvironment()</a></li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			restoreEnvironment
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetLanguage" id="setLanguage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setLanguage</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a619">619</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set $PHORUM['language'] according to the URI/Param/..</p>
+<p class="description"><p>Language is given as a two-letter code, either as first part of the REQUEST_URI or via map:parameter name=&quot;language&quot; in sitemap.xml  So try to get one of these and translate it into a name understood by phorum.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/generator_usercomments.html#var$langAbbrev2langName">generator_usercomments::$langAbbrev2langName</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setLanguage
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetThreaded" id="setThreaded"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setThreaded</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a702">702</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find out wether a threaded- oder flat-mode forum is going to be displayed</p>
+<p class="description"><p>Try to read ot get the value of a map:parameter named &quot;threaded&quot;.  If it is present and is set to true, switch on threaded mode.  In any other case, leave it off.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			setThreaded
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodshowForm" id="showForm"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">showForm</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsusercomments.php.html#a321">321</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Show form</p>
+<p class="description"><p>This happens if there are no threads for the given url</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			showForm
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:34:42 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

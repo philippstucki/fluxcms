@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>phpDocumentor Parser Errors and Warnings</title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+											</head>
+		<body>
+						<a href="#Post-parsing">Post-parsing</a><br>
+<a href="#aggregator.php">aggregator.php</a><br>
+<a href="#any.php">any.php</a><br>
+<a href="#autoload.php">autoload.php</a><br>
+<a href="#bitflux.php">bitflux.php</a><br>
+<a href="#bitfluxcms.php">bitfluxcms.php</a><br>
+<a href="#bitfluxnavi.php">bitfluxnavi.php</a><br>
+<a href="#bitflux_ebp.php">bitflux_ebp.php</a><br>
+<a href="#bx.php">bx.php</a><br>
+<a href="#bxe_newarticle.php">bxe_newarticle.php</a><br>
+<a href="#bxe_save.php">bxe_save.php</a><br>
+<a href="#BX_BITLIB_DIR.php">BX_BITLIB_DIR.php</a><br>
+<a href="#BX_PROJECT_DIR.php">BX_PROJECT_DIR.php</a><br>
+<a href="#cache.php">cache.php</a><br>
+<a href="#common.php">common.php</a><br>
+<a href="#component.php">component.php</a><br>
+<a href="#config.php">config.php</a><br>
+<a href="#config_cache.php">config_cache.php</a><br>
+<a href="#davput.php">davput.php</a><br>
+<a href="#db2xml.php">db2xml.php</a><br>
+<a href="#dbsax.php">dbsax.php</a><br>
+<a href="#db_query.php">db_query.php</a><br>
+<a href="#debug.php">debug.php</a><br>
+<a href="#directory.php">directory.php</a><br>
+<a href="#eval.php">eval.php</a><br>
+<a href="#fo2pdf.php">fo2pdf.php</a><br>
+<a href="#formwizard.php">formwizard.php</a><br>
+<a href="#generator.php">generator.php</a><br>
+<a href="#globalContainer.php">globalContainer.php</a><br>
+<a href="#globals.php">globals.php</a><br>
+<a href="#html.php">html.php</a><br>
+<a href="#html2html.php">html2html.php</a><br>
+<a href="#htmlwithmailobfuscator.php">htmlwithmailobfuscator.php</a><br>
+<a href="#imageresize.php">imageresize.php</a><br>
+<a href="#index.php">index.php</a><br>
+<a href="#info.php">info.php</a><br>
+<a href="#lang.php">lang.php</a><br>
+<a href="#libxslt.php">libxslt.php</a><br>
+<a href="#mail.php">mail.php</a><br>
+<a href="#mailobfuscator.php">mailobfuscator.php</a><br>
+<a href="#matcher.php">matcher.php</a><br>
+<a href="#mixedcontent.php">mixedcontent.php</a><br>
+<a href="#MnogoSearch.php">MnogoSearch.php</a><br>
+<a href="#mygyndoc.php">mygyndoc.php</a><br>
+<a href="#ooo.php">ooo.php</a><br>
+<a href="#options.php">options.php</a><br>
+<a href="#outputcache.php">outputcache.php</a><br>
+<a href="#pearauth.php">pearauth.php</a><br>
+<a href="#peardb.php">peardb.php</a><br>
+<a href="#php.php">php.php</a><br>
+<a href="#phpglobals.php">phpglobals.php</a><br>
+<a href="#phpglobalvars.php">phpglobalvars.php</a><br>
+<a href="#phpprocessor.php">phpprocessor.php</a><br>
+<a href="#phpprocessorsax.php">phpprocessorsax.php</a><br>
+<a href="#phpsource.php">phpsource.php</a><br>
+<a href="#popoon.php">popoon.php</a><br>
+<a href="#pwforgotten.php">pwforgotten.php</a><br>
+<a href="#querybuilder.php">querybuilder.php</a><br>
+<a href="#reader.php">reader.php</a><br>
+<a href="#requestmethod.php">requestmethod.php</a><br>
+<a href="#resource.php">resource.php</a><br>
+<a href="#search.php">search.php</a><br>
+<a href="#search2sql.php">search2sql.php</a><br>
+<a href="#selector.php">selector.php</a><br>
+<a href="#serializer.php">serializer.php</a><br>
+<a href="#sessionstorer.php">sessionstorer.php</a><br>
+<a href="#simple.php">simple.php</a><br>
+<a href="#simpleperm.php">simpleperm.php</a><br>
+<a href="#sitemap.php">sitemap.php</a><br>
+<a href="#sourceview.php">sourceview.php</a><br>
+<a href="#structure2xml.php">structure2xml.php</a><br>
+<a href="#structureslider.php">structureslider.php</a><br>
+<a href="#SwishE.php">SwishE.php</a><br>
+<a href="#textsource.php">textsource.php</a><br>
+<a href="#tidy.php">tidy.php</a><br>
+<a href="#transformer.php">transformer.php</a><br>
+<a href="#uri.php">uri.php</a><br>
+<a href="#usercomments.php">usercomments.php</a><br>
+<a href="#webdavfile.php">webdavfile.php</a><br>
+<a href="#wiki.php">wiki.php</a><br>
+<a href="#xforms.php">xforms.php</a><br>
+<a href="#xhtml.php">xhtml.php</a><br>
+<a href="#xinclude.php">xinclude.php</a><br>
+<a href="#xml.php">xml.php</a><br>
+<a href="#xmldom.php">xmldom.php</a><br>
+<a href="#xmlfile.php">xmlfile.php</a><br>
+<a href="#xmlformatted.php">xmlformatted.php</a><br>
+<a href="#xmlrpc_server.php">xmlrpc_server.php</a><br>
+<a href="#xmltransformer.php">xmltransformer.php</a><br>
+<a href="#xmlvariable.php">xmlvariable.php</a><br>
+<a href="#xslt.php">xslt.php</a><br>
+<a name="Post-parsing"></a>
+<h1>Post-parsing</h1>
+<h2>Warnings:</h2><br>
+<b>Warning</b> - Class transformer_xforms parent transformer not found<br>
+<b>Warning</b> - Class transformer_xinclude parent transformer not found<br>
+<b>Warning</b> - Class action_search2sql parent action not found<br>
+<b>Warning</b> - Class serializer_debug parent serializer not found<br>
+<b>Warning</b> - Class transformer_phpsource parent transformer not found<br>
+<b>Warning</b> - Class generator_xmlrpc_server parent generator not found<br>
+<b>Warning</b> - Class serializer_htmlwithmailobfuscator parent serializer not found<br>
+<b>Warning</b> - Class serializer_html2html parent serializer not found<br>
+<b>Warning</b> - Class serializer_fo2pdf parent serializer not found<br>
+<b>Warning</b> - Class transformer_xmltransformer parent transformer not found<br>
+<b>Warning</b> - class matcher_any in package popoon parent not found in @see parent::matcher()<br>
+<b>Warning</b> - class generator_xmlvariable in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class serializer_xmlformatted in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class action_bitfluxcms in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_xmltransformer in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class generator_xmlrpc_server in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - Class action_sessionstorer parent action not found<br>
+<b>Warning</b> - Class action_simpleperm parent action not found<br>
+<b>Warning</b> - class transformer_xforms in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class generator_structure2xml in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - Class action_bxe_newarticle parent action not found<br>
+<b>Warning</b> - Class transformer_mailobfuscator parent transformer not found<br>
+<b>Warning</b> - Class action_pearauth parent action not found<br>
+<b>Warning</b> - Class serializer_xmldom parent serializer not found<br>
+<b>Warning</b> - Class transformer_mixedcontent parent transformer not found<br>
+<b>Warning</b> - Class transformer_formwizard parent transformer not found<br>
+<b>Warning</b> - Class serializer_xmlformatted parent serializer not found<br>
+<b>Warning</b> - class serializer_xmldom in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class serializer_xmldom in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_xinclude in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - Class transformer_phpprocessorsax parent transformer not found<br>
+<b>Warning</b> - Class action_pwforgotten parent action not found<br>
+<b>Warning</b> - Class action_mygyndoc parent action not found<br>
+<b>Warning</b> - Class action_bitfluxcms parent action not found<br>
+<b>Warning</b> - Class HTTP_WebDAV_Server_Popoon parent HTTP_WebDAV_Server_Filesystem not found<br>
+<b>Warning</b> - Class action_db_query parent action not found<br>
+<b>Warning</b> - Class action_davput parent action not found<br>
+<b>Warning</b> - Class action_querybuilder parent action not found<br>
+<b>Warning</b> - Class generator_directory parent generator not found<br>
+<b>Warning</b> - Class action_bxe_save parent action not found<br>
+<b>Warning</b> - class serializer_debug in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class matcher_any in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_phpprocessorsax in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class reader_phpsource in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_phpsource in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class matcher_phpglobalvars in package popoon parent not found in @see parent::matcher()<br>
+<b>Warning</b> - Class reader_info parent reader not found<br>
+<b>Warning</b> - class serializer_debug in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - Class reader_php parent reader not found<br>
+<b>Warning</b> - class generator_pwforgotten in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class action_querybuilder in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - Class matcher_phpglobals parent matcher not found<br>
+<b>Warning</b> - Class matcher_any parent matcher not found<br>
+<b>Warning</b> - Class generator_xmlvariable parent generator not found<br>
+<b>Warning</b> - Class matcher_phpglobalvars parent matcher not found<br>
+<b>Warning</b> - Class generator_pwforgotten parent generator not found<br>
+<b>Warning</b> - Class action_mail parent action not found<br>
+<b>Warning</b> - Class generator_search parent generator not found<br>
+<b>Warning</b> - Class reader_textsource parent reader not found<br>
+<b>Warning</b> - Class reader_phpsource parent reader not found<br>
+<b>Warning</b> - class action_mail in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_mailobfuscator in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class reader_php in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class generator_usercomments in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class reader_info in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class serializer_htmlwithmailobfuscator in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class serializer_fo2pdf in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - class transformer_formwizard in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class serializer_html2html in package popoon parent not found in @see parent::init()<br>
+<b>Warning</b> - Class generator_usercomments parent generator not found<br>
+<b>Warning</b> - class transformer_mixedcontent in package popoon parent not found in @see parent::DomStart()<br>
+<b>Warning</b> - class matcher_phpglobals in package popoon parent not found in @see parent::matcher()<br>
+<b>Warning</b> - Class generator_structure2xml parent generator not found<br>
+<b>Warning</b> - class reader_textsource in package popoon parent not found in @see parent::init()<br>
+<a name="action.php"></a>
+<h1>action.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "popoon_components_action", use another DocBlock to document the file<br>
+<a name="aggregator.php"></a>
+<h1>aggregator.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 28</b> - DocBlock would be page-level, but precedes class "popoon_components_aggregator", use another DocBlock to document the file<br>
+<a name="any.php"></a>
+<h1>any.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 51</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/matchers/any.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 52</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/selectors/any.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="autoload.php"></a>
+<h1>autoload.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 22</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/autoload.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bitflux.php"></a>
+<h1>bitflux.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 375</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/bitflux.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bitfluxcms.php"></a>
+<h1>bitfluxcms.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 119</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/bitfluxcms.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 229</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/bitfluxcms.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bitfluxnavi.php"></a>
+<h1>bitfluxnavi.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 85</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/bitfluxnavi.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bitflux_ebp.php"></a>
+<h1>bitflux_ebp.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 350</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/bitflux_ebp.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bx.php"></a>
+<h1>bx.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 2</b> - no @package tag was used in a DocBlock for class bxStream<br>
+<b>Warning on line 60</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/bx.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="bxe_newarticle.php"></a>
+<h1>bxe_newarticle.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 407</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/bxe_newarticle.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<h2>Errors:</h2><br>
+<b>Error on line 155</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 155</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 213</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 213</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 235</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 235</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 262</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 262</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 293</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 293</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 322</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 322</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 344</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 344</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 366</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 366</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 385</b> - "@return" tag was used without any parameters, illegal<br>
+<b>Error on line 385</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 396</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Error on line 396</b> - "@return" tag was used without any parameters, illegal<br>
+<a name="bxe_save.php"></a>
+<h1>bxe_save.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 86</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/bxe_save.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="BX_BITLIB_DIR.php"></a>
+<h1>BX_BITLIB_DIR.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 34</b> - Page-level DocBlock precedes "function scheme_BX_BITLIB_DIR", use another DocBlock to document the source element<br>
+<a name="BX_PROJECT_DIR.php"></a>
+<h1>BX_PROJECT_DIR.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 34</b> - Page-level DocBlock precedes "function scheme_BX_PROJECT_DIR", use another DocBlock to document the source element<br>
+<a name="cache.php"></a>
+<h1>cache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 104</b> - Unknown tag "@_load()" used<br>
+<b>Warning on line 564</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/cache.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<h2>Errors:</h2><br>
+<b>Error on line 356</b> - DocBlock has multiple @access tags, illegal. ignoring additional tag "@access public"<br>
+<a name="common.php"></a>
+<h1>common.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "common", use another DocBlock to document the file<br>
+<a name="component.php"></a>
+<h1>component.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "popoon_component", use another DocBlock to document the file<br>
+<a name="config.php"></a>
+<h1>config.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 2</b> - no @package tag was used in a DocBlock for class popoonIconfig<br>
+<b>Warning on line 7</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/interfaces/config.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "popoon_classes_config", use another DocBlock to document the file<br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 35</b> - Page-level DocBlock precedes "function scheme_config", use another DocBlock to document the source element<br>
+<a name="config_cache.php"></a>
+<h1>config_cache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/docs/examples/classes/config_cache.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="davput.php"></a>
+<h1>davput.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 68</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/davput.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="db2xml.php"></a>
+<h1>db2xml.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "popoon_components_generators_db2xml", use another DocBlock to document the file<br>
+<a name="dbsax.php"></a>
+<h1>dbsax.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 2</b> - no @package tag was used in a DocBlock for class dbsaxStream<br>
+<b>Warning on line 99</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/storage/dbsax.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="db_query.php"></a>
+<h1>db_query.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 55</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/db_query.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="debug.php"></a>
+<h1>debug.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 59</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/debug.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="directory.php"></a>
+<h1>directory.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 161</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/directory.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="eval.php"></a>
+<h1>eval.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 49</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/selectors/eval.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="fo2pdf.php"></a>
+<h1>fo2pdf.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/fo2pdf.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="formwizard.php"></a>
+<h1>formwizard.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 334</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/formwizard.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="generator.php"></a>
+<h1>generator.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 32</b> - DocBlock would be page-level, but precedes class "popoon_components_generator", use another DocBlock to document the file<br>
+<a name="globalContainer.php"></a>
+<h1>globalContainer.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 28</b> - DocBlock would be page-level, but precedes class "globalContainer", use another DocBlock to document the file<br>
+<a name="globals.php"></a>
+<h1>globals.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - Unknown tag "@module" used<br>
+<b>Warning on line 32</b> - Page-level DocBlock precedes "function scheme_globals", use another DocBlock to document the source element<br>
+<a name="html.php"></a>
+<h1>html.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "popoon_components_serializers_html", use another DocBlock to document the file<br>
+<a name="html2html.php"></a>
+<h1>html2html.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 71</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/html2html.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="htmlwithmailobfuscator.php"></a>
+<h1>htmlwithmailobfuscator.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/htmlwithmailobfuscator.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="imageresize.php"></a>
+<h1>imageresize.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 22</b> - no @package tag was used in a DocBlock for class ImageResizeStream<br>
+<b>Warning on line 133</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/imageresize.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="index.php"></a>
+<h1>index.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/examples/slideml/index.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="info.php"></a>
+<h1>info.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 73</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/readers/info.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<h2>Errors:</h2><br>
+<b>Error on line 61</b> - "@return" tag was used without any parameters, illegal<br>
+<a name="lang.php"></a>
+<h1>lang.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 42</b> - Page-level DocBlock precedes "function scheme_lang", use another DocBlock to document the source element<br>
+<a name="libxslt.php"></a>
+<h1>libxslt.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - DocBlock would be page-level, but precedes class "popoon_components_transformers_libxslt", use another DocBlock to document the file<br>
+<a name="mail.php"></a>
+<h1>mail.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 84</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/mail.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="mailobfuscator.php"></a>
+<h1>mailobfuscator.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 73</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/mailobfuscator.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="matcher.php"></a>
+<h1>matcher.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 31</b> - DocBlock would be page-level, but precedes class "popoon_components_matcher", use another DocBlock to document the file<br>
+<a name="mixedcontent.php"></a>
+<h1>mixedcontent.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 107</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/mixedcontent.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="MnogoSearch.php"></a>
+<h1>MnogoSearch.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - Unknown tag "@version:" used<br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "MnogoSearch", use another DocBlock to document the file<br>
+<b>Warning on line 29</b> - Unknown tag "@author:" used<br>
+<a name="mygyndoc.php"></a>
+<h1>mygyndoc.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 145</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/mygyndoc.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="ooo.php"></a>
+<h1>ooo.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 3</b> - no @package tag was used in a DocBlock for class OooStream<br>
+<b>Warning on line 57</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/ooo.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="options.php"></a>
+<h1>options.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - Unknown tag "@module" used<br>
+<b>Warning on line 34</b> - Page-level DocBlock precedes "function scheme_options", use another DocBlock to document the source element<br>
+<a name="outputcache.php"></a>
+<h1>outputcache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 83</b> - no @package tag was used in a DocBlock for class popoon_sitemap_outputcache<br>
+<a name="pearauth.php"></a>
+<h1>pearauth.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 164</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/pearauth.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="peardb.php"></a>
+<h1>peardb.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 51</b> - Unknown tag "@module" used<br>
+<b>Warning on line 72</b> - Page-level DocBlock precedes "function scheme_peardb", use another DocBlock to document the source element<br>
+<a name="php.php"></a>
+<h1>php.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 28</b> - Unknown tag "@module" used<br>
+<b>Warning on line 37</b> - Page-level DocBlock precedes "function scheme_php", use another DocBlock to document the source element<br>
+<b>Warning on line 69</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/readers/php.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="phpglobals.php"></a>
+<h1>phpglobals.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - Unknown tag "@module" used<br>
+<b>Warning on line 52</b> - Page-level DocBlock precedes "function scheme_phpglobals", use another DocBlock to document the source element<br>
+<b>Warning on line 77</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/matchers/phpglobals.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="phpglobalvars.php"></a>
+<h1>phpglobalvars.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 72</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/selectors/phpglobalvars.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 73</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/matchers/phpglobalvars.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="phpprocessor.php"></a>
+<h1>phpprocessor.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - DocBlock would be page-level, but precedes class "popoon_components_transformers_phpprocessor", use another DocBlock to document the file<br>
+<a name="phpprocessorsax.php"></a>
+<h1>phpprocessorsax.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 173</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/phpprocessorsax.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="phpsource.php"></a>
+<h1>phpsource.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 70</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/readers/phpsource.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 128</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/phpsource.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="popoon.php"></a>
+<h1>popoon.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - no @package tag was used in a DocBlock for class HTTP_WebDAV_Server_Popoon<br>
+<b>Warning on line 56</b> - Unknown tag "@const" used<br>
+<b>Warning on line 64</b> - Unknown tag "@const" used<br>
+<b>Warning on line 71</b> - Unknown tag "@const" used<br>
+<b>Warning on line 72</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/webdav/popoon.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 78</b> - Unknown tag "@const" used<br>
+<b>Warning on line 85</b> - Unknown tag "@const" used<br>
+<b>Warning on line 92</b> - Unknown tag "@const" used<br>
+<b>Warning on line 98</b> - Unknown tag "@const" used<br>
+<b>Warning on line 105</b> - Unknown tag "@const" used<br>
+<b>Warning on line 436</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/popoon.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="pwforgotten.php"></a>
+<h1>pwforgotten.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 99</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/pwforgotten.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 274</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/pwforgotten.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="querybuilder.php"></a>
+<h1>querybuilder.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 100</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/querybuilder.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="reader.php"></a>
+<h1>reader.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - DocBlock would be page-level, but precedes class "popoon_components_reader", use another DocBlock to document the file<br>
+<a name="requestmethod.php"></a>
+<h1>requestmethod.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 43</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/selectors/requestmethod.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="resource.php"></a>
+<h1>resource.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 116</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/readers/resource.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="search.php"></a>
+<h1>search.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - Page-level DocBlock precedes "include_once search.php", use another DocBlock to document the source element<br>
+<b>Warning on line 34</b> - Unknown tag "@author:" used<br>
+<b>Warning on line 34</b> - Unknown tag "@version:" used<br>
+<b>Warning on line 36</b> - no @package tag was used in a DocBlock for class generator_search<br>
+<a name="search2sql.php"></a>
+<h1>search2sql.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 60</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/search2sql.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="selector.php"></a>
+<h1>selector.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - Unknown tag "@module" used<br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "selector", use another DocBlock to document the file<br>
+<a name="serializer.php"></a>
+<h1>serializer.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 32</b> - DocBlock would be page-level, but precedes class "popoon_components_serializer", use another DocBlock to document the file<br>
+<a name="sessionstorer.php"></a>
+<h1>sessionstorer.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 86</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/sessionstorer.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="simple.php"></a>
+<h1>simple.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "popoon_components_actions_simple", use another DocBlock to document the file<br>
+<a name="simpleperm.php"></a>
+<h1>simpleperm.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 95</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/actions/simpleperm.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="sitemap.php"></a>
+<h1>sitemap.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 30</b> - DocBlock would be page-level, but precedes class "popoon_sitemap", use another DocBlock to document the file<br>
+<a name="sourceview.php"></a>
+<h1>sourceview.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 23</b> - no @package tag was used in a DocBlock for class popoon_components_transformers_sourceview<br>
+<b>Warning on line 118</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/sourceview.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="structure2xml.php"></a>
+<h1>structure2xml.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 710</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/structure2xml.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="structureslider.php"></a>
+<h1>structureslider.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 101</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/structureslider.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="SwishE.php"></a>
+<h1>SwishE.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - no @package tag was used in a DocBlock for class SwishE<br>
+<b>Warning on line 71</b> - Unknown tag "@params" used<br>
+<b>Warning on line 312</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/search/SwishE.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="textsource.php"></a>
+<h1>textsource.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 80</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/readers/textsource.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="tidy.php"></a>
+<h1>tidy.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 3</b> - no @package tag was used in a DocBlock for class TidyStream<br>
+<b>Warning on line 87</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/tidy.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="transformer.php"></a>
+<h1>transformer.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "popoon_components_transformer", use another DocBlock to document the file<br>
+<a name="uri.php"></a>
+<h1>uri.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - DocBlock would be page-level, but precedes class "popoon_components_matchers_uri", use another DocBlock to document the file<br>
+<b>Warning on line 43</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/selectors/uri.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="usercomments.php"></a>
+<h1>usercomments.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 747</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/usercomments.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="webdavfile.php"></a>
+<h1>webdavfile.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 138</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/webdavfile.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="wiki.php"></a>
+<h1>wiki.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 3</b> - no @package tag was used in a DocBlock for class WikiStream<br>
+<b>Warning on line 96</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/streams/wiki.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xforms.php"></a>
+<h1>xforms.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 435</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/xforms.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xhtml.php"></a>
+<h1>xhtml.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 74</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/xhtml.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xinclude.php"></a>
+<h1>xinclude.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 47</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/xinclude.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xml.php"></a>
+<h1>xml.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 28</b> - DocBlock would be page-level, but precedes class "popoon_components_serializers_xml", use another DocBlock to document the file<br>
+<a name="xmldom.php"></a>
+<h1>xmldom.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 61</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/xmldom.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xmlfile.php"></a>
+<h1>xmlfile.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 30</b> - DocBlock would be page-level, but precedes class "popoon_components_generators_xmlfile", use another DocBlock to document the file<br>
+<a name="xmlformatted.php"></a>
+<h1>xmlformatted.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 83</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/serializers/xmlformatted.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xmlrpc_server.php"></a>
+<h1>xmlrpc_server.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 140</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/xmlrpc_server.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xmltransformer.php"></a>
+<h1>xmltransformer.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 73</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/xmltransformer.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xmlvariable.php"></a>
+<h1>xmlvariable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/generators/xmlvariable.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="xslt.php"></a>
+<h1>xslt.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 87</b> - File "/usr/local/bxphp/apache/htdocs/evtuto/inc/popoon/components/transformers/xslt.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:35:11 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</body>
+</html>

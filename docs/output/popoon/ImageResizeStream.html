@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class ImageResizeStream</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ImageResizeStream</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">an Image Resizer Stream  not perfect yet, but a start</p>
+<p class="description"><p>fopen(&quot;irs://path/to/your/300x400/file.jpg&quot;);</p><p>then you get a 300x400 scaled image back   or you can use</p><p>fopen(&quot;irs://path/to/your/300xX/file.jpg&quot;);  fopen(&quot;irs://path/to/your/Xx300/file.jpg&quot;);</p><p>which will keep the ratio.</p><p>fopen(&quot;irs://path/to/your/file.jpg/300x300/&quot;);</p><p>A filter would actually be better, but that's a PHP5 thingie only...</p><p>No caching is done either right now</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_streams_imageresize_php.html">/streams/imageresize.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a23">23</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$html" title="details" class="var-name">$html</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$position" title="details" class="var-name">$position</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_close" title="details" class="method-name">stream_close</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_eof" title="details" class="method-name">stream_eof</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_open" title="details" class="method-name">stream_open</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$mode</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$options</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$opened_path</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_read" title="details" class="method-name">stream_read</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$count</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_seek" title="details" class="method-name">stream_seek</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$offset</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$whence</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_tell" title="details" class="method-name">stream_tell</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stream_write" title="details" class="method-name">stream_write</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#url_stat" title="details" class="method-name">url_stat</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$html" id="$html"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$html</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a25">25</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$position" id="$position"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$position</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a26">26</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodstream_close" id="stream_close"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_close</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a124">124</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_close
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_eof" id="stream_eof"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_eof</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a86">86</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_eof
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_open" id="stream_open"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_open</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a27">27</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_open
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$mode</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$options</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$opened_path</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_read" id="stream_read"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_read</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a71">71</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_read
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$count</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_seek" id="stream_seek"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_seek</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a90">90</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_seek
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$offset</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$whence</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_tell" id="stream_tell"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_tell</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a82">82</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_tell
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstream_write" id="stream_write"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">stream_write</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a76">76</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stream_write
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodurl_stat" id="url_stat"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">url_stat</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__streamsimageresize.php.html#a127">127</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			url_stat
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:32:27 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

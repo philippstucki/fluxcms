@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SwishE</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SwishE</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_search_SwishE_php.html">/components/generators/search/SwishE.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a32">32</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$ResFound" title="details" class="var-name">$ResFound</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$ResTime" title="details" class="var-name">$ResTime</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$Result" title="details" class="var-name">$Result</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_currpage" title="details" class="var-name">$_currpage</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_delim" title="details" class="var-name">$_delim</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_format" title="details" class="var-name">$_format</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_indexfile" title="details" class="var-name">$_indexfile</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_mode" title="details" class="var-name">$_mode</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_numrows" title="details" class="var-name">$_numrows</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_pipe" title="details" class="var-name">$_pipe</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_query" title="details" class="var-name">$_query</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_resp" title="details" class="var-name">$_resp</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$_resv" title="details" class="var-name">$_resv</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_swish" title="details" class="var-name">$_swish</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_swish_app" title="details" class="var-name">$_swish_app</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_which_app" title="details" class="var-name">$_which_app</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">SwishE</span>
+										<a href="#SwishE" title="details" class="method-name">SwishE</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$params</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#doQuery" title="details" class="method-name">doQuery</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getResult" title="details" class="method-name">getResult</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#setter" title="details" class="method-name">setter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$var</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#set_swish" title="details" class="method-name">set_swish</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_eval_query" title="details" class="method-name">_eval_query</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_exec_query" title="details" class="method-name">_exec_query</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$exec</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#_parse_result" title="details" class="method-name">_parse_result</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$result</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_prepare_query" title="details" class="method-name">_prepare_query</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$ResFound" id="$ResFound"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$ResFound</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a63">63</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$ResTime" id="$ResTime"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$ResTime</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a64">64</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$Result" id="$Result"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$Result</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a65">65</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_currpage" id="$_currpage"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_currpage</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a38">38</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_delim" id="$_delim"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_delim</span>
+			 = <span class="var-default">&quot;|&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a42">42</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_format" id="$_format"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_format</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a41">41</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_indexfile" id="$_indexfile"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_indexfile</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a35">35</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_mode" id="$_mode"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_mode</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a39">39</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_numrows" id="$_numrows"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_numrows</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a37">37</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_pipe" id="$_pipe"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_pipe</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a36">36</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_query" id="$_query"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_query</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a40">40</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_resp" id="$_resp"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_resp</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a43">43</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_resv" id="$_resv"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_resv</span>
+			 = <span class="var-default">array(	'count'=&gt;'%c',<br />						'title'=&gt;'%t',<br />						'text'=&gt;'%d',<br />						'url'=&gt;'%p',<br />						'size'=&gt;'%l',<br />						'keywords'=&gt;'&lt;keywords&gt;',<br />						'rating'=&gt;'%r',<br />						'mod'=&gt;'%D',<br />						'type'=&gt;'')</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a52">52</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Holds key=Name of ResultField, value=Swishe's shortcut</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$_swish" id="$_swish"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_swish</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a44">44</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_swish_app" id="$_swish_app"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_swish_app</span>
+			 = <span class="var-default">&quot;swish-e&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a45">45</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$_which_app" id="$_which_app"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_which_app</span>
+			 = <span class="var-default">&quot;/usr/bin/which&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a46">46</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodSwishE" id="SwishE"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor SwishE</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a72">72</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">SwishE</span>
+		<span class="method-name">
+			SwishE
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$params</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddoQuery" id="doQuery"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">doQuery</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a98">98</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Interface Function to query search module</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			doQuery
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span><span class="var-description">: Querystring</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetResult" id="getResult"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getResult</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a124">124</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Interface Function to get formatted Result</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getResult
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetter" id="setter"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setter</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a139">139</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">General function to set Classvars</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true|false</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			setter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$var</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$var</span><span class="var-description">: name of variable</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: value of variable</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Type of variable</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodset_swish" id="set_swish"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_swish</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a295">295</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets Swish-e executeable</p>
+<p class="description"><p>Detection of Swish-e location only for Linux  Windows needs to set it with $path</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			set_swish
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path to swish-e executeable</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_eval_query" id="_eval_query"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_eval_query</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a171">171</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Evaluate Query</p>
+<p class="description"><p>Escape malicious elements and catch if there  are already boolean elements (and|or|not|near) or  insert them if nescessary</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_eval_query
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span><span class="var-description">: Querystring</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_exec_query" id="_exec_query"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_exec_query</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a234">234</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute Query</p>
+<p class="description"><p>Opens pipe to Swish-e and executes given query</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Output of query</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_exec_query
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$exec</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$exec</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_parse_result" id="_parse_result"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_parse_result</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a260">260</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse Result coming from Swish-e</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> formatted array</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			_parse_result
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$result</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$result</span><span class="var-description">: Output of Swish-e query</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_prepare_query" id="_prepare_query"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_prepare_query</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorssearchSwishE.php.html#a207">207</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prepares Querystring</p>
+<p class="description"><p>Concat query to be piped to Swish-e</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> String which is executeable by Swish-e</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_prepare_query
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span>			</li>
+				</ul>
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:34:29 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

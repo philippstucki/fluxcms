@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class generator_bitfluxcms</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class generator_bitfluxcms</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generator Module for popoon</p>
+<p class="description"><p>This Module provides access to the popoon     , with its structure Files   and sql2xml stuff and some config options in the db, etc...</p><p>It should be a little bit cleaned up. It grew over the last few months   and therefore it's a mess :) it has some special features as well, which   were only needed on some sites, therefore we need something more modular   here</p><p>It extends the structure2xml module for the main computing part</p><p>It's a big mess, should be documentated and cleaned up some day...</p><p>REFACTOR!!!</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: generator_bitfluxcms.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_bitfluxcms_php.html">/components/generators/bitfluxcms.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a46">46</a></span>)
+		</p>
+		
+				
+		<pre>generator
+   |
+   --<a href="../popoon/generator_structure2xml.html">generator_structure2xml</a>
+      |
+      --generator_bitfluxcms</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$db" title="details" class="var-name">$db</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$fulluri" title="details" class="var-name">$fulluri</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$fulluriwonumbers" title="details" class="var-name">$fulluriwonumbers</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$page" title="details" class="var-name">$page</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$pageExtension" title="details" class="var-name">$pageExtension</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$pageWhere" title="details" class="var-name">$pageWhere</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$src" title="details" class="var-name">$src</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$treeStartID" title="details" class="var-name">$treeStartID</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">generator_bitfluxcms</span>
+										<a href="#generator_bitfluxcms" title="details" class="method-name">generator_bitfluxcms</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#DomStart" title="details" class="method-name">DomStart</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateKey" title="details" class="method-name">generateKey</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$db" id="$db"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$db</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a48">48</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../popoon/generator_structure2xml.html#var$db">generator_structure2xml::$db</a></dt>
+					</dl>
+		
+		
+
+</div>
+<a name="var$fulluri" id="$fulluri"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$fulluri</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a49">49</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$fulluriwonumbers" id="$fulluriwonumbers"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$fulluriwonumbers</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a50">50</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$page" id="$page"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$page</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a51">51</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$pageExtension" id="$pageExtension"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$pageExtension</span>
+			 = <span class="var-default">&quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a52">52</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$pageWhere" id="$pageWhere"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$pageWhere</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a54">54</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$src" id="$src"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$src</span>
+			 = <span class="var-default"> &quot;&quot; </span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a55">55</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$treeStartID" id="$treeStartID"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$treeStartID</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a53">53</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../popoon/generator_structure2xml.html">generator_structure2xml</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/generator_structure2xml.html#var$defaultExpires">generator_structure2xml::$defaultExpires</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/generator_structure2xml.html#var$dsn">generator_structure2xml::$dsn</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/generator_structure2xml.html#var$queries">generator_structure2xml::$queries</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/generator_structure2xml.html#var$queryCacheOptions">generator_structure2xml::$queryCacheOptions</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../popoon/generator_structure2xml.html#var$st2xmlCaching">generator_structure2xml::$st2xmlCaching</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgenerator_bitfluxcms" id="generator_bitfluxcms"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor generator_bitfluxcms</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a56">56</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">generator_bitfluxcms</span>
+		<span class="method-name">
+			generator_bitfluxcms
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodDomStart" id="DomStart"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">DomStart</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a60">60</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			DomStart
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../popoon/generator_structure2xml.html#methodDomStart">generator_structure2xml::DomStart()</a></dt>
+					</dl>
+		
+	</div>
+<a name="methodgenerateKey" id="generateKey"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateKey</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsbitfluxcms.php.html#a108">108</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate cacheKey</p>
+<p class="description"><p>Calls the method inherited from 'Component'</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> generateKeyDefault()</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateKey
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$attribs</span><span class="var-description">: attributes</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$keyBefore</span><span class="var-description">: last cacheKey</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../popoon/generator_structure2xml.html#methodgenerateKey">generator_structure2xml::generateKey()</a></dt>
+						<dd>Generate cacheKey</dd>
+					</dl>
+		
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../popoon/generator_structure2xml.html">generator_structure2xml</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodgenerator_structure2xml">generator_structure2xml::generator_structure2xml()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodcheckValidity">generator_structure2xml::checkValidity()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodDomStart">generator_structure2xml::DomStart()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodgenerateKey">generator_structure2xml::generateKey()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodgenerateValidity">generator_structure2xml::generateValidity()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodgetQueries">generator_structure2xml::getQueries()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodgetQueryFields">generator_structure2xml::getQueryFields()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodinit">generator_structure2xml::init()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodreplaceVarsInWhere">generator_structure2xml::replaceVarsInWhere()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodshowPage">generator_structure2xml::showPage()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodStructure2Sql">generator_structure2xml::Structure2Sql()</a></span><br>
+													<span class="method-name"><a href="../popoon/generator_structure2xml.html#methodStructures2Sql">generator_structure2xml::Structures2Sql()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

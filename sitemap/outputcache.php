@@ -1,0 +1,173 @@
+<?php
+// +----------------------------------------------------------------------+
+// | popoon                                                               |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2001,2002,2003,2004 Bitflux GmbH                       |
+// +----------------------------------------------------------------------+
+// | Licensed under the Apache License, Version 2.0 (the "License");      |
+// | you may not use this file except in compliance with the License.     |
+// | You may obtain a copy of the License at                              |
+// | http://www.apache.org/licenses/LICENSE-2.0                           |
+// | Unless required by applicable law or agreed to in writing, software  |
+// | distributed under the License is distributed on an "AS IS" BASIS,    |
+// | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or      |
+// | implied. See the License for the specific language governing         |
+// | permissions and limitations under the License.                       |
+// +----------------------------------------------------------------------+
+// | Author: Christian Stocker <chregu@bitflux.ch>                        |
+// +----------------------------------------------------------------------+
+//
+// $Id: outputcache.php,v 1.14 2004/03/07 15:46:04 chregu Exp $
+
+/**
+* Class for doing the sitemap parsing stuff
+*
+* @author   Christian Stocker <chregu@bitflux.ch>
+* @version  $Id: outputcache.php,v 1.14 2004/03/07 15:46:04 chregu Exp $
+* @package  popoon
+*/
+
+/** 
+* Some words about 304 caching:
+*
+* It has now quite sophisticated 304 detecting mechanism built in
+*
+* C-Etag = Cached Etag (md5($content))
+* B-Etag = Browser sent etag 
+* C-LM = Cached Last Modified
+* B-LM = Browser Last Modified
+* M-LM = Last Modified in oc.meta
+*
+* oc.meta = outputcache.meta. Dies directory contains metadata about LM and Etag of 
+*  the last cached url.
+*  This allows to delete the cache directory (outputcache) completely, but we still now
+*   the Etag (md5 of content) and LM of the last generated page.
+*
+* If url exits in cache and C-ETag = B-Etag and C-LM <= B-LM 
+*   send 304
+*
+* If url does not exist in cache and not in outputcache.meta
+*   generate content
+*   generate C-Etag = md5($content)
+*   if C-Etag = B-Etag
+*      send 304
+*   save content
+*   save oc.meta
+*   print content
+*   // this method saves us sending the whole content, when the browser already cached this content
+*   // it does not make it faster, since we have to generate the content anyway, we just save bandwidth
+*
+* If url does not exist in cache but in outputcache.meta
+*   generate content
+*   generate C-Etag = md5($content)
+*   if C-Etag = M-Etag
+*      set LM to M-LM
+*   if C-Etag = B-Etag
+*      send 304
+*   if C-LM <= B-LM
+*      send 304
+*   save content
+*   print content
+*
+*   //this method saves us also sending the whole content as above, it additionally keeps the LM if the 
+*   // md5 did not change. this is more cosmetics than really saving resources as the above does save
+*   // the resources anyway (except the browser doesn't understand Etags..)
+*
+*   Honestly said, the later 2 parts in the 304 handler is maybe overkill... It's just cosmetics more or 
+*    less and will not save much resources. But with newsreaders, which read the rss file every half an 
+*    hour or so, it could sum up and save some bandwidth.
+* 
+*  Maybe I will make the later part with the extra oc.meta files optional... But for Google it's certainly
+*   nice to know, when the page was really last modified and not, when the cache was last created ;)
+*/
+
+class popoon_sitemap_outputcache {
+    
+    function __construct(popoon_classes_config $options = NULL) {
+        require_once('Cache/Output.php');
+        $this->cache = new Cache_Output($options->cacheContainer, $options->cacheParams );
+    }
+    
+    function start() {
+        $idParams = $_GET;
+        if (isset($idParams['SID']))
+        {
+            unset($idParams['SID']);
+        }
+        $this->id = $this->cache->generateID($idParams);
+        if ($content = $this->cache->start($this->id,'outputcache') ) {
+            
+            $header = unserialize($this->cache->getUserdata($this->id,'outputcache'));
+            $etag = $header['ETag'];
+            foreach ($header as $key => $value) {
+                header("$key: $value");
+            }
+            if ($this->check304($etag, $header['Last-Modified'])) {
+                header( 'HTTP/1.1 304 Not Modified' );
+                die();
+            }
+            
+            header("X-Popoon-Cached: true");
+            print $content;
+            die();
+        }
+    }
+    
+    function check304($etag, $lastModified) {
+        if (isset($_SERVER["HTTP_IF_NONE_MATCH"])) {
+            if ($etag == stripslashes($_SERVER["HTTP_IF_NONE_MATCH"])) {
+                return true;
+            }
+        }
+        else if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) )
+        {
+            if (strtotime($lastModified) <= strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {
+                return true;
+            } 
+        }
+        return false;
+    }
+    
+    function end(&$sitemap, $expire = 3600) {
+        $content =  ob_get_contents();
+        ob_end_clean();
+        $etag =  md5($content);
+        $sitemap->setHeader("ETag", $etag);
+        $metadata = $this->cache->get($this->id.'.meta','outputcache.meta');
+        $lastModified = null;
+        if ($metadata) {
+            if (isset($metadata['Etag'] )&& $metadata['Etag'] == $etag) {
+                $sitemap->setHeaderIfNotExists("Last-Modified",$metadata['Last-Modified']);
+                $lastModified = true;
+            } 
+        }
+        if (!$lastModified) {
+            $metadata['Etag'] = $etag;
+            $sitemap->setHeaderIfNotExists("Last-Modified",gmdate('D, d M Y H:i:s T'));
+            $metadata['Last-Modified'] = $sitemap->header['Last-Modified'];
+            $this->cache->container->save($this->id.'.meta', $metadata, 0 ,"outputcache.meta","" );
+        }
+        
+        // we don't want phps cache-control stuff, when we do caching
+        // there is a "problem" if session_start is used, then PHP adds no-cache http headers
+        // we do not want that in outputCaching.
+        // Drawback: OutputCAching with sites relying on different sessions-values do not work
+        header("Pragma: ");
+        header("Cache-Control: ");
+        header("Expires: ");
+        
+        foreach ($sitemap->header as $key => $value) {
+            header("$key: $value");
+        }
+        
+        
+        if ($this->check304($etag, $sitemap->header['Last-Modified'])) {
+            header( 'HTTP/1.1 304 Not Modified' );
+            $this->cache->container->save($this->id, $content, $expire ,"outputcache", serialize($sitemap->header));
+            die();
+        } else {
+            print $content;
+            $this->cache->container->save($this->id, $content, $expire ,"outputcache", serialize($sitemap->header));
+        }
+    }
+}

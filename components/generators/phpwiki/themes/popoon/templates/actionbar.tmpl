@@ -1,0 +1,21 @@
+<?php // -*-html-*- ?>
+<!-- $Id: actionbar.tmpl,v 1.2 2003/05/06 15:27:08 chregu Exp $ -->
+
+<?php
+  $Sep = $Theme->getButtonSeparator();
+
+  if (!$page->get('locked') || $user->isAdmin())
+      $EditB = Button("edit",
+                      $revision->isCurrent() ? _("EditText") : _("Edit Old Revision"));
+  else
+      $EditB = Button("viewsource", _("View Source"));
+  $EditB = fmt("%s of this page", $EditB);
+
+?>
+<span name="EditText">
+<?= $EditB ?> </span>
+<span name="LastModified"><a href="<?=WikiURL($revision,array('action'=>'diff'))?>" 
+   ><?= $Theme->getLastModifiedMessage($revision) ?></a> </span>
+<span name="PageHistory"><?=$Sep?><?= Button("PageHistory", _("PageHistory")) ?> </span>
+<span name="PageInfo"><?=$Sep?><?= Button("PageInfo", _("PageInfo")) ?> </span>
+

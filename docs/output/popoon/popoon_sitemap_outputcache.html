@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class popoon_sitemap_outputcache</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class popoon_sitemap_outputcache</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Some words about 304 caching:</p>
+<p class="description"><p>It has now quite sophisticated 304 detecting mechanism built in</p><p>C-Etag = Cached Etag (md5($content))  B-Etag = Browser sent etag  C-LM = Cached Last Modified  B-LM = Browser Last Modified  M-LM = Last Modified in oc.meta</p><p>oc.meta = outputcache.meta. Dies directory contains metadata about LM and Etag of   the last cached url.   This allows to delete the cache directory (outputcache) completely, but we still now    the Etag (md5 of content) and LM of the last generated page.</p><p>If url exits in cache and C-ETag = B-Etag and C-LM &lt;= B-LM    send 304</p><p>If url does not exist in cache and not in outputcache.meta    generate content    generate C-Etag = md5($content)    if C-Etag = B-Etag       send 304    save content    save oc.meta    print content    // this method saves us sending the whole content, when the browser already cached this content    // it does not make it faster, since we have to generate the content anyway, we just save bandwidth</p><p>If url does not exist in cache but in outputcache.meta    generate content    generate C-Etag = md5($content)    if C-Etag = M-Etag       set LM to M-LM    if C-Etag = B-Etag       send 304    if C-LM &lt;= B-LM       send 304    save content    print content</p><p>//this method saves us also sending the whole content as above, it additionally keeps the LM if the    // md5 did not change. this is more cosmetics than really saving resources as the above does save    // the resources anyway (except the browser doesn't understand Etags..)</p><p>Honestly said, the later 2 parts in the 304 handler is maybe overkill... It's just cosmetics more or     less and will not save much resources. But with newsreaders, which read the rss file every half an     hour or so, it could sum up and save some bandwidth.</p><p>Maybe I will make the later part with the extra oc.meta files optional... But for Google it's certainly    nice to know, when the page was really last modified and not, when the cache was last created ;)</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_sitemap_outputcache_php.html">/sitemap/outputcache.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__sitemapoutputcache.php.html#a84">84</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">popoon_sitemap_outputcache</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">popoon_classes_config</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#check304" title="details" class="method-name">check304</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$etag</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$lastModified</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#end" title="details" class="method-name">end</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$expire</span> = <span class="var-default">3600</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#start" title="details" class="method-name">start</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemapoutputcache.php.html#a86">86</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">popoon_sitemap_outputcache</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">popoon_classes_config</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodcheck304" id="check304"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">check304</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemapoutputcache.php.html#a116">116</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			check304
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$etag</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$lastModified</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodend" id="end"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">end</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemapoutputcache.php.html#a131">131</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			end
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$expire</span> = <span class="var-default">3600</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstart" id="start"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">start</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemapoutputcache.php.html#a91">91</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			start
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:33:08 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

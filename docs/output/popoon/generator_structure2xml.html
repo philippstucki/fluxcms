@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class generator_structure2xml</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class generator_structure2xml</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Module for generating an XML-Document with the help of a structure File   and db2xml.</p>
+<p class="description"><p>This is one of the core features of popoon. You give it a XML-File   which describes your DB-Structure and it makes a XML-Document out of   it. More Documentation about that structure XML will follow (or see    the examples in the popoon      Distribution)</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: generator_structure2xml.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_generators_structure2xml_php.html">/components/generators/structure2xml.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a39">39</a></span>)
+		</p>
+		
+				
+		<pre>generator
+   |
+   --generator_structure2xml</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/generator_bitflux.html">generator_bitflux</a></td>
+					<td>
+											Generator Module for popoon
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/generator_bitflux_ebp.html">generator_bitflux_ebp</a></td>
+					<td>
+											Generator Module for popoon
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/generator_bitfluxcms.html">generator_bitfluxcms</a></td>
+					<td>
+											Generator Module for popoon
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/generator_bitfluxnavi.html">generator_bitfluxnavi</a></td>
+					<td>
+											Generator Module for popoon      Navigation tree
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/generator_structureslider.html">generator_structureslider</a></td>
+					<td>
+											
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$db" title="details" class="var-name">$db</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$defaultExpires" title="details" class="var-name">$defaultExpires</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$dsn" title="details" class="var-name">$dsn</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$queries" title="details" class="var-name">$queries</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$queryCacheOptions" title="details" class="var-name">$queryCacheOptions</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$st2xmlCaching" title="details" class="var-name">$st2xmlCaching</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">generator_structure2xml</span>
+										<a href="#generator_structure2xml" title="details" class="method-name">generator_structure2xml</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#checkValidity" title="details" class="method-name">checkValidity</a>
+											(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#DomStart" title="details" class="method-name">DomStart</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateKey" title="details" class="method-name">generateKey</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#generateValidity" title="details" class="method-name">generateValidity</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getQueries" title="details" class="method-name">getQueries</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configXml</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$PageOptions</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getQueryFields" title="details" class="method-name">getQueryFields</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$tablename</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$dbStructure</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$xmlparent</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$tableInfo</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#replaceVarsInWhere" title="details" class="method-name">replaceVarsInWhere</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$where</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#showPage" title="details" class="method-name">showPage</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configXml</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$PageOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$returnDb2XmlObject</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#Structure2Sql" title="details" class="method-name">Structure2Sql</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configFile</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$tableInfo</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sqlOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$rootpath</span> = <span class="var-default">"/ibaconfig/structure"</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#Structures2Sql" title="details" class="method-name">Structures2Sql</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configFile</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sqlOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$rootpath</span> = <span class="var-default">"/structure"</span>])
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$db" id="$db"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$db</span>
+			 = <span class="var-default">false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a52">52</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_bitflux.html#var$db">generator_bitflux::$db</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitflux_ebp.html#var$db">generator_bitflux_ebp::$db</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitfluxcms.html#var$db">generator_bitfluxcms::$db</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$db">generator_structureslider::$db</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$defaultExpires" id="$defaultExpires"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$defaultExpires</span>
+			 = <span class="var-default"> 3600</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a51">51</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$defaultExpires">generator_structureslider::$defaultExpires</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$dsn" id="$dsn"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$dsn</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a53">53</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_bitflux.html#var$dsn">generator_bitflux::$dsn</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitflux_ebp.html#var$dsn">generator_bitflux_ebp::$dsn</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$dsn">generator_structureslider::$dsn</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$queries" id="$queries"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$queries</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a50">50</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$queries">generator_structureslider::$queries</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$queryCacheOptions" id="$queryCacheOptions"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$queryCacheOptions</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a47">47</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$queryCacheOptions">generator_structureslider::$queryCacheOptions</a>
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$st2xmlCaching" id="$st2xmlCaching"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$st2xmlCaching</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a42">42</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_structureslider.html#var$st2xmlCaching">generator_structureslider::$st2xmlCaching</a>
+							</li>
+				</ul>
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgenerator_structure2xml" id="generator_structure2xml"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor generator_structure2xml</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a55">55</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">generator_structure2xml</span>
+		<span class="method-name">
+			generator_structure2xml
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodcheckValidity" id="checkValidity"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkValidity</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a616">616</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check validity of a validityObject from cache</p>
+<p class="description"><p>This implements only the most simple form: If there's no fresher version, take that from cache.  I guess we'll need some more refined criteria..</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if the validityObject indicates that the cached version can be used, false otherwise.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			checkValidity
+		</span>
+					(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object validityObject</span>
+				<span class="var-name">$validityObject</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodDomStart" id="DomStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">DomStart</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a67">67</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			DomStart
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_bitflux.html#methodDomStart">generator_bitflux::DomStart()</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitflux_ebp.html#methodDomStart">generator_bitflux_ebp::DomStart()</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitfluxcms.html#methodDomStart">generator_bitfluxcms::DomStart()</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_bitfluxnavi.html#methodDomStart">generator_bitfluxnavi::DomStart()</a>
+							</li>
+					<li>
+				<a href="../popoon/generator_structureslider.html#methodDomStart">generator_structureslider::DomStart()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodgenerateKey" id="generateKey"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateKey</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a584">584</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate cacheKey</p>
+<p class="description"><p>Calls the method inherited from 'Component'</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> generateKeyDefault()</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateKey
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$keyBefore</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$attribs</span><span class="var-description">: attributes</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$keyBefore</span><span class="var-description">: last cacheKey</span>			</li>
+				</ul>
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_bitflux.html#methodgenerateKey">generator_bitflux::generateKey()</a>
+								: Generate cacheKey
+							</li>
+					<li>
+				<a href="../popoon/generator_bitflux_ebp.html#methodgenerateKey">generator_bitflux_ebp::generateKey()</a>
+								: Generate cacheKey
+							</li>
+					<li>
+				<a href="../popoon/generator_bitfluxcms.html#methodgenerateKey">generator_bitfluxcms::generateKey()</a>
+								: Generate cacheKey
+							</li>
+				</ul>
+	</div>
+<a name="methodgenerateValidity" id="generateValidity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateValidity</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a603">603</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate validityObject</p>
+<p class="description"><p>This is common to all &quot;readers&quot;, you'll find the same code there.  I'm thinking about making a method in the class component named generateValidityFile() or alike  instead of having the same code everywhere..</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> contains the components attributes plus file modification time and time of last access.</li>
+				<li><span class="field">see:</span> checkvalidity()</li>
+				<li><span class="field">author:</span> Hannes Gassert &lt;<a href="mailto:hannes.gassert@unifr.ch">hannes.gassert@unifr.ch</a>&gt;</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			generateValidity
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetQueries" id="getQueries"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getQueries</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a509">509</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getQueries
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configXml</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$PageOptions</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetQueryFields" id="getQueryFields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getQueryFields</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a476">476</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getQueryFields
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$tablename</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$dbStructure</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$xmlparent</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$tableInfo</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a59">59</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/generator_structureslider.html#methodinit">generator_structureslider::init()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodreplaceVarsInWhere" id="replaceVarsInWhere"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">replaceVarsInWhere</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a670">670</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			replaceVarsInWhere
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$where</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodshowPage" id="showPage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">showPage</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a76">76</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			showPage
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configXml</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$PageOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$returnDb2XmlObject</span> = <span class="var-default">false</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodStructure2Sql" id="Structure2Sql"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Structure2Sql</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a266">266</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			Structure2Sql
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configFile</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$tableInfo</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sqlOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$rootpath</span> = <span class="var-default">"/ibaconfig/structure"</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodStructures2Sql" id="Structures2Sql"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Structures2Sql</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsgeneratorsstructure2xml.php.html#a219">219</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			Structures2Sql
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$configFile</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sqlOptions</span> = <span class="var-default">array()</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$rootpath</span> = <span class="var-default">"/structure"</span>])
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:34:23 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

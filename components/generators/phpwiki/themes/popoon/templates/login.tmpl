@@ -1,0 +1,69 @@
+<?php // -*-html-*- ?>
+<!-- $Id: login.tmpl,v 1.1 2003/04/16 20:30:27 chregu Exp $ -->
+<!-- The login form -->
+
+<?php if ($fail_message) { ?>
+  <p><strong><?=$fail_message?></strong></p>
+  <hr noshade="noshade" />
+<?php } ?>
+
+<?php if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
+  // This iso-8859-1 sample covers French, Spanish, Italian, German, and probably others
+  $examplechars = htmlentities("ÀñíçéàÖãæôßøü", ENT_QUOTES, 'iso-8859-1');
+  // Japanese login doesn't work yet
+  /*if ((CHARSET == 'utf-8') && defined('ALLOW_NONWIKIWORD_LOGINS') && ALLOW_NONWIKIWORD_LOGINS) {
+    //sample Japanese loginname in unicode
+    $examplechars = $examplechars . "&#22825;&#36947;&#12354;&#12363;&#12397;";
+  }*/ ?>
+  <p><?= printf(_("You may sign in using any WikiWord as a UserId. (%s etc. may be used too). The UserId will be used as a link in RecentChanges to your UserId page, your HomePage."), $examplechars) ?>
+  <?php if (empty($pass_required)) ?>
+  <?= _("New users may use an empty password.") ?>
+  </p>
+<?php } ?>
+
+<form method="post" action="<?= $request->getPostURL() ?>" accept-charset="<?=CHARSET?>" name="login">
+
+<table cellspacing="4">
+<tr>
+  <td align="right"><?= _("UserId:") ?></td>
+  <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?=$userid?>" /></td>
+</tr>
+<tr>
+  <td align="right"><?= _("Password:") ?></td>
+  <td><input type="password" name="auth[passwd]" size="12" maxlength="256" /></td>
+</tr>
+<?php
+  $dbi = $request->getDbh();
+  $checked = (!empty($userid) and $dbi->isWikiPage($userid)) ? '' : 'checked="checked"';
+?>
+<tr>
+  <td align="right"><?= _("Create Homepage:") ?></td>
+  <td><input type="checkbox" name="auth[homepage]" <?=$checked?> /></td>
+</tr>
+<tr><td align="center" colspan="2">
+  <?=Button("submit:", _("Sign In"), 'wikiaction')?>
+  <?php if (!$require_level) { ?>
+    <?=Button("submit:auth[cancel]", _("Cancel"), 'button')?>
+  <?php } ?>
+</td></tr>
+</table>
+
+<input type="hidden" name="auth[require_level]" value="<?=$require_level?>" />
+<input type="hidden" name="auth[login]" value="1" />
+<?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
+</form>
+
+<script language="JavaScript" type="text/javascript">
+<!-- // Really there's got to be a simpler way to do this....
+function select_input (type) {
+    var elements = document.forms['login'].elements;
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].type == type) {
+            elements[i].focus();
+            return;
+        }
+    }
+}
+select_input('<?= $userid ? "password" : "text" ?>');
+//-->
+</script>

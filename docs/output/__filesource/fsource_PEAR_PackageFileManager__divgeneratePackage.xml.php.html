@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for generatePackage.xml.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file generatePackage.xml.php</h1>
+<p>Documentation is available at <a href="../PEAR_PackageFileManager/_div_generatePackage_xml_php.html">generatePackage.xml.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a><span class="src-doc">/**</span></li>
+<li><a name="a3"></a><span class="src-doc">* A simple example</span></li>
+<li><a name="a4"></a><span class="src-doc">* </span><span class="src-doc-coretag">@package</span><span class="src-doc"> PEAR_PackageFileManager</span></li>
+<li><a name="a5"></a><span class="src-doc">*/</span></li>
+<li><a name="a6"></a><span class="src-doc">/**</span></li>
+<li><a name="a7"></a><span class="src-doc">* Include the package file manager</span></li>
+<li><a name="a8"></a><span class="src-doc">*/</span></li>
+<li><a name="a9"></a><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PEAR/PackageFileManager.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a10"></a><span class="src-var">$test </span>= <span class="src-key">new </span><span class="src-id">PEAR_PackageFileManager</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a11"></a><span class="src-key">if </span><span class="src-sym">(</span><span class="src-id">PEAR</span><span class="src-sym">::</span><span class="src-id">isError</span><span class="src-sym">(</span><span class="src-var">$test</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a12"></a>    echo <span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">getMessage</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a13"></a>    <span class="src-key">exit</span><span class="src-sym">;</span></li>
+<li><a name="a14"></a><span class="src-sym">}</span></li>
+<li><a name="a15"></a><span class="src-var">$bla </span>= <span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">setOptions</span><span class="src-sym">(</span></li>
+<li><a name="a16"></a><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'baseinstalldir' </span>=&gt; <span class="src-str">'popoon'</span><span class="src-sym">,</span></li>
+<li><a name="a17"></a><span class="src-str">'version' </span>=&gt; <span class="src-str">'1.0'</span><span class="src-sym">,</span></li>
+<li><a name="a18"></a><span class="src-str">'packagedirectory' </span>=&gt; <span class="src-str">'.'</span><span class="src-sym">,</span></li>
+<li><a name="a19"></a><span class="src-str">'packagefile' </span>=&gt; <span class="src-str">'package.xml'</span><span class="src-sym">,</span></li>
+<li><a name="a20"></a><span class="src-str">'package' </span>=&gt; <span class="src-str">'popoon'</span><span class="src-sym">,</span></li>
+<li><a name="a21"></a><span class="src-str">'state' </span>=&gt; <span class="src-str">'stable'</span><span class="src-sym">,</span></li>
+<li><a name="a22"></a><span class="src-str">'simpleoutput' </span>=&gt; <span class="src-id">true</span><span class="src-sym">,</span></li>
+<li><a name="a23"></a><span class="src-str">'license' </span>=&gt; <span class="src-str">'ASFL-2.0'</span><span class="src-sym">,</span></li>
+<li><a name="a24"></a>&nbsp;</li>
+<li><a name="a25"></a><span class="src-str">'filelistgenerator' </span>=&gt; <span class="src-str">'cvs'</span><span class="src-sym">,</span></li>
+<li><a name="a26"></a><span class="src-str">'notes' </span>=&gt; <span class="src-str">'First official stable release of Popoon'</span><span class="src-sym">,</span></li>
+<li><a name="a27"></a><span class="src-str">'ignore' </span>=&gt; <span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'package.xml'</span><span class="src-sym">,</span><span class="src-str">'api/'</span><span class="src-sym">)))</span><span class="src-sym">;</span></li>
+<li><a name="a28"></a><span class="src-comm">//$test-&gt;addDependency('PEAR', '1.1');</span></li>
+<li><a name="a29"></a><span class="src-key">if </span><span class="src-sym">(</span><span class="src-id">PEAR</span><span class="src-sym">::</span><span class="src-id">isError</span><span class="src-sym">(</span><span class="src-var">$bla</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a30"></a>    echo <span class="src-var">$bla</span><span class="src-sym">-&gt;</span><span class="src-id">getMessage</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a31"></a><span class="src-sym">}</span></li>
+<li><a name="a32"></a>&nbsp;</li>
+<li><a name="a33"></a><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">addMaintainer</span><span class="src-sym">(</span><span class="src-str">&quot;chregu&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;lead&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;Christian Stocker&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;chregu@bitflux.org&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a34"></a>&nbsp;</li>
+<li><a name="a35"></a><span class="src-var">$e </span>= <span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">writePackageFile</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a36"></a><span class="src-key">if </span><span class="src-sym">(</span><span class="src-id">PEAR</span><span class="src-sym">::</span><span class="src-id">isError</span><span class="src-sym">(</span><span class="src-var">$e</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a37"></a>    echo <span class="src-var">$e</span><span class="src-sym">-&gt;</span><span class="src-id">getMessage</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a38"></a><span class="src-sym">}</span></li>
+<li><a name="a39"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:32:16 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</body>
+</html>

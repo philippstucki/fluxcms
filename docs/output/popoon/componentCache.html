@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class componentCache</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class componentCache</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Component Caching for Popoon</p>
+<p class="description"><p>This classy class should mimic the caching mechanims Cocoon uses.  Have a look at http://bugzilla.bitflux.ch/show_bug.cgi?id=23 and the Cocoon documentation for more on this topic.</p></p>
+	<ul class="tags">
+				<li><span class="field">TODO:</span> Take care of sending HTTP Cache headers, implement and test other containers than the filesystem, DO COMPONENTS</li>
+				<li><span class="field">version:</span> $Id</li>
+				<li><span class="field">author:</span> Hannes Gassert &lt;<a href="mailto:hannes.gassert@unifr.ch">hannes.gassert@unifr.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_cache_php.html">/components/cache.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a36">36</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$cachableInterface" title="details" class="var-name">$cachableInterface</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$cacheHandlers" title="details" class="var-name">$cacheHandlers</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$componentTypes" title="details" class="var-name">$componentTypes</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$currentCacheKey" title="details" class="var-name">$currentCacheKey</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$currentContainer" title="details" class="var-name">$currentContainer</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$currentMetaObject" title="details" class="var-name">$currentMetaObject</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$defaultContainer" title="details" class="var-name">$defaultContainer</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$globalSuffix" title="details" class="var-name">$globalSuffix</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">bool</span>
+					<a href="#$iscachable" title="details" class="var-name">$iscachable</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$lastCacheKey" title="details" class="var-name">$lastCacheKey</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$metafileSuffix" title="details" class="var-name">$metafileSuffix</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">$miss</span>
+					<a href="#$miss" title="details" class="var-name">$miss</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">componentCache</span>
+										<a href="#componentCache" title="details" class="method-name">componentCache</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getCacheKey" title="details" class="method-name">getCacheKey</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getContainerOptions" title="details" class="method-name">getContainerOptions</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$containerType</span> = <span class="var-default">'file'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span> = <span class="var-default">array()</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#implementscachable" title="details" class="method-name">implementscachable</a>
+											(<span class="var-type">object poopon</span>&nbsp;<span class="var-name">&$component</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">&$component</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isCached" title="details" class="method-name">isCached</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#load" title="details" class="method-name">load</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#loadCachedContent" title="details" class="method-name">loadCachedContent</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#loadGlobals" title="details" class="method-name">loadGlobals</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#loadHeader" title="details" class="method-name">loadHeader</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#loadLast" title="details" class="method-name">loadLast</a>
+											(<span class="var-type">$target</span>&nbsp;<span class="var-name">&$target</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">object validityObject</span>
+										<a href="#loadValidityObject" title="details" class="method-name">loadValidityObject</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#setCacheGroup" title="details" class="method-name">setCacheGroup</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cacheKey</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#store" title="details" class="method-name">store</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$launchMethod</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$param</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#storeContent" title="details" class="method-name">storeContent</a>
+											([<span class="var-type">$content</span>&nbsp;<span class="var-name">$content</span> = <span class="var-default">''</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#storeGlobals" title="details" class="method-name">storeGlobals</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#storeHeader" title="details" class="method-name">storeHeader</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#storeValidityObject" title="details" class="method-name">storeValidityObject</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#_load" title="details" class="method-name">_load</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$what</span> = <span class="var-default">'content'</span>])
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$cachableInterface" id="$cachableInterface"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$cachableInterface</span>
+			 = <span class="var-default">array('generateValidity', 'checkValidity', 'generateKey')</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a44">44</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">&quot;Definition&quot; of the 'cachable' interface (methods only)</p>
+	<ul class="tags">
+				<li><span class="field">var:</span> Methods required by the 'cachable' interface</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cacheHandlers" id="$cacheHandlers"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$cacheHandlers</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a52">52</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Array of PEAR::Cache container objects, one entry per container.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$componentTypes" id="$componentTypes"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$componentTypes</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a115">115</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Type of the last component in the pipeline</p>
+<p class="description"><p>Used by loadLast(), updated by init().</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodinit">componentCache::init()</a>, <a href="../popoon/componentCache.html#methodloadLast">componentCache::loadLast()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentCacheKey" id="$currentCacheKey"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$currentCacheKey</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a133">133</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cache-key generated by the current component</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> $currentComponent</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentContainer" id="$currentContainer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$currentContainer</span>
+			 = <span class="var-default"> 'file'</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a68">68</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Name of PEAR::Cache container currently in use (currently a container is chosen per pipeline)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentMetaObject" id="$currentMetaObject"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$currentMetaObject</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a135">135</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$defaultContainer" id="$defaultContainer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$defaultContainer</span>
+			 = <span class="var-default"> 'file'</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a60">60</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Name of default PEAR::Cache container</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$globalSuffix" id="$globalSuffix"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$globalSuffix</span>
+			 = <span class="var-default"> '.global'</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a84">84</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Filename suffix for cache-globalfiles (for globals)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$iscachable" id="$iscachable"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$iscachable</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a124">124</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indicates wether the current component is cachable at all.</p>
+<p class="description"><p>True by default, is set to false if the component doesn't implement the  'cachable' interface, for example.</p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$lastCacheKey" id="$lastCacheKey"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$lastCacheKey</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a92">92</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cache-key generated by the last component in the pipeline</p>
+	<ul class="tags">
+				<li><span class="field">var:</span> MD5 hash, probably</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$metafileSuffix" id="$metafileSuffix"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$metafileSuffix</span>
+			 = <span class="var-default"> '.meta'</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a76">76</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Filename suffix for cache-metafiles (for validityObjects)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$miss" id="$miss"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">$miss</span>
+			<span class="var-name">$miss</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a105">105</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indicates a cache miss.</p>
+<p class="description"><p>All components must recalculate their results if this is set to true.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodcomponentCache" id="componentCache"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor componentCache</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a149">149</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+<p class="description"><p>If necessary creates a new PEAR::Cache object of the desired type and adds it to $cacheHandlers  Also sets $currentContainer to the name of the currenct container. Currenty you should only use the default  container (Container/file.php), I haven't tested anything else yet.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#var$cacheHandlers">componentCache::$cacheHandlers</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">componentCache</span>
+		<span class="method-name">
+			componentCache
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$pipelineAttribs</span><span class="var-description">: map:pipeline attributes</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetCacheKey" id="getCacheKey"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCacheKey</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a302">302</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the current cache key.</p>
+<p class="description"><p>Just a getter-method. I don't remember where I wanted to use this.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#var$currentCacheKey">componentCache::$currentCacheKey</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getCacheKey
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetContainerOptions" id="getContainerOptions"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getContainerOptions</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a518">518</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Determines the option to use for container $containerType</p>
+<p class="description"><p>This is quite a bad method. It relies halfway on the bitfluxcms environment, which it shouldn't.  I did not know where to put popoon-specific configuration, so I added  my stuff to the bitfluxcms $BX_config hash.. dunno if that's good.  If you don't use bitfluxcms but standalone popoon, you can put container options such as  'cachedir' into your sitemap.xml as attributes of a pipeline. You'd better take absolute path names  there, which is something I should add to the popoon documentation, if there's such a thing :)</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> PEAR::Cache container options</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getContainerOptions
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$containerType</span> = <span class="var-default">'file'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$containerType</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$pipelineAttribs</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodimplementscachable" id="implementscachable"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">implementscachable</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a357">357</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks wether a component implements the cachable interface</p>
+<p class="description"><p>Tests if all methods in $interface_methods are implemented by $component.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			implementscachable
+		</span>
+					(<span class="var-type">object poopon</span>&nbsp;<span class="var-name">&$component</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object poopon</span>
+				<span class="var-name">&$component</span><span class="var-description">: component object</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a175">175</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initalizer</p>
+<p class="description"><p>This is some kind of pseudo constructor. Hands the current component to this class.  This means that init() _has_ to be called for every component that should be cached.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">&$component</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$component</span><span class="var-description">: Component to be cached</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodisCached" id="isCached"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isCached</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a292">292</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check if there's something in the cache for the current cache key</p>
+<p class="description"><p>Behind this hides all the validity checking between the cache system and the components,  so you should call this alway. Perhaps I could in some way call this from init() to have  one &quot;must-do&quot; call less..</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if the content associated with there's a valid cache entry for $currentCacheKey.</li>
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#var$currentCacheKey">componentCache::$currentCacheKey</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isCached
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodload" id="load"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">load</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a280">280</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load the content associated to the current cache Key</p>
+<p class="description"><p>You'd use this rather seldom, cause most of the time you'll wan't to use loadLast()</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodloadLast">componentCache::loadLast()</a>, <a href="../popoon/componentCache.html#var$currentCacheKey">componentCache::$currentCacheKey</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			load
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$printsDirectly</span><span class="var-description">: if header and result from cache should be printed directly (needed for serializers)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodloadCachedContent" id="loadCachedContent"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadCachedContent</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a473">473</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tries to load string content belonging to the current cache key</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#var$currentCacheKey">componentCache::$currentCacheKey</a>, <a href="../popoon/componentCache.html#methodloadGlobals">componentCache::loadGlobals()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			loadCachedContent
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$printsDirectly</span><span class="var-description">: if header and result from cache should be printed directly (needed for serializers)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodloadGlobals" id="loadGlobals"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadGlobals</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a382">382</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Try to load  globals</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			loadGlobals
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodloadHeader" id="loadHeader"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadHeader</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a395">395</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Try to load header</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			loadHeader
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodloadLast" id="loadLast"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadLast</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a239">239</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load content associated with last cache key</p>
+<p class="description"><p>When we come to a point in the pipeline where we need the output of the last component, we call loadLast().  It resets the cache object to the state it was when handling the last component, fetches the content wanted and  sets back the state of this object.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			loadLast
+		</span>
+					(<span class="var-type">$target</span>&nbsp;<span class="var-name">&$target</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$target</span>
+				<span class="var-name">&$target</span><span class="var-description">: reference to the variable you wan't to have the content you're looking for put into.</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodloadValidityObject" id="loadValidityObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">loadValidityObject</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a369">369</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Try to load  validityObject from $cacheKey.meta</p>
+	
+	<div class="method-signature">
+		<span class="method-result">object validityObject</span>
+		<span class="method-name">
+			loadValidityObject
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetCacheGroup" id="setCacheGroup"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCacheGroup</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a496">496</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Determine group of current component</p>
+<p class="description"><p>Cache objects are grouped primarily to avoid too large directories, which would mean too long a lookup time to get  a particular file.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Group name</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			setCacheGroup
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cacheKey</span> = <span class="var-default">null</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstore" id="store"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">store</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a315">315</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Store component generated data</p>
+<p class="description"><p>Tells the current component to produce the data and call the methods to store that content and the according validityObject.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodstoreContent">componentCache::storeContent()</a>, $storeValidityObhect()</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			store
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$launchMethod</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$param</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$printsDirectly</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$launchMethod</span><span class="var-description">: Method to call to make the component generate the content</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$printsDirectly</span><span class="var-description">: Indicates wether $launchMethod prints the content directly (as e.g. the readers do) or wether we have to get the content from $content</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodstoreContent" id="storeContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">storeContent</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a456">456</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores component data in cache</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodstoreGlobals">componentCache::storeGlobals()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			storeContent
+		</span>
+					([<span class="var-type">$content</span>&nbsp;<span class="var-name">$content</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$content</span>
+				<span class="var-name">$content</span><span class="var-description">: string representation of the output of the current component</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodstoreGlobals" id="storeGlobals"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">storeGlobals</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a429">429</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores Globals in currentMetaObject</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodstoreContent">componentCache::storeContent()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			storeGlobals
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstoreHeader" id="storeHeader"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">storeHeader</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a442">442</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores Header in currentMetaObject</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodstoreContent">componentCache::storeContent()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			storeHeader
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstoreValidityObject" id="storeValidityObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">storeValidityObject</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a411">411</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores validityObject in Cache</p>
+<p class="description"><p>Tinkers file and group name and calls save() method of current PEAR::Cache container.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			storeValidityObject
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="method_load" id="_load"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_load</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentscache.php.html#a209">209</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Try to get cached component output</p>
+<p class="description"><p>Tries to get a validityObject for the current request. If there's one and if the component does verify it's validity,  the cached content is fetched and returned. Works only with Components implementing the 'cachable' interface, of course.  In any other case than success returns null.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> cached content</li>
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html#methodimplementscachable">componentCache::implementscachable()</a>, <a href="../popoon/componentCache.html#methodloadValidityObject">componentCache::loadValidityObject()</a>, checkValidity(), <a href="../popoon/componentCache.html#methodloadCachedContent">componentCache::loadCachedContent()</a></li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			_load
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$what</span> = <span class="var-default">'content'</span>])
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:37 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

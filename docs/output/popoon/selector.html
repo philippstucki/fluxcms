@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class selector</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class selector</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is the Base-Class for all selectors</p>
+<p class="description"><p>Selectors are used in &lt;map:select&gt; in sitemap.xml</p><p>Selectors match here much the same as Matchers, this is different to cocoon    they don't return the hits, but nevermind :)</p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: selector.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_components_selector_php.html">/components/selector.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a35">35</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/selector_any.html">selector_any</a></td>
+					<td>
+											Matches any popoon vars
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/selector_eval.html">selector_eval</a></td>
+					<td>
+											
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/selector_phpglobalvars.html">selector_phpglobalvars</a></td>
+					<td>
+											Matches one of PHPs super global variables
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/selector_requestmethod.html">selector_requestmethod</a></td>
+					<td>
+											Matches an  uri
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/selector_uri.html">selector_uri</a></td>
+					<td>
+											Matches an  uri
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$debug" title="details" class="var-name">$debug</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hit" title="details" class="var-name">$hit</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">selector</span>
+										<a href="#selector" title="details" class="method-name">selector</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getAttrib" title="details" class="method-name">getAttrib</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribute</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#match" title="details" class="method-name">match</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#printDebug" title="details" class="method-name">printDebug</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#printDebugArray" title="details" class="method-name">printDebugArray</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">""</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_match" title="details" class="method-name">_match</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_match_regex" title="details" class="method-name">_match_regex</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_match_simple" title="details" class="method-name">_match_simple</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$debug" id="$debug"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$debug</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a36">36</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$hit" id="$hit"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hit</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a37">37</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodselector" id="selector"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor selector</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a39">39</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">selector</span>
+		<span class="method-name">
+			selector
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$sitemap</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetAttrib" id="getAttrib"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAttrib</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a108">108</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAttrib
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribute</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a43">43</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/selector_any.html#methodinit">selector_any::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/selector_eval.html#methodinit">selector_eval::init()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodmatch" id="match"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">match</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a61">61</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			match
+		</span>
+				()
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/selector_any.html#methodmatch">selector_any::match()</a>
+							</li>
+					<li>
+				<a href="../popoon/selector_eval.html#methodmatch">selector_eval::match()</a>
+							</li>
+					<li>
+				<a href="../popoon/selector_phpglobalvars.html#methodmatch">selector_phpglobalvars::match()</a>
+							</li>
+					<li>
+				<a href="../popoon/selector_requestmethod.html#methodmatch">selector_requestmethod::match()</a>
+							</li>
+					<li>
+				<a href="../popoon/selector_uri.html#methodmatch">selector_uri::match()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodprintDebug" id="printDebug"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">printDebug</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a128">128</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an entry to the debug Output   if $this-&gt;debug is true</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printDebug
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$content</span><span class="var-description">: content  text to be added</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodprintDebugArray" id="printDebugArray"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">printDebugArray</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a144">144</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an decomposed Array to the debug Output   if $this-&gt;debug is true</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printDebugArray
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">""</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$array</span><span class="var-description">: array Array to be added</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: description line to be added before array</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_match" id="_match"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_match</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a65">65</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_match
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="method_match_regex" id="_match_regex"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_match_regex</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a102">102</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_match_regex
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="method_match_simple" id="_match_simple"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_match_simple</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__componentsselector.php.html#a95">95</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_match_simple
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:33:55 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class popoon_component</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class popoon_component</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Documentation is missing at the moment...</p>
+	<ul class="tags">
+				<li><span class="field">abstract:</span> </li>
+				<li><span class="field">version:</span> $Id: popoon_component.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_component_php.html">/component.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__component.php.html#a30">30</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_action.html">popoon_components_action</a></td>
+					<td>
+											Class for generating xml document
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_aggregator.html">popoon_components_aggregator</a></td>
+					<td>
+											Class for aggregating content
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_generator.html">popoon_components_generator</a></td>
+					<td>
+											Class for generating xml document
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_reader.html">popoon_components_reader</a></td>
+					<td>
+											Class for generating xml document
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_serializer.html">popoon_components_serializer</a></td>
+					<td>
+											Base class for serializers
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../popoon/popoon_components_transformer.html">popoon_components_transformer</a></td>
+					<td>
+											Base-class for all the transformers
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$debug" title="details" class="var-name">$debug</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasDomInput" title="details" class="var-name">$hasDomInput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasDomOutput" title="details" class="var-name">$hasDomOutput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasSaxInput" title="details" class="var-name">$hasSaxInput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasSaxOutput" title="details" class="var-name">$hasSaxOutput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasXmlStringInput" title="details" class="var-name">$hasXmlStringInput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$hasXmlStringOutput" title="details" class="var-name">$hasXmlStringOutput</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$params" title="details" class="var-name">$params</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">popoon_component</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sitemap</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#checkValidityDefault" title="details" class="method-name">checkValidityDefault</a>
+											(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#generateKeyDefault" title="details" class="method-name">generateKeyDefault</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$keybefore</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#generateValidityDefault" title="details" class="method-name">generateValidityDefault</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getAttrib" title="details" class="method-name">getAttrib</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribute</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$doNotTranslate</span> = <span class="var-default">array()</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getParameter" title="details" class="method-name">getParameter</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">"default"</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getParameterAll" title="details" class="method-name">getParameterAll</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getParameterDefault" title="details" class="method-name">getParameterDefault</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#init" title="details" class="method-name">init</a>
+											(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#printDebug" title="details" class="method-name">printDebug</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#printDebugArray" title="details" class="method-name">printDebugArray</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">""</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setParameter" title="details" class="method-name">setParameter</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$debug" id="$debug"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$debug</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a32">32</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasDomInput" id="$hasDomInput"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasDomInput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a36">36</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasDomOutput" id="$hasDomOutput"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasDomOutput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a37">37</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasSaxInput" id="$hasSaxInput"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasSaxInput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a34">34</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasSaxOutput" id="$hasSaxOutput"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasSaxOutput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a35">35</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasXmlStringInput" id="$hasXmlStringInput"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasXmlStringInput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a38">38</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$hasXmlStringOutput" id="$hasXmlStringOutput"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$hasXmlStringOutput</span>
+			 = <span class="var-default"> False</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a39">39</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$params" id="$params"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$params</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a40">40</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a42">42</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">popoon_component</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sitemap</span>)
+			</div>
+	
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/popoon_components_action.html#method__construct">popoon_components_action::__construct()</a>
+								: Constructor
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_actions_simple.html#method__construct">popoon_components_actions_simple::__construct()</a>
+								: Constructor
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_aggregator.html#method__construct">popoon_components_aggregator::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generator.html#method__construct">popoon_components_generator::__construct()</a>
+								: Constructor
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generators_db2xml.html#method__construct">popoon_components_generators_db2xml::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generators_webdavfile.html#method__construct">popoon_components_generators_webdavfile::__construct()</a>
+								: Constructor, does nothing at the moment
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generators_xmlfile.html#method__construct">popoon_components_generators_xmlfile::__construct()</a>
+								: Constructor, does nothing at the moment
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_reader.html#method__construct">popoon_components_reader::__construct()</a>
+								: Constructor
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_readers_resource.html#method__construct">popoon_components_readers_resource::__construct()</a>
+								: Constructor, does nothing at the moment
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_html.html#method__construct">popoon_components_serializers_html::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_xhtml.html#method__construct">popoon_components_serializers_xhtml::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_xml.html#method__construct">popoon_components_serializers_xml::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformer.html#method__construct">popoon_components_transformer::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformers_phpprocessor.html#method__construct">popoon_components_transformers_phpprocessor::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformers_sourceview.html#method__construct">popoon_components_transformers_sourceview::__construct()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformers_xslt.html#method__construct">popoon_components_transformers_xslt::__construct()</a>
+								: Constructor, creates xslt_process
+							</li>
+				</ul>
+	</div>
+<a name="methodcheckValidityDefault" id="checkValidityDefault"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkValidityDefault</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a260">260</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check validity of a validityObject from cache: NOT REALLY DONE YET!!</p>
+<p class="description"><p>It's the same thing as with all validity checkers: there are many more ways to determine  cache validity. things like &quot;access + 4 days&quot; (which would also involve sending appropriate http headers)  are not implemented at all. but they will be! .)  At the very moment, this method checks only if the &quot;live&quot; content is not more recent than the cached one.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if the validityObject indicates that the cached version can be used, false otherwise.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			checkValidityDefault
+		</span>
+					(<span class="var-type">object validityObject</span>&nbsp;<span class="var-name">$validityObject</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object validityObject</span>
+				<span class="var-name">$validityObject</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgenerateKeyDefault" id="generateKeyDefault"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateKeyDefault</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a226">226</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate unique key from an array and a string (seen abstractly)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> md5 hash key of the mashed parameters</li>
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../popoon/componentCache.html">componentCache</a></li>
+				<li><span class="field">author:</span> Hannes Gassert &lt;<a href="mailto:hannes.gassert@unifr.ch">hannes.gassert@unifr.ch</a>&gt;</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			generateKeyDefault
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$attribs</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$keybefore</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$attribs</span><span class="var-description">: Array of component attributes</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$keybefore</span><span class="var-description">: hash key of previous component in pipeline</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgenerateValidityDefault" id="generateValidityDefault"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateValidityDefault</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a240">240</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate validityObject</p>
+<p class="description"><p>This is common to all file-reading components. As they're probably largest in number,  they are allowed to be the default methods.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> contains the components attributes plus file modification time and time of last access.</li>
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> checkvalidity</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			generateValidityDefault
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetAttrib" id="getAttrib"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAttrib</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a104">104</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAttrib
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribute</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$doNotTranslate</span> = <span class="var-default">array()</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetParameter" id="getParameter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getParameter</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a138">138</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getParameter
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">"default"</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span> = <span class="var-default">false</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetParameterAll" id="getParameterAll"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getParameterAll</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a130">130</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getParameterAll
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetParameterDefault" id="getParameterDefault"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getParameterDefault</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a134">134</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getParameterDefault
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span> = <span class="var-default">false</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodinit" id="init"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">init</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a54">54</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initiator, called after construction of object</p>
+<p class="description"><p>This method will be called in the start element with the attributes from this element</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			init
+		</span>
+					(<span class="var-type">$attribs</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$attribs</span>
+				<span class="var-name">$attribs</span><span class="var-description">: array    associative array with element attributes</span>			</li>
+				</ul>
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../popoon/popoon_components_actions_simple.html#methodinit">popoon_components_actions_simple::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_aggregator.html#methodinit">popoon_components_aggregator::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generator.html#methodinit">popoon_components_generator::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generators_webdavfile.html#methodinit">popoon_components_generators_webdavfile::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_generators_xmlfile.html#methodinit">popoon_components_generators_xmlfile::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_reader.html#methodinit">popoon_components_reader::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_readers_resource.html#methodinit">popoon_components_readers_resource::init()</a>
+								: Initiator, called after construction of object
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializer.html#methodinit">popoon_components_serializer::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_html.html#methodinit">popoon_components_serializers_html::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_xhtml.html#methodinit">popoon_components_serializers_xhtml::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_serializers_xml.html#methodinit">popoon_components_serializers_xml::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformers_phpprocessor.html#methodinit">popoon_components_transformers_phpprocessor::init()</a>
+							</li>
+					<li>
+				<a href="../popoon/popoon_components_transformers_sourceview.html#methodinit">popoon_components_transformers_sourceview::init()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodprintDebug" id="printDebug"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">printDebug</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a176">176</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an entry to the debug Output   if $this-&gt;debug is true</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printDebug
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$content</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$content</span><span class="var-description">: content  text to be added</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodprintDebugArray" id="printDebugArray"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">printDebugArray</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a191">191</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an decomposed Array to the debug Output   if $this-&gt;debug is true</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printDebugArray
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">""</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$array</span><span class="var-description">: array Array to be added</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: description line to be added before array</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetParameter" id="setParameter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setParameter</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__component.php.html#a121">121</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setParameter
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:47 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>

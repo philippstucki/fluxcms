@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>File Source for component.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+											</head>
+		<body>
+						<h1>Source for file component.php</h1>
+<p>Documentation is available at <a href="../popoon/_component_php.html">component.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a><span class="src-comm">// +----------------------------------------------------------------------+</span></li>
+<li><a name="a3"></a><span class="src-comm">// | popoon                                                               |</span></li>
+<li><a name="a4"></a><span class="src-comm">// +----------------------------------------------------------------------+</span></li>
+<li><a name="a5"></a><span class="src-comm">// | Copyright (c) 2001,2002,2003,2004 Bitflux GmbH                       |</span></li>
+<li><a name="a6"></a><span class="src-comm">// +----------------------------------------------------------------------+</span></li>
+<li><a name="a7"></a><span class="src-comm">// | Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);      |</span></li>
+<li><a name="a8"></a><span class="src-comm">// | you may not use this file except in compliance with the License.     |</span></li>
+<li><a name="a9"></a><span class="src-comm">// | You may obtain a copy of the License at                              |</span></li>
+<li><a name="a10"></a><span class="src-comm">// | http://www.apache.org/licenses/LICENSE-2.0                           |</span></li>
+<li><a name="a11"></a><span class="src-comm">// | Unless required by applicable law or agreed to in writing, software  |</span></li>
+<li><a name="a12"></a><span class="src-comm">// | distributed under the License is distributed on an &quot;AS IS&quot; BASIS,    |</span></li>
+<li><a name="a13"></a><span class="src-comm">// | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or      |</span></li>
+<li><a name="a14"></a><span class="src-comm">// | implied. See the License for the specific language governing         |</span></li>
+<li><a name="a15"></a><span class="src-comm">// | permissions and limitations under the License.                       |</span></li>
+<li><a name="a16"></a><span class="src-comm">// +----------------------------------------------------------------------+</span></li>
+<li><a name="a17"></a><span class="src-comm">// | Author: Christian Stocker &lt;chregu@bitflux.ch&gt;                        |</span></li>
+<li><a name="a18"></a><span class="src-comm">// +----------------------------------------------------------------------+</span></li>
+<li><a name="a19"></a><span class="src-comm">//</span></li>
+<li><a name="a20"></a><span class="src-comm">// $Id: fsource_popoon__component.php.html,v 1.2 2004/03/08 07:37:47 chregu Exp $</span></li>
+<li><a name="a21"></a>&nbsp;</li>
+<li><a name="a20"></a>&nbsp;</li>
+<li><a name="a21"></a>&nbsp;</li>
+<li><a name="a22"></a><span class="src-doc">/**</span></li>
+<li><a name="a23"></a><span class="src-doc">* Documentation is missing at the moment...</span></li>
+<li><a name="a24"></a><span class="src-doc">*</span></li>
+<li><a name="a25"></a><span class="src-doc">* </span><span class="src-doc-coretag">@author</span><span class="src-doc">   Christian Stocker &lt;chregu@bitflux.ch&gt;</span></li>
+<li><a name="a26"></a><span class="src-doc">* </span><span class="src-doc-coretag">@version</span><span class="src-doc">  $Id: fsource_popoon__component.php.html,v 1.2 2004/03/08 07:37:47 chregu Exp $</span></li>
+<li><a name="a27"></a><span class="src-doc">* </span><span class="src-doc-coretag">@package</span><span class="src-doc">  popoon</span></li>
+<li><a name="a28"></a><span class="src-doc">*/</span></li>
+<li><a name="a29"></a>&nbsp;</li>
+<li><a name="a30"></a><span class="src-key">abstract </span><span class="src-key">class </span><a href="../popoon/popoon_component.html">popoon_component</a> <span class="src-sym">{</span></li>
+<li><a name="a31"></a>&nbsp;</li>
+<li><a name="a32"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$debug">$debug</a> = <span class="src-id">False</span><span class="src-sym">;</span></li>
+<li><a name="a33"></a>    </li>
+<li><a name="a34"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasSaxInput">$hasSaxInput</a> = <span class="src-id">False</span><span class="src-sym">;</span></li>
+<li><a name="a35"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasSaxOutput">$hasSaxOutput</a> = <span class="src-id">False</span><span class="src-sym">;    </span></li>
+<li><a name="a36"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasDomInput">$hasDomInput</a> = <span class="src-id">False</span><span class="src-sym">;    </span></li>
+<li><a name="a37"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasDomOutput">$hasDomOutput</a> = <span class="src-id">False</span><span class="src-sym">;        </span></li>
+<li><a name="a38"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasXmlStringInput">$hasXmlStringInput</a> = <span class="src-id">False</span><span class="src-sym">;        </span></li>
+<li><a name="a39"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$hasXmlStringOutput">$hasXmlStringOutput</a> = <span class="src-id">False</span><span class="src-sym">;            </span></li>
+<li><a name="a40"></a>    <span class="src-key">private </span><a href="../popoon/popoon_component.html#var$params">$params</a> = <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;    </span></li>
+<li><a name="a41"></a>&nbsp;</li>
+<li><a name="a42"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#method__construct">__construct</a><span class="src-sym">(</span><span class="src-var">$sitemap</span><span class="src-sym">)</span></li>
+<li><a name="a43"></a>    <span class="src-sym">{</span></li>
+<li><a name="a44"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap </span>= <span class="src-var">$sitemap</span><span class="src-sym">;</span></li>
+<li><a name="a45"></a>    <span class="src-sym">}</span></li>
+<li><a name="a46"></a>&nbsp;</li>
+<li><a name="a47"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a48"></a><span class="src-doc">    * Initiator, called after construction of object</span></li>
+<li><a name="a49"></a><span class="src-doc">    *</span></li>
+<li><a name="a50"></a><span class="src-doc">    *  This method will be called in the start element with the attributes from this element</span></li>
+<li><a name="a51"></a><span class="src-doc">    *</span></li>
+<li><a name="a52"></a><span class="src-doc">    *  </span><span class="src-doc-coretag">@param </span><span class="src-doc-type">$attribs </span><span class="src-doc">array    associative array with element attributes</span></li>
+<li><a name="a53"></a><span class="src-doc">	*/</span></li>
+<li><a name="a54"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodinit">init</a><span class="src-sym">(</span><span class="src-var">$attribs</span><span class="src-sym">)</span></li>
+<li><a name="a55"></a>    <span class="src-sym">{</span></li>
+<li><a name="a56"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs </span>= <span class="src-var">$attribs</span><span class="src-sym">;</span></li>
+<li><a name="a57"></a>&nbsp;</li>
+<li><a name="a58"></a>        <span class="src-comm">/*override class default vars from above with attribute from sitemap.xml */        </span></li>
+<li><a name="a59"></a>        <span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs </span><span class="src-key">as </span><span class="src-var">$key </span>=&gt; <span class="src-var">$value</span><span class="src-sym">)</span></li>
+<li><a name="a60"></a>        <span class="src-sym">{</span></li>
+<li><a name="a61"></a>            <span class="src-key">if </span><span class="src-sym">(</span>isset <span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$key</span><span class="src-sym">))</span></li>
+<li><a name="a62"></a>            <span class="src-sym">{</span></li>
+<li><a name="a63"></a>                <span class="src-var">$_attr </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#methodgetAttrib">getAttrib</a><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str"><span class="src-var">$key</span></span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a64"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$_attr </span>!== <span class="src-id">null</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a65"></a>                    <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$key </span>= <span class="src-var">$_attr</span><span class="src-sym">;</span></li>
+<li><a name="a66"></a>                <span class="src-sym">}</span></li>
+<li><a name="a67"></a>            <span class="src-sym">}</span></li>
+<li><a name="a68"></a>        <span class="src-sym">}</span></li>
+<li><a name="a69"></a>&nbsp;</li>
+<li><a name="a70"></a>        <span class="src-comm">/*override class default vars from above with default-parameters (= with no type-attribute) from sitemap.xml */        </span></li>
+<li><a name="a71"></a>        <span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#methodgetParameter">getParameter</a><span class="src-sym">(</span><span class="src-str">&quot;default&quot;</span><span class="src-sym">) </span><span class="src-key">as </span><span class="src-var">$key </span>=&gt; <span class="src-var">$value</span><span class="src-sym">)</span></li>
+<li><a name="a72"></a>        <span class="src-sym">{</span></li>
+<li><a name="a73"></a>            <span class="src-key">if </span><span class="src-sym">(</span>isset <span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$key</span><span class="src-sym">))</span></li>
+<li><a name="a74"></a>            <span class="src-sym">{</span></li>
+<li><a name="a75"></a>                <span class="src-var">$_attr </span>= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a76"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$_attr </span>!== <span class="src-id">null</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a77"></a>                    <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$key </span>= <span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a78"></a>                <span class="src-sym">}</span></li>
+<li><a name="a79"></a>            <span class="src-sym">}</span></li>
+<li><a name="a80"></a>        <span class="src-sym">}</span></li>
+<li><a name="a81"></a>&nbsp;</li>
+<li><a name="a82"></a>        <span class="src-comm">//if we should debug</span></li>
+<li><a name="a83"></a>        <span class="src-var">$debug </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#methodgetAttrib">getAttrib</a><span class="src-sym">(</span><span class="src-str">&quot;debug&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a84"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span><a href="http://www.php.net/is_null">is_null</a><span class="src-sym">(</span><span class="src-var">$debug</span><span class="src-sym">) </span>&amp;&amp; <span class="src-var">$debug</span>!=<span class="src-str">&quot;no&quot;  </span><span class="src-sym">)</span></li>
+<li><a name="a85"></a>        <span class="src-sym">{</span></li>
+<li><a name="a86"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$debug">debug</a> = <span class="src-id">True</span><span class="src-sym">;</span></li>
+<li><a name="a87"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-str">&quot;---&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a88"></a>            <span class="src-var">$p </span>= <a href="http://www.php.net/get_parent_class">get_parent_class</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a89"></a>            <span class="src-key">while </span><span class="src-sym">(</span><span class="src-var">$pnew </span>= <a href="http://www.php.net/get_parent_class">get_parent_class</a><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">))</span></li>
+<li><a name="a90"></a>            <span class="src-sym">{</span></li>
+<li><a name="a91"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$pnew </span>== <span class="src-str">&quot;component&quot;</span><span class="src-sym">) </span><span class="src-sym">{ </span><span class="src-key">break</span><span class="src-sym">;</span><span class="src-sym">}</span></li>
+<li><a name="a92"></a>                <span class="src-var">$p </span>= <span class="src-var">$pnew</span><span class="src-sym">;</span></li>
+<li><a name="a93"></a>            <span class="src-sym">}          </span></li>
+<li><a name="a94"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>=<span class="src-var">$p</span>.<span class="src-str">&quot;: &quot;</span>.<a href="http://www.php.net/get_class">get_class</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a95"></a>&nbsp;</li>
+<li><a name="a96"></a>            <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs </span><span class="src-key">as </span><span class="src-var">$key </span>=&gt; <span class="src-var">$value</span><span class="src-sym">)</span></li>
+<li><a name="a97"></a>            <span class="src-sym">{</span></li>
+<li><a name="a98"></a>                <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-str">&quot;</span><span class="src-str"><span class="src-var">$key</span> =&gt; <span class="src-var">$value</span></span><span class="src-str">&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a99"></a>            <span class="src-sym">}</span></li>
+<li><a name="a100"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-str">&quot;---&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a101"></a>        <span class="src-sym">}</span></li>
+<li><a name="a102"></a>    <span class="src-sym">}</span></li>
+<li><a name="a103"></a>&nbsp;</li>
+<li><a name="a104"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgetAttrib">getAttrib</a><span class="src-sym">(</span><span class="src-var">$attribute</span><span class="src-sym">, </span><span class="src-var">$doNotTranslate </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a105"></a>        <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs</span><span class="src-sym">[</span><span class="src-str">&quot;</span><span class="src-str"><span class="src-var">$attribute</span></span><span class="src-str">&quot;</span><span class="src-sym">]</span><span class="src-sym">))</span></li>
+<li><a name="a106"></a>        <span class="src-sym">{</span></li>
+<li><a name="a107"></a>                <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">! </span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a108"></a>                    <span class="src-key">die</span><span class="src-sym">(</span><span class="src-str">&quot;The class &quot;</span>.<a href="http://www.php.net/get_class">get_class</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">)</span>. <span class="src-str">&quot; has no sitemap integrated&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a109"></a>                <span class="src-sym">}</span></li>
+<li><a name="a110"></a>            </li>
+<li><a name="a111"></a>&nbsp;</li>
+<li><a name="a112"></a><span class="src-comm">//				return $this-&gt;attribs[$attribute] = $this-&gt;sitemap-&gt;translateScheme($this-&gt;attribs[&quot;$attribute&quot;],$doNotTranslate );</span></li>
+<li><a name="a113"></a>                <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap</span><span class="src-sym">-&gt;</span><span class="src-id">translateScheme</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs</span><span class="src-sym">[</span><span class="src-str">&quot;</span><span class="src-str"><span class="src-var">$attribute</span></span><span class="src-str">&quot;</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-var">$doNotTranslate </span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a114"></a>        <span class="src-sym">}</span></li>
+<li><a name="a115"></a>        <span class="src-key">else</span></li>
+<li><a name="a116"></a>        <span class="src-sym">{</span></li>
+<li><a name="a117"></a>            <span class="src-key">return </span><span class="src-id">Null</span><span class="src-sym">;</span></li>
+<li><a name="a118"></a>        <span class="src-sym">}</span></li>
+<li><a name="a119"></a>    <span class="src-sym">}</span></li>
+<li><a name="a120"></a>    </li>
+<li><a name="a121"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodsetParameter">setParameter</a><span class="src-sym">(</span><span class="src-var">$type</span><span class="src-sym">,</span><span class="src-var">$key</span><span class="src-sym">,</span><span class="src-var">$value</span><span class="src-sym">) </span></li>
+<li><a name="a122"></a>    <span class="src-sym">{</span></li>
+<li><a name="a123"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-sym">!</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">]</span><span class="src-sym">))</span></li>
+<li><a name="a124"></a>        <span class="src-sym">{</span></li>
+<li><a name="a125"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">] </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a126"></a>        <span class="src-sym">}</span></li>
+<li><a name="a127"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]</span>=<span class="src-var">$value</span><span class="src-sym">;</span></li>
+<li><a name="a128"></a>    <span class="src-sym">}</span></li>
+<li><a name="a129"></a>        </li>
+<li><a name="a130"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgetParameterAll">getParameterAll</a><span class="src-sym">(</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a131"></a>            <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">;</span></li>
+<li><a name="a132"></a>    <span class="src-sym">}</span></li>
+<li><a name="a133"></a>    </li>
+<li><a name="a134"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgetParameterDefault">getParameterDefault</a><span class="src-sym">(</span><span class="src-var">$key </span>= <span class="src-id">false</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a135"></a>        <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#methodgetParameter">getParameter</a><span class="src-sym">(</span><span class="src-str">&quot;default&quot;</span><span class="src-sym">,</span><span class="src-var">$key</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a136"></a>    <span class="src-sym">}</span></li>
+<li><a name="a137"></a>    </li>
+<li><a name="a138"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgetParameter">getParameter</a><span class="src-sym">(</span><span class="src-var">$type </span>= <span class="src-str">&quot;default&quot;</span><span class="src-sym">,</span><span class="src-var">$key </span>= <span class="src-id">false</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li><a name="a139"></a>&nbsp;</li>
+<li><a name="a140"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$key</span><span class="src-sym">) </span></li>
+<li><a name="a141"></a>        <span class="src-sym">{</span></li>
+<li><a name="a142"></a>            <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]</span><span class="src-sym">)) </span></li>
+<li><a name="a143"></a>            <span class="src-sym">{</span></li>
+<li><a name="a144"></a>                <span class="src-key">return </span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap</span><span class="src-sym">-&gt;</span><span class="src-id">translateScheme</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a145"></a>            <span class="src-sym">}</span></li>
+<li><a name="a146"></a>            <span class="src-key">else</span></li>
+<li><a name="a147"></a>            <span class="src-sym">{</span></li>
+<li><a name="a148"></a>                <span class="src-key">return </span><span class="src-id">null</span><span class="src-sym">;</span></li>
+<li><a name="a149"></a>            <span class="src-sym">}</span></li>
+<li><a name="a150"></a>        <span class="src-sym">}</span></li>
+<li><a name="a151"></a>        <span class="src-key">else</span></li>
+<li><a name="a152"></a>        <span class="src-sym">{        </span></li>
+<li><a name="a153"></a>            <span class="src-key">if </span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">]</span><span class="src-sym">)) </span><span class="src-sym">{</span></li>
+<li><a name="a154"></a>                <span class="src-var">$retarr </span>= <span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a155"></a>                <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$params">params</a><span class="src-sym">[</span><span class="src-var">$type</span><span class="src-sym">] </span><span class="src-key">as </span><span class="src-var">$value </span>=&gt; <span class="src-var">$key</span><span class="src-sym">) </span></li>
+<li><a name="a156"></a>                <span class="src-sym">{</span></li>
+<li><a name="a157"></a>                    <span class="src-var">$retarr</span><span class="src-sym">[</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap</span><span class="src-sym">-&gt;</span><span class="src-id">translateScheme</span><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">] </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">sitemap</span><span class="src-sym">-&gt;</span><span class="src-id">translateScheme</span><span class="src-sym">(</span><span class="src-var">$key</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a158"></a>                <span class="src-sym">}</span></li>
+<li><a name="a159"></a>                <span class="src-key">return </span><span class="src-var">$retarr</span><span class="src-sym">;</span></li>
+<li><a name="a160"></a>            <span class="src-sym">} </span></li>
+<li><a name="a161"></a>            <span class="src-key">else </span></li>
+<li><a name="a162"></a>            <span class="src-sym">{</span></li>
+<li><a name="a163"></a>                <span class="src-key">return </span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a164"></a>            <span class="src-sym">}</span></li>
+<li><a name="a165"></a>        <span class="src-sym">}</span></li>
+<li><a name="a166"></a>    <span class="src-sym">}</span></li>
+<li><a name="a167"></a>    </li>
+<li><a name="a168"></a>&nbsp;</li>
+<li><a name="a169"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a170"></a><span class="src-doc">    * Adds an entry to the debug Output</span></li>
+<li><a name="a171"></a><span class="src-doc">    *  if $this-&gt;debug is true</span></li>
+<li><a name="a172"></a><span class="src-doc">    *</span></li>
+<li><a name="a173"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc"> </span><span class="src-doc-type">mixed </span><span class="src-doc"> content  text to be added</span></li>
+<li><a name="a174"></a><span class="src-doc">    */</span></li>
+<li><a name="a175"></a>&nbsp;</li>
+<li><a name="a176"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodprintDebug">printDebug</a><span class="src-sym">(</span><span class="src-var">$content</span><span class="src-sym">)</span></li>
+<li><a name="a177"></a>    <span class="src-sym">{</span></li>
+<li><a name="a178"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$debug">debug</a><span class="src-sym">)</span></li>
+<li><a name="a179"></a>        <span class="src-sym">{</span></li>
+<li><a name="a180"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-var">$content</span><span class="src-sym">;</span></li>
+<li><a name="a181"></a>        <span class="src-sym">}</span></li>
+<li><a name="a182"></a>    <span class="src-sym">}</span></li>
+<li><a name="a183"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a184"></a><span class="src-doc">    * Adds an decomposed Array to the debug Output</span></li>
+<li><a name="a185"></a><span class="src-doc">    *  if $this-&gt;debug is true</span></li>
+<li><a name="a186"></a><span class="src-doc">    *</span></li>
+<li><a name="a187"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc"> </span><span class="src-doc-type">array </span><span class="src-doc">array Array to be added</span></li>
+<li><a name="a188"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@param </span><span class="src-doc"> </span><span class="src-doc-type">string </span><span class="src-doc">description line to be added before array</span></li>
+<li><a name="a189"></a><span class="src-doc">    * </span><span class="src-doc-coretag">@access</span><span class="src-doc"> private</span></li>
+<li><a name="a190"></a><span class="src-doc">    */    </span></li>
+<li><a name="a191"></a>    <span class="src-key">protected </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodprintDebugArray">printDebugArray</a><span class="src-sym">(</span><span class="src-var">$array</span><span class="src-sym">,</span><span class="src-var">$description </span>= <span class="src-str">&quot;&quot;</span><span class="src-sym">)</span></li>
+<li><a name="a192"></a>    <span class="src-sym">{</span></li>
+<li><a name="a193"></a>        <span class="src-key">if </span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../popoon/popoon_component.html#var$debug">debug</a><span class="src-sym">)</span></li>
+<li><a name="a194"></a>        <span class="src-sym">{</span></li>
+<li><a name="a195"></a>            <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-var">$description</span><span class="src-sym">;</span></li>
+<li><a name="a196"></a>            <span class="src-key">if </span><span class="src-sym">(</span><a href="http://www.php.net/is_array">is_array</a><span class="src-sym">(</span><span class="src-var">$array</span><span class="src-sym">))</span></li>
+<li><a name="a197"></a>            <span class="src-sym">{</span></li>
+<li><a name="a198"></a>            <span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$array </span><span class="src-key">as </span><span class="src-var">$key </span>=&gt; <span class="src-var">$value</span><span class="src-sym">)</span></li>
+<li><a name="a199"></a>            <span class="src-sym">{</span></li>
+<li><a name="a200"></a>                <span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">&quot;_POPOON_globalContainer&quot;</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debugOutput</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-str">&quot;</span><span class="src-str"><span class="src-var">$key</span> =&gt; <span class="src-var">$value</span></span><span class="src-str">&quot;</span><span class="src-sym">;</span></li>
+<li><a name="a201"></a>            <span class="src-sym">}</span></li>
+<li><a name="a202"></a>            <span class="src-sym">}</span></li>
+<li><a name="a203"></a>        <span class="src-sym">}</span></li>
+<li><a name="a204"></a>    <span class="src-sym">}</span></li>
+<li><a name="a205"></a>    </li>
+<li><a name="a206"></a>  </li>
+<li><a name="a207"></a>    <span class="src-comm">/* CACHING STUFF */</span></li>
+<li><a name="a208"></a>    <span class="src-comm">/*</span></li>
+<li><a name="a209"></a><span class="src-comm">       Hannes' comment:</span></li>
+<li><a name="a210"></a><span class="src-comm">       Here come the default methods. generateKeyDefault() is sort of generic, while</span></li>
+<li><a name="a211"></a><span class="src-comm">       the other two methods are valid but for components interacting with filesystem.</span></li>
+<li><a name="a212"></a><span class="src-comm">       It seemed to me that in putting them here I came away with the least amount of</span></li>
+<li><a name="a213"></a><span class="src-comm">       duplicate code.</span></li>
+<li><a name="a214"></a><span class="src-comm">       Correct me if this was a bad choice.</span></li>
+<li><a name="a215"></a><span class="src-comm">    */      </span></li>
+<li><a name="a216"></a>    </li>
+<li><a name="a217"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a218"></a><span class="src-doc">     * Generate unique key from an array and a string (seen abstractly)</span></li>
+<li><a name="a219"></a><span class="src-doc">     *</span></li>
+<li><a name="a220"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc"> </span><span class="src-doc-type">array </span><span class="src-doc"> </span><span class="src-doc-var">$attribs </span><span class="src-doc">Array of component attributes</span></li>
+<li><a name="a221"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc"> </span><span class="src-doc-type">string </span><span class="src-doc">hash key of previous component in pipeline</span></li>
+<li><a name="a222"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc-type">string </span><span class="src-doc">md5 hash key of the mashed parameters</span></li>
+<li><a name="a223"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@author</span><span class="src-doc"> Hannes Gassert &lt;hannes.gassert@unifr.ch&gt;</span></li>
+<li><a name="a224"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> componentCache</span></li>
+<li><a name="a225"></a><span class="src-doc">     */</span></li>
+<li><a name="a226"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgenerateKeyDefault">generateKeyDefault</a><span class="src-sym">(</span><span class="src-var">$attribs</span><span class="src-sym">, </span><span class="src-var">$keybefore</span><span class="src-sym">)</span><span class="src-sym">{</span></li>
+<li><a name="a227"></a>        <span class="src-var">$attribs</span><span class="src-sym">[</span><span class="src-sym">] </span>= <span class="src-var">$keybefore</span><span class="src-sym">;</span></li>
+<li><a name="a228"></a>        <span class="src-key">return</span><span class="src-sym">(</span><a href="http://www.php.net/md5">md5</a><span class="src-sym">(</span><a href="http://www.php.net/serialize">serialize</a><span class="src-sym">(</span><span class="src-var">$attribs</span><span class="src-sym">)))</span><span class="src-sym">;</span></li>
+<li><a name="a229"></a>    <span class="src-sym">}</span></li>
+<li><a name="a230"></a>&nbsp;</li>
+<li><a name="a231"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a232"></a><span class="src-doc">     * Generate validityObject</span></li>
+<li><a name="a233"></a><span class="src-doc">     *</span></li>
+<li><a name="a234"></a><span class="src-doc">     * This is common to all file-reading components. As they're probably largest in number,</span></li>
+<li><a name="a235"></a><span class="src-doc">     * they are allowed to be the default methods.</span></li>
+<li><a name="a236"></a><span class="src-doc">     *</span></li>
+<li><a name="a237"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc">  checkvalidity</span></li>
+<li><a name="a238"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc"> </span><span class="src-doc-type">array </span><span class="src-doc"> $validityObject contains the components attributes plus file modification time and time of last access.</span></li>
+<li><a name="a239"></a><span class="src-doc">     */</span></li>
+<li><a name="a240"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodgenerateValidityDefault">generateValidityDefault</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">{</span></li>
+<li><a name="a241"></a>        <span class="src-var">$validityObject </span>= <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs</span><span class="src-sym">;</span></li>
+<li><a name="a242"></a>        <span class="src-key">if</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">))</span><span class="src-sym">{</span></li>
+<li><a name="a243"></a>            <span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'filemtime'</span><span class="src-sym">] </span>= <a href="http://www.php.net/filemtime">filemtime</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a244"></a>            <span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'fileatime'</span><span class="src-sym">] </span>= <a href="http://www.php.net/fileatime">fileatime</a><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">attribs</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a245"></a>        <span class="src-sym">}</span></li>
+<li><a name="a246"></a>        <span class="src-key">return</span><span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a247"></a>    <span class="src-sym">}</span></li>
+<li><a name="a248"></a>&nbsp;</li>
+<li><a name="a249"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a250"></a><span class="src-doc">     * Check validity of a validityObject from cache: NOT REALLY DONE YET!!</span></li>
+<li><a name="a251"></a><span class="src-doc">     *</span></li>
+<li><a name="a252"></a><span class="src-doc">     * It's the same thing as with all validity checkers: there are many more ways to determine</span></li>
+<li><a name="a253"></a><span class="src-doc">     * cache validity. things like &quot;access + 4 days&quot; (which would also involve sending appropriate http headers)</span></li>
+<li><a name="a254"></a><span class="src-doc">     * are not implemented at all. but they will be! .)</span></li>
+<li><a name="a255"></a><span class="src-doc">     * At the very moment, this method checks only if the &quot;live&quot; content is not more recent than the cached one.</span></li>
+<li><a name="a256"></a><span class="src-doc">     * </span></li>
+<li><a name="a257"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@return </span><span class="src-doc"> </span><span class="src-doc-type">bool </span><span class="src-doc"> true if the validityObject indicates that the cached version can be used, false otherwise.</span></li>
+<li><a name="a258"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@param </span><span class="src-doc">  </span><span class="src-doc-type">object </span><span class="src-doc"> </span><span class="src-doc-type">validityObject </span></li>
+<li><a name="a259"></a><span class="src-doc">     */</span></li>
+<li><a name="a260"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../popoon/popoon_component.html#methodcheckValidityDefault">checkValidityDefault</a><span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">)</span><span class="src-sym">{</span></li>
+<li><a name="a261"></a>        <span class="src-key">return</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">)       </span>&amp;&amp;</li>
+<li><a name="a262"></a>               isset<span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'filemtime'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a263"></a>               <a href="http://www.php.net/file_exists">file_exists</a><span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">) </span>&amp;&amp;</li>
+<li><a name="a264"></a>               <span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'filemtime'</span><span class="src-sym">] </span>&gt;= <a href="http://www.php.net/filemtime">filemtime</a><span class="src-sym">(</span><span class="src-var">$validityObject</span><span class="src-sym">[</span><span class="src-str">'src'</span><span class="src-sym">]</span><span class="src-sym">)))</span><span class="src-sym">;         </span><span class="src-comm">//! no good ! they're always euqal..</span></li>
+<li><a name="a265"></a>    <span class="src-sym">}</span></li>
+<li><a name="a266"></a>&nbsp;</li>
+<li><a name="a267"></a>&nbsp;</li>
+<li><a name="a268"></a><span class="src-sym">}</span></li>
+<li><a name="a269"></a>&nbsp;</li>
+<li><a name="a270"></a>&nbsp;</li>
+<li><a name="a271"></a>&nbsp;</li>
+<li><a name="a272"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:31:47 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</body>
+</html>

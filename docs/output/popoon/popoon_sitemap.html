@@ -1,0 +1,1452 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class popoon_sitemap</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class popoon_sitemap</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class for doing the sitemap parsing stuff</p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id: popoon_sitemap.html,v 1.2 2004/03/08 07:37:48 chregu Exp $</li>
+				<li><span class="field">author:</span> Christian Stocker &lt;<a href="mailto:chregu@bitflux.ch">chregu@bitflux.ch</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_sitemap_php.html">/sitemap.php</a> (line <span class="field"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a31">31</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$cacheDir" title="details" class="var-name">$cacheDir</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$componentCache" title="details" class="var-name">$componentCache</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$contentType" title="details" class="var-name">$contentType</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$file" title="details" class="var-name">$file</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$header" title="details" class="var-name">$header</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$maps" title="details" class="var-name">$maps</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$options" title="details" class="var-name">$options</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$outputCache" title="details" class="var-name">$outputCache</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$responseCode" title="details" class="var-name">$responseCode</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$sm2phpincludes_xsl" title="details" class="var-name">$sm2phpincludes_xsl</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$sm2php_xsl" title="details" class="var-name">$sm2php_xsl</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$sm2php_xsl_dir" title="details" class="var-name">$sm2php_xsl_dir</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$uri" title="details" class="var-name">$uri</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$xml" title="details" class="var-name">$xml</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapFile</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">null</span>], [<span class="var-type">popoon_classes_config</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">NULL</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addMap" title="details" class="method-name">addMap</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$map</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#convertXML" title="details" class="method-name">convertXML</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#disableCaching" title="details" class="method-name">disableCaching</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#disableOutputCaching" title="details" class="method-name">disableOutputCaching</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#enableCaching" title="details" class="method-name">enableCaching</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#generateSitemapID" title="details" class="method-name">generateSitemapID</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$realpath</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getGlobalOptions" title="details" class="method-name">getGlobalOptions</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getGlobalOptionsAll" title="details" class="method-name">getGlobalOptionsAll</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getSchemeParts" title="details" class="method-name">getSchemeParts</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#printHeader" title="details" class="method-name">printHeader</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#redirectTo" title="details" class="method-name">redirectTo</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$uri</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#removeMap" title="details" class="method-name">removeMap</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#runSitemap" title="details" class="method-name">runSitemap</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapCachedFile</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCacheHeaders" title="details" class="method-name">setCacheHeaders</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$noCache</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setContentType" title="details" class="method-name">setContentType</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setGlobalOptions" title="details" class="method-name">setGlobalOptions</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setGlobalOptionsAll" title="details" class="method-name">setGlobalOptionsAll</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setHeader" title="details" class="method-name">setHeader</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setHeaderAndPrint" title="details" class="method-name">setHeaderAndPrint</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setHeaderIfNotExists" title="details" class="method-name">setHeaderIfNotExists</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setLastModified" title="details" class="method-name">setLastModified</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$time</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setResponseCode" title="details" class="method-name">setResponseCode</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#sitemap2php" title="details" class="method-name">sitemap2php</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapRealPath</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapCachedFile</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#translateScheme" title="details" class="method-name">translateScheme</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$doNotTranslate</span> = <span class="var-default">array()</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#translateSchemeSubParts" title="details" class="method-name">translateSchemeSubParts</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value2</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#var2XMLObject" title="details" class="method-name">var2XMLObject</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xmldoc</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#var2XMLString" title="details" class="method-name">var2XMLString</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xmldoc</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_mount" title="details" class="method-name">_mount</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#_scheme" title="details" class="method-name">_scheme</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$cacheDir" id="$cacheDir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$cacheDir</span>
+			 = <span class="var-default"> &quot;./tmp/&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a69">69</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The Directory, where the cached sitemaps should be saved</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$componentCache" id="$componentCache"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$componentCache</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a78">78</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Contains instance of ComponentCache or false</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+				<li><span class="field">see:</span> <a href="../popoon/popoon_sitemap.html#methodenableCaching">popoon_sitemap::enableCaching()</a>, <a href="../popoon/popoon_sitemap.html#methoddisableCaching">popoon_sitemap::disableCaching()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$contentType" id="$contentType"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$contentType</span>
+			 = <span class="var-default"> &quot;text/html&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a63">63</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The contenttype</p>
+<p class="description"><p>should be set within components (resp. serializers) with  $this-&gt;sitemap-&gt;setContentType($type);</p></p>
+	<ul class="tags">
+				<li><span class="field">var:</span> contenttype</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$file" id="$file"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$file</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a35">35</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$header" id="$header"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$header</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a44">44</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Contains the header, which will be output just before serializing</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$maps" id="$maps"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$maps</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a34">34</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$options" id="$options"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$options</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a101">101</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$outputCache" id="$outputCache"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$outputCache</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a80">80</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$responseCode" id="$responseCode"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$responseCode</span>
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a52">52</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">HTTP response code which is sent with the first header</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sm2phpincludes_xsl" id="$sm2phpincludes_xsl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$sm2phpincludes_xsl</span>
+			 = <span class="var-default"> &quot;sitemap2phpincludes.xsl&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a98">98</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sm2php_xsl" id="$sm2php_xsl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sm2php_xsl</span>
+			 = <span class="var-default"> &quot;sitemap2php.xsl&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a96">96</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The XSL File for transforming sitemap.xsl to a cached php file</p>
+<p class="description"><p>You shouldn't have to change it.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sm2php_xsl_dir" id="$sm2php_xsl_dir"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sm2php_xsl_dir</span>
+			 = <span class="var-default"> &quot;popoon/sitemap/&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a87">87</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The directory, where the xslt documents for  sitemap 2 php translation are.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$uri" id="$uri"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$uri</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a36">36</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$xml" id="$xml"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$xml</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a37">37</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a116">116</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construtor</p>
+<p class="description"><p>Almost everything happens here. The cached sitemap is generated here, if it    doesn't exist or if it's older   Then this sitemap is included and the code in it is run</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapFile</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">null</span>], [<span class="var-type">popoon_classes_config</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sitemapFile</span><span class="var-description">: the location of sitemap.xml, can be relativ</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uri</span><span class="var-description">: the uri of the call, optional (takes _SERVER[&quot;REQUEST_URI&quot;] then)</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$options</span><span class="var-description">: options, to be defined</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodaddMap" id="addMap"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addMap</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a511">511</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addMap
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$map</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodconvertXML" id="convertXML"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">convertXML</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a350">350</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			convertXML
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xml</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddisableCaching" id="disableCaching"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">disableCaching</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a614">614</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disables component caching</p>
+<p class="description"><p>Reset $this-&gt;componentCache</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/popoon_sitemap.html#methodenableCaching">popoon_sitemap::enableCaching()</a>, <a href="../popoon/popoon_sitemap.html#var$componentCache">popoon_sitemap::$componentCache</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disableCaching
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddisableOutputCaching" id="disableOutputCaching"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">disableOutputCaching</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a618">618</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disableOutputCaching
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodenableCaching" id="enableCaching"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">enableCaching</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a602">602</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Starts component caching</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../popoon/popoon_sitemap.html#methoddisableCaching">popoon_sitemap::disableCaching()</a>, <a href="../popoon/popoon_sitemap.html#var$componentCache">popoon_sitemap::$componentCache</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			enableCaching
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$pipelineAttribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$pipelineAttribs</span><span class="var-description">: Attributes of current pipeline</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgenerateSitemapID" id="generateSitemapID"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateSitemapID</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a286">286</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">generates a unique ID out of a string (path+filename)</p>
+<p class="description"><p>This method is used for generating a unique ID for every sitemap   which has to be compiled. It just takes the realpath as input,   and returns a unique ID for it.  In this case it replaces every DIRECTORY_SEPERATOR with _ for better   debugging. Theoretically one could use md5 as well.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> ID</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			generateSitemapID
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$realpath</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$realpath</span><span class="var-description">: Any string, but in this class normally a fullpath+filename</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetGlobalOptions" id="getGlobalOptions"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGlobalOptions</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a527">527</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getGlobalOptions
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetGlobalOptionsAll" id="getGlobalOptionsAll"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGlobalOptionsAll</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a531">531</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getGlobalOptionsAll
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetSchemeParts" id="getSchemeParts"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSchemeParts</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a491">491</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getSchemeParts
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodprintHeader" id="printHeader"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">printHeader</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a254">254</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prints all the header in $this-&gt;header</p>
+<p class="description"><p>this function is called from components/serializer.php in the constructor</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			printHeader
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodredirectTo" id="redirectTo"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">redirectTo</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a418">418</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			redirectTo
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$uri</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodremoveMap" id="removeMap"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeMap</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a515">515</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			removeMap
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodrunSitemap" id="runSitemap"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">runSitemap</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a167">167</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Runs the cached Sitemap</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true on success, pear error on error</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			runSitemap
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapCachedFile</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sitemapCachedFile</span><span class="var-description">: location of the cached file</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetCacheHeaders" id="setCacheHeaders"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCacheHeaders</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a238">238</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If noCache is set, disables all http caching</p>
+<p class="description"><p>headers according to http://dclp-faq.de/q/q-http-caching.html</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCacheHeaders
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$noCache</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetContentType" id="setContentType"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setContentType</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a230">230</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the content type of the document</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setContentType
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: content type</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetGlobalOptions" id="setGlobalOptions"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setGlobalOptions</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a519">519</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setGlobalOptions
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetGlobalOptionsAll" id="setGlobalOptionsAll"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setGlobalOptionsAll</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a523">523</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setGlobalOptionsAll
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetHeader" id="setHeader"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setHeader</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a180">180</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a header, which is output just before the serializer</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setHeader
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the header</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: value of the header</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetHeaderAndPrint" id="setHeaderAndPrint"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setHeaderAndPrint</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a209">209</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a header, and directly outputs it</p>
+<p class="description"><p>Very useful in DomStart of serializers, as the printHeader()   function is called before...</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setHeaderAndPrint
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the header</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: value of the header</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetHeaderIfNotExists" id="setHeaderIfNotExists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setHeaderIfNotExists</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a185">185</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setHeaderIfNotExists
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetLastModified" id="setLastModified"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setLastModified</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a219">219</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the last modified time</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setLastModified
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$time</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$time</span><span class="var-description">: unixtime last modified</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetResponseCode" id="setResponseCode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setResponseCode</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a196">196</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a HTTP response code, which is sent with the first header</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setResponseCode
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$value</span><span class="var-description">: response code value</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsitemap2php" id="sitemap2php"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sitemap2php</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a303">303</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generates the cached sitemap</p>
+<p class="description"><p>This function generates a php file out of a sitemap.xml with the help   an xsl file (poponn/sitemap/sitemap2xsl.php)</p><p>Libxslt and Sablotron is supported right now.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			sitemap2php
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapRealPath</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sitemapCachedFile</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sitemapRealPath</span><span class="var-description">: the absolute location of sitemap.xml</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sitemapCachedFile</span><span class="var-description">: the absolute location of the cached sitemap (php file)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodtranslateScheme" id="translateScheme"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">translateScheme</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a449">449</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			translateScheme
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$doNotTranslate</span> = <span class="var-default">array()</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodtranslateSchemeSubParts" id="translateSchemeSubParts"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">translateSchemeSubParts</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a483">483</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			translateSchemeSubParts
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value2</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodvar2XMLObject" id="var2XMLObject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">var2XMLObject</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a369">369</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts it's parameter into a DomDocument object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			var2XMLObject
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xmldoc</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">&$xmldoc</span><span class="var-description">: xmldoc        can either be a XML String or a DomDocument object</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodvar2XMLString" id="var2XMLString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">var2XMLString</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a430">430</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts it's parameter into a XML String</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			var2XMLString
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$xmldoc</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">&$xmldoc</span><span class="var-description">: xmldoc        can either be a XML String or a DomDocument object</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method_mount" id="_mount"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">_mount</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a548">548</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mounts a second sitemap</p>
+<p class="description"><p>Not a very elegant solution, should be rewritten some day</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_mount
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="method_scheme" id="_scheme"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">_scheme</span> (line <span class="line-number"><a href="..//__filesource/fsource_popoon__sitemap.php.html#a567">567</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_scheme
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon,  8 Mar 2004 08:34:07 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC2</a>
+	</p>
+	</div></body>
+</html>
