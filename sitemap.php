@@ -460,8 +460,8 @@ class popoon_sitemap {
     function translateScheme($value, $doNotTranslate = array(), $onSitemapGeneration = false) {
         // don't do anything, if we don't have any scheme stuff in the $value;
         // strpos should be rather fast, i assume.
-        
-        if(is_object($value) || strpos($value,":/") === false && strpos($value,"{") === false) {
+                
+        if(is_object($value) || is_array($value) || strpos($value,":/") === false && strpos($value,"{") === false) {
                 
                 return $value;
         }
