@@ -234,9 +234,9 @@ class popoon_classes_structure2xml {
             return Null;
         }
         $queryfields = $dbMasterValues['children'][0].".*";
-        
         $query = " from ".$dbMasterValues['children'][0];
         $name = $dbMasterValues['children'][0];
+     
         
         $dbStructure = $configClass->getValues("$rootpath/$name");
         
@@ -435,7 +435,9 @@ class popoon_classes_structure2xml {
     function getQueryFields($tablename,$dbStructure,$xmlparent,&$tableInfo)
     {
         $queryfields = ""; //E_ALL fix
-        
+        if (PEAR::isError($dbStructure)) {
+            throw new PopoonDBException($dbStructure);   
+        }
         if (! isset($dbStructure["nofields"]) && !(isset($dbStructure["fields"]) && (strlen($dbStructure["fields"]) == 0)))
         {
             if (isset($dbStructure["fields"]) )
