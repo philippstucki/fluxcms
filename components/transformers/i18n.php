@@ -14,14 +14,32 @@
 // | implied. See the License for the specific language governing         |
 // | permissions and limitations under the License.                       |
 // +----------------------------------------------------------------------+
-// | Author: Hannes Gassert <hannes@mediagonal.ch>                        |
+// | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
 // $Id$
 
 /**
-* 
-* @author   Christian Stocker  
+* A translator, which tries to implement the i18n transformer from cocoon.
+*
+* See http://cocoon.apache.org/2.1/userdocs/transformers/i18n-transformer.html
+*  for an introduction.
+*
+* If you want to use it, add the following to your sitemap
+*
+*  <map:transform type="i18n" src="xml/catalog">
+*     <map:parameter name="locale" value="{lang}"/>
+*     <map:parameter name="driver" value="xml"/>
+*  </map:transform>
+*
+* There are (or will be) different drivers vor getting the values,
+*  currently only a xml driver is available. See the source comments
+*  for more details.
+*
+* A DB driver is planned.
+*  
+*
+* @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
 * @package  popoon
 */
