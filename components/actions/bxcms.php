@@ -17,12 +17,12 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: bxcms.php,v 1.3 2004/03/14 17:05:00 chregu Exp $
+// $Id$
 
 /**
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: bxcms.php,v 1.3 2004/03/14 17:05:00 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 
@@ -43,8 +43,8 @@ class popoon_components_actions_bxcms extends popoon_components_action {
     function act() {
         $fulluri = $this->getAttrib("uri");
         $collection = bx_collections::getCollection($fulluri);
-        $filename = str_replace($collection->uri,"",$fulluri);
-       
+        
+        $filename = preg_replace("#^/#","",str_replace($collection->uri,"",$fulluri));
         $res = $collection->resourceExists($filename);
         if(!$res) {
             print "not found";
