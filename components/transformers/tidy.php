@@ -51,28 +51,46 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "wrap" => "350", 
             "indent" => true, 
             "indent-spaces" => 1,
-            "ascii-chars" => "no",
+            "ascii-chars" => false,
             "char-encoding" => "utf8",
             "wrap-attributes" => false,
             "alt-text" => "none",
             "doctype" => "loose",
             "numeric-entities" => true,
-	     "drop-proprietary-attributes" => true
+            "drop-proprietary-attributes" => true
             );
-        
-        $options = array_merge($options,$this->getParameter("default") );
+            
+        foreach ($this->getParameter("default") as $key => $value) {
+            switch ($value) {
+                case "yes":
+                case "true":
+                    $options[$key] = true;
+                    break;
+                case "no":
+                case "false":
+                    $options[$key] = false;
+                    break;
+                default:
+                    $options[$key] = $value;
+            }
+        }
         
         $tidy = new tidy();
         
         if(!$tidy) {
             throw new Exception("Something went wrong with tidy initialisation");
         }
-        $tidy->parseString($xml,$options,$options["char-encoding"]);
+        $charencoding = $options["char-encoding"];
+        unset ($options["char-encoding"]);
+        $tidy->parseString($xml,$options,$charencoding);
         $tidy->cleanRepair();
         $xml = (string) $tidy;
+       unset($tidy);
+        
         if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
             $xml = preg_replace('/xmlns="[^"]*"/','',$xml);
         }
+        
         
     }
 }
