@@ -56,7 +56,13 @@ class popoon_components_serializers_html extends popoon_components_serializer {
         if (!defined('SID') || (defined('SID') && SID == "")) {
             //$this->sitemap->setHeaderAndPrint("Content-Length",strlen($xml));
         }
-        print $xml;            
+        print $this->obfuscateMail($xml);            
+    }
+  function obfuscateMail($xml) {
+         if ($this->getParameter('default','obfuscateMail') == 'true') {
+                return str_replace('mailto:','&#109;&#97;&#105;&#108;&#116;&#111;&#58;',str_replace('@','&#64;',$xml));
+        }
+        return $xml;
     }
 }
 
