@@ -17,14 +17,14 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: webdavfile.php,v 1.1 2004/03/02 07:23:01 chregu Exp $
+// $Id$
 
 include_once("popoon/components/generator.php");
 
 /**
 
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: webdavfile.php,v 1.1 2004/03/02 07:23:01 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_generators_webdavfile extends popoon_components_generator {
@@ -66,11 +66,11 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
         // this is the place where WebDAV_Server looks for the files in the filesystem
         
         $_SERVER["PATH_INFO"] = str_replace($webroot,"",$this->sitemap->uri);
-        
         // add it to scriptname, otherwise the return in ls are not correct
         // the else is a special case, if it's the root file
+        $webrootPrepend = substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],"$webroot"));
         if ($webroot || $_SERVER["PATH_INFO"]) {
-            $_SERVER["SCRIPT_NAME"] = str_replace("/index.php","",$_SERVER["SCRIPT_NAME"])."/".$webroot;
+            $_SERVER["SCRIPT_NAME"] = str_replace("/index.php","",$_SERVER["SCRIPT_NAME"]).$webrootPrepend.$webroot;
         } else {
             $_SERVER["SCRIPT_NAME"] = str_replace("/index.php","",$_SERVER["SCRIPT_NAME"]);
         }

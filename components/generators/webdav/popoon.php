@@ -45,8 +45,6 @@
         function getStreamType($path) {
           
           $extension = substr(trim($path),strrpos(trim($path),".")+1);
-          error_log("ext: " . $extension);
-          
           switch($extension) {
               case "html":
                 include_once("popoon/streams/tidy.php");
