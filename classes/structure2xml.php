@@ -2,9 +2,12 @@
 class popoon_classes_structure2xml {
     
     private $parent;
+    private $queries = null;
+    private $queryCacheOptions = null;
     
     function __construct($parent) {
         $this->parent = $parent;
+        $this->db = $this->parent->db;
     }
     
     private function getAttrib($value) {
@@ -28,7 +31,7 @@ class popoon_classes_structure2xml {
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
         
-        $sql2xml = new XML_db2xml($this->parent->db,"bx","Extended");
+        $sql2xml = new XML_db2xml($this->db,"bx","Extended");
         
         // i should add this for all options .... later maybe
         if (!(is_null($this->getAttrib("xml_seperator")) ))
@@ -80,9 +83,10 @@ class popoon_classes_structure2xml {
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
                     $query["query"] = $this->replaceVarsInWhere($query["query"]);
-                    if ( $this->st2xmlCaching == "true" ) { 
+                    if ( $this->parent->st2xmlCaching == "true" ) { 
                         if (! (isset($query["maxLastChanged"]) )) {
-                            $query["maxLastChanged"]  = $this->db->getOne($query['queryLastChanged']);
+                            $this->db->loadModule('extended');
+                            $query["maxLastChanged"]  = $this->db->extended->getOne($query['queryLastChanged']);
                             
                         } 
                         
@@ -92,9 +96,10 @@ class popoon_classes_structure2xml {
                         else {
                             $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
                             $sql2xml->add($query['query']);
-                            $ctx = xpath_new_context($sql2xml->Format->xmldoc);
-                            $resultTree = $ctx->xpath_eval("$structureName",$sql2xml->Format->xmlroot );
-                            $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->dump_node($resultTree->nodeset[0]),"file", $query["maxLastChanged"]);
+                            $ctx = new DomXpath($sql2xml->Format->xmldoc);
+                            $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
+                            
+                            $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->saveXML($resultTree->item(0)),"file", $query["maxLastChanged"]);
                         }
                         $_maxLastChangedAll[] = $query["maxLastChanged"];
                         
@@ -523,8 +528,11 @@ class popoon_classes_structure2xml {
         // +VAR with +VAR ("hello world" gets to "+hello +world" this is useful for fulltext search in mysql)
         $regs = array();
         $repl = array();
-        
-        $requests = array_merge($_REQUEST,$this->getParameter("structure2xml"));
+        if (is_array($this->getParameter("structure2xml"))) {
+            $requests = array_merge($_REQUEST,$this->getParameter("structure2xml"));
+        } else {
+            $requests = $_REQUEST;
+        }
         foreach ($requests as $key => $val)
         {
             /* not so sure about that */
