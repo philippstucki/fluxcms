@@ -21,7 +21,6 @@ class popoon_classes_browser {
         }
     }
     static function isMozilla() {
-        self::init();
         return( self::getName() == "mozilla");
     }
     
@@ -39,6 +38,9 @@ class popoon_classes_browser {
            }
            return false;
            
+    }
+    static function isPalm() {
+        return (self::getPlatform()=="palm");
     }
     
     static function isMSIEWin() {
@@ -85,16 +87,19 @@ class popoon_classes_browser {
             
             
             // find operating system
-            if (eregi("win", $agent))
-            $bd['platform'] = "windows";
-            elseif (eregi("mac", $agent))
-            $bd['platform'] = "macintosh";
-            elseif (eregi("linux", $agent))
-            $bd['platform'] = "linux";
-            elseif (eregi("OS/2", $agent))
-            $bd['platform'] = "os/2";
-            elseif (eregi("BeOS", $agent))
-            $bd['platform'] = "beos";
+            if (eregi("win", $agent)) {
+                $bd['platform'] = "windows";
+            } elseif (eregi("mac", $agent)) {
+                $bd['platform'] = "macintosh";
+            } elseif (eregi("linux", $agent)) {
+                $bd['platform'] = "linux";
+            } elseif (eregi("OS/2", $agent)) {
+                $bd['platform'] = "os/2";
+            } elseif (eregi("BeOS", $agent)) {
+                $bd['platform'] = "beos";
+            } elseif (strpos("PalmOS",$agent) !== false) {
+                $bd['platform'] = "palm";
+            }
             
             // test for Opera		
             if (eregi("opera",$agent)){
