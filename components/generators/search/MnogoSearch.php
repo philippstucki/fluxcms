@@ -194,12 +194,12 @@ Class MnogoSearch  {
 				if (isset($row['mod'])) {
 					$row['date'] = date("d.m.y",$row['mod']);
 				}
-                                if(!isset($row['title']) && !empty($row['url'])) {
-                                    $pInfo = pathinfo($row['url']);
+                if(!isset($row['title']) && !empty($row['url'])) {
+                    $pInfo = pathinfo($row['url']);
 				    if(!empty($pInfo['basename'])) {
-                                        $row['title'] = '::'.$pInfo['basename'];
-                                    }
-                                }
+                        $row['title'] = '::'.$pInfo['basename'];
+                    }
+                }
 
 				array_push($this->Result,$row);	
 			}	
