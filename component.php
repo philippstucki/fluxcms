@@ -124,7 +124,7 @@ abstract class popoon_component {
 		{
 			$this->params[$type] = array();
 		}
-        if( $default !== NULL ) {
+        if( !$value && $default !== NULL ) {
             $this->params[$type][$key] = $default;
         } else {
             $this->params[$type][$key] = $value;
