@@ -121,7 +121,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
     function getEntries($from,$section,$startEntry) {
           
         
-        $cdataFields = array("title","link","description","content_encoded","blog_Title");
+        $cdataFields = array("title","link","description","content_encoded","blog_title");
         $res = $this->db->query('
         SELECT entries.ID,
         entries.title,
