@@ -113,11 +113,14 @@ class popoon_sitemap {
     *  @access public
     *  @return bool
     */
-    function __construct($sitemapFile, $uri= null, popoon_classes_config $options = NULL) {
+    function __construct($sitemapFile, $uri= null, popoon_classes_config $options = NULL, $maps = NULL) {
         
         //replace class-properties by values in the options-array()
-        
+        if ($maps) {
+            $this->maps = $maps;
+        }
         $this->options = $options;
+        
         
         //FIXME use new config object class...
         if (!isset($options['sm2php_xsl_dir']) && isset($options['sm2php_xsl'])) {
@@ -533,12 +536,12 @@ class popoon_sitemap {
             $prefix = popoon_sitemap::translateScheme($attribs["uri-prefix"]);
             if ($prefix)
             {
-                $this->uri = preg_replace("#^/*$prefix/*#","",$this->uri);
+                $this->uri = preg_replace("#^/*$prefix/*#","",$this->uri, $this->maps);
             }
             
         }
         // I hope, this doesn't have too many sideeffects
-        $pipelineHit = $this->__construct($file,$this->uri,$this->options);
+        $pipelineHit = $this->__construct($file,$this->uri,$this->options, $this->maps);
         
         
         $this->uri = $old_uri;
