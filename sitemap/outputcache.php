@@ -194,7 +194,7 @@ class popoon_sitemap_outputcache {
                 header("$key: $value");
             }
         }
-        if ($this->check304($etag, $sitemap->header['Last-Modified'])) {
+        if (isset($sitemap->header['Last-Modified']) && $this->check304($etag, $sitemap->header['Last-Modified'])) {
             header( 'HTTP/1.1 304 Not Modified' );
             
             if ($this->options->outputCacheSave !== 304) {
