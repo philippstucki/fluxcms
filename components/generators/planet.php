@@ -31,7 +31,6 @@ class popoon_components_generators_planet extends popoon_components_generator {
         }
         
         $startEntry = $this->getParameterDefault("startEntry");
-        if (!$startEntry) {$startEntry = 0;}
         
         $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
         $xml .= '<planet>';

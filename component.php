@@ -118,13 +118,17 @@ abstract class popoon_component {
 		}
 	}
     
-	public function setParameter($type,$key,$value) 
+	public function setParameter($type,$key,$value, $default = NULL) 
 	{
 		if (!isset($this->params[$type]))
 		{
 			$this->params[$type] = array();
 		}
-		$this->params[$type][$key]=$value;
+        if( $default !== NULL ) {
+            $this->params[$type][$key] = $default;
+        } else {
+            $this->params[$type][$key] = $value;
+        }
 	}
 		
 	protected function getParameterAll() {

@@ -33,4 +33,8 @@ function scheme_BX_BITLIB_DIR($value)
 {
 	return BX_BITLIB_DIR.$value;
 }
+
+function scheme_BX_BITLIB_DIR_onSitemapGeneration($value) {
+    return "'.BX_BITLIB_DIR.'".$value;   
+}
 	

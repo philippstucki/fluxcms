@@ -33,4 +33,9 @@ function scheme_BX_PROJECT_DIR($value)
 {
 	return BX_PROJECT_DIR.$value;
 }
+
+function scheme_BX_PROJECT_DIR_onSitemapGeneration($value) {
+    return "'.BX_PROJECT_DIR.'".$value;   
+}
+
 	

@@ -36,4 +36,14 @@ function scheme_config($value)
     $config = $GLOBALS['POOL']->config;
     return $config->$value;
 }
+
+function scheme_config_onSitemapGeneration($value) {
+    // do not retranslate dsn later on
+    if ($value != "dsn") {
+        return '\'.$GLOBALS[\'POOL\']->config->'.$value.".'";
+    } else {
+        
+        return "\''".'.$GLOBALS[\'POOL\']->config->'.$value.".'\'";
+    }
+}
 	

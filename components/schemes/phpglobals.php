@@ -29,27 +29,33 @@
 */
 function scheme_phpglobals($value)
 {
-		if (strpos($value,"[")) {
-			preg_match_all("/(.*)(\[['\"]*([^'\"]*)['\"]*\])+/U",$value,$matches);
-            $depth = count($matches[3]);
-            if ($matches[1][0] == '_SESSION') {
-                session_start();
-            }
-			if ($depth == 1 && isset($GLOBALS[$matches[1][0]][$matches[3][0]])) {
-				return $GLOBALS[$matches[1][0]][$matches[3][0]];
-                
-			} 
-			else if ($depth == 2 && isset($GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]])) {
-				return $GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]];
-			} 
-
-			else 
-			{
-				return null;
-			}
-		} else {
-    		return $GLOBALS[$value];
+    if (strpos($value,"[")) {
+        preg_match_all("/(.*)(\[['\"]*([^'\"]*)['\"]*\])+/U",$value,$matches);
+        $depth = count($matches[3]);
+        if ($matches[1][0] == '_SESSION') {
+            session_start();
         }
-	}
+        if ($depth == 1 && isset($GLOBALS[$matches[1][0]][$matches[3][0]])) {
+            return $GLOBALS[$matches[1][0]][$matches[3][0]];
+            
+        } 
+        else if ($depth == 2 && isset($GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]])) {
+            return $GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]];
+        } 
+        
+        else 
+        {
+            return null;
+        }
+    } else {
+        return $GLOBALS[$value];
+    }
+}
 
-	
+function scheme_phpglobals_onSitemapGeneration($value) {
+    
+        $value = "'.$".str_replace("[","['",str_replace("]","']",$value)).".'";
+        return $value;
+    
+    
+}

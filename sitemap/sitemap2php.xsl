@@ -357,7 +357,8 @@
             $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',$e);
             </xsl:when>
             <xsl:otherwise>
-                $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>);
+                $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>
+                <xsl:if test="@default">, <xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@default"/></xsl:call-template></xsl:if>);
             </xsl:otherwise>
             </xsl:choose>
         </xsl:template>

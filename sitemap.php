@@ -438,38 +438,49 @@ class popoon_sitemap {
     }
     
     /* in the array doNotTranslate we can give some values, which should not be translated, as for example http...*/
-    function translateScheme($value, $doNotTranslate = array()) {
+    function translateScheme($value, $doNotTranslate = array(), $onSitemapGeneration = false) {
         // don't do anything, if we don't have any scheme stuff in the $value;
         // strpos should be rather fast, i assume.
         
-        if(strpos($value,":/") === false && strpos($value,"{") === false) { return $value;}
-            
-            $scheme = popoon_sitemap::getSchemeParts($value);
-            
+        if(strpos($value,":/") === false && strpos($value,"{") === false) { 
+                return $value;
+        }
+        
+        $scheme = popoon_sitemap::getSchemeParts($value);
+        
 		//checks if value  ends with } and starts with { with no { after the first position
                 // then we don't need this fairly complicated preg from below and can substitute also arrays and alike
                 
-        if (substr ($scheme["value"], -1,1) == "}" && strrpos ( $scheme["value"], "{") === 0)
-            {
+        if (substr ($scheme["value"], -1,1) == "}" && strrpos ( $scheme["value"], "{") === 0) {
                 $scheme["value"] = substr($scheme["value"],1,-1);
                 
                 $scheme["value"] = @$this->maps[substr_count($scheme["value"],'../')][str_replace("../","",$scheme["value"])];
-            }
-            else
-            {
-                
-        $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","\$this->translateSchemeSubParts('$1','$2')",$scheme["value"] );
-            }
-            if (in_array($scheme["scheme"],$doNotTranslate)) {
+        }
+        else if ($onSitemapGeneration) {
+            
+        $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","popoon_sitemap::translateSchemeSubPartsOnSitemapGeneration('$1','$2')",$scheme["value"] );
+        } else {
+            $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","\$this->translateSchemeSubParts('$1','$2')",$scheme["value"] );
+        }
+        if (in_array($scheme["scheme"],$doNotTranslate)) {
+            return $value;
+        } else if ($scheme["scheme"] != "default") {
+            if (!@include_once("popoon/components/schemes/".$scheme["scheme"].".php")) {
                 return $value;
-            } else if ($scheme["scheme"] != "default") {
-                include_once("popoon/components/schemes/".$scheme["scheme"].".php");
+            }
+            if ($onSitemapGeneration) {
+                if (function_exists("scheme_".$scheme["scheme"]."_onSitemapGeneration")) {
+                     return call_user_func("scheme_".$scheme["scheme"]."_onSitemapGeneration",$scheme["value"]);
+                } else {
+                    return $value;
+                }
+            } else {
                 return call_user_func("scheme_".$scheme["scheme"],$scheme["value"],&$this);
             }
-            else
-            {
-                return $scheme["value"];
-            }
+        }
+        else {
+            return $scheme["value"];
+        }
     }
     
     function translateSchemeSubParts ($value, $value2) {
@@ -477,6 +488,20 @@ class popoon_sitemap {
             return $this->maps[substr_count($value,'../')][$value2];
         } else {
             return $this->translateScheme($value);
+        }
+    }
+    
+     function translateSchemeSubPartsOnSitemapGeneration ($value, $value2) {
+        if (strpos($value,":/") === false) {
+            return '{'.$value.'}';
+        } else {
+            $newVal = popoon_sitemap::translateScheme($value,array(),true);
+            if ($newVal == $value) {
+                return '{'.$value.'}';
+            } else {
+                return $newVal;
+            }
+            
         }
     }
     
@@ -628,10 +653,18 @@ function sitemap_formatValues($value) {
            } 
        }
     }
-    
-    
-    return "'".$value."'";
+    //check if there are any schemes... else we can return here
+    if(strpos($value,":/") === false && strpos($value,"{") === false) {
+            return sitemap_fixValue($value);
+    }
+    // translate translatabe scheme      
+    $value = popoon_sitemap::translateScheme($value,array(),true);
+    return sitemap_fixValue($value);
 }
     
+function sitemap_fixValue($value) {
+     $value = "'".$value."'";
+    return preg_replace(array("#\.''$#","#^''\.#","#\.''\.#"),"",$value);
+}
 
 ?>
