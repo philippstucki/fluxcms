@@ -21,50 +21,40 @@
 
 include_once("popoon/components/action.php");
 /**
+*
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
 * @package  popoon
 */
 
-class popoon_components_actions_davput extends popoon_components_action {
+class popoon_components_actions_httpauth extends popoon_components_action {
 
+    private $db = null;
     /**
-    * Constructor
-    *
+       * Constructor
+       *
     */
-    function action_davput(&$sitemap) {
-        $this->action($sitemap);
+    function __construct($sitemap) {
+        parent::__construct($sitemap);
     }
 
-    function init() {
-    }
-    
+
     function act() {
         
-        
-        
-        // read data from php://input stream
-        if ($_SERVER['REQUEST_METHOD'] == "PUT") {
-        $xml = "";
-        $fd = fopen("php://input","r");
-        while ($line = fread($fd,2048)) {
-            $xml .= $line;
-        }
-        fclose($fd);
-        $src = $this->getParameterDefault("src");
-        $fd=fopen($src,"w");
-        
-        fwrite($fd,$xml);
-        fclose($fd);
-        // TODO: Error handling!
-        $this->sitemap->setResponseCode(204);
-        return array("message" => "Data saved");
-        }
-        return array("message" => "Not a PUT request");
-        
-        
+        $user = $this->getParameterDefault("user");
+        $password = $this->getParameterDefault("password");
+
+        if (isset($_SERVER['PHP_AUTH_USER'] ) && isset($_SERVER['PHP_AUTH_PW']) && $user == $_SERVER['PHP_AUTH_USER'] && $password == $_SERVER['PHP_AUTH_PW']) {
+           return array("message" => "Login Successfull");
+       }
+       // setting the database connection options
+       if ($this->getParameterDefault("showlogin") == "true") {
+           header("WWW-Authenticate: Basic realm=\"popoon httpauth login\"");
+           header("HTTP/1.0 401 Unauthorized");
+       }
+       
+       return false;
     }
 
-}
 
-?>
+}
