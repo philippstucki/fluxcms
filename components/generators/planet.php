@@ -14,7 +14,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
     function init($attribs)
     {
         parent::init($attribs);
-        $this->db = $this->getParameterDefault("db");
+       // $this->db = $this->getParameterDefault("db");
         
     }    
     
@@ -34,18 +34,18 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $search = $this->getParameterDefault("search");
         
         
-        $db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
+        $this->db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
 
         $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
         $xml .= '<planet>';
         $xml .= '<search>';
         if ($search) {
-            $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "')";
+            $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "') ";
           
             $xml .= '<string>'.$search .'</string>';
            
         } else {
-            $where = "";
+            $where = "where  1=1 ";
         }
         
         
@@ -53,37 +53,31 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join feeds on entries.feedsID = feeds.ID
         left join blogs on feeds.blogsID = blogs.ID
         ' . $where ;
-        $db->loadModule("extended");
-        $count = $db->extended->getOne('select count(entries.ID) ' . $from);
+        
+        $this->db->loadModule("extended");
+        $count = $this->db->extended->getOne('select count(entries.ID) ' . $from . "and feeds.section = 'default'");
         
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
         $xml .= '</search>';
+        switch (substr($this->sitemap->uri,0,3)) {
+            case "rdf":
+            case "rss":
+            case "ato":
+            $xml .= $this->getEntries( $from, "default",0);    
+            break;
+            default:
+            $xml .= $this->getEntries( $from, "default",$startEntry);    
+            $xml .= $this->getEntries( $from, "releases",0);
+        }
+            
         
-        $cdataFields = array("title","link","description","content_encoded","blog_Title");
-        $res = $db->query('
-        SELECT entries.ID,
-        entries.title,
-        entries.link,
-        entries.description,
-        entries.content_encoded,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i") as date_iso,
         
-        blogs.link as blog_Link,
-        if(length(blogs.title) > '. ($this->maxBlogTitleLength + 5) .' , concat(left(blogs.title,'. ($this->maxBlogTitleLength ) .')," ..."), blogs.Title) as blog_Title
-        ' . $from . '
-        order by entries.dc_date DESC 
-        limit '.$startEntry . ',10');
-        
-        $xml .= '<entries>';
-        $xml .= $this->mdbResult2XML($res,"entry",$cdataFields);
-        $xml .= '</entries>';
         
         if ($this->getParameterDefault("feedsList") == "yes") {
             $xml .= '<blogs>';
             
-            $res = $db->query("
+            $res = $this->db->query("
             select 
             blogs.link as link,
             blogs.title as title,
@@ -103,6 +97,32 @@ class popoon_components_generators_planet extends popoon_components_generator {
         
         $xml .= "</planet>";
         return TRUE;
+    }
+    
+    function getEntries($from,$section,$startEntry) {
+          
+        
+        $cdataFields = array("title","link","description","content_encoded","blog_Title");
+        $res = $this->db->query('
+        SELECT entries.ID,
+        entries.title,
+        entries.link,
+        entries.description,
+        entries.content_encoded,
+        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
+        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i") as date_iso,
+        
+        blogs.link as blog_Link,
+        if(length(blogs.title) > '. ($this->maxBlogTitleLength + 5) .' , concat(left(blogs.title,'. ($this->maxBlogTitleLength ) .')," ..."), blogs.Title) as blog_Title
+        ' . $from . ' and feeds.section = "'.$section.'"
+        order by entries.dc_date DESC 
+        limit '.$startEntry . ',10');
+        
+        $xml = '<entries section="'.$section.'">';
+        $xml .= $this->mdbResult2XML($res,"entry",$cdataFields);
+        $xml .= '</entries>';
+        return $xml;
+        
     }
     
     function mdbResult2XML ($res, $rowField, $cdataFields = array()) {
