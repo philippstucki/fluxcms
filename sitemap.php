@@ -155,7 +155,8 @@ class popoon_sitemap {
                 $err = $this->sitemap2php($sitemapRealPath,$sitemapCachedFile);
             }
 
-	 	$err = $this->runSitemap($sitemapCachedFile);
+	 	$pipelineHit =  $this->runSitemap($sitemapCachedFile);
+        return $pipelineHit;
 
 	}
 
@@ -169,7 +170,7 @@ class popoon_sitemap {
 		//include the sitemap file
 		$pipelineHit = false;
         include ($sitemapCachedFile);
-
+        return $pipelineHit;
 	}
     
     public function getOptions() {
@@ -522,24 +523,27 @@ class popoon_sitemap {
      * Not a very elegant solution, should be rewritten some day
      *
      */
-    private function _mount($attribs)
-    {
-		$file = popoon_sitemap::translateScheme($attribs["src"]);
-	 	$old_uri = $this->uri;
-
-		if (isset($attribs["uri-prefix"]))
-            {
-                $prefix = popoon_sitemap::translateScheme($attribs["uri-prefix"]);
-                if ($prefix)
-                    {
-                        $this->uri = preg_replace("#^/*$prefix/*#","",$this->uri);
-                    }
-
-            }
-		// I hope, this doesn't have too many sideeffects
-		$this->__construct($file,$this->uri,$this->options);
-		$this->uri = $old_uri;
-    }
+     private function _mount($attribs)
+     {
+         $file = popoon_sitemap::translateScheme($attribs["src"]);
+         $old_uri = $this->uri;
+         
+         if (isset($attribs["uri-prefix"]))
+         {
+             $prefix = popoon_sitemap::translateScheme($attribs["uri-prefix"]);
+             if ($prefix)
+             {
+                 $this->uri = preg_replace("#^/*$prefix/*#","",$this->uri);
+             }
+             
+         }
+         // I hope, this doesn't have too many sideeffects
+         $pipelineHit = $this->__construct($file,$this->uri,$this->options);
+         
+         
+         $this->uri = $old_uri;
+         return $pipelineHit;
+     }
 
     private function _scheme($attribs)
     {

@@ -43,7 +43,7 @@
     </xsl:template>
 
 	<xsl:template match="map:pipeline//map:mount">
-		$this->_mount(<xsl:call-template name="generateAttributes"/>);
+		$pipelineHit = $this->_mount(<xsl:call-template name="generateAttributes"/>);
 	</xsl:template>		
 
 	<xsl:template match="map:pipeline//map:aggregate">
