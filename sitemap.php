@@ -340,9 +340,9 @@ class popoon_sitemap {
                 $xslincludesDom->load($this->sm2php_xsl_dir."/".$this->sm2phpincludes_xsl);
                 $xslincludes = new XsltProcessor();
                 $xslincludes->importStylesheet($xslincludesDom);
-                
                 $sm = new DomDocument();
                 $sm->load($sitemapRealPath);
+                $xsl->setParameter("","popoonDir",dirname(__FILE__));
                 
                 $result = $xslincludes->transformToDoc($sm);
                 $result = $xsl->transformToUri($result,$sitemapCachedFile);

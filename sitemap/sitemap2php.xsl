@@ -2,8 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                               xmlns:map="http://apache.org/cocoon/sitemap/1.0"
 >
-    <xsl:output omit-xml-declaration="yes" indent="no" encoding="ISO-8859-1" method="xml"/>
 
+    <xsl:output omit-xml-declaration="yes" indent="no" encoding="ISO-8859-1" method="xml"/>
+    <xsl:param name="popoonDir" />
     <xsl:template match="/map:sitemap"><xsl:processing-instruction name="php">
             <xsl:apply-templates />
     </xsl:processing-instruction></xsl:template>
@@ -20,7 +21,7 @@
     </xsl:template>
     
     <xsl:template match="map:pipelines/map:pipeline">
-        
+        try {
         <xsl:if test="@benchmark">
             $this->benchmark["do"] = True;
         </xsl:if>
@@ -35,13 +36,51 @@
         </xsl:choose>
         
         <xsl:apply-templates/>	
+        } 
         
+        <xsl:choose>
+            <xsl:when test="map:handle-errors">
+                <xsl:apply-templates select="map:handle-errors"/>
+            </xsl:when>
+            <xsl:otherwise>
+                catch (Exception $e) {
+                   
+                   $generator = new popoon_components_generators_error($this);
+                   $generator->init(array("exception"=>$e));;
+                   $generator->DomStart($this->xml);
+                   $transformer = new popoon_components_transformers_xslt($this);
+                   $transformer->init(
+                   array(
+                    "type"=>"xslt","src"=>"<xsl:value-of select="$popoonDir"/>/xsl/error2html.xsl",
+                    )
+                   );
+                   $transformer->DomStart($this->xml);        
+                   $serializer = new popoon_components_serializers_xhtml($this);
+                   $serializer->init(
+                   array(
+                      "type"=>"xhtml","contentType"=>"text/html; charset=utf-8",
+                   )
+                   );
+                    $this->convertXML($serializer, $this->xml);
+                   $this->printHeader();
+                   $serializer->DomStart($this->xml);
+                }
+            </xsl:otherwise>
+        </xsl:choose>
         if ($pipelineHit) {
         return true;
         }
         
+        
+        
+        
     </xsl:template>
 
+    <xsl:template match="map:pipeline/map:handle-errors">
+    
+    
+    </xsl:template>
+    
 	<xsl:template match="map:pipeline//map:mount">
 		$pipelineHit = $this->_mount(<xsl:call-template name="generateAttributes"/>);
 	</xsl:template>		
