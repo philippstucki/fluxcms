@@ -11,12 +11,14 @@ class popoon_classes_externalinput {
         if (get_magic_quotes_gpc()) {
             $string = stripslashes($string);
         }
+        $string = str_replace(array("&amp;","&lt;","&gt;"),array("&amp;amp;","&amp;lt;","&amp;gt;",),$string);
+        
         $string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
         $string = preg_replace('#</*(script|embed|object)[^>]*>#i',"",$string);
         $string = preg_replace('#(<[^>]+)\son[^>]*>#iU',"$1>",$string);
         $string = preg_replace('#([a-z]*)\s*=\s*([\'\"]*)\s*j\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\s*:#i','$1=$2nojavascript...',$string);
         //convert & back to &amp; 
-        $string = str_replace("&","&amp;",$string);
+       // $string = str_replace("&","&amp;",$string);
         
         return $string;
     }
