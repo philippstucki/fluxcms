@@ -112,7 +112,7 @@
         <map:generate type="error">
             <map:parameter name="exception"/>
         </map:generate>
-        <map:transform type="xslt" src="BX_PROJECT_DIR://inc/popoon/xsl/error2html.xsl"/>
+        <map:transform type="xslt" src="constant(BX_POPOON_DIR)/xsl/error2html.xsl"/>
         <map:serialize type="xhtml"/>
 
     </xsl:template>

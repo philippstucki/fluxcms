@@ -78,9 +78,11 @@ class popoon_components_generators_s9y extends popoon_components_generator {
         @ini_set('include_path', $serendipity['serendipityPath'] . PATH_SEPARATOR . $serendipity['serendipityPath'] . 'bundled-libs/' . PATH_SEPARATOR . $old_include);
         ob_start();	
 	require $src;
+	if ($src == "index.php") {
+		 serendipity_plugin_api::generate_plugins('right','div');
+	}
         $blog_data = ob_get_contents();
         ob_end_clean();
-
         @ini_set($old_include);
         chdir($old_dir);
         $xml = new DomDocument();
