@@ -61,13 +61,12 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     }
     
     function DomStart(&$xml) {
-    
         
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
         setlocale(LC_ALL,$lang);
-        $driver = "popoon_components_transformers_i18n_".$this->getParameterDefault("driver");
-        $d = new  $driver($src, $lang);       
+
+        $d = popoon_classes_i18n::getInstance($src, $lang, $this->getParameterDefault("driver"));
 
         $ctx = new domxpath($xml);
         $ctx->registerNamespace("i18n",I18NNS);
@@ -80,7 +79,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
                 $key = $text->getAttributeNS(I18NNS,"key");   
             } else {
                 $key = $text->nodeValue;
-            }                
+            }
             if (!$locText = $d->getText($key)) {
                 $locText = $key;
             }
@@ -153,6 +152,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
                     
            }
     }
+    
 } 
 
 ?>
