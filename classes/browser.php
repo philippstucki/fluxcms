@@ -97,10 +97,9 @@ class popoon_classes_browser {
                 $bd['platform'] = "os/2";
             } elseif (eregi("BeOS", $agent)) {
                 $bd['platform'] = "beos";
-            } elseif (strpos("PalmOS",$agent) !== false) {
+            } elseif (stripos($agent,'PalmOS') !== false) {
                 $bd['platform'] = "palm";
             }
-            
             // test for Opera		
             if (eregi("opera",$agent)){
                 $val = stristr($agent, "opera");
