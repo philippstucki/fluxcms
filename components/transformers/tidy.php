@@ -47,7 +47,7 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
 
         $options = array(
             "output-xhtml" => true,
-            "clean" => true,
+            "clean" => false,
             "wrap" => "350",
             "indent" => true,
             "indent-spaces" => 1,
