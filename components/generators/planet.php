@@ -139,7 +139,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
                 foreach($row as $key => $value) {
                     $xml .= '<'.$key.'>';
                     if (in_array($key,$cdataFields)) {
-                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",$value)).']]>';
+                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",str_replace("pre>","code>",$value))).']]>';
                     } else {
                         $xml .= $value;
                     }
