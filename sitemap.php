@@ -408,7 +408,7 @@ class popoon_sitemap {
     }
     
     function redirectTo($uri) {
-        header("Location: ".$this->translateScheme($uri));
+        header("Location: ".popoon_sitemap::translateScheme($uri));
         exit;
     }
     
@@ -458,7 +458,7 @@ class popoon_sitemap {
         }
         else if ($onSitemapGeneration) {
             
-        $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","popoon_sitemap::translateSchemeSubPartsOnSitemapGeneration('$1','$2')",$scheme["value"] );
+            $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","popoon_sitemap::translateSchemeSubPartsOnSitemapGeneration('$1','$2')",$scheme["value"] );
         } else {
             $scheme["value"] = preg_replace("#\{([\./]*([^}]+))\}#e","\$this->translateSchemeSubParts('$1','$2')",$scheme["value"] );
         }
@@ -487,11 +487,11 @@ class popoon_sitemap {
         if (strpos($value,":/") === false) {
             return $this->maps[substr_count($value,'../')][$value2];
         } else {
-            return $this->translateScheme($value);
+            return popoon_sitemap::translateScheme($value);
         }
     }
     
-     function translateSchemeSubPartsOnSitemapGeneration ($value, $value2) {
+     static function translateSchemeSubPartsOnSitemapGeneration ($value, $value2) {
         if (strpos($value,":/") === false) {
             return '{'.$value.'}';
         } else {
@@ -505,7 +505,7 @@ class popoon_sitemap {
         }
     }
     
-    function getSchemeParts($value) {
+    static function getSchemeParts($value) {
         $scheme = array();
         if (preg_match("#^'(.*)'$#",$value,$match))
         {
@@ -600,14 +600,14 @@ class popoon_sitemap {
             $GLOBALS["_POPOON_globalContainer"]->schemes[$attribs["name"]][$attribs["subname"]]  = array();
             foreach ($attribs as $value => $key)
             {
-                $GLOBALS["_POPOON_globalContainer"]->schemes[$attribs["name"]][$attribs["subname"]][$value] =   $this->translateScheme($key);
+                $GLOBALS["_POPOON_globalContainer"]->schemes[$attribs["name"]][$attribs["subname"]][$value] = popoon_sitemap::translateScheme($key);
             }
         }
         else
         {
             foreach ($attribs as $value => $key)
             {
-                $GLOBALS["_POPOON_globalContainer"]->schemes[$attribs["name"]][$value] =   $this->translateScheme($key);
+                $GLOBALS["_POPOON_globalContainer"]->schemes[$attribs["name"]][$value] =   popoon_sitemap::translateScheme($key);
             }
         }
         
