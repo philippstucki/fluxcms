@@ -234,7 +234,6 @@
        </dir> <!-- tests -->
        <file role="data" name="ChangeLog"/>
        <file role="php" name="globalContainer.php"/>
-       <file role="data" name="GPL.txt"/>
        <file role="php" name="popoon.php"/>
        <file role="php" name="sitemap.php"/>
        <file role="data" name="VERSION"/>
