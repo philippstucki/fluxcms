@@ -40,18 +40,27 @@
         
         <xsl:apply-templates select="*[not(local-name() = 'handle-errors')]"/>	
    
-        } // end try 
+       
         
        
-       <xsl:apply-templates select="map:handle-errors"/>
+      
            
         if ($pipelineHit) {
         return true;
         }
+         } // end try 
+         <xsl:apply-templates select="map:handle-errors"/>
     </xsl:template>
 
     <xsl:template match="map:pipeline/map:handle-errors">
         <xsl:apply-templates/>
+    
+    </xsl:template>
+    
+    
+    <xsl:template match="map:pipelines/map:handle-errors">
+       
+      
     
     </xsl:template>
 

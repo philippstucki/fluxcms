@@ -67,32 +67,54 @@
             </map:select>
         </map:handle-errors>
     </xsl:template>
-    
+
 
     <xsl:template name="standardHandleError">
         <map:handle-errors>
-            <map:select type="exception">
-                <map:otherwise>
-                    <xsl:choose>
 
-                        <xsl:when test="not(/map:sitemap/map:pipelines/map:handle-errors)">
-                            <map:generate type="error">
-                                <map:parameter name="exception"/>
-                            </map:generate>
-                            <map:transform type="xslt" src="BX_PROJECT_DIR://inc/popoon/xsl/error2html.xsl"/>
-                            <map:serialize type="xhtml"/>
+            <xsl:choose>
+                <xsl:when test="not(/map:sitemap/map:pipelines/map:handle-errors)">
+                    <map:select type="exception">
+                        <map:otherwise>
+                            <xsl:call-template name="standardHandleErrorPipeline"/>
+                        </map:otherwise>
+                    </map:select>
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="/map:sitemap/map:pipelines/map:handle-errors/map:select[@type = 'exception'] and not(/map:sitemap/map:pipelines/map:handle-errors/map:select/map:otherwise)">
+                            <map:select type="exception">
+                                <xsl:for-each select="/map:sitemap/map:pipelines/map:handle-errors/map:select[@type = 'exception']/*">
+                                    <xsl:copy-of select="."/>
+                                </xsl:for-each>
+
+                                <map:otherwise>
+                                    <xsl:call-template name="standardHandleErrorPipeline"/>
+                                </map:otherwise>
+                            </map:select>
+                        
 
                         </xsl:when>
-
                         <xsl:otherwise>
-
                             <xsl:copy-of select="/map:sitemap/map:pipelines/map:handle-errors/*"/>
-
                         </xsl:otherwise>
+
                     </xsl:choose>
-                </map:otherwise>
-            </map:select>
+                </xsl:otherwise>
+            </xsl:choose>
+
         </map:handle-errors>
+    </xsl:template>
+
+
+    <xsl:template name="standardHandleErrorPipeline">
+        <map:generate type="error">
+            <map:parameter name="exception"/>
+        </map:generate>
+        <map:transform type="xslt" src="BX_PROJECT_DIR://inc/popoon/xsl/error2html.xsl"/>
+        <map:serialize type="xhtml"/>
+
     </xsl:template>
 
 
