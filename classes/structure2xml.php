@@ -566,10 +566,14 @@ class popoon_classes_structure2xml {
             $regs[] ="+$key";
             $repl[] = "+".join(" +",explode(" ",$val));
         }
+        
         $where = str_replace($regs,$repl,$where);
         $where = preg_replace('#\[\[[^\]]*\$[^\]]+\]\]#',"",$where);
         $where = str_replace(array("[[","]]"),"",$where);
-        
+        //replace where condition, if there's an empty one...
+        $where = preg_replace("#where\s*\(\s*\)#"," where ( 1 = 1 ) ",$where);
+        //and delete an eventuall "and" only at the beginning
+        $where = preg_replace("#where\s*\(\s*and#"," where (  ",$where);
         return $where;
         
     }
