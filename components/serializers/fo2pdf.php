@@ -44,6 +44,17 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
     }
     
     public function DomStart(&$xml) {
+        
+        $this->doCache = $this->getParameterDefault("internalCache") != "false";
+        if ($this->doCache) {
+            
+            $this->sc = bx_helpers_simplecache::getInstance();
+            $this->md5 = md5($xml);
+            if ($pdf = $this->sc->simpleCacheCheck($this->md5,"fo2pdf",null,"file",3600)) {
+                readfile($pdf);
+                return true;
+            }
+        }
         $cmd = $this->getAttrib("commandline");
         
         if ($cmd) {
@@ -67,9 +78,13 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         }
         header("Content-Length: ".filesize($pdfname));
         readfile($pdfname);
+        if ($this->doCache) {
+            $this->sc->simpleCacheWrite($this->md5,"fo2pdf",null,$pdfname,"moveFile");
+        } else {
+            unlink($pdfname);
+        }
         
         unlink($foname);
-        unlink($pdfname);
         
     }
     
