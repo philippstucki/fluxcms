@@ -52,10 +52,10 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $from = 'from entries
         left join feeds on entries.feedsID = feeds.ID
         left join blogs on feeds.blogsID = blogs.ID
-        ' . $where ;
+        ';
         
         $this->db->loadModule("extended");
-        $count = $this->db->extended->getOne('select count(entries.ID) ' . $from . "and feeds.section = 'default'");
+        $count = $this->db->extended->getOne('select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'");
         
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
@@ -64,11 +64,11 @@ class popoon_components_generators_planet extends popoon_components_generator {
             case "rdf":
             case "rss":
             case "ato":
-            $xml .= $this->getEntries( $from, "default",0);    
+            $xml .= $this->getEntries( $from.$where, "default",0);    
             break;
             default:
-            $xml .= $this->getEntries( $from, "default",$startEntry);    
-            $xml .= $this->getEntries( $from, "releases",0);
+            $xml .= $this->getEntries( $from.$where, "default",$startEntry);    
+            $xml .= $this->getEntries( $from." where 1=1", "releases",0);
         }
             
         
