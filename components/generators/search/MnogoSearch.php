@@ -505,7 +505,8 @@ function ParseDocText($str){
        
     	$str = str_replace("\2","",$str);
     	$str = str_replace("\3","",$str);
-return $str;
+        $str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+        return $str;
 }
 
 }
