@@ -43,6 +43,10 @@ class popoon_components_actions_bxcms extends popoon_components_action {
     function act() {
         $fulluri = $this->getAttrib("uri");
         
+        if (strpos($fulluri,".") === false) {
+            $fulluri .= "/index.html";   
+        }
+
         $collection = bx_collections::getCollection($fulluri);
         
         $filename = preg_replace("#^/#","",str_replace($collection->uri,"",$fulluri));
