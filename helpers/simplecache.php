@@ -249,7 +249,7 @@ class popoon_helpers_simplecache {
         else {
              include_once("HTTP/Request.php");
              $req = new HTTP_Request($url,array("timeout" => 5));
-             $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev: 2815 $ (http://popoon.org)');
+             $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev$ (http://popoon.org)');
 
              if ($cacheFileLastModified_mtime) {
                   $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
