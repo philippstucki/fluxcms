@@ -1,7 +1,6 @@
 <?php
 
 
-
 class popoon_components_generators_planet extends popoon_components_generator {
     
     var $maxBlogTitleLength  = 35;
@@ -84,8 +83,11 @@ class popoon_components_generators_planet extends popoon_components_generator {
             select 
             blogs.link as link,
             blogs.title as title,
-            max(entries.dc_date) as maxDate
-            
+	    blogs.dontshowblogtitle  as dontshowblogtitle,
+            blogs.author as author,
+            unix_timestamp(max(entries.dc_date)) as maxDate,
+            unix_timestamp(date_sub(now(), INTERVAL 100 DAY)) as border
+
             from blogs left join feeds on feeds.blogsID = blogs.ID
             left join entries on entries.feedsID = feeds.ID
             where entries.dc_date > 0 and feeds.section = 'default'
@@ -129,15 +131,18 @@ class popoon_components_generators_planet extends popoon_components_generator {
         entries.description,
         entries.content_encoded,
         DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i") as date_iso,
+        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i+00:00") as date_iso,
+        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%a, %d %b %Y %T +0000") as date_rfc,
         
         blogs.link as blog_Link,
+	blogs.author as blog_Author,
+	blogs.dontshowblogtitle as blog_dontshowblogtitle,
         if(length(blogs.title) > '. ($this->maxBlogTitleLength + 5) .' , concat(left(blogs.title,'. ($this->maxBlogTitleLength ) .')," ..."), blogs.Title) as blog_Title
         ' . $from . ' and feeds.section = "'.$section.'"
         order by entries.dc_date DESC 
         limit '.$startEntry . ',10');
-        
-        $xml = '<entries section="'.$section.'">';
+
+	$xml = '<entries section="'.$section.'">';
         $xml .= $this->mdbResult2XML($res,"entry",$cdataFields);
         $xml .= '</entries>';
         return $xml;
@@ -155,7 +160,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
                 foreach($row as $key => $value) {
                     $xml .= '<'.$key.'>';
                     if (in_array($key,$cdataFields)) {
-                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",str_replace("pre>","code>",$value))).']]>';
+			
+			  $value= preg_replace('#(<[^>]+[\s\r\n\"\'])on[^>]*>#iU',"$1>",$value);
+                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",str_replace("pre>","code>",($value)))).']]>';
                     } else {
                         $xml .= $value;
                     }
