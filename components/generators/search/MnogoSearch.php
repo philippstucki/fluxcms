@@ -68,13 +68,20 @@ Class MnogoSearch  {
 			$this->set_ResField();
 			
 			if($this->msAllocate($params['dsn'])) {
-				
+
+		$this->set_AgentParam(UDM_PARAM_LOCAL_CHARSET,'UTF-8');
+		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_BROWSER_CHARSET,'UTF-8');
+		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_CHARSET,'UTF-8');
+		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_DETECT_CLONES,UDM_DISABLED);				
+		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_MIN_WORD_LEN,3);
+/*		 Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLBEG,"<i>");
+		 Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLEND,"</i>");
+*/
 				$this->set_MaxResults($params['NumRows']);
 				$this->set_CurrPage($params['CurrPage']);
 			    	
                 $searchmode = (isset($params['SearchMode'])) ? $params['SearchMode'] : 'single';
-                $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 10;
-                
+                $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 11;
                 $this->set_SearchMode($searchmode);
 				$this->set_WeightFactor($weightfact);
 			}
@@ -155,7 +162,6 @@ Class MnogoSearch  {
 		 * Here can be done some query-checking
 		 * and convertion of boolean search operators 
 		 */
-		
 		return urldecode($query);
 	}
 
@@ -175,6 +181,9 @@ Class MnogoSearch  {
 				$row = array();
 				foreach($this->ResField as $field) {
 					if($fval = udm_get_res_field($this->_result,$i,$field[1])) {
+						if ( $field[0] == 'text') {
+							$fval = $this->ParseDocText($fval);
+						}
 						$row[$field[0]] = $fval;
 					}
 				}
@@ -205,15 +214,15 @@ Class MnogoSearch  {
 	function _query($query) {
 		$this->query = $this->_eval_query($query);
         if (!empty($this->query) && is_resource($this->MRes)) {
+	Udm_Set_Agent_Param($this->MRes,UDM_PARAM_QUERY,$this->query);
             if($this->_result = udm_find($this->MRes,$this->query)) {
-                $this->_set_ResParam('ResRows',UDM_PARAM_NUM_ROWS);
+				$this->_set_ResParam('ResRows',UDM_PARAM_NUM_ROWS);
 				$this->_set_ResParam('ResFound',UDM_PARAM_FOUND);
 				$this->_set_ResParam('ResTime',UDM_PARAM_SEARCHTIME);
 				$this->_set_ResParam('ResFDoc',UDM_PARAM_FIRST_DOC);
 				$this->_set_ResParam('ResLDoc',UDM_PARAM_LAST_DOC);
                 $this->maxPages = ceil($this->ResFound / $this->NumRows);
-                
-                return TRUE;
+	                return TRUE;
 			}
             
             return array("error"=>"mnogosearch:" . udm_Error($this->MRes));;
@@ -241,7 +250,6 @@ Class MnogoSearch  {
 			$this->set_dsn($dsn);
 			$this->_parse_dsn($this->dsn);
 		}
-			
 		// MnogoSearch <= 3.1.2 doesn't
 		// accepts dbmode in dsn
 		if ($this->apiversion <= 30130) {
@@ -249,7 +257,7 @@ Class MnogoSearch  {
 				return array("error" => 'mnogosearch could not allocate Agent');
 			}
 		} else {
-			if(!$this->MRes = udm_alloc_agent($this->DBAddr."?dbmode=".$this->DBMode)) {
+			if(!$this->MRes = udm_alloc_agent_array(array($this->DBAddr."?dbmode=".$this->DBMode))) {
 				return array("error" => 'mnogosearch could not allocate Agent');
 			}
 		}
@@ -445,6 +453,7 @@ Class MnogoSearch  {
 		if(is_resource($this->_result)) {
 			$this->{$var} = udm_get_res_param($this->_result,$param);
 		}
+
 		
 		return TRUE;
 	}
@@ -486,6 +495,13 @@ Class MnogoSearch  {
         
         return $page;
     }
+
+function ParseDocText($str){
+       
+    	$str = str_replace("\2","",$str);
+    	$str = str_replace("\3","",$str);
+return $str;
+}
 
 }
 
