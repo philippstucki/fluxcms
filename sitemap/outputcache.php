@@ -137,7 +137,7 @@ class popoon_sitemap_outputcache {
     }
     
     function check304($etag, $lastModified) {
-        if (isset($_SERVER["HTTP_IF_NONE_MATCH"])) {
+        if (isset($_SERVER["HTTP_IF_NONE_MATCH"]) && $_SERVER["HTTP_IF_NONE_MATCH"] != 'None') {
             if (trim($etag,"\"' \t") == trim($_SERVER["HTTP_IF_NONE_MATCH"],"\"' \t")) {
                 return true;
             }
@@ -220,11 +220,16 @@ class popoon_sitemap_outputcache {
     
     function getSupportedCompression() {
         // check what the client accepts
-        if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
-        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
-            return 'x-gzip';
-        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'))
-            return 'gzip';
+        if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {	
+	        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+		        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip')) {	
+				return 'x-gzip';
+			}
+			//The Technorati Bot has some problems with our compression... don't know why..
+			 if (false === strpos($_SERVER['HTTP_USER_AGENT'],'Technorati')) {
+				return 'gzip';
+			 }
+		}
         }
             
         // no compression
