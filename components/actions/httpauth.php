@@ -47,7 +47,6 @@ class popoon_components_actions_httpauth extends popoon_components_action {
         if (isset($_SERVER['PHP_AUTH_USER'] ) && isset($_SERVER['PHP_AUTH_PW']) && $user == $_SERVER['PHP_AUTH_USER'] && $password == $_SERVER['PHP_AUTH_PW']) {
            return array("message" => "Login Successfull");
        }
-       // setting the database connection options
        if ($this->getParameterDefault("showlogin") == "true") {
            header("WWW-Authenticate: Basic realm=\"popoon httpauth login\"");
            header("HTTP/1.0 401 Unauthorized");
