@@ -49,7 +49,7 @@ class popoon_components_transformers_xsltal extends popoon_components_transforme
         
         
         $transXsl = new DomDocument();
-        $transXsl->load(BX_POPOON_DIR.'/components/transformers/xsltal/xhtml2xslt.xsl');
+        $transXsl->load(BX_POPOON_DIR.'/components/transformers/xsltal/tal2xslt.xsl');
         
         $proc = new XsltProcessor();
         $proc->importStylesheet($transXsl);
