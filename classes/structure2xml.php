@@ -4,11 +4,16 @@ class popoon_classes_structure2xml {
     private $parent;
     private $queries = null;
     private $queryCacheOptions = null;
+    private $db = null;
     
     function __construct($parent) {
         $this->parent = $parent;
         $this->api = bx_helpers_simplecache::getInstance();
-        $this->db = $this->parent->db;
+        if (isset($this->parent->db)) {
+            $this->db = $this->parent->db;
+        } elseif (isset($GLOBALS['POOL']->db)) {
+            $this->db = $GLOBALS['POOL']->db;
+        }
     }
     
     private function getAttrib($value) {
@@ -540,6 +545,9 @@ class popoon_classes_structure2xml {
     }
     
     static function replaceVarsInWhereStatic($where,$requests) {
+        $regs = array();
+        $repl = array();
+        
          foreach ($requests as $key => $val)
         {
             /* not so sure about that */
