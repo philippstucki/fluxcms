@@ -65,7 +65,6 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
-        
         setlocale(LC_ALL,$lang);
         $driver = "popoon_components_transformers_i18n_".$this->getParameterDefault("driver");
         $d = new  $driver($src, $lang);       
@@ -110,23 +109,49 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
            <i18n:number type="percent" value="1.2" />
            are not supported yet
            */
-        $res = $ctx->query("//i18n:number");
-        foreach($res as $node) {
-            switch ($node->getAttribute("type")) {
-                case "currency":
-                if ($digits = $node->getAttribute("fraction-digits")) {
-                    $value = money_format("%.${digits}n",$node->getAttribute("value"));
-                } else {
-                   $value = money_format("%n",$node->getAttribute("value"));
-                }
+           $res = $ctx->query("//i18n:number");
+           foreach($res as $node) {
+               switch ($node->getAttribute("type")) {
+                   case "currency":
+                   if ($digits = $node->getAttribute("fraction-digits")) {
+                       $value = money_format("%.${digits}n",$node->getAttribute("value"));
+                   } else {
+                       $value = money_format("%n",$node->getAttribute("value"));
+                   }
                    break;
-                case "printf":
-                    $value = sprintf($node->getAttribute("pattern"),$node->getAttribute("value"));
-            }   
-            $node->parentNode->replaceChild($xml->createTextNode($value),$node);
-            
-        }
-        
+                   case "printf":
+                   $value = sprintf($node->getAttribute("pattern"),$node->getAttribute("value"));
+               }   
+               $node->parentNode->replaceChild($xml->createTextNode($value),$node);
+               
+           }
+           
+           //i18n:date-time
+           /* only i18n:date-time is supported right now
+                it uses the strftime format of PHP not the java date format, eg.
+                pattern should be "%d:%b:%Y" and not "dd:MMM:yyyy".
+                
+              short/medium/long/full are also not implemented. Use
+              %c, %x and %X as an alternative.
+           */
+           $res = $ctx->query("//i18n:date-time");
+           foreach($res as $node) {
+                $pattern = $node->getAttribute("pattern");
+                $src = $node->getAttribute("src-pattern");
+                $value = $node->getAttribute("value");
+                if (!$value) {
+                    $value = time();
+                }
+                else if ($src && function_exists("strptime")) {
+                    $t = strptime($value,$src);
+                    $value = mktime($t['tm_hour'],$t['tm_min'],$t['tm_sec'],$t['tm_mon'],$t['tm_mday'],$t['tm_year']);
+                } else {
+                    $value = strtotime($value);
+                }
+                $value = strftime($pattern,$value);
+                $node->parentNode->replaceChild($xml->createTextNode($value),$node);
+                    
+           }
     }
 } 
 
