@@ -50,8 +50,6 @@ class popoon_components_generators_error extends popoon_components_generator {
     {
         
         parent::init($attribs);
-        error_log("fooba");
-
     }    
     
     /**
