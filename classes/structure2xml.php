@@ -79,6 +79,10 @@ class popoon_classes_structure2xml {
                 if  ($structureName == "_queryInfo") {
                     continue;
                 }
+                if (isset($query['noOutput']) && $query['noOutput']) {
+                    
+                    continue;
+                }
                 $query['user_options']['result_root'] = $structureName;
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
@@ -179,6 +183,7 @@ class popoon_classes_structure2xml {
         {
             
             foreach ($dbMainStructure['children'] as $structureName) {
+                
                 $dbStructure = $configClass->getValues( "$rootpath/$structureName");
                 if (PEAR::isError($dbStructure)) {
                     die($dbStructure->getUserinfo() .  "\n" . $dbStructure->getMessage());
@@ -215,6 +220,10 @@ class popoon_classes_structure2xml {
                     $allqueries[$structureName]['tableInfo'] = $tableInfo;
                     $allqueries[$structureName]['type'] = "dbquery";
                 }
+                if (isset($dbStructure['noOutput']) && $dbStructure['noOutput'] = 'true') {
+                   $allqueries[$structureName]['noOutput'] = true;
+                }
+
             }
         }
         // print "<pre>";print_r($allqueries);
@@ -487,7 +496,6 @@ class popoon_classes_structure2xml {
         // we don't have the queries cached, generate them..
         else {
             $queries = $this->Structures2Sql($config,$PageOptions);
-            
             // generate the query for lastchanged stuff
             // even if we don't do st2xml caching, it's not a big deal
             // to do this here anyway, since this is only generated, when
