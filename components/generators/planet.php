@@ -40,14 +40,17 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $xml .= '<planet>';
         $xml .= '<search>';
         if ($search) {
-            $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "') ";
-          
+            if (strlen($search) <= 3) {
+                $where = " where content_encoded LIKE '%$search%' or entries.description LIKE '%$search%' or entries.title LIKE '%$search%' ";
+            } else {
+                $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "') ";
+            }
+            
             $xml .= '<string>'.$search .'</string>';
            
         } else {
             $where = "where  1=1 ";
         }
-        
         
         $from = 'from entries
         left join feeds on entries.feedsID = feeds.ID
