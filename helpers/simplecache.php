@@ -201,6 +201,18 @@ class popoon_helpers_simplecache {
         return $this->readFile($cacheFile);
     }
     
+    public function simpleCacheRemoteArrayRead ($url, $expire = -1) {
+        $cacheFile = $this->simpleCacheGenerateName("simpleCacheRemoteArray",$url);
+   
+        if ($content = $this->simpleCacheCheck($url, "simpleCacheRemoteArray",null,"serialize",$expire)) {
+            return $content;
+        }
+        $file = $this->simpleCacheHttpRead($url,$expire);
+        $array = explode("\n",trim($file));
+        $this->simpleCacheWrite($url,"simpleCacheRemoteArray",null,$array,"serialize");
+        return $array;
+    }
+    
     
     /**
     * Checks the last modified date of an external page and returns the page
