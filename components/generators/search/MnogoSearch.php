@@ -477,7 +477,7 @@ Class MnogoSearch  {
             }
         } elseif($what == 'prev') {
         
-            if(($this->currPage -1) >= 1) {
+            if(($this->currPage -1) >= 0) {
                 $page = $this->currPage -1;
             } else {
                 $page = $this->currPage;
