@@ -28,7 +28,7 @@ include_once("popoon/components/reader.php");
  */
 class popoon_components_readers_resource extends popoon_components_reader {
 
-    var $attribs = array();
+    public $attribs = array();
     
 	/**
      * Constructor, does nothing at the moment

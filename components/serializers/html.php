@@ -29,8 +29,8 @@
 */
 class popoon_components_serializers_html extends popoon_components_serializer {
 
-    var $XmlFormat = "Own";
-    var $contentType = "text/html";
+    public $XmlFormat = "Own";
+    public $contentType = "text/html";
 
     function __construct ($sitemap) {
         $this->sitemap = $sitemap;
