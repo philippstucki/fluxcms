@@ -6,7 +6,8 @@ class popoon_classes_structure2xml {
     private $queryCacheOptions = null;
     private $db = null;
     
-    function __construct($parent) {
+    function __construct($parent,$tablePrefix) {
+        $this->tablePrefix = $tablePrefix;
         $this->parent = $parent;
         $this->api = popoon_helpers_simplecache::getInstance();
         if (isset($this->parent->db)) {
@@ -243,7 +244,7 @@ class popoon_classes_structure2xml {
             return Null;
         }
         $queryfields = $dbMasterValues['children'][0].".*";
-        $query = " from ".$dbMasterValues['children'][0];
+        $query = " from ".$this->tablePrefix.$dbMasterValues['children'][0] . " as " . $dbMasterValues['children'][0];
         $name = $dbMasterValues['children'][0];
         $dbStructure = $configClass->getValues("$rootpath/$name");
         
@@ -254,7 +255,7 @@ class popoon_classes_structure2xml {
             
             include_once("bitlib/SQL/Tree.php");
             $t = new sql_tree($this->db);
-            $t->tablename = $name;
+            $t->tablename = $this->tablePrefix.$name;
             $data = explode(" , ",$dbStructure['fields']);
             $sitemapStartTreeID = $this->getAttrib("treeStartID");
             if (isset($sqlOptions['start_id'])) {
@@ -273,7 +274,7 @@ class popoon_classes_structure2xml {
             
             include_once("bitlib/SQL/Tree.php");
             $t = new sql_tree($this->db);
-            $t->tablename = $name;
+            $t->tablename = $this->tablePrefix.$name;
             $data = explode(" , ",$dbStructure['fields']);
             $query = $t->supers_query_byname(array("id"=>$sqlOptions[start_id]),$data,False);
             
@@ -283,7 +284,7 @@ class popoon_classes_structure2xml {
             
             include_once("bitlib/SQL/Tree.php");
             $t = new sql_tree($this->db);
-            $t->tablename = $name;
+            $t->tablename = $this->tablePrefix.$name;
             $data = explode(" , ",$dbStructure['fields']);
             $query = $t->children_query_byname(array("id"=>$sqlOptions[start_id]),$data);
         }
@@ -315,7 +316,7 @@ class popoon_classes_structure2xml {
                     
                     if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "id";}
                     if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "id";}
-                    $query = $query ." left join ".$name. " on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
+                    $query = $query ." left join ".$this->tablePrefix.$name. " as $name on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
                     if (isset($dbStructure["objectfield"]) )
                     {
                         $query = "$query and $parentname.".$dbStructure["objectfield"]." = '$name'";
@@ -436,7 +437,6 @@ class popoon_classes_structure2xml {
             
             $query = str_replace("where", "where $simplepermWhere and ", $query);
         }
-        
         return $query;
     }
     function getQueryFields($tablename,$dbStructure,$xmlparent,&$tableInfo)
@@ -491,7 +491,7 @@ class popoon_classes_structure2xml {
             $this->queryCacheOptions = $PageOptions;
         } 
         
-        if ( $queries = $this->api->simpleCacheCheck($configXml,"st2xml_queries",$this->queryCacheOptions)) {
+        if ( false && $queries = $this->api->simpleCacheCheck($configXml,"st2xml_queries",$this->queryCacheOptions)) {
         } 
         // we don't have the queries cached, generate them..
         else {
