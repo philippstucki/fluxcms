@@ -163,18 +163,20 @@ class popoon_classes_structure2xml {
     {
         
         $configClass = bx_helpers_db::getConfigClass($configFile);
-        
         $dbMainStructure = $configClass->getValues( $rootpath);
         if (is_array($dbMainStructure['children']))
         {
+            
             foreach ($dbMainStructure['children'] as $structureName) {
-                
                 $dbStructure = $configClass->getValues( "$rootpath/$structureName");
+                if (PEAR::isError($dbStructure)) {
+                    die($dbStructure->getUserinfo() .  "\n" . $dbStructure->getMessage());
+                }
                 if (isset($dbStructure["expires"])) {
                     $allqueries[$structureName]['expires'] = time() - strtotime(preg_replace("#access\s+minus\s+#", "-",$dbStructure["expires"]));
                 } 
                 else {
-                    $allqueries[$structureName]['expires'] = $this->defaultExpires;
+                    $allqueries[$structureName]['expires'] = $this->parent->defaultExpires;
                 }
                 if (isset($dbStructure["type"]) && $dbStructure["type"] == "aggregate") {
                     
