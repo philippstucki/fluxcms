@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: resource.php,v 1.12 2004/03/05 14:37:07 chregu Exp $
+// $Id$
 
 include_once("popoon/components/reader.php");
 
 /**
  * @author   Christian Stocker <chregu@bitflux.ch>
- * @version  $Id: resource.php,v 1.12 2004/03/05 14:37:07 chregu Exp $
+ * @version  $Id$
  * @package  popoon
  */
 class popoon_components_readers_resource extends popoon_components_reader {
@@ -69,11 +69,22 @@ class popoon_components_readers_resource extends popoon_components_reader {
         if ($mimetype) {
             $this->sitemap->setHeaderAndPrint("Content-Type","$mimetype");
         }
-
+        if (file_exists($src)) {
+            $lastModified = filemtime($src);
+            $this->sitemap->setHeaderAndPrint("Last-Modified",gmdate('D, d M Y H:i:s T',$lastModified));
+            if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ) {
+                if (strtotime($lastModified) <= strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {
+                    header( 'HTTP/1.1 304 Not Modified' );
+                    return true;
+                } 
+            }
+        }
+        
         if (!@readfile($src)) {
             header("HTTP/1.0 404 Not Found");
             popoon::raiseError($this->getAttrib('src') . " could not be loaded", POPOON_ERROR_WARNING);
-        }          
+        }     
+        
     }
     function getMimeType($src) {
         $extension = substr($src,strrpos($src,".")+1);
