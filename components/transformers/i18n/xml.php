@@ -47,9 +47,10 @@ class popoon_components_transformers_i18n_xml {
     function __construct($src,$lang) {
         if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
             $lang = substr($lang,0,-(strrpos($lang,"_")+1));
-            $cat = @domdocument::load($src.'_'.$lang.'.xml');
+            if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
+            	 $cat = @domdocument::load($src.'.xml');
+	    }
         }
-
         if($cat instanceof DOMDocument) {
             // resolve xincludes
             $cat->xinclude();
