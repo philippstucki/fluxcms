@@ -27,7 +27,7 @@
 * @package  popoon
 */
 class popoon_components_aggregator extends popoon_component {
-    var $xml = "";
+    public $xml = "";
     
     function __construct(&$sitemap) {
         $this->sitemap = &$sitemap;
@@ -87,7 +87,9 @@ class popoon_components_aggregator extends popoon_component {
             }
             
             ob_start();
-            $sitemap = new popoon_sitemap($this->sitemap->file,$uri, $this->sitemap->getOptions());
+            
+            $sitemap = new popoon_sitemap($this->sitemap->rootFile, $uri, $this->sitemap->getOptions());
+ 
             /* if the serializer thinks, its object in $sitemap->xml is the right one, it
             can set hasFinalDom to true and we can take just this and don't have to
             parse it again, otherwise get the outputtet content and parse it to a dom */
@@ -95,9 +97,11 @@ class popoon_components_aggregator extends popoon_component {
             if (isset($sitemap->hasFinalDom) && $sitemap->hasFinalDom && get_class($sitemap->xml) == "domdocument") {
                 $xmldoc = $sitemap->xml;
             } else {
-                $xmldoc = domxml_open_mem(ob_get_contents());
+                $xmldoc = new DomDocument();
+                $xmldoc->loadXML(ob_get_contents()); 
             }
             ob_end_clean();
+        
         }
         // if protocol is http:// get it :)	
         
