@@ -55,9 +55,13 @@
          switch ($name) {
              case "config":
                 $c = $this->configclass;
-                $this->config = popoon_classes_config::getInstance();
+                eval('$this->config = '.$this->configclass.'::getInstance();');
                 return $this->config;
                 break;
+             case "db":
+                require_once("MDB2.php");
+                $this->db = MDB2::connect($this->config->dsn,$this->config->dboptions);
+                return $this->db;
          }
              
      }
