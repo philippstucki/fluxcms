@@ -60,7 +60,8 @@ class popoon_components_generators_error extends popoon_components_generator {
     function DomStart(&$xml)
     {
         $xml = new DomDocument();
-        $e= $this->getAttrib("exception");
+        
+        $e= $this->getParameterDefault("exception");
         
         $xml->loadXML('<?xml version="1.0"
  encoding="UTF-8"?>

@@ -149,7 +149,7 @@ class popoon_sitemap {
         }*/
         $sitemapCachedFile = $this->cacheDir . $sitemapId;
         //check if sitemapCache does exists and if it's older than the sitemap.xml
-        if (! (file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath)))
+        if (DEBUG || (! (file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath))))
         {
             //if it is, make new sitemapCached file
             $err = $this->sitemap2php($sitemapRealPath,$sitemapCachedFile);
@@ -345,6 +345,11 @@ class popoon_sitemap {
         $xsl->setParameter("","popoonDir",dirname(__FILE__));
         
         $result = $xslincludes->transformToDoc($sm);
+        // DEBUG CODE, go away later
+        if (DEBUG) {
+            $result->save("/tmp/inbetween.xsl");
+        }
+        
         $result = $xsl->transformToUri($result,$sitemapCachedFile);
         
         

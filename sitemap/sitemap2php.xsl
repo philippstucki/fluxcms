@@ -35,50 +35,39 @@
            </xsl:otherwise>
         </xsl:choose>
         
-        <xsl:apply-templates/>	
-        } 
+        <xsl:apply-templates select="*[not(local-name() = 'handle-errors')]"/>	
+   
+        } // end try 
         
-        <xsl:choose>
-            <xsl:when test="map:handle-errors">
-                <xsl:apply-templates select="map:handle-errors"/>
-            </xsl:when>
-            <xsl:otherwise>
-                catch (Exception $e) {
-                   
-                   $generator = new popoon_components_generators_error($this);
-                   $generator->init(array("exception"=>$e));;
-                   $generator->DomStart($this->xml);
-                   $transformer = new popoon_components_transformers_xslt($this);
-                   $transformer->init(
-                   array(
-                    "type"=>"xslt","src"=>"<xsl:value-of select="$popoonDir"/>/xsl/error2html.xsl",
-                    )
-                   );
-                   $transformer->DomStart($this->xml);        
-                   $serializer = new popoon_components_serializers_xhtml($this);
-                   $serializer->init(
-                   array(
-                      "type"=>"xhtml","contentType"=>"text/html; charset=utf-8",
-                   )
-                   );
-                    $this->convertXML($serializer, $this->xml);
-                   $this->printHeader();
-                   $serializer->DomStart($this->xml);
-                }
-            </xsl:otherwise>
-        </xsl:choose>
+       
+       <xsl:apply-templates select="map:handle-errors"/>
+           
         if ($pipelineHit) {
         return true;
         }
-        
-        
-        
-        
     </xsl:template>
 
     <xsl:template match="map:pipeline/map:handle-errors">
+        <xsl:apply-templates/>
     
+    </xsl:template>
+
+     <xsl:template match="map:select[@type = 'exception']">
+       <xsl:apply-templates/>
+     
+     </xsl:template>
     
+    <xsl:template match="map:select[@type = 'exception']/map:otherwise"  priority="100">
+        catch (Exception $e) {
+            <xsl:apply-templates/>
+        }
+    </xsl:template>
+
+    <xsl:template match="map:select[@type = 'exception']/map:when" priority="100">
+        catch (<xsl:value-of select="@test"/> $e)  {
+        
+            <xsl:apply-templates/>
+        }
     </xsl:template>
     
 	<xsl:template match="map:pipeline//map:mount">
@@ -110,7 +99,7 @@
         </xsl:call-template> /*do  Generate*/
 	</xsl:template>		
 	    
-    <xsl:template match="map:pipeline//map:generate" name="doGenerate">
+    <xsl:template match="map:pipeline//map:generate|map:handle-errors/map:select[@type='exception']/*/map:generate" name="doGenerate">
         <xsl:param name="xmlVar" select="'$this->xml'"/>
         <xsl:call-template name="setupComponent">
             <xsl:with-param name="prefix">generator</xsl:with-param>
@@ -351,8 +340,15 @@
                 <xsl:otherwise>default</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-		$<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>','<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>');
-		</xsl:template>
+        <xsl:choose>
+            <xsl:when test="@name = 'exception'">
+            $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',$e);
+            </xsl:when>
+            <xsl:otherwise>
+                $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>','<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>');
+            </xsl:otherwise>
+            </xsl:choose>
+        </xsl:template>
     
     <xsl:template name="escapeSingleQuotes">
         <xsl:param name="text"/>
