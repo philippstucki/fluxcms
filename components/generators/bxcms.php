@@ -17,12 +17,12 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: bxcms.php,v 1.1 2004/03/11 16:20:04 chregu Exp $
+// $Id$
 
 /**
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: bxcms.php,v 1.1 2004/03/11 16:20:04 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_generators_bxcms extends popoon_components_generator {
@@ -48,6 +48,7 @@ class popoon_components_generators_bxcms extends popoon_components_generator {
     */
     function init($attribs)
     {
+        
         parent::init($attribs);
     }    
     
@@ -59,8 +60,9 @@ class popoon_components_generators_bxcms extends popoon_components_generator {
     */
     function DomStart(&$xml)
     {
+        
         $collection = $this->getParameterDefault("collection");
-        $xml = $collection->getOutputContent($this->getParameterDefault("filename"));
+        $xml = $collection->getOutputContent($this->getParameterDefault("filename"),$this->getParameterDefault("ext"));
         
         
     }

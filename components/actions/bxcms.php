@@ -42,18 +42,26 @@ class popoon_components_actions_bxcms extends popoon_components_action {
     
     function act() {
         $fulluri = $this->getAttrib("uri");
+        
         $collection = bx_collections::getCollection($fulluri);
         
         $filename = preg_replace("#^/#","",str_replace($collection->uri,"",$fulluri));
-        $res = $collection->resourceExists($filename);
+        $parts = explode(".",$filename);
+        $ext = array_pop($parts);
+        $filename = implode(".",$parts);
+        $res = $collection->resourceExists($filename,$ext);
+        
         if(!$res) {
             print "not found";
             return array();
         }
+
         return array("collection" => $collection,
                      "collectionUri" => $collection->uri,
-                     "filename" => $filename
+                     "filename" => $filename,
+                     "ext" => $ext
         
         );
+         
     }
 }
