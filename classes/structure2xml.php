@@ -186,9 +186,13 @@ class popoon_classes_structure2xml {
                 if (isset($dbStructure["expires"])) {
                     $allqueries[$structureName]['expires'] = time() - strtotime(preg_replace("#access\s+minus\s+#", "-",$dbStructure["expires"]));
                 } 
-                else {
+                else if (isset($this->parent->defaultExpires)) {
+                    
                     $allqueries[$structureName]['expires'] = $this->parent->defaultExpires;
+                } else {
+                    $allqueries[$structureName]['expires'] = 3600;
                 }
+                
                 if (isset($dbStructure["type"]) && $dbStructure["type"] == "aggregate") {
                     
                     $allqueries[$structureName]['query'] = $dbStructure["src"];
