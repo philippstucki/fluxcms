@@ -65,6 +65,7 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         if ($error) {
 //            print $error;
         }
+        header("Content-Length: ".filesize($pdfname));
         readfile($pdfname);
         
         unlink($foname);
