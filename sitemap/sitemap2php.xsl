@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                               xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+                              xmlns:php="http://php.net/xsl"
+                xsl:extension-element-prefixes="php"
+
 >
 
     <xsl:output omit-xml-declaration="yes" indent="no" encoding="ISO-8859-1" method="xml"/>
@@ -302,7 +305,7 @@
     
     <xsl:template name="generateAttributes">
         array(
-        <xsl:for-each select="@*">"<xsl:value-of select="name()"/>"=>"<xsl:value-of select="."/>",</xsl:for-each>
+        <xsl:for-each select="@*">"<xsl:value-of select="name()"/>"=><xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text"  select="."/></xsl:call-template>,</xsl:for-each>
         )
     </xsl:template>
     
@@ -345,18 +348,20 @@
             $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',$e);
             </xsl:when>
             <xsl:otherwise>
-                $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>','<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>');
+                $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>);
             </xsl:otherwise>
             </xsl:choose>
         </xsl:template>
     
     <xsl:template name="escapeSingleQuotes">
         <xsl:param name="text"/>
-        <xsl:call-template name="replace-string">
-            <xsl:with-param name="text" select="$text"/>
+       <xsl:value-of select="php:functionString('sitemap_formatValues',$text)"/>
+        <!--<xsl:call-template name="replace-string">
+            <xsl:with-param name="text" select="php:functionString('sitemap_formatValues',$text)"/>
             <xsl:with-param name="search">'</xsl:with-param>
             <xsl:with-param name="replace">\'</xsl:with-param>
         </xsl:call-template>
+       -->
     </xsl:template>
 
     <xsl:template name="replace-string">

@@ -149,7 +149,7 @@ class popoon_sitemap {
         }*/
         $sitemapCachedFile = $this->cacheDir . $sitemapId;
         //check if sitemapCache does exists and if it's older than the sitemap.xml
-        if ((! (file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath))))
+        if ( (! (file_exists($sitemapCachedFile) && filemtime($sitemapCachedFile) >= filemtime($sitemapRealPath))))
         {
             //if it is, make new sitemapCached file
             $err = $this->sitemap2php($sitemapRealPath,$sitemapCachedFile);
@@ -335,7 +335,7 @@ class popoon_sitemap {
         }
         $xsl = new XsltProcessor();
         $xsl->importStylesheet($xslDom);
-        
+        $xsl->registerPhpFunctions();
         $xslincludesDom = new DomDocument();
         $xslincludesDom->load($this->sm2php_xsl_dir."/".$this->sm2phpincludes_xsl);
         $xslincludes = new XsltProcessor();
@@ -601,5 +601,23 @@ class popoon_sitemap {
     }
     
 }
+
+function sitemap_formatValues($value) {
+    $value = str_replace("'","\'",$value);
+    //replace constant() with content
+    preg_match_all("#constant\(([^\)]+)\)#",$value,$matches);
+    $c = count($matches[0]) ;
+    if ($c > 0) {
+       for ($i = 0; $i < $c; $i++) {
+           if (defined($matches[1][$i])) {
+               $value = str_replace($matches[0][$i],"'.".$matches[1][$i].".'",$value);
+           } 
+       }
+    }
+    
+    
+    return "'".$value."'";
+}
+    
 
 ?>
