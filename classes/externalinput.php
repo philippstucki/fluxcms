@@ -14,8 +14,11 @@ class popoon_classes_externalinput {
         
         $string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
         $string = preg_replace('#</*(script|embed|object|iframe)[^>]*>#i',"",$string);
-        $string = preg_replace('#(<[^>]+)[\s\r\n]on[^>]*>#iU',"$1>",$string);
+        $string = preg_replace('#(<[^>]+[\s\r\n\"\'])on[^>]*>#iU',"$1>",$string);
         $string = preg_replace('#([a-z]*)[\s\r\n]*=[\s\r\n]*([\'\"]*)[\s\r\n]*j[\s\r\n]*a[\s\r\n]*v[\s\r\n]*a[\s\r\n]*s[\s\r\n]*c[\s\r\n]*r[\s\r\n]*i[\s\r\n]*p[\s\r\n]*t[\s\r\n]*:#iU','$1=$2nojavascript...',$string);
+	//<span style="width: expression(alert('Ping!'));"></span> 
+	// only works in ie...
+	$string = preg_replace('#(<[^>]+)style[\s\r\n]*=[\s\r\n]*([\'\"]*).*expression[\s\r\n]*\([^>]*>#iU',"$1>",$string);
        return $string;
     }
 }
