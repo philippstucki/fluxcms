@@ -51,7 +51,7 @@ class popoon_components_transformers_highlightcode extends popoon_components_tra
     
     function DomStart(&$xml) {
     
-        $defaultMatch = '//code';
+        $defaultMatch = '//*[name() = "code"]';
         $match = $this->getAttrib('match');
         if(is_null($match)){
             $match = $defaultMatch;
