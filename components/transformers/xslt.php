@@ -62,7 +62,17 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         $xsl = new XsltProcessor();
 
         if ($this->getParameter("options","registerPhpFunctions")) {
-            $xsl->registerPhpFunctions();
+            
+            if (($allowed = $this->getParameter("allowedPhpFunctions")) 
+                 && (!(!is_array(reset($allowed)) && reset($allowed) == '__all__'))) {
+                 foreach ($allowed as $value) {
+                    $xsl->registerPhpFunctions($value);
+                }
+            }
+            else { 
+                $xsl->registerPhpFunctions();
+            }
+            
         }
         
 	$xsl->importStylesheet($xslDom);
