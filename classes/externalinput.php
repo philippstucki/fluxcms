@@ -11,7 +11,8 @@ class popoon_classes_externalinput {
             $string = stripslashes($string);
         }
         $string = str_replace(array("&amp;","&lt;","&gt;"),array("&amp;amp;","&amp;lt;","&amp;gt;",),$string);
-        
+        // fix &entitiy\n;
+        $string = preg_replace('#(&\#*\w+)[\s\r\n]+;#',"$1;",$string);
         $string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
         $string = preg_replace('#</*(script|embed|object|iframe)[^>]*>#i',"",$string);
         $string = preg_replace('#(<[^>]+[\s\r\n\"\'])on[^>]*>#iU',"$1>",$string);
