@@ -64,9 +64,11 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         if ($this->getParameter("options","registerPhpFunctions")) {
             $xsl->registerPhpFunctions();
         }
-        $xsl->importStylesheet($xslDom);
         
-        $utfHack = $this->getParameter("options","utfHack");
+	$xsl->importStylesheet($xslDom);
+       	$xsl->registerPHPFunctions(); 
+        
+	$utfHack = $this->getParameter("options","utfHack");
         $params =$this->getParameter("default");
         
         if ($utfHack) {
