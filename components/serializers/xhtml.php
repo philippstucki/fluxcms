@@ -88,7 +88,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
     
     private function stripBxAttributes($xml) {
-        return preg_replace("#bx[a-zA-Z_]+=\"[^\"]+\"#","",$xml);  
+        return preg_replace("#\sbx[a-zA-Z_]+=\"[^\"]+\"#","",$xml);  
     }
         
     private function obfuscateMail($xml) {
