@@ -41,9 +41,10 @@ Class MnogoSearch  {
 	protected $AgentParams = array();
 	protected $ResField = array();
 	protected $_result;
+	protected $currPage;
+	protected $maxPages;							
 	
-								
-	/**
+    /**
 	* Constructor
 	* Checks whether Mnogosearch extension is 
 	* available and calls msAll	ocate() to allocate a mnogo-agent
@@ -70,7 +71,7 @@ Class MnogoSearch  {
 				
 				$this->set_MaxResults($params['NumRows']);
 				$this->set_CurrPage($params['CurrPage']);
-				
+			    	
                 $searchmode = (isset($params['SearchMode'])) ? $params['SearchMode'] : 'single';
                 $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 10;
                 
@@ -210,8 +211,9 @@ Class MnogoSearch  {
 				$this->_set_ResParam('ResTime',UDM_PARAM_SEARCHTIME);
 				$this->_set_ResParam('ResFDoc',UDM_PARAM_FIRST_DOC);
 				$this->_set_ResParam('ResLDoc',UDM_PARAM_LAST_DOC);
-				
-				return TRUE;
+                $this->maxPages = ceil($this->ResFound / $this->NumRows);
+                
+                return TRUE;
 			}
             
             return array("error"=>"mnogosearch:" . udm_Error($this->MRes));;
@@ -263,7 +265,8 @@ Class MnogoSearch  {
 	* @access public
 	*/
 	function set_MaxResults($results) {
-		$this->set_AgentParam(UDM_PARAM_PAGE_SIZE,$results);
+		$this->NumRows = $results;
+        $this->set_AgentParam(UDM_PARAM_PAGE_SIZE,$results);
 		return TRUE;
 	}
 	
@@ -276,7 +279,8 @@ Class MnogoSearch  {
 	* @access public
 	*/
 	function set_CurrPage($page) {
-		$this->set_AgentParam(UDM_PARAM_PAGE_NUM,$page);
+		$this->currPage = $page;
+        $this->set_AgentParam(UDM_PARAM_PAGE_NUM,$page);
 		return TRUE;
 	}
 	
@@ -443,7 +447,46 @@ Class MnogoSearch  {
 		}
 		
 		return TRUE;
-	}	
+	}
+    
+    public function getResultParams() {
+        $resprm = array('found'     => $this->ResFound,
+                        'currpage'  => $this->currPage,
+                        'nextpage'  => $this->getPrevNext('next'),
+                        'prevpage'  => $this->getPrevNext('prev'),
+                        'maxpages'  => $this->maxPages, 
+                        'firstdoc'  => $this->ResFDoc,
+                        'lastdoc'   => $this->ResLDoc
+                        );
+       
+        return $resprm;
+    }
+    
+    public function getResultFound() {
+        return $this->ResFound;
+    }
+
+    public function getPrevNext($what) {
+        $maxp = (($this->maxPages -1) >=0)?($this->maxPages -1):0;
+
+        if($what == 'next') {
+            if(($this->currPage +1) <= $maxp) {
+                $page = $this->currPage +1;
+            } else {
+                $page = $this->maxPages -1;
+            }
+        } elseif($what == 'prev') {
+        
+            if(($this->currPage -1) >= 1) {
+                $page = $this->currPage -1;
+            } else {
+                $page = $this->currPage;
+            }
+        }
+        
+        return $page;
+    }
+
 }
 
 
