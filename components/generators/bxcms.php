@@ -62,6 +62,10 @@ class popoon_components_generators_bxcms extends popoon_components_generator {
     {
         
         $collection = $this->getParameterDefault("collection");
+        $xml = new DomDocument();
+        
+        
+        
         $xml = $collection->getOutputContent($this->getParameterDefault("filename"),$this->getParameterDefault("ext"));
         
         
