@@ -46,9 +46,9 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
                 parse_str($ref['query'],$para);
                 $query =  $para['q'];
 	    }
-            if (isset($_GET['q'])) {
+/*            if (isset($_GET['q'])) {
 		$query = $_GET['q'];
-	     }	
+	     }	*/
                 if (isset($query)) {
                     parent::DomStart($xml);
                     popoon_sitemap::var2XMLString($xml);
