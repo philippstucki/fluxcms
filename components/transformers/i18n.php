@@ -68,10 +68,10 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         $driver = "popoon_components_transformers_i18n_".$this->getParameterDefault("driver");
         $d = new  $driver($src, $lang);       
 
-        
-
         $ctx = new domxpath($xml);
         $ctx->registerNamespace("i18n",I18NNS);
+        
+        //translate i18n:text 
         $res = $ctx->query("//i18n:text");
 
         foreach($res as $text) {
@@ -83,7 +83,22 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
             if (!$locText = $d->getText($key)) {
                 $locText = $key;
             }
-            $text->parentNode->replaceChild($xml->createTextNode( $locText),$text);;
+            $text->parentNode->replaceChild($xml->createTextNode( $locText),$text);
+        }
+        
+        // translate i18n:attr
+        $res = $ctx->query("//@i18n:attr");
+        foreach($res as $node) {
+            foreach (explode(" ",$node->value) as $attrName) {
+                if ($key = $node->parentNode->getAttribute($attrName)) {
+                      if (!$locText = $d->getText($key)) {
+                          $locText = $key;
+                      } 
+                      $node->parentNode->setAttribute($attrName,$locText);
+                }
+            }
+            $node->parentNode->removeAttributeNode($node);
+            
         }
     }
 } 
