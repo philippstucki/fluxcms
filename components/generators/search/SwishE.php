@@ -127,7 +127,11 @@ Class SwishE {
 		}
 	}
  		
-	
+
+    public function getResultParams() {
+        return array();
+    }
+    
 	/** 
 	* General function to set Classvars
 	* @param string $var name of variable
