@@ -155,8 +155,10 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
                     }
                     else
                     {
+                        
                         $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
                         $sql2xml->add($query['query']);
+                        
                     }
                 }
                 else if ( $query['type'] == "aggregate" ) {
@@ -180,6 +182,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
                     else {
                         // with no caching, just get and add it.. (maybe we should allow http caching without db-caching..)
                         $sql2xml->add($query['query'],array("root"=> $structureName));
+                        
                     }
                 } 
                 else {
@@ -302,7 +305,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
             $t = new sql_tree($this->db);
             $t->tablename = $name;
             $data = explode(" , ",$dbStructure['fields']);
-            $query = $t->supers_query_byname(array("ID"=>$sqlOptions[start_id]),$data,False);
+            $query = $t->supers_query_byname(array("id"=>$sqlOptions[start_id]),$data,False);
             
         }        
         
@@ -312,7 +315,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
             $t = new sql_tree($this->db);
             $t->tablename = $name;
             $data = explode(" , ",$dbStructure['fields']);
-            $query = $t->children_query_byname(array("ID"=>$sqlOptions[start_id]),$data);
+            $query = $t->children_query_byname(array("id"=>$sqlOptions[start_id]),$data);
         }
         else {
             $path = $rootpath;
@@ -340,8 +343,8 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
                     $queryfields = $queryfields. $this->getQueryFields($child,$dbStructure,$xmlparent,$tableInfo);
                     
                     
-                    if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "ID";}
-                    if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "ID";}
+                    if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "id";}
+                    if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "id";}
                     $query = $query ." left join ".$name. " on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
                     if (isset($dbStructure["objectfield"]) )
                     {
