@@ -31,9 +31,9 @@ include_once("popoon/components/transformer.php");
 class popoon_components_transformers_tidy extends popoon_components_transformer {
 
     public $XmlFormat = "XmlString";
-	public $classname = "tidy";
-    
-    
+    public $classname = "tidy";
+
+
     function __construct(&$sitemap) {
         parent::__construct($sitemap);
     }
@@ -44,12 +44,12 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
         // default properties
         // can be overwritten from the sitemap with for example
         //  <map:parameter name="wrap" value="80"/>
-        
+
         $options = array(
-            "output-xhtml" => true, 
-            "clean" => true, 
-            "wrap" => "350", 
-            "indent" => true, 
+            "output-xhtml" => true,
+            "clean" => true,
+            "wrap" => "350",
+            "indent" => true,
             "indent-spaces" => 1,
             "ascii-chars" => false,
             "char-encoding" => "utf8",
@@ -59,7 +59,7 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "numeric-entities" => true,
             "drop-proprietary-attributes" => true
             );
-            
+
         foreach ($this->getParameter("default") as $key => $value) {
             switch ($value) {
                 case "yes":
@@ -74,11 +74,12 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
                     $options[$key] = $value;
             }
         }
-        
-        $tidy = new tidy();
-        
+
+        if (class_exists("tidy")) {
+            $tidy = new tidy();
+        }
         if(!$tidy) {
-            throw new Exception("Something went wrong with tidy initialisation");
+            throw new Exception("Something went wrong with tidy initialisation. Maybe you didn't enable ext/tidy in your PHP installation. Either install it or remove the tidy transformer from your sitemap.xml");
         }
         $charencoding = $options["char-encoding"];
         unset ($options["char-encoding"]);
@@ -86,12 +87,12 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
         $tidy->cleanRepair();
         $xml = (string) $tidy;
        unset($tidy);
-        
+
         if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
             $xml = preg_replace('/xmlns="[^"]*"/','',$xml);
         }
-        
-        
+
+
     }
 }
 
