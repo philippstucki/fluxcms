@@ -4,7 +4,7 @@
 class popoon_helpers_mimetypes {
     
     
-    function getFromFileLocation($src) {
+    static function getFromFileLocation($src) {
         $extension = substr($src,strrpos($src,".")+1);
         
         switch ($extension) {
