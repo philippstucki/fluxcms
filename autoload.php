@@ -13,7 +13,11 @@ function __autoload($class) {
             }
             break;
         default:
-            $incFile = str_replace("_","/",$class).".php";
+            if (substr($class, -9) == "Exception") {
+                $incFile = BX_POPOON_DIR.'exceptions/'.substr(substr($class,6),0,-9).'.php';    
+            } else {
+                $incFile = str_replace("_",DIRECTORY_SEPARATOR,$class).".php";
+            }
     }
     if (! include_once($incFile)) {
         print("couldn't load $class from $incFile\n");
