@@ -87,8 +87,9 @@ class popoon_components_aggregator extends popoon_component {
             }
             $options = $this->sitemap->getOptions(true);
             $options->internalRequest = true;
+            $options->popoonmap = $this->getParameter("popoonmap");
+
             ob_start();
-            
             $sitemap = new popoon_sitemap($this->sitemap->rootFile, $uri, $options);
  
             /* if the serializer thinks, its object in $sitemap->xml is the right one, it

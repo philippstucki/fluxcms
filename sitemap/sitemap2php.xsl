@@ -95,6 +95,8 @@
 	</xsl:template>		
 	
 	<xsl:template match="map:aggregate/map:part">
+        $aggregator->clearParameters();
+         <xsl:apply-templates/>
 		$aggregator->addPart(<xsl:call-template name="generateAttributes"/>);
          $pipelineHit = true;
 	</xsl:template>		
@@ -191,6 +193,13 @@
 		</xsl:call-template>
     </xsl:template>
 
+    <xsl:template match="map:part/map:parameter">
+        
+		<xsl:call-template  name="setParameter">
+			<xsl:with-param name="prefix">aggregator</xsl:with-param>
+            <xsl:with-param name="doParams">true</xsl:with-param>						
+		</xsl:call-template>
+    </xsl:template>
 
     <xsl:template match="map:transform/map:parameter">
 		<xsl:call-template  name="setParameter">

@@ -131,6 +131,9 @@ abstract class popoon_component {
         }
 	}
 		
+    public function clearParameters() {
+        $this->params = array();
+    }
 	protected function getParameterAll() {
 			return $this->params;
 	}

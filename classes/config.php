@@ -39,6 +39,7 @@
      private $values = array();
      
      public $internalRequest = false;
+     public $popoonmap = array();
      
      private $outputCacheCallback = null;
      /**
