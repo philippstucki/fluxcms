@@ -33,6 +33,10 @@ class popoon_classes_structure2xml {
         
         $sql2xml = new XML_db2xml($this->db,"bx","Extended");
         
+        if ($this->getParameter("contentIsXml")) {
+            $sql2xml->setContentIsXml(true);
+        }
+        
         // i should add this for all options .... later maybe
         if (!(is_null($this->getAttrib("xml_seperator")) ))
         {
