@@ -141,6 +141,8 @@
     <xsl:template match="map:pipeline//map:read">
         <xsl:call-template name="setupComponent">
             <xsl:with-param name="prefix">reader</xsl:with-param>
+            
+             <xsl:with-param name="doParams">true</xsl:with-param>	
         </xsl:call-template>
 
         if($this->componentCache AND $this->componentCache->init($reader)){
@@ -185,7 +187,12 @@
         
         
     </xsl:template>
-    
+    <xsl:template match="map:read/map:parameter">
+		<xsl:call-template  name="setParameter">
+			<xsl:with-param name="prefix">reader</xsl:with-param>
+            <xsl:with-param name="doParams">true</xsl:with-param>						
+		</xsl:call-template>
+    </xsl:template>
 	<xsl:template match="map:act/map:parameter">
 		<xsl:call-template  name="setParameter">
 			<xsl:with-param name="prefix">action</xsl:with-param>

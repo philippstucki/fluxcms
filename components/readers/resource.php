@@ -63,7 +63,7 @@ class popoon_components_readers_resource extends popoon_components_reader {
         $mimetype = $this->getAttrib('mime-type');
         $src = str_replace("..","",$this->getAttrib('src'));  
         if ($mimetype == "auto") {
-                    $mimetype= $this->getMimeType($src);
+                    $mimetype= popoon_helpers_mimetypes::getFromFileLocation($this->sitemap->uri);
         }
         
         if ($mimetype) {
@@ -88,43 +88,7 @@ class popoon_components_readers_resource extends popoon_components_reader {
         }     
         
     }
-    function getMimeType($src) {
-        $extension = substr($src,strrpos($src,".")+1);
-        
-        switch ($extension) {
-            case "gif":
-                return "image/gif";
-            case "jpg":
-            case "jpeg":
-                return "image/jpeg";
-            case "png":
-                return "image/png";
-            case "css":
-                return "text/css";
-            case "xml":
-            case "xsl":
-            case "xsd":
-            case "rng":
-                return "text/xml";
-            case "js":
-                return "text/javascript";
-            case "html":
-            case "htm":
-                return "text/html";
-            case "txt":
-                return "text/plain";
-            
-            default:
-                if (file_exists($src)) {
-                    $m =  `file -b $src`;
-                    return $m;
-                } else {
-                    return "text/plain";
-                }
-        }
-        
-        
-    }
+   
 }
 
 

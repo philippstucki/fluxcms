@@ -22,7 +22,9 @@
 include_once("popoon/components/generator.php");
 
 /**
-
+* THIS MODULE IS DEPRECATED,
+* It should be used as reader and not as generator/serializer
+*
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
 * @package  popoon
