@@ -236,8 +236,6 @@ class popoon_classes_structure2xml {
         $queryfields = $dbMasterValues['children'][0].".*";
         $query = " from ".$dbMasterValues['children'][0];
         $name = $dbMasterValues['children'][0];
-     
-        
         $dbStructure = $configClass->getValues("$rootpath/$name");
         
         $queryfields =  $this->getQueryFields($name,$dbStructure,"root",$tableInfo);
@@ -436,7 +434,15 @@ class popoon_classes_structure2xml {
     {
         $queryfields = ""; //E_ALL fix
         if (PEAR::isError($dbStructure)) {
-            throw new PopoonDBException($dbStructure);   
+            $e = new PopoonPEARException($dbStructure);
+            if (version_compare(phpversion(),"5.0.2",">")) {
+                $e->userInfo = "There seems to be a problem with PHP 5.0.3.
+                        If you are using PHP 5.0.3 and see this message, 
+                        try down grading to 5.0.2, 
+                        until we find a solution. ";
+                
+            }
+            throw $e;    
         }
         if (! isset($dbStructure["nofields"]) && !(isset($dbStructure["fields"]) && (strlen($dbStructure["fields"]) == 0)))
         {
