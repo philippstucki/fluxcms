@@ -85,42 +85,46 @@ class popoon_sitemap_outputcache {
     
     function __construct(popoon_classes_config $options = NULL) {
         require_once('Cache/Output.php');
+        $this->options = $options;
         $this->cache = new Cache_Output($options->cacheContainer, $options->cacheParams );
     }
     
-    function start() {
+    function start($uri) {
         $idParams = $_GET;
         if (isset($idParams['SID']))
         {
             unset($idParams['SID']);
         }
-        $this->id = $this->cache->generateID($idParams);
-        if ($content = $this->cache->start($this->id,'outputcache') ) {
-            $header = unserialize($this->cache->getUserdata($this->id,'outputcache'));
-            $etag = $header['ETag'];
-            
-            if (isset($header['_file-location'])) {
+        $this->id = str_replace("/","_",$uri).$this->cache->generateID($idParams);
+        $this->cacheGroup = 'outputcache';
+        if ( $content = $this->cache->start($this->id,$this->cacheGroup) ) {
+            if ($this->options->outputCacheSave === true ) {
+                $header = unserialize($this->cache->getUserdata($this->id,$this->cacheGroup));
+                $etag = $header['ETag'];
+                
                 if (isset($header['_file-location'])) {
-                    if (strtotime($header['Last-Modified']) < filemtime($header['_file-location'])) {
-                        header("X-Popoon-Cache-Status: File is newer than cache");
-                        return false;
+                    if (isset($header['_file-location'])) {
+                        if (strtotime($header['Last-Modified']) < filemtime($header['_file-location'])) {
+                            header("X-Popoon-Cache-Status: File is newer than cache");
+                            return false;
+                        }
                     }
                 }
-            }
-            foreach ($header as $key => $value) {
-                if (substr($key,0,1) != "_") { 
-                    header("$key: $value");
+                foreach ($header as $key => $value) {
+                    if (substr($key,0,1) != "_") { 
+                        header("$key: $value");
+                    }
                 }
-            }
-            if ($this->check304($etag, $header['Last-Modified'])) {
-                header('HTTP/1.1 304 Not Modified' );
-                header("X-Popoon-Cache-Status: 304");
+                if ($this->check304($etag, $header['Last-Modified'])) {
+                    header('HTTP/1.1 304 Not Modified' );
+                    header("X-Popoon-Cache-Status: 304");
+                    die();
+                }
+                
+                header("X-Popoon-Cache-Status: true");
+                print $content;
                 die();
             }
-            
-            header("X-Popoon-Cache-Status: true");
-            print $content;
-            die();
         }
     }
     
@@ -174,14 +178,18 @@ class popoon_sitemap_outputcache {
             }
         }
         
-        
         if ($this->check304($etag, $sitemap->header['Last-Modified'])) {
             header( 'HTTP/1.1 304 Not Modified' );
-            $this->cache->container->save($this->id, $content, $expire ,"outputcache", serialize($sitemap->header));
-            die();
+            
+            if ($this->options->outputCacheSave !== 304) {
+                $this->cache->container->save($this->id, $content, $expire ,$this->cacheGroup, serialize($sitemap->header));
+                die();
+            }
         } else {
             print $content;
-            $this->cache->container->save($this->id, $content, $expire ,"outputcache", serialize($sitemap->header));
+            if ($this->options->outputCacheSave !== 304) {
+                $this->cache->container->save($this->id, $content, $expire ,$this->cacheGroup, serialize($sitemap->header));
+            }
         }
     }
 }

@@ -75,7 +75,7 @@
       *
       * @var bool
       */
-     private $outputCacheSave = false;
+     public $outputCacheSave = false;
      
      /** 
       * if static file cache should be used
@@ -212,8 +212,12 @@
      */
     public function doOutputCache() {
         
-        if ($this->outputCacheCallback && $this->doOutputCacheCallback()) {
-            $this->outputCacheSave = true;
+        if ($this->outputCacheCallback && $mode = $this->doOutputCacheCallback()) {
+            if ($mode === 304) {
+                $this->outputCacheSave = 304;
+            } else {
+                $this->outputCacheSave = true;
+            }
             return true;
         } 
         if ($this->staticFileCache) {
@@ -243,7 +247,7 @@
     public function doOutputCacheSave($sitemap) {
         // if the outputCacheSave param is set, just return true
         if ($this->outputCacheSave) {
-           return  true;
+           return  $this->outputCacheSave;
         }
         /* but we want to use outputcaching for all "components
             which define _file-location. always. It's quite safe to use that anyway

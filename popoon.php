@@ -152,9 +152,8 @@ class popoon {
         }
         if ( $options->doOutputCache()) 
         {
-            //include_once("popoon/sitemap/outputcache.php");
             $oc = new popoon_sitemap_outputcache($options);
-            $oc->start();
+            $oc->start($uri);
         } 
         if ($sitemapFile !== null)
         {
