@@ -446,7 +446,8 @@ class popoon_sitemap {
         // don't do anything, if we don't have any scheme stuff in the $value;
         // strpos should be rather fast, i assume.
         
-        if(strpos($value,":/") === false && strpos($value,"{") === false) { 
+        if(is_object($value) || strpos($value,":/") === false && strpos($value,"{") === false) {
+                
                 return $value;
         }
         
