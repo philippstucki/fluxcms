@@ -71,27 +71,34 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         
     }
         
-    function cleanXHTML($xml) {
+    private function cleanXHTML($xml) {
         /* for some strange reasons, libxml makes an upercase HTML, which the w3c validator doesn't like */
         if ($this->getParameterDefault("stripScriptCDATA") == "true") {
             $xml = $this->stripScriptCDATA($xml);
         }
+        if ($this->getParameterDefault("stripBxAttributes") == "true") {
+            $xml = $this->stripBxAttributes($xml);   
+        }
         return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
     }
 
-    function stripScriptCDATA($xml) {
+    private function stripScriptCDATA($xml) {
         $xml = preg_replace("#(<script[^>]+>)<!\[CDATA\[#","$1",$xml);
         return preg_replace("#\]\]>(</script>)#","$1",$xml);
     }
+    
+    private function stripBxAttributes($xml) {
+        return preg_replace("#bx[a-zA-Z_]+=\"[^\"]+\"#","",$xml);  
+    }
         
-    function obfuscateMail($xml) {
+    private function obfuscateMail($xml) {
 	 if ($this->getParameter('default','obfuscateMail') == 'true') {
                 return str_replace('mailto:','&#109;&#97;&#105;&#108;&#116;&#111;&#58;',str_replace('@','&#64;',$xml));
         }
 	return $xml;
     }
     
-    function getErrorReporting($class) {
+    private function getErrorReporting($class) {
         eval('$err = '.$class.'::getInstance();');
         if ($err->hasErrors()) {
             return $err->getHtml();
