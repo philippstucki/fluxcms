@@ -192,6 +192,8 @@ class popoon_helpers_simplecache {
               $this->simpleCacheHttpLastModified($url, $expire);
 	   } catch(Exception $e) {
 		if (file_exists($cacheFile)) {	
+			//touch the file, so we don't have to read it on every request..
+			touch ($cacheFile);
 		        return $this->readFile($cacheFile);
 		} else {
 			return "<html><title>Could not load '$url': \n" . $e->getMessage()."</title></html>";
@@ -247,7 +249,7 @@ class popoon_helpers_simplecache {
         else {
              include_once("HTTP/Request.php");
              $req = new HTTP_Request($url,array("timeout" => 5));
-             $req->addHeader("User-Agent","Popoon Aggregator (http://bitflux.org)");
+             $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev: 2815 $ (http://popoon.org)');
 
              if ($cacheFileLastModified_mtime) {
                   $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
@@ -309,7 +311,9 @@ class popoon_helpers_simplecache {
                         touch($cacheFileLastModified,$lastmodified);
                     }
                  }
-                 touch($cacheFile, time());
+                 if (!touch($cacheFile, time())) {
+                     trigger_error("$cacheFile not touchable",E_USER_WARNING);
+                 }
                  return $lastmodified;
              } 
              // if a 304 came back, content didn't change... no need to get it, just touch the file
@@ -363,10 +367,12 @@ class popoon_helpers_simplecache {
             return false;
 
         $num_removed = 0;
-
-        while ($file = readdir($dh)) {
-            if ('.' == $file || '..' == $file)
+        $file = readdir($dh);
+        while ($file !== false) {
+            if ('.' == $file || '..' == $file) {
+                $file = readdir($dh);
                 continue;
+            }
 
             $file = $dir . $file;
             if (is_dir($file)) {
@@ -378,6 +384,7 @@ class popoon_helpers_simplecache {
                 if (unlink($file))
                     $num_removed++;
             }
+            $file = readdir($dh);
         }
         // according to php-manual the following is needed for windows installations.
         closedir($dh);
