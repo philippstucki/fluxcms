@@ -25,33 +25,33 @@
 */
 
 class popoon_helpers_simplecache {
-
+    
     public $cacheDir = null;
     private $bxst = array();
     private $db = null;
     private $idField = "ID";
-
+    
     static function &getInstance()
     {
         static $instance;
-
+        
         if (!isset($instance))
         {
             $instance = new popoon_helpers_simplecache();
         }
         return $instance;
     }
-
+    
     /*****************************
     * simpleCache Functions      *
     ******************************/
-
+    
     /* simple cache is a really simple, but very fast cache
-       no Garbage Collection and at the moment no file locking is done
-       it's used for caching xml->array stuff (mostly config files),
-        but can be used for almost everything 
-     */
-
+    no Garbage Collection and at the moment no file locking is done
+    it's used for caching xml->array stuff (mostly config files),
+    but can be used for almost everything 
+    */
+    
     function simpleCacheCheck($file,$group,$param = null, $type="serialize",$lastModified = false)
     {
         if (!$this->cacheDir)
@@ -65,10 +65,10 @@ class popoon_helpers_simplecache {
         }
         
         if ($lastModified  && ($lastModified >= $filemtime)) {
-                return false;
+            return false;
         } 
         else if (!$lastModified && (!(file_exists($file)) || filemtime($file) >= $filemtime)) {
-                return false;
+            return false;
         }
         else
         {
@@ -87,8 +87,8 @@ class popoon_helpers_simplecache {
             }
         }
     }
-
-
+    
+    
     function simpleCacheWrite($file,$group,$param,$data,$type = "serialize")
     {
         if (!$this->cacheDir)
@@ -107,48 +107,48 @@ class popoon_helpers_simplecache {
             }
             rename($data,$cacheFile); 
         } else {
-        $fd = @fopen ($cacheFile,"wb");
-        if (!$fd) {
-            //if directory does not exist, create it
-            if (!(@mkdir(dirname($cacheFile)))) {
-                //if we can't generate the dir for the to be cached file
-                // try to make it for the whole path
-                // this should happen very seldom, or better said, only once 
-                // then we have all the needed directories (new one letter dirs
-                //  are handled by the statement above, the whole mkpath stuff
-                //  is only needed for new group dirs, which do not change often
-                $this->mkpath(dirname($cacheFile));
-           }
-           $fd = fopen ($cacheFile,"wb");
-        }
-        /* this can be used, if we want to save the vars as php-file, so caches can cache it...
-        fwrite ($fd, '<?php $var = ');
-              fwrite($fd,var_export($data,1));
-        fwrite ($fd, '?>');        
-        */
-        if ($type == "serialize") {
-            fwrite ($fd,serialize($data));
-        } elseif ($type == "plain" || $type == "file") {
-            fwrite ($fd,$data);
-        } else if ($type == "php") {
+            $fd = @fopen ($cacheFile,"wb");
+            if (!$fd) {
+                //if directory does not exist, create it
+                if (!(@mkdir(dirname($cacheFile)))) {
+                    //if we can't generate the dir for the to be cached file
+                    // try to make it for the whole path
+                    // this should happen very seldom, or better said, only once 
+                    // then we have all the needed directories (new one letter dirs
+                    //  are handled by the statement above, the whole mkpath stuff
+                    //  is only needed for new group dirs, which do not change often
+                    $this->mkpath(dirname($cacheFile));
+                }
+                $fd = fopen ($cacheFile,"wb");
+            }
+            /* this can be used, if we want to save the vars as php-file, so caches can cache it...
             fwrite ($fd, '<?php $var = ');
             fwrite($fd,var_export($data,1));
             fwrite ($fd, '?>');        
-        } 
-        fclose($fd);
+            */
+            if ($type == "serialize") {
+                fwrite ($fd,serialize($data));
+            } elseif ($type == "plain" || $type == "file") {
+                fwrite ($fd,$data);
+            } else if ($type == "php") {
+                fwrite ($fd, '<?php $var = ');
+                fwrite($fd,var_export($data,1));
+                fwrite ($fd, '?>');        
+            } 
+            fclose($fd);
         }
     }
-
+    
     function simpleCacheFlush($group = "")
     {
         if (!$this->cacheDir)
         {
             $this->cacheDir = BX_PROJECT_DIR."/tmp/";
         }
-
+        
         $this->deleteDir($this->cacheDir."/".$group);
     }
-
+    
     function simpleCacheDelete($file,$group,$param)
     {
         if (!$this->cacheDir)
@@ -158,7 +158,7 @@ class popoon_helpers_simplecache {
         $cacheFile = $this->simpleCacheGenerateName($group,$file,$param);
         unlink ($cacheFile);
     }
-
+    
     public function simpleCacheGenerateName($group,$file,$param = array()) {
         if (!$this->cacheDir)
         {
@@ -166,8 +166,8 @@ class popoon_helpers_simplecache {
         }
         $md5 = md5($file . serialize($param));
         return ($this->cacheDir.$group."/".substr($md5,0,1)."/".$md5);
-   }
-   /**
+    }
+    /**
     * Reads content of remote page
     *
     * If it's already cached, it reads the file from the Cache
@@ -188,26 +188,26 @@ class popoon_helpers_simplecache {
             $expire = time() - $expire;
         }
         if ($expire >= 0) {
-	   try {
-              $this->simpleCacheHttpLastModified($url, $expire);
-	   } catch(Exception $e) {
-		if (file_exists($cacheFile)) {	
-			//touch the file, so we don't have to read it on every request..
-			touch ($cacheFile);
-		        return $this->readFile($cacheFile);
-		} else {
-			return "<html><title>Could not load '$url': \n" . $e->getMessage()."</title></html>";
-		}
-	  }
+            try {
+                $this->simpleCacheHttpLastModified($url, $expire);
+            } catch(Exception $e) {
+                if (file_exists($cacheFile)) {	
+                    //touch the file, so we don't have to read it on every request..
+                    touch ($cacheFile);
+                    return $this->readFile($cacheFile);
+                } else {
+                    return "<html><title>Could not load '$url': \n" . $e->getMessage()."</title></html>";
+                }
+            }
         }
         else if (!file_exists($cacheFile)){
             $this->simpleCacheHttpLastModified($url, $expire);
         }
         return $this->readFile($cacheFile);
     }
-
-
-   /**
+    
+    
+    /**
     * Checks the last modified date of an external page and returns the page
     *
     * But only, if it was checked before (unixtime) $expire, otherwise it
@@ -232,10 +232,10 @@ class popoon_helpers_simplecache {
         $cacheFileLastModified = $cacheFile.".lastmodified";
         $cacheFileLastModified_mtime = @ filemtime($cacheFileLastModified);        
         /* if we checked the cache later than expire time, just return LastModified date
-            This way, we can prevent to ask the http-server on every hit, if we set
-            for example  $expire = now() - 1 hour, we only check the server every hour.
-            It would be quite stupid to ask the server on every request, even a 304 answer
-            needs an established connection, which is really slow for doing on every request
+        This way, we can prevent to ask the http-server on every hit, if we set
+        for example  $expire = now() - 1 hour, we only check the server every hour.
+        It would be quite stupid to ask the server on every request, even a 304 answer
+        needs an established connection, which is really slow for doing on every request
         */
         if ($cacheFile_mtime && $expire > 0 && $cacheFile_mtime > $expire) {
             if ($cacheFileLastModified_mtime) {
@@ -247,15 +247,15 @@ class popoon_helpers_simplecache {
         }
         // if we checked a long time ago, try to get it
         else {
-             include_once("HTTP/Request.php");
-             $req = new HTTP_Request($url,array("timeout" => 5));
-             $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev$ (http://popoon.org)');
-
-             if ($cacheFileLastModified_mtime) {
-                  $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
-             }
-             if ($proxy) {
-                 
+            include_once("HTTP/Request.php");
+            $req = new HTTP_Request($url,array("timeout" => 5));
+            $req->addHeader("User-Agent",'Popoon HTTP Fetcher+Cacher $Rev$ (http://popoon.org)');
+            
+            if ($cacheFileLastModified_mtime) {
+                $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
+            }
+            if ($proxy) {
+                
                 $proxy = parse_url('http://'.$proxy);
                 if (!isset($proxy['user'])) {
                     $proxy['user'] = null;
@@ -267,14 +267,14 @@ class popoon_helpers_simplecache {
                     $proxy['port'] = 8080;
                 }
                 $req->setProxy($proxy['host'], $proxy['port'], $proxy['user'], $proxy['pass']);   
-             }
-             $req->sendRequest();
-             
-             $respCode = $req->getResponseCode();
-             if ($respCode == 200) {
-                 // check if we have a a last-modified response...                 
-                 if ($lastModifiedResponse = $req->getResponseHeader("last-modified")) {
-
+            }
+            $req->sendRequest();
+            
+            $respCode = $req->getResponseCode();
+            if ($respCode == 200) {
+                // check if we have a a last-modified response...                 
+                if ($lastModifiedResponse = $req->getResponseHeader("last-modified")) {
+                    
                     $lastmodified = strtotime($lastModifiedResponse);
                     // check if modified date changed, if yes, save it and touch the lastmodified file
                     if ($lastmodified != $cacheFileLastModified_mtime) {
@@ -282,14 +282,14 @@ class popoon_helpers_simplecache {
                         touch($cacheFileLastModified,$lastmodified);
                     }  
                     
-                 } 
-                 /* if we don't have a last-modified header, we compare the md5 fingerprint to the one 
-                     we cached. This takes evt. more time, _but_ we first save one filewrite if it's the same
-                     and - more importantly - we can return the modified date of the first successfull
-                     retrieval. This will help a lot with st2xml and compo caching in popoon
-                     TODO: E-Tag caching
+                } 
+                /* if we don't have a last-modified header, we compare the md5 fingerprint to the one 
+                we cached. This takes evt. more time, _but_ we first save one filewrite if it's the same
+                and - more importantly - we can return the modified date of the first successfull
+                retrieval. This will help a lot with st2xml and compo caching in popoon
+                TODO: E-Tag caching
                 */
-                 else {
+                else {
                     $_newcontent = $req->getResponseBody();
                     if (file_exists($cacheFile)) {
                         $md5_oldcontent = md5($this->readFile($cacheFile));
@@ -298,10 +298,10 @@ class popoon_helpers_simplecache {
                     else {
                         $md5_oldcontent = false;
                     }
-
+                    
                     // if content is the same, we can return the mtime of the timestamp cache file
                     if ($md5_oldcontent && $md5_oldcontent == $md5_newcontent) {
-                          $lastmodified = $cacheFileLastModified_mtime;
+                        $lastmodified = $cacheFileLastModified_mtime;
                     } 
                     // otherwise write it and touch the lastmodified file
                     else {
@@ -310,28 +310,28 @@ class popoon_helpers_simplecache {
                         $lastmodified = time();
                         touch($cacheFileLastModified,$lastmodified);
                     }
-                 }
-                 if (!touch($cacheFile, time())) {
-                     trigger_error("$cacheFile not touchable",E_USER_WARNING);
-                 }
-                 return $lastmodified;
-             } 
-             // if a 304 came back, content didn't change... no need to get it, just touch the file
-             else  if ($respCode == 304) {
+                }
+                if (!touch($cacheFile, time())) {
+                    trigger_error("$cacheFile not touchable",E_USER_WARNING);
+                }
+                return $lastmodified;
+            } 
+            // if a 304 came back, content didn't change... no need to get it, just touch the file
+            else  if ($respCode == 304) {
                 touch($cacheFile, time());
                 return $cacheFileLastModified_mtime;
-             } 
-             else {
+            } 
+            else {
                 throw new Exception("SimpleCache HTTP Load Error. HTTP Error Code: $respCode", $respCode);
                 return false;
-             }
+            }
         }
-
-   }
-
-
-   
-   /**
+        
+    }
+    
+    
+    
+    /**
     * reads a file and returns the content
     * 
     * file_get_contents is slightly faster than fopen/fread/fclose, but
@@ -340,10 +340,10 @@ class popoon_helpers_simplecache {
     function readFile($file) {
         return file_get_contents($file);
     }
-   
-   /** creates a full path...
+    
+    /** creates a full path...
     */
-   function mkpath($path) {
+    function mkpath($path) {
         $dirs = explode("/",$path);
         $path = $dirs[0];
         for($i = 1;$i < count($dirs);$i++) {
@@ -352,9 +352,9 @@ class popoon_helpers_simplecache {
                 mkdir($path);
             }
         }
-   }
-
-
+    }
+    
+    
     /**
     * Deletes a directory and all files in it.
     *
@@ -364,8 +364,8 @@ class popoon_helpers_simplecache {
     */
     function deleteDir($dir) {
         if (!($dh = opendir($dir)))
-            return false;
-
+        return false;
+        
         $num_removed = 0;
         $file = readdir($dh);
         while ($file !== false) {
@@ -373,30 +373,30 @@ class popoon_helpers_simplecache {
                 $file = readdir($dh);
                 continue;
             }
-
+            
             $file = $dir . $file;
             if (is_dir($file)) {
                 $file .= '/';
                 $num = $this->deleteDir($file . '/');
                 if (is_int($num))
-                    $num_removed += $num;
+                $num_removed += $num;
             } else {
                 if (unlink($file))
-                    $num_removed++;
+                $num_removed++;
             }
             $file = readdir($dh);
         }
         // according to php-manual the following is needed for windows installations.
         closedir($dh);
         unset( $dh);
-
+        
         if (realpath($dir) != realpath($this->cacheDir)) {  //delete the sub-dir entries  itself also, but not the cache-dir.
             rmDir($dir);
             $num_removed++;
         }
-
+        
         return $num_removed;
     } // end func deleteDir
-
+    
 }
 ?>
