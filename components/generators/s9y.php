@@ -66,13 +66,21 @@ class popoon_components_generators_s9y extends popoon_components_generator {
         $serendipity['serendipityPath'] = BX_PROJECT_DIR."/s9y/";
         $old_include = @ini_get('include_path');
         $old_dir = getcwd();
+	$src =  $this->getAttrib("src");
+	if (substr($src,-4) == "html") {
+		$_SERVER['QUERY_STRING'] = $src;
+		$src="index.php";		
+	}
+	else if (substr($src,-3) != "php") {
+		$src = "index.php";
+	}
         chdir($serendipity['serendipityPath']);
         @ini_set('include_path', $serendipity['serendipityPath'] . PATH_SEPARATOR . $serendipity['serendipityPath'] . 'bundled-libs/' . PATH_SEPARATOR . $old_include);
-        ob_start();
-        require $this->getAttrib("src");
+        ob_start();	
+	require $src;
         $blog_data = ob_get_contents();
         ob_end_clean();
-       
+
         @ini_set($old_include);
         chdir($old_dir);
         $xml = new DomDocument();
