@@ -19,8 +19,8 @@ function __autoload($class) {
                 $incFile = str_replace("_",DIRECTORY_SEPARATOR,$class).".php";
             }
     }
-    if (! include_once($incFile)) {
-        print("couldn't load $class from $incFile\n");
+    if (! @include_once($incFile)) {
+        //print("couldn't load $class from $incFile\n");
     }
 }
     
