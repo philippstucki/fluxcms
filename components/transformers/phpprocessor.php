@@ -33,11 +33,11 @@
 */
 class popoon_components_transformers_phpprocessor extends popoon_components_transformer  {
     
-    var $XmlFormat = "DomDocument";
-    var $PHPErrorMessage = "PHP-Error. See Debug-Output for Details.";
-    var $XMLErrorMessage = "XML-Error. PHP didn't produce valid XML. See Debug-Output for Details.";
-    var $name = "phpprocessor";
-    var $containsPhpPi = false;
+   public $XmlFormat = "DomDocument";
+   public $PHPErrorMessage = "PHP-Error. See Debug-Output for Details.";
+   public $XMLErrorMessage = "XML-Error. PHP didn't produce valid XML. See Debug-Output for Details.";
+   public $name = "phpprocessor";
+   public $containsPhpPi = false;
     
     function __construct () {
         
@@ -50,6 +50,7 @@ class popoon_components_transformers_phpprocessor extends popoon_components_tran
     
     function DomStart(&$xml)
     {
+        
         $ctx = new domxpath($xml);
         $res = $ctx->query("//processing-instruction('php')");
         
@@ -125,7 +126,7 @@ class popoon_components_transformers_phpprocessor extends popoon_components_tran
      *
      * @return bool false
      */
-    function checkValidity(){
+    function checkValidity($validityObject){
         return(true);
     }
 } 
