@@ -55,7 +55,8 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "char-encoding" => "utf8",
             "wrap-attributes" => false,
             "alt-text" => "none",
-            "doctype" => "loose"
+            "doctype" => "loose",
+            "numeric-entities" => true
             );
         
         $options = array_merge($options,$this->getParameter("default") );
