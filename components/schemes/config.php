@@ -33,7 +33,7 @@ function scheme_config($value)
 {
 //we need a factory method for that...    
     //$config = bx_global::getConfigInstance();
-    $config = popoon_classes_config::getInstance();
+    $config = $GLOBALS['POOL']->config;
     return $config->$value;
 }
 	
