@@ -60,7 +60,7 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         file_put_contents($foname,$xml);
         $returnstr =  system(escapeshellcmd($cmd . " $foname $pdfname"),$error);
         if ($error) {
-            print $error;
+//            print $error;
         }
         readfile($pdfname);
         
