@@ -121,11 +121,6 @@ class popoon_helpers_simplecache {
                 }
                 $fd = fopen ($cacheFile,"wb");
             }
-            /* this can be used, if we want to save the vars as php-file, so caches can cache it...
-            fwrite ($fd, '<?php $var = ');
-            fwrite($fd,var_export($data,1));
-            fwrite ($fd, '?>');        
-            */
             if ($type == "serialize") {
                 fwrite ($fd,serialize($data));
             } elseif ($type == "plain" || $type == "file") {
