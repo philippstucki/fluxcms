@@ -64,7 +64,6 @@ class popoon_components_generators_textfile extends popoon_components_generator 
         $xml = new DomDocument();
         $src = $this->getAttrib("src");
         
-        
         $xmlstr = file_get_contents($src);
         if (!$xmlstr) {
             if (!file_exists($src) ) {
@@ -74,9 +73,13 @@ class popoon_components_generators_textfile extends popoon_components_generator 
             } 
         }
         if ($this->getParameterDefault("escapeLTonly") == "true") {
-            if ($xml->loadXML( "<?xml version='1.0' encoding='utf-8' ?><text>".str_replace("<","&lt;",$xmlstr)."</text>")) {
+            if ($xml->loadXML( "<?xml version='1.0' encoding='utf-8' ?><text>".str_replace(array("<",">"),array("&lt;","&gt;"),$xmlstr)."</text>")) {
                 return true;
-            }
+            } else {
+             
+                throw new PopoonXMLParseErrorException($src);  
+            }   
+
         } 
         $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>";
         
