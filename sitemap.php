@@ -359,7 +359,13 @@ class popoon_sitemap {
         $xslincludes = new XsltProcessor();
         $xslincludes->importStylesheet($xslincludesDom);
         $sm = new DomDocument();
-        $sm->load($sitemapRealPath);
+        if (! $sm->load($sitemapRealPath)) {
+            if (!file_exists($sitemapRealPath)) {
+                throw new PopoonFileNotFoundException($sitemapRealPath);
+            } else {
+                throw new PopoonXMLParseErrorException("Could not load $sitemapRealPath");
+            }
+        }
         $xsl->setParameter("","popoonDir",dirname(__FILE__));
         
         $result = $xslincludes->transformToDoc($sm);
