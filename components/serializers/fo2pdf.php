@@ -31,8 +31,8 @@
 */
 class popoon_components_serializers_fo2pdf extends popoon_components_serializer {
     
-    var $XmlFormat = "XmlString";
-    var $contentType = "application/pdf";
+    public $XmlFormat = "XmlString";
+    public $contentType = "application/pdf";
     
     function __construct ($sitemap) {
         
