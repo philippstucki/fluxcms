@@ -1,4 +1,10 @@
 <?php
+/*
+This Exception needs a PHP, if you're using PHP 5.0 to show the full errors.
+-> http://svn.bitflux.ch/repos/public/misc/dompatches/xslt-error-handler.patch
+If not patched, it still works, just doesn't show the exact error messages
+*/
+
 class PopoonXSLTParseErrorException extends Exception {
     
     public function __construct($filename) {
