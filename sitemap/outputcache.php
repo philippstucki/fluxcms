@@ -225,9 +225,7 @@ class popoon_sitemap_outputcache {
 		        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip')) {	
 				return 'x-gzip';
 			}
-//			 if (false === strpos($_SERVER['HTTP_USER_AGENT'],'Technorati')) {
-				return 'gzip';
-//			 }
+			return 'gzip';
 		}
         }
             
