@@ -50,25 +50,47 @@
         </xslout:stylesheet>
     </xsl:template>
 
-    <xsl:template match="xhtml:*[@tal:condition]" priority="10">
+    <xsl:template match="*[@tal:condition]" priority="10">
         <xslout:if test="{bxf:tales(@tal:condition)}">
             <xsl:apply-templates/>
         </xslout:if>
     </xsl:template>
 
 
-    <xsl:template match="xhtml:*[@tal:content]">
+    <xsl:template match="*[@tal:content]">
 
         <xsl:copy>
 
             <xsl:apply-templates select="@*"/>
-            <xslout:apply-templates select="{bxf:tales(@tal:content)}/*|{bxf:tales(@tal:content)}/text()"/>
+            
+            <xsl:choose>
+            <xsl:when test="contains(@tal:content,'@')">
+                <xslout:value-of select="{bxf:tales(@tal:content)}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xslout:copy-of select="{bxf:tales(@tal:content)}/node()"/>
+            </xsl:otherwise>
+            </xsl:choose>
         </xsl:copy>
 
     </xsl:template>
+    
+     <xsl:template match="*[@tal:replace]">
+
+            
+            <xsl:choose>
+            <xsl:when test="contains(@tal:replace,'@')">
+                <xslout:value-of select="{bxf:tales(@tal:replace)}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xslout:copy-of select="{bxf:tales(@tal:replace)}/node()"/>
+            </xsl:otherwise>
+            </xsl:choose>
+        
+    </xsl:template>
 
 
-    <xsl:template match="xhtml:*[@tal:repeat]">
+    <xsl:template match="*[@tal:repeat]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:variable name="v" select="substring-before(@tal:repeat,' ')"/>
@@ -126,7 +148,7 @@
 
     </xsl:template>
 
-    <xsl:template match="xhtml:*">
+    <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:apply-templates/>
