@@ -72,9 +72,11 @@ class popoon_components_readers_resource extends popoon_components_reader {
         if (file_exists($src)) {
             $lastModified = filemtime($src);
             $this->sitemap->setHeaderAndPrint("Last-Modified",gmdate('D, d M Y H:i:s T',$lastModified));
+            $this->sitemap->setUserData("file-location",$src);
             if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ) {
-                if (strtotime($lastModified) <= strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {
+                if ($lastModified <= strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {
                     header( 'HTTP/1.1 304 Not Modified' );
+                    header("X-Popoon-Cache-Status: Resource Reader 304");
                     return true;
                 } 
             }

@@ -159,7 +159,7 @@ class popoon {
             $sm = $this->run(realpath($sitemapFile),$uri,$options);
         }
 
-        if ( $options->doOutputCacheSave())
+        if ( $options->doOutputCacheSave($sm))
         {
             $oc->end($sm, $options->outputCacheExpire);
         }

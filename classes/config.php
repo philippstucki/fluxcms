@@ -75,6 +75,27 @@
       */
      private $outputCacheSave = false;
      
+     /** 
+      * if static file cache should be used
+      *
+      *  If that is true, then files served with reader_resource
+      *  are always cached and checked against local modification.
+      *
+      *  The disadvantage is, that we have to load the output cache classes
+      *   on every hit, even if no static pages are served...
+      *
+      * Additionally you get 304 support for staticFiles.
+      * 
+      * It's save to turn it on, but your mileage may vary with speed improvements
+      *
+      * *****
+      * FIXME: It's turned off by default until we can check it with bytecode caches
+      *  The speed improvements are neglectable right now... and 304 support is built-in
+      *  in reader_resource
+      * *****
+      */
+     public $staticFileCache = false;
+     
      /**
       * The constructor
       * 
@@ -192,6 +213,9 @@
         if ($this->outputCacheCallback && $this->doOutputCacheCallback()) {
             $this->outputCacheSave = true;
             return true;
+        } 
+        if ($this->staticFileCache) {
+            return true;
         }
         return false;
     }
@@ -214,8 +238,21 @@
      * @return bool
      */
      
-    public function doOutputCacheSave() {
-           return  $this->outputCacheSave;
+    public function doOutputCacheSave($sitemap) {
+        // if the outputCacheSave param is set, just return true
+        if ($this->outputCacheSave) {
+           return  true;
+        }
+        /* but we want to use outputcaching for all "components
+            which define _file-location. always. It's quite safe to use that anyway
+            (if you read a file with the resource component for example, it just
+             outputs the content of that file, so if we check, if that file changed,
+             that should be enough to get a reliable cache hit)
+        */
+        if ($this->staticFileCache && isset($sitemap->header["_file-location"]) ) {
+            return true;
+        }
+        return false;
     }
     /**
      *  Sets outputcache handler

@@ -96,18 +96,29 @@ class popoon_sitemap_outputcache {
         }
         $this->id = $this->cache->generateID($idParams);
         if ($content = $this->cache->start($this->id,'outputcache') ) {
-            
             $header = unserialize($this->cache->getUserdata($this->id,'outputcache'));
             $etag = $header['ETag'];
+            
+            if (isset($header['_file-location'])) {
+                if (isset($header['_file-location'])) {
+                    if (strtotime($header['Last-Modified']) < filemtime($header['_file-location'])) {
+                        header("X-Popoon-Cache-Status: File is newer than cache");
+                        return false;
+                    }
+                }
+            }
             foreach ($header as $key => $value) {
-                header("$key: $value");
+                if (substr($key,0,1) != "_") { 
+                    header("$key: $value");
+                }
             }
             if ($this->check304($etag, $header['Last-Modified'])) {
-                header( 'HTTP/1.1 304 Not Modified' );
+                header('HTTP/1.1 304 Not Modified' );
+                header("X-Popoon-Cache-Status: 304");
                 die();
             }
             
-            header("X-Popoon-Cached: true");
+            header("X-Popoon-Cache-Status: true");
             print $content;
             die();
         }
@@ -157,7 +168,10 @@ class popoon_sitemap_outputcache {
         header("Expires: ");
         
         foreach ($sitemap->header as $key => $value) {
-            header("$key: $value");
+            
+            if (substr($key,0,1) != "_") { 
+                header("$key: $value");
+            }
         }
         
         

@@ -190,6 +190,14 @@ class popoon_sitemap {
         $this->header[$name] = $value;
     }
     
+    function setUserData($name, $value) {
+        $this->header['_'.$name] = $value;
+    }
+    
+    function getUserData($name) {
+        return $this->header['_'.$name];
+    }
+    
     
     function setHeaderIfNotExists($name, $value) {
         if (!isset($this->header[$name])) {
@@ -267,12 +275,15 @@ class popoon_sitemap {
         $responseCodeSent = FALSE;
         
         foreach ($this->header as $name => $value) {
+            if (substr($name,0,1) != "_") { 
+             
             // only send response code with first header
             if($responseCodeSent) {
                 header("$name: $value");
             } else {
                 header("$name: $value", TRUE, $this->responseCode);
                 $responseCodeSent = TRUE;
+            }
             }
         }    
         
