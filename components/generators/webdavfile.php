@@ -79,7 +79,7 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
         $w->ServeRequest($this->getParameterDefault("fsroot"));
         //error_log("lll".$_SERVER["SCRIPT_NAME"]);
         $xml = ob_get_contents();
-        //error_log($xml);
+        error_log($xml);
        ob_end_clean();
         return True;
     }

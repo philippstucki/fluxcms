@@ -1,13 +1,13 @@
 <?php
 
-    require_once "HTTP/WebDAV/Server/Filesystem.php";
+    require_once "HTTP/WebDAV/Server/Filesystem_MDB2.php";
     
     /**
      * Filesystem access using WebDAV
      *
      * @access public
      */
-    class HTTP_WebDAV_Server_bxcmsng extends HTTP_WebDAV_Server_Filesystem
+    class HTTP_WebDAV_Server_bxcmsng extends HTTP_WebDAV_Server_Filesystem_MDB2
     {
         /**
          * PROPFIND method handler
@@ -20,12 +20,20 @@
         {
             // get absolute fs path to requested resource
             $fspath = $this->base . $options["path"];
-            
+            $path = "";
             $coll = bx_collections::getCollection($options["path"]."/index.html");
             // sanity check
             if (!$coll) {
-                error_log("404 " .  $options["path"]);
-                return false;
+                $coll = bx_collections::getCollection($options["path"]);
+                
+                //FIXME: we should have a $coll->getResource($filename) method..
+                $ch = $coll->getOutputChildren();
+                $path = $coll->uri;
+                $coll = $ch[str_replace($coll->uri,"",$options["path"])];
+                if (!$coll) {
+                    error_log("404 " .  $options["path"]);
+                    return false;
+                }
             }
             
             
@@ -34,7 +42,7 @@
 
             // store information for the requested path itself
 //
-            $files["files"][] = $this->fileinfo("", $coll);
+            $files["files"][] = $this->fileinfo($path, $coll);
      
             // information for contained resources requested?
              
@@ -126,12 +134,13 @@
             }
 
             // get additional properties from database
+            
             $query = "SELECT ns, name, value FROM properties WHERE path = '$path'";
-            $res = mysql_query($query);
-            while($row = mysql_fetch_assoc($res)) {
+            $res = $this->db->query($query);
+            while($row = $res->fetchRow(MDB2_FETCHMODE_ASSOC)) {
                 $info["props"][] = $this->mkprop($row["ns"], $row["name"], $row["value"]);
             }
-            mysql_free_result($res);
+            $res->free($res);
 
             return $info;
         }
