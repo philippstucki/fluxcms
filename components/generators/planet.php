@@ -35,7 +35,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         
         $this->db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
 
-        $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
+        $xml = '<?xml version="1.0" encoding="utf-8"?>';
         $xml .= '<planet>';
         $xml .= '<search>';
         if ($search) {
@@ -96,7 +96,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
             
             );
             
-            $xml .= $this->mdbResult2XML($res,"blog",array("link","title"));
+            $xml .= $this->mdbResult2XML($res,"blog",array("link","title","author"));
             $xml .= "</blogs>";
         }
         $delicious = $this->getParameterDefault("deliciousRss");
@@ -109,9 +109,8 @@ class popoon_components_generators_planet extends popoon_components_generator {
             $t = $simplecache->simpleCacheHttpRead($uri,1600);
             
             $deldom = new domdocument();
-            
-            //del.ici.ous claims to be utf8, but it isn't..
-            if (@$deldom->loadXML(utf8_encode($t))) {
+	    $t = iconv("UTF-8","UTF-8//IGNORE",$t);            
+            if ($deldom->loadXML($t)) {
                 $xml .= preg_replace("#<\?xml[^>]*\?>#","",$deldom->saveXML());
             }
 
@@ -123,7 +122,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
     function getEntries($from,$section,$startEntry) {
           
         
-        $cdataFields = array("title","link","description","content_encoded","blog_title");
+        $cdataFields = array("title","link","description","content_encoded","blog_title","blog_author");
         $res = $this->db->query('
         SELECT entries.ID,
         entries.title,
