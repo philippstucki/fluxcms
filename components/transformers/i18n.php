@@ -32,7 +32,7 @@
 *     <map:parameter name="driver" value="xml"/>
 *  </map:transform>
 *
-* There are (or will be) different drivers vor getting the values,
+* There are (or will be) different drivers for getting the values,
 *  currently only a xml driver is available. See the source comments
 *  for more details.
 *
