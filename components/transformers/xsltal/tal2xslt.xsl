@@ -137,6 +137,12 @@
             <xsl:when test="$mode = 'text'">
                 <xslout:value-of select="{bxf:tales($spath)}"/>
             </xsl:when>
+            <xsl:when test="$path = 'structure .'">
+                <xslout:copy>
+                    <xslout:apply-templates select="@*"/>
+                    <xslout:apply-templates select="{bxf:tales('')}"/>
+                </xslout:copy>
+            </xsl:when>
             <xsl:when test="$mode = 'structure'">
                 <xslout:apply-templates select="{bxf:tales($spath)}"/>
             </xsl:when>
