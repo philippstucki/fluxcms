@@ -63,7 +63,17 @@ class popoon_components_generators_xmlfile extends popoon_components_generator {
     function DomStart(&$xml)
     {
         $xml = new DomDocument();
-        $xml->load($this->getAttrib("src"));
+        $src = $this->getAttrib("src");
+        if (! $xml->load($src)) {
+            if (!file_exists($src) ) {
+                throw new PopoonFileNotFoundException($src);
+            } else if (!is_file($src)) {
+                throw new PopoonIsNotFileException($src);
+            } else {
+                throw new PopoonXMLParseErrorException($src);  
+            }
+        }
+        
         //$xml = xmldocfile($this->getAttrib("src"));
         return True;
     }

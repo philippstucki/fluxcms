@@ -50,10 +50,10 @@ abstract class popoon_components_generator extends popoon_component {
     *
     *  @param $attribs array	associative array with element attributes
 	*/
-    public function init($attribs)
+    /*public function init($attribs)
     {
     	parent::init($attribs);
-	}
+	}*/
     
     /**
     * Does the generation of the xml Document

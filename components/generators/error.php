@@ -48,7 +48,10 @@ class popoon_components_generators_error extends popoon_components_generator {
     */
     function init($attribs)
     {
+        
         parent::init($attribs);
+        error_log("fooba");
+
     }    
     
     /**
@@ -59,6 +62,7 @@ class popoon_components_generators_error extends popoon_components_generator {
     */
     function DomStart(&$xml)
     {
+
         $xml = new DomDocument();
         
         $e= $this->getParameterDefault("exception");
