@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: fo2pdf.php,v 1.9 2004/03/14 09:18:09 chregu Exp $
+// $Id$
 
 
 
@@ -26,7 +26,7 @@
 *
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: fo2pdf.php,v 1.9 2004/03/14 09:18:09 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_serializers_fo2pdf extends popoon_components_serializer {

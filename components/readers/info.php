@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: info.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/reader.php");
 
@@ -25,7 +25,7 @@ include_once("popoon/components/reader.php");
 * This class gives some info about popoon and variables and phpinfo()
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: info.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class reader_info extends reader {

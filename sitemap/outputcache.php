@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: outputcache.php,v 1.14 2004/03/07 15:46:04 chregu Exp $
+// $Id$
 
 /**
 * Class for doing the sitemap parsing stuff
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: outputcache.php,v 1.14 2004/03/07 15:46:04 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

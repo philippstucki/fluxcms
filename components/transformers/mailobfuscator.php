@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: mailobfuscator.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 
@@ -40,7 +40,7 @@ include_once("popoon/components/transformer.php");
 * I didn't recognize much speed lossess with this module..
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: mailobfuscator.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_mailobfuscator extends transformer {

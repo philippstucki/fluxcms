@@ -17,7 +17,7 @@
 // | Author: Hannes Gassert <hannes@mediagonal.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: usercomments.php,v 1.24 2004/02/23 23:59:31 chregu Exp $
+// $Id$
 
 require_once('popoon/components/generator.php');
 require_once('DB.php');
@@ -49,7 +49,7 @@ require_once('DB.php');
  *
  *
  * @author   Hannes Gassert <hannes@mediagonal.ch>
- * @version  $Id: usercomments.php,v 1.24 2004/02/23 23:59:31 chregu Exp $
+ * @version  $Id$
  * @package  popoon
  */
 class generator_usercomments extends generator {

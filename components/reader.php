@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: reader.php,v 1.6 2004/03/05 14:37:07 chregu Exp $
+// $Id$
 
 
 /**
@@ -28,7 +28,7 @@
 *  I'm not sure, if we really need this 
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: reader.php,v 1.6 2004/03/05 14:37:07 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_reader extends popoon_component {

@@ -17,14 +17,14 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: lang.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 /**
 * detects language
 * value = default lang
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: lang.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module   schemes_config
 */

@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpprocessorsax.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 
@@ -30,7 +30,7 @@ include_once("popoon/components/transformer.php");
 * Warning: No checking about security risks is done at the moment!
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: phpprocessorsax.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_phpprocessorsax extends transformer  {

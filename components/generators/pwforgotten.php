@@ -17,14 +17,14 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: pwforgotten.php,v 1.4 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 
 include_once("popoon/components/generator.php");
 
 /**
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: pwforgotten.php,v 1.4 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class generator_pwforgotten extends generator {

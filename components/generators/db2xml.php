@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: db2xml.php,v 1.20 2004/02/23 23:59:31 chregu Exp $
+// $Id$
 
 
 /**
@@ -29,7 +29,7 @@
 *  in the src attribute..
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: db2xml.php,v 1.20 2004/02/23 23:59:31 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_generators_db2xml extends popoon_components_generator {

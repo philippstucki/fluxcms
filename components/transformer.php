@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: transformer.php,v 1.18 2004/02/24 10:38:14 chregu Exp $
+// $Id$
 
 /**
  * Base-class for all the transformers
@@ -28,7 +28,7 @@
  * method DomStart()
  *
  * @author   Christian Stocker <chregu@bitflux.ch>
- * @version  $Id: transformer.php,v 1.18 2004/02/24 10:38:14 chregu Exp $
+ * @version  $Id$
  * @package  popoon
  */
 

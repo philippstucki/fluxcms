@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: themeinfo.php,v 1.1 2003/04/17 06:26:05 chregu Exp $');
+rcs_id('$Id$');
 
 /*
  * This file defines an appearance ("theme") of PhpWiki similar to the popoon Pattern Repository.

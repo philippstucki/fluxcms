@@ -17,7 +17,7 @@
 // | Author: Hannes Gassert <hannes@mediagonal.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpsource.php,v 1.3 2004/02/23 23:59:32 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 /**
@@ -34,7 +34,7 @@ include_once("popoon/components/transformer.php");
 * Security implications: none I know of
 *
 * @author   Hannes Gassert <hannes@mediagonal.ch>
-* @version  $Id: phpsource.php,v 1.3 2004/02/23 23:59:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_phpsource extends transformer  {

@@ -1,6 +1,6 @@
 <?php
 
-rcs_id('$Id: WikiRequest.php,v 1.1 2003/04/16 20:30:26 chregu Exp $');
+rcs_id('$Id$');
 
 
 include_once "lib/config.php";

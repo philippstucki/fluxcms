@@ -17,12 +17,12 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: tgz.php,v 1.1 2004/03/12 22:48:47 chregu Exp $
+// $Id$
 
 
 /**
  * @author   Christian Stocker <chregu@bitflux.ch>
- * @version  $Id: tgz.php,v 1.1 2004/03/12 22:48:47 chregu Exp $
+ * @version  $Id$
  * @package  popoon
  */
 class popoon_components_readers_tgz extends popoon_components_reader {

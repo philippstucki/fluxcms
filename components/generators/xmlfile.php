@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmlfile.php,v 1.18 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 /**
 * This class reads an xml-file from the filesystem
@@ -25,7 +25,7 @@
 *  Reads the xml-file stated in the "src" attribute in map:generate
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xmlfile.php,v 1.18 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_generators_xmlfile extends popoon_components_generator {

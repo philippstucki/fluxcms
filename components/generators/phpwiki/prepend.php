@@ -7,7 +7,7 @@
 $RCS_IDS = '';
 function rcs_id ($id) { 
 }
-rcs_id('$Id: prepend.php,v 1.1 2003/04/16 20:30:26 chregu Exp $');
+rcs_id('$Id$');
 
 // Used for debugging purposes
 class DebugTimer {

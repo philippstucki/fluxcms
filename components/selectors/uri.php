@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: uri.php,v 1.6 2004/03/12 15:26:27 chregu Exp $
+// $Id$
 
 /**
 * Matches an  uri 
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: uri.php,v 1.6 2004/03/12 15:26:27 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_selectors_uri extends popoon_components_selector

@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: simple.php,v 1.5 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 
 /**
 * Class for generating xml document
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: simple.php,v 1.5 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: options.php,v 1.10 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 /**
 * Deprecated, use globals instead
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: options.php,v 1.10 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module	schemes_options
 * @deprecated  since almost the beginning, use globals:// instead

@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: formwizard.php,v 1.10 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 
 /**
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: formwizard.php,v 1.10 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_formwizard extends transformer {

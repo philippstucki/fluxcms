@@ -17,7 +17,7 @@
 // | Author: Philipp Stucki <philipp@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmlrpc_server.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/generator.php");
 include_once("XML/RPC.php");
@@ -60,7 +60,7 @@ include_once("XML/RPC/Server.php");
 *
 *
 * @author   Philipp Stucki <philipp@bitflux.ch>
-* @version  $Id: xmlrpc_server.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

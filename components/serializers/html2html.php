@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: html2html.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/serializer.php");
 
@@ -32,7 +32,7 @@ include_once("popoon/components/serializer.php");
 *
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: html2html.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

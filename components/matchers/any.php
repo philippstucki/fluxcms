@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: any.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/matcher.php");
 
@@ -30,7 +30,7 @@ include_once("popoon/components/matcher.php");
 * quite handy for testing responses from actions for example
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: any.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class matcher_any extends matcher

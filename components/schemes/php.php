@@ -17,11 +17,11 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: php.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 /**
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: php.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module   schemes_php
 */

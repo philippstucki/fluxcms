@@ -17,14 +17,14 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: BX_PROJECT_DIR.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 /**
 * Reads Options/Values from a config file. can be accessed via
 *  config://foobar in sitemap
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: BX_PROJECT_DIR.php,v 1.4 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module   schemes_config
 */

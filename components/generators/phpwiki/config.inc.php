@@ -58,7 +58,7 @@ if (!defined('DEBUG')) define ('DEBUG', 1);
 /////////////////////////////////////////////////////////////////////
 // Part Null: Don't touch this!
 require (dirname(__FILE__)."/prepend.php");
-rcs_id('$Id: config.inc.php,v 1.2 2003/05/06 15:27:08 chregu Exp $');
+rcs_id('$Id$');
 
 /////////////////////////////////////////////////////////////////////
 //

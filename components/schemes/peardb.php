@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: peardb.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 /**
 * scheme for a global peardb object...
 *
@@ -44,7 +44,7 @@
 *  how many times you call it and it's only created, if you call it.
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: peardb.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module   schemes_peardb
 */

@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch                         |
 // +----------------------------------------------------------------------+
 //
-// $Id: sourceview.php,v 1.5 2004/03/08 07:38:33 chregu Exp $
+// $Id$
 
 /**
 */

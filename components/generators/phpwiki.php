@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpwiki.php,v 1.3 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 include_once("popoon/components/generator.php");
 
 /**
@@ -26,7 +26,7 @@ include_once("popoon/components/generator.php");
 *  Reads the xml-file stated in the "src" attribute in map:generate
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: phpwiki.php,v 1.3 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class generator_phpwiki extends generator {

@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpsource.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/reader.php");
 
@@ -27,7 +27,7 @@ include_once("popoon/components/reader.php");
 * Shows the source of the php file mentioned in the attribute "src"
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: phpsource.php,v 1.3 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class reader_phpsource extends reader {

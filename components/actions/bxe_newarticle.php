@@ -17,14 +17,14 @@
 // | Author: Philipp Stucki <philipp@bitflux.ch>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: bxe_newarticle.php,v 1.11 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 
 include_once("popoon/components/action.php");
 /**
 * Action to insert a new article via bxe
 *
 * @author   Philipp Stucki <philipp@bitflux.ch>
-* @version  $Id: bxe_newarticle.php,v 1.11 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: any.php,v 1.4 2004/03/14 09:17:46 chregu Exp $
+// $Id$
 
 
 /**
@@ -29,7 +29,7 @@
 * quite handy for testing responses from actions for example
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: any.php,v 1.4 2004/03/14 09:17:46 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_selectors_any extends popoon_components_selector

@@ -5,7 +5,7 @@
  *  Parameter about Caching et al. are also stored here
  *
  * @author   Christian Stocker <chregu@bitflux.ch>
- * @version  $Id: config.php,v 1.6 2004/03/12 10:11:35 chregu Exp $
+ * @version  $Id$
  * @example classes/config_cache.php
  * @package  popoon
  */

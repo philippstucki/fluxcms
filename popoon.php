@@ -18,7 +18,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: popoon.php,v 1.24 2004/03/12 10:11:35 chregu Exp $
+// $Id$
 
 // version check
 
@@ -112,7 +112,7 @@ $GLOBALS['_POPOON_errorLevel']= POPOON_ERROR_DEFAULT;
 * Class for doing everything in popoon :)
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: popoon.php,v 1.24 2004/03/12 10:11:35 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon {

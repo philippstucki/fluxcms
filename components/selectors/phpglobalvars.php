@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpglobalvars.php,v 1.6 2004/03/14 09:17:46 chregu Exp $
+// $Id$
 
 
 /**
@@ -31,7 +31,7 @@
 * 
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: phpglobalvars.php,v 1.6 2004/03/14 09:17:46 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

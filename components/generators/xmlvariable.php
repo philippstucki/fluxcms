@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmlvariable.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/generator.php");
 
@@ -27,7 +27,7 @@ include_once("popoon/components/generator.php");
 *  Reads the xml-file stated in the "src" attribute in map:generate
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xmlvariable.php,v 1.5 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class generator_xmlvariable extends generator {

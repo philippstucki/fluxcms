@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmlformatted.php,v 1.19 2004/03/12 15:26:03 chregu Exp $
+// $Id$
 
 include_once("popoon/components/serializer.php");
 
@@ -28,7 +28,7 @@ include_once("popoon/components/serializer.php");
 * webbrowser, for example for debugging...
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xmlformatted.php,v 1.19 2004/03/12 15:26:03 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_serializers_xmlformatted extends popoon_components_serializer {

@@ -23,7 +23,7 @@
  * ( http://search.mnogo.ru/ ) 
  * 
  * @author: silvan zurbruegg <silvan@bitflux.ch>
- * @version: $Id: MnogoSearch.php,v 1.10 2004/02/24 10:38:14 chregu Exp $
+ * @version: $Id$
  * @package  popoon
  */
 

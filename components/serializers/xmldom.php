@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmldom.php,v 1.8 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/serializer.php");
 
@@ -25,7 +25,7 @@ include_once("popoon/components/serializer.php");
 * Outputs the XML-Document as XML
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xmldom.php,v 1.8 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class serializer_xmldom extends serializer {

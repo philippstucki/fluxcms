@@ -17,14 +17,14 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearauth.php,v 1.29 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 
 include_once("popoon/components/action.php");
 /**
 * Class for generating xml document
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: pearauth.php,v 1.29 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 

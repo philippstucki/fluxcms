@@ -19,7 +19,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xmltransformer.php,v 1.11 2004/03/12 15:26:27 chregu Exp $
+// $Id$
 
 
 
@@ -32,7 +32,7 @@
 *  it's said to be much faster than sablotron.
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xmltransformer.php,v 1.11 2004/03/12 15:26:27 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_transformers_xmltransformer extends popoon_components_transformer {

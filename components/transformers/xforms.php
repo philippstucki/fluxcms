@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xforms.php,v 1.45 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 
@@ -35,7 +35,7 @@ include_once("popoon/components/transformer.php");
 *  within one xml document.
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xforms.php,v 1.45 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_xforms extends transformer {

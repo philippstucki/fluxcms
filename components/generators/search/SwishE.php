@@ -24,7 +24,7 @@
  * 
  *
  * @author: silvan zurbruegg <silvan@bitflux.ch>
- * @version: $Id: SwishE.php,v 1.5 2004/02/24 10:38:14 chregu Exp $
+ * @version: $Id$
  * @package  popoon
  */
  

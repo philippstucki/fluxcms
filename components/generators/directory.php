@@ -19,7 +19,7 @@
 // |         Christian Stocker <chregu@bitflux.ch                         |
 // +----------------------------------------------------------------------+
 //
-// $Id: directory.php,v 1.5 2004/02/24 10:38:14 chregu Exp $
+// $Id$
 
 include_once('popoon/components/generator.php');
 
@@ -27,7 +27,7 @@ include_once('popoon/components/generator.php');
 * This class returns xml from directory listing
 *
 * @author   Mike Hommey <mh@glandium.org>
-* @version  $Id: directory.php,v 1.5 2004/02/24 10:38:14 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class generator_directory extends generator {

@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: phpglobals.php,v 1.6 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/matcher.php");
 
@@ -34,7 +34,7 @@ include_once("popoon/components/matcher.php");
 *  <map:match type="phpglobals" var="_SERVER[REQUEST_URI]" pattern="*">
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: phpglobals.php,v 1.6 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class matcher_phpglobals extends matcher

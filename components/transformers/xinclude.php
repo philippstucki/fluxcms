@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xinclude.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+// $Id$
 
 include_once("popoon/components/transformer.php");
 
@@ -25,7 +25,7 @@ include_once("popoon/components/transformer.php");
 * Transforms an XML-Document with the help of libxslt out of domxml
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xinclude.php,v 1.2 2004/02/23 23:47:33 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class transformer_xinclude extends transformer {

@@ -26,7 +26,7 @@
  * Swish-e and MnogoSearch
  * 
  * @author: silvan zurbruegg <silvan@bitflux.ch>
- * @version: $Id: search.php,v 1.21 2004/02/24 10:38:14 chregu Exp $
+ * @version: $Id$
  * @package  popoon
  */
  

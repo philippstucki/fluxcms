@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: structure2xml.php,v 1.42 2004/02/23 23:47:32 chregu Exp $
+// $Id$
 
 include_once("popoon/components/generator.php");
 include_once("popoon/functions/common.php");
@@ -33,7 +33,7 @@ include_once("XML/db2xml.php");
 *   the examples in the popoon      Distribution)
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: structure2xml.php,v 1.42 2004/02/23 23:47:32 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class generator_structure2xml extends generator {
