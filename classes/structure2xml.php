@@ -541,7 +541,8 @@ class popoon_classes_structure2xml {
             
             if (is_null($val) or $val ===    false)
             {
-                $val = 0;
+                continue;
+                //$val = 0;
             }
             else if(is_array($val)) {
                 if (count($val) == 0) {
@@ -561,6 +562,9 @@ class popoon_classes_structure2xml {
             $repl[] = "+".join(" +",explode(" ",$val));
         }
         $where = str_replace($regs,$repl,$where);
+        $where = preg_replace('#\[\[[^\]]*\$[^\]]+\]\]#',"",$where);
+        $where = str_replace(array("[[","]]"),"",$where);
+        
         return $where;
     }
 }
