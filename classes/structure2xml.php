@@ -110,7 +110,7 @@ class popoon_classes_structure2xml {
                     }
                 }
                 else if ( $query['type'] == "aggregate" ) {
-                    if ($this->st2xmlCaching == "true" ) {
+                    if ($this->parent->st2xmlCaching == "true" ) {
                         //http stuff
                         if (strpos($query['query'],"http") === 0 ) {
                             
