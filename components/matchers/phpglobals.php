@@ -37,7 +37,7 @@ include_once("popoon/components/matcher.php");
 * @version  $Id$
 * @package  popoon
 */
-class matcher_phpglobals extends matcher
+class popoon_components_matchers_phpglobals extends popoon_components_matcher
 {
 
     function matcher_phpglobals (&$sitemap) {
