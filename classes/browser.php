@@ -4,7 +4,7 @@
 class popoon_classes_browser {
     
     static private $BrowserName = "Unknown";
-    static private $BrowserSubName = "Unknown";
+    static private $BrowserSubName = "None";
     static private $Version = "Unknown";
     static private $Platform = "Unknown";
     static private $UserAgent = "Not reported";
@@ -52,12 +52,12 @@ class popoon_classes_browser {
         return self::$Platform;
     }
     
-    function getAgent() {
+    static function getAgent() {
         self::init();
         return self::$UserAgent;
     }
     
-    function parse(){
+    static function parse(){
         
         if (!self::$parsed) {
             self::init();
@@ -164,7 +164,9 @@ class popoon_classes_browser {
 
             // finally assign our properties
             self::$BrowserName = strtolower($bd['browser']);
-            self::$BrowserSubName = strtolower($bd['subbrowser']);
+            if (isset($bd['subbrowser'])) {
+                self::$BrowserSubName = strtolower($bd['subbrowser']);
+            }
             self::$Version = $bd['version'];
             self::$Platform = $bd['platform'];
             self::$parsed = true;
