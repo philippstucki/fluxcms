@@ -132,7 +132,7 @@
                 if($ns == "DAV:") {
                     $options["props"][$key][$status] = "403 Forbidden";
                 } else {
-                    bx_resources::setProperty($options['path'],$prop['name'],$prop['ns'], $prop['val']);
+                    bx_resources::setProperty($options['path'],$prop['name'],$prop['val'], $prop['ns']);
                 }
             }
                         
