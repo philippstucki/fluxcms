@@ -65,6 +65,8 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
+        
+        setlocale(LC_ALL,$lang);
         $driver = "popoon_components_transformers_i18n_".$this->getParameterDefault("driver");
         $d = new  $driver($src, $lang);       
 
@@ -98,8 +100,33 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
                 }
             }
             $node->parentNode->removeAttributeNode($node);
+        }
+        
+        // i18n:number
+        
+        /* <i18n:number type="int-currency-no-unit" value="170374" />
+           <i18n:number type="int-currency" value="170374" />
+           and
+           <i18n:number type="percent" value="1.2" />
+           are not supported yet
+           */
+        $res = $ctx->query("//i18n:number");
+        foreach($res as $node) {
+            switch ($node->getAttribute("type")) {
+                case "currency":
+                if ($digits = $node->getAttribute("fraction-digits")) {
+                    $value = money_format("%.${digits}n",$node->getAttribute("value"));
+                } else {
+                   $value = money_format("%n",$node->getAttribute("value"));
+                }
+                   break;
+                case "printf":
+                    $value = sprintf($node->getAttribute("pattern"),$node->getAttribute("value"));
+            }   
+            $node->parentNode->replaceChild($xml->createTextNode($value),$node);
             
         }
+        
     }
 } 
 
