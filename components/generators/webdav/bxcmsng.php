@@ -1,7 +1,5 @@
 <?php
 
-    require_once "HTTP/WebDAV/Server/Filesystem_MDB2.php";
-    
     /**
      * Filesystem access using WebDAV
      *
