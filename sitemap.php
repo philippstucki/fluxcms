@@ -35,6 +35,7 @@ class popoon_sitemap {
     public $file = null;
     public $uri = "";
     public $xml = null;
+    public $rootFile = null;
     
     /**
     * Contains the header, which will be output just before serializing
@@ -114,7 +115,9 @@ class popoon_sitemap {
     *  @return bool
     */
     function __construct($sitemapFile, $uri= null, popoon_classes_config $options = NULL, $maps = NULL) {
-        
+        if (!$this->rootFile) {
+            $this->rootFile = $sitemapFile;
+        }
         //replace class-properties by values in the options-array()
         if ($maps) {
             $this->maps = $maps;
@@ -173,6 +176,7 @@ class popoon_sitemap {
         //include the sitemap file
         $pipelineHit = false;
         include ($sitemapCachedFile);
+        $this->pipelineHit = $pipelineHit;
         return $pipelineHit;
     }
     
@@ -577,7 +581,7 @@ class popoon_sitemap {
             
         }
         // I hope, this doesn't have too many sideeffects
-        $pipelineHit = $this->__construct($file,$this->uri,$this->options, $this->maps);
+        $pipelineHit = $this->__construct($file, $this->uri, $this->options, $this->maps);
         
         
         $this->uri = $old_uri;

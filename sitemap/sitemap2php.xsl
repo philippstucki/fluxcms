@@ -91,10 +91,12 @@
 		$aggregator->init(<xsl:call-template name="generateAttributes"/>);
 		<xsl:apply-templates/>
 		$aggregator->start($this->xml);
+       
 	</xsl:template>		
 	
 	<xsl:template match="map:aggregate/map:part">
 		$aggregator->addPart(<xsl:call-template name="generateAttributes"/>);
+         $pipelineHit = true;
 	</xsl:template>		
 
 	<xsl:template match="map:aggregate/map:part[map:generate]">

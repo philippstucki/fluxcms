@@ -28,16 +28,16 @@ include_once("popoon/components/action.php");
 * @package  popoon
 */
 
-class action_pearauth extends action {
+class popoon_components_actions_pearauth extends popoon_components_action {
 
 	/* these values are schering specific, as soon as i changed the schering sitemap.xml
 		they will be changed to some more appropriate defaults */
-	var $usertable  = "MyGyndoc";
-	var $usernamecol = "Login_Name";
-	var $passwordcol = "Login_Passwd";
-    var $whereAdd = "";
-	var $dbfields = "ID";
-    var $returnPassword = false;
+	protected $usertable  = "MyGyndoc";
+	protected $usernamecol = "Login_Name";
+	protected $passwordcol = "Login_Passwd";
+    protected $whereAdd = "";
+	protected $dbfields = "ID";
+    protected $returnPassword = false;
 
 	/**
     * Constructor
@@ -67,7 +67,7 @@ class action_pearauth extends action {
             "whereAdd" => $this->whereAdd,
             );
     
-	$a = new Auth("DB", $params, "action_pearauth_logi",false);
+	$a = new Auth("MDB2", $params, "action_pearauth_logi",false);
     session_start();
     // if the user is not logged in, try to find out his preferred language
 	// only do it when not logged in, as he can change it later again
