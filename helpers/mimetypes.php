@@ -35,7 +35,8 @@ class popoon_helpers_mimetypes {
             return "application/pdf";
             
             default:
-            if (file_exists($src)) {
+            
+            if (strpos($src,"://") == false && file_exists($src)) {
                 $m =  `file -ib $src`;
                 return $m;
             } else {
