@@ -39,13 +39,17 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
     
     function DomStart(&$xml)
     {   
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            
-            if (strpos($_SERVER['HTTP_REFERER'],"q=")) {
+        if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {	
+            if (isset($_SERVER['HTTP_REFERER'])  && strpos($_SERVER['HTTP_REFERER'],"q=")) {
+		
                 $ref = parse_url($_SERVER['HTTP_REFERER']);
                 parse_str($ref['query'],$para);
                 $query =  $para['q'];
-                if ($query) {
+	    }
+            if (isset($_GET['q'])) {
+		$query = $_GET['q'];
+	     }	
+                if (isset($query)) {
                     parent::DomStart($xml);
                     popoon_sitemap::var2XMLString($xml);
                     $strings = explode(" ", $query);
@@ -56,7 +60,7 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
                     $repl = '$1<span class="searchHighlight">$2</span>';
                     $xml = preg_replace($search,$repl,$xml);
                 }
-            }
+            
         }
         
         
