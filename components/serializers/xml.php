@@ -45,10 +45,11 @@ class popoon_components_serializers_xml extends popoon_components_serializer {
         if (is_object($xml))
         {
             $this->sitemap->hasFinalDom = true;
-            print str_replace("HTML","html",$xml->saveXML());
+            $xml = str_replace("HTML","html",$xml->saveXML());
         }
-        else
-        {	
+        if ($this->getParameter("trickMozillaDisplay")) {
+            print  str_replace("http://www.w3.org/1999/xhtml","http://www.w3.org/1999/xhtml#trickMozillaDisplay",$xml);
+        } else {
             print $xml;
         }
     }
