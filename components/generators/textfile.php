@@ -73,7 +73,14 @@ class popoon_components_generators_textfile extends popoon_components_generator 
                 throw new PopoonIsNotFileException($src);
             } 
         }
-        if (! $xml->loadXML("<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>")) {
+        if ($this->getParameterDefault("escapeLTonly") == "true") {
+            if ($xml->loadXML( "<?xml version='1.0' encoding='utf-8' ?><text>".str_replace("<","&lt;",$xmlstr)."</text>")) {
+                return true;
+            }
+        } 
+        $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>";
+        
+         if (! $xml->loadXML($xmlstr)) {
                 throw new PopoonXMLParseErrorException($src);  
         }
 
