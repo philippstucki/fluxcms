@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: xhtml.php,v 1.7 2004/03/07 12:51:52 chregu Exp $
+// $Id$
 
 include_once("popoon/components/serializer.php");
 
@@ -25,7 +25,7 @@ include_once("popoon/components/serializer.php");
 * Documentation is missing at the moment...
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: xhtml.php,v 1.7 2004/03/07 12:51:52 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_serializers_xhtml extends popoon_components_serializer {
@@ -43,16 +43,20 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
 
     function DomStart(&$xml)
     {
-         parent::DomStart($xml);
-        if (is_object($xml))
-        {
+        parent::DomStart($xml);
+        
+        if (is_object($xml)) {
             $this->sitemap->hasFinalDom = true;
-            print $this->cleanXHTML($xml->saveXML());
+            $xml = $xml->saveXML();
         }
-        else
-        {   
-            print $this->cleanXHTML($xml);
+        if ($errhandler = $this->getParameterDefault("outputErrors")) {
+            $err = $this->getErrorReporting($errhandler);
+            if ($err) {
+                $xml = str_replace("</html>",$err."</html>",$xml);
+            }
         }
+        print $this->cleanXHTML($xml);
+        
     }
         
     function cleanXHTML($xml) {
@@ -65,8 +69,19 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                 return str_replace('mailto:','&#109;&#97;&#105;&#108;&#116;&#111;&#58;',str_replace('@','&#64;',$xml));
         }
 	return $xml;
-	
     }
+    
+    function getErrorReporting($class) {
+        eval('$err = '.$class.'::getInstance();');
+        if ($err->hasErrors()) {
+            return $err->getHtml();
+        } else {
+            return null;
+        }
+        restore_error_handler();
+    }
+	
+    
 
         
 }
