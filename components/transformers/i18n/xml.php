@@ -41,15 +41,24 @@
 
 
 class popoon_components_transformers_i18n_xml {
+
+    protected $catctx = NULL;
     
     function __construct($src,$lang) {
-        if (!$cat =@domdocument::load($src.'_'.$lang.'.xml')) {
-            $lang =  substr($lang,0,-(strrpos($lang,"_")+1));
-            $cat = domdocument::load($src.'_'.$lang.'.xml');
+        if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
+            $lang = substr($lang,0,-(strrpos($lang,"_")+1));
+            $cat = @domdocument::load($src.'_'.$lang.'.xml');
         }
-        $this->catctx = new DomXpath($cat);
+
+        if($cat instanceof DOMDocument) {
+            $this->catctx = new DomXpath($cat);
+        }
     }
+
     function getText($key) {
+        if(!isset($this->catctx)) {
+            return FALSE;
+        }
         $catres = $this->catctx->query('/catalogue/message[@key = "'.$key.'"]');
         if($catres && $catres->length > 0) {
             return $catres->item(0)->nodeValue;
