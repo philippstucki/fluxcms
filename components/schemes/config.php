@@ -17,21 +17,23 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: config.php,v 1.13 2004/03/05 14:37:07 chregu Exp $
+// $Id$
 
 /**
 * Reads Options/Values from a config file. can be accessed via
 *  config://foobar in sitemap
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: config.php,v 1.13 2004/03/05 14:37:07 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module   schemes_config
 */
 
 function scheme_config($value)
 {
-    $config = bx_global::getConfigInstance();
+//we need a factory method for that...    
+    //$config = bx_global::getConfigInstance();
+    $config = popoon_classes_config::getInstance();
     return $config->$value;
 }
 	
