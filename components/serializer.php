@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: serializer.php,v 1.22 2004/03/07 12:51:52 chregu Exp $
+// $Id$
 
 
 /**
@@ -26,7 +26,7 @@
 *	Serializers are used for outputting the actual data with <map:serializer>
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: serializer.php,v 1.22 2004/03/07 12:51:52 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 
@@ -41,6 +41,14 @@ abstract class popoon_components_serializer extends popoon_component {
         parent::init($attribs);
         $this->sitemap->setContentType($this->contentType);
         $this->sitemap->setCacheHeaders($this->getAttrib("noHttpCaching") == "true");
+        foreach ($this->getParameter("header") as $key => $value) {
+            if ($key == "HTTP") {
+                header("HTTP/1.0 ". $value);
+            } else {
+                $this->sitemap->setHeader($key,$value);
+            }
+        }
+        
     }
 
 	protected function DomStart(&$xml) {
