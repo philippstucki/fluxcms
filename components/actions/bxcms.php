@@ -46,13 +46,12 @@ class popoon_components_actions_bxcms extends popoon_components_action {
         if (strpos($fulluri,".") === false) {
             $fulluri .= "/index.html";   
         }
-
-        $collection = bx_collections::getCollection($fulluri);
+        $parts = bx_collections::getCollectionAndFileParts($fulluri);
+        $collection = $parts['coll'] ;
         
-        $filename = preg_replace("#^/#","",str_replace($collection->uri,"",$fulluri));
-        $parts = explode(".",$filename);
-        $ext = array_pop($parts);
-        $filename = implode(".",$parts);
+        $filename = $parts['name'];
+        $ext = $parts['ext'];
+      
         $res = $collection->resourceExists($filename,$ext);
         
         if(!$res) {
