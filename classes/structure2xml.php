@@ -8,7 +8,7 @@ class popoon_classes_structure2xml {
     
     function __construct($parent) {
         $this->parent = $parent;
-        $this->api = bx_helpers_simplecache::getInstance();
+        $this->api = popoon_helpers_simplecache::getInstance();
         if (isset($this->parent->db)) {
             $this->db = $this->parent->db;
         } elseif (isset($GLOBALS['POOL']->db)) {

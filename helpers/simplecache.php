@@ -37,7 +37,7 @@ class popoon_helpers_simplecache {
 
         if (!isset($instance))
         {
-            $instance = new bx_helpers_simplecache();
+            $instance = new popoon_helpers_simplecache();
         }
         return $instance;
     }

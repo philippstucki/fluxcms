@@ -75,7 +75,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
         
         
         
-        $this->api = bx_helpers_simplecache::getInstance();
+        $this->api = popoon_helpers_simplecache::getInstance();
         // get the queries, either cached from file system or generated
         
         if (is_null($this->queries)) {
