@@ -52,19 +52,19 @@ class popoon_components_actions_bxcms extends popoon_components_action {
         $filename = $parts['name'];
         $ext = $parts['ext'];
       
-        $res = $collection->resourceExists($filename,$ext);
         
-        if(!$res) {
+        if($collection === FALSE || !$collection->resourceExists($filename,$ext)) {
+
             print "not found";
             return array();
-        }
+        } else {
 
-        return array("collection" => $collection,
-                     "collectionUri" => $collection->uri,
-                     "filename" => $filename,
-                     "ext" => $ext
-        
-        );
-         
+            return array(
+                "collection" => $collection,
+                "collectionUri" => $collection->uri,
+                "filename" => $filename,
+                "ext" => $ext
+            );
+        }
     }
 }
