@@ -451,7 +451,7 @@ class popoon_sitemap {
 		//checks if value  ends with } and starts with { with no { after the first position
                 // then we don't need this fairly complicated preg from below and can substitute also arrays and alike
                 
-        if (substr ($scheme["value"], -1,1) == "}" && strrpos ( $scheme["value"], "{") === 0) {
+        if ( !$onSitemapGeneration  && substr ($scheme["value"], -1,1) == "}" && strrpos ( $scheme["value"], "{") === 0) {
                 $scheme["value"] = substr($scheme["value"],1,-1);
                 
                 $scheme["value"] = @$this->maps[substr_count($scheme["value"],'../')][str_replace("../","",$scheme["value"])];
@@ -659,6 +659,7 @@ function sitemap_formatValues($value) {
     }
     // translate translatabe scheme      
     $value = popoon_sitemap::translateScheme($value,array(),true);
+    
     return sitemap_fixValue($value);
 }
     
