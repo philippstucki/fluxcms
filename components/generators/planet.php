@@ -30,6 +30,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
             $TZ = sprintf("+%02d:00",abs($GLOBALS['BX_config']['webTimezone']));
         }
         
+        $startEntry = $this->getParameterDefault("startEntry");
+        if (!$startEntry) {$startEntry = 0;}
+        
         $xml = '<?xml version="1.0" encoding="iso-8859-1"?>';
         $xml .= '<planet>';
         
@@ -50,7 +53,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join feeds on entries.feedsID = feeds.ID
         left join blogs on feeds.blogsID = blogs.ID
         order by entries.dc_date DESC 
-        limit 10 ');
+        limit '.$startEntry . ',10');
         
         $xml .= '<entries>';
         $xml .= $this->mdbResult2XML($res,"entry",$cdataFields);
