@@ -57,6 +57,13 @@
         </xslout:stylesheet>
     </xsl:template>
 
+    <xsl:template match="xhtml:*[@tal:condition]" priority="10">
+        <xslout:if test="{bxf:tales(@tal:condition)}">
+            <xsl:apply-templates />
+        </xslout:if>
+    </xsl:template>
+    
+    
     <xsl:template match="xhtml:*[@tal:content]">
 
         <xsl:copy>
