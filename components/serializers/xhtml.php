@@ -53,8 +53,13 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             }
             return true;
         }
+        $encoding = $this->getParameterDefault("contentEncoding");
         
         if (is_object($xml)) {
+                if ($encoding) {
+                        $xml->encoding = $encoding;
+                }
+
             $this->sitemap->hasFinalDom = true;
             $xmlstr = $xml->saveXML();
         } else {
