@@ -56,9 +56,9 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     function init($attribs) {
         parent::init($attribs);
         if ($this->dsn) {
-            $this->db= bx_helpers_db::getDbFromDsn($this->dsn);
+            $this->db= bx_helpers_db::getDbFromDsn($this->dsn,$this->getParameterDefault("dboptions"));
         }
-        
+     
     }
     
     function DomStart(&$xml)
@@ -82,7 +82,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
         
-        $sql2xml = new xml_db2xml($this->db,"bx","Extended");
+        $sql2xml = new XML_db2xml($this->db,"bx","Extended");
         
         // i should add this for all options .... later maybe
         if (!(is_null($this->getAttrib("xml_seperator")) ))

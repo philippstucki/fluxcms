@@ -43,7 +43,10 @@ function scheme_config_onSitemapGeneration($value) {
         return '\'.$GLOBALS[\'POOL\']->config->'.$value.".'";
     } else {
         
-        return "\''".'.$GLOBALS[\'POOL\']->config->'.$value.".'\'";
+        return '\'.is_array($GLOBALS[\'POOL\']->config->dsn) ? ' .
+            '$GLOBALS[\'POOL\']->config->dsn : ' .
+            '"\'".$GLOBALS[\'POOL\']->config->'.$value.'."\'".\'';
+            
     }
 }
 	
