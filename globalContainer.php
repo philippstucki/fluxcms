@@ -20,7 +20,7 @@
 // $Id: globalContainer.php,v 1.10 2004/03/08 08:05:49 chregu Exp $
 
 /**
-* Documentation is missing at the moment...
+* Do we still need this?
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id: globalContainer.php,v 1.10 2004/03/08 08:05:49 chregu Exp $
