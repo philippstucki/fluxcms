@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0" xmlns:bxf="http://bitflux.org/functions" xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xslout="whatever" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:func="http://exslt.org/functions" extension-element-prefixes="func">
+<xsl:stylesheet version="1.0"  xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns:bxf="http://bitflux.org/functions" xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xslout="whatever" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:func="http://exslt.org/functions" extension-element-prefixes="func">
 
     <xsl:namespace-alias stylesheet-prefix="xslout" result-prefix="xsl"/>
     <func:function name="bxf:tales">
@@ -19,7 +19,7 @@
             <xslout:output encoding="utf-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
             <xsl:apply-templates select="//*[@tal:include]" mode="init"/>
             <xsl:apply-templates select="//*[@tal:match]" mode="init"/>
-
+            <xsl:apply-templates select="//*[@metal:use-macro]" mode="init"/>
             <xslout:template match="/">
 
                 <xsl:apply-templates/>
@@ -46,7 +46,28 @@
         </xslout:if>
     </xsl:template>
 
-
+    <xsl:template match="*[@metal:use-macro]">
+        <xsl:variable name="doc" select="substring-before(@metal:use-macro,'#')"/>
+        <xsl:variable name="path" select="substring-after(@metal:use-macro,'#')"/>
+        <xsl:apply-templates select="document($doc)//*[@metal:define-macro = $path]"/>
+     </xsl:template>
+     
+     <xsl:template match="*[@metal:use-macro]" mode="init">
+        <xsl:variable name="doc" select="substring-before(@metal:use-macro,'#')"/>
+        <xsl:variable name="path" select="substring-after(@metal:use-macro,'#')"/>
+        <xsl:apply-templates select="document($doc)//*[@metal:define-macro = $path]" mode="init"/>
+     </xsl:template>
+     
+     <xsl:template match="text()" mode ="init">
+        <xsl:if test="ancestor::*[@tal:match]">
+            <xsl:copy/>
+        </xsl:if>
+     </xsl:template>
+     
+     
+    
+    <xsl:template match="@metal:define-macro">
+    </xsl:template>
     <xsl:template match="*[@tal:content]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
