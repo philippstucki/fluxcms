@@ -19,9 +19,6 @@
 //
 // $Id$
 
-include_once("popoon/components/generator.php");
-include_once("popoon/functions/common.php");
-include_once("XML/db2xml.php");
 
 /**
 * Module for generating an XML-Document with the help of a structure File
@@ -36,7 +33,7 @@ include_once("XML/db2xml.php");
 * @version  $Id$
 * @package  popoon
 */
-class generator_structure2xml extends generator {
+class popoon_components_generators_structure2xml extends popoon_components_generator {
 
 	// do st2xmlCaching;
 	var $st2xmlCaching = false;
@@ -52,14 +49,14 @@ class generator_structure2xml extends generator {
     var $db =false;
     var $dsn = "";
 
-	function generator_structure2xml (&$sitemap) {
-		$this->generator($sitemap);
+	function __construct (&$sitemap) {
+		parent::__construct($sitemap);
     }
 	
     function init($attribs) {
         parent::init($attribs);
         if ($this->dsn) {
-            $this->db= common::getDbFromDsn($this->dsn);
+            $this->db= bx_plugins_dbform_common::getDbFromDsn($this->dsn);
         }
         
     }
@@ -77,20 +74,16 @@ class generator_structure2xml extends generator {
     {
 
         
-  		require_once("bitlib/admin/php/api.php");
-		$this->api = admin_api::getInstance();
+  		
+		$this->api = bx_helpers_simplecache::getInstance();
         // get the queries, either cached from file system or generated
 
         if (is_null($this->queries)) {
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
-
-        if (phpversion("domxml") >= 20030405) {
-            $sql2xml = new xml_db2xml($this->db,"iba","Extended_NG",array("Sql_NG","Dbresult_NG","Array","Http","File","XmlObject","String"));
-        } else {
-            $sql2xml = new xml_db2xml($this->db,"iba","Extended");
-        }
-
+  
+        $sql2xml = new xml_db2xml($this->db,"bx","Extended");
+  
 		// i should add this for all options .... later maybe
         if (!(is_null($this->getAttrib("xml_seperator")) ))
         {
@@ -219,7 +212,7 @@ class generator_structure2xml extends generator {
     function Structures2Sql ($configFile,$sqlOptions=array(),$rootpath= "/structure")
     {
 
-        $configClass = common::getConfigClass($configFile);
+        $configClass = bx_plugins_dbform_common::getConfigClass($configFile);
 
         $dbMainStructure = $configClass->getValues( $rootpath);
 		if (is_array($dbMainStructure['children']))
@@ -263,10 +256,10 @@ class generator_structure2xml extends generator {
 
     }
 
-    function Structure2Sql ( $configFile ,&$tableInfo,$sqlOptions=array(),$rootpath = "/ibaconfig/structure")
+    function Structure2Sql ( $configFile ,&$tableInfo,$sqlOptions=array(),$rootpath = "/bxconfig/structure")
     {
         //if it's a string, then it musst be a file, otherwise it's already a config class
-        $configClass = common::getConfigClass($configFile);
+        $configClass = bx_plugins_dbform_common::getConfigClass($configFile);
 
         $dbMasterValues = $configClass->getValues( $rootpath);
         // if dont is set, then stop the query building... and return nothing, not used at the moment
@@ -510,7 +503,7 @@ class generator_structure2xml extends generator {
     
     	//here comes the new cache code
 
-        $config = common::getConfigClass($configXml);
+        $config = bx_plugins_dbform_common::getConfigClass($configXml);
         if (!$this->queryCacheOptions) {
           $this->queryCacheOptions = $PageOptions;
         } 
