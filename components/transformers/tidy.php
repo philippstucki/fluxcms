@@ -66,7 +66,11 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
         $tidy->parseString($xml,$options);
         $tidy->cleanRepair();
         $xml = (string) $tidy;
-    }
+	if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
+		$xml = str_replace('xmlns=""','',$xml);
+	}
+	
+}
 }
 
 
