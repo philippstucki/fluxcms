@@ -53,8 +53,8 @@ function scheme_phpglobals($value)
 }
 
 function scheme_phpglobals_onSitemapGeneration($value) {
-    
-        $value = "'.$".str_replace("[","['",str_replace("]","']",$value)).".'";
+        $var = '$'.str_replace("[","['",str_replace("]","']",$value));
+        $value = "'. isset(".$var.") ? " . $var . " : NULL .'";
         return $value;
     
     
