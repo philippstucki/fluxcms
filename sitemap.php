@@ -495,7 +495,7 @@ class popoon_sitemap {
                     return $value;
                 }
             } else {
-                return call_user_func("scheme_".$scheme["scheme"],$scheme["value"],&$this);
+                return call_user_func("scheme_".$scheme["scheme"],$scheme["value"],$this);
             }
         }
         else {
