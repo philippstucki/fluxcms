@@ -22,6 +22,8 @@
 /**
 * Do we still need this?
 *
+* Otherwise we delete it later
+*
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id: globalContainer.php,v 1.10 2004/03/08 08:05:49 chregu Exp $
 * @package  popoon
