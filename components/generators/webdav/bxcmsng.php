@@ -243,37 +243,100 @@
             
             
             
-            $fspath = BX_DATA_DIR.$fspath;
             
-            //$options["new"] = ! file_exists($fspath);
-            $options["new"] = false;
+            $p = bx_collections::getCollectionAndFileParts($options["path"]);
+            $fspath = $p['coll']->getInputContentUri($p['name'],$p['ext']);
+            
+            $options["new"] = ! file_exists($fspath);
+            //$options["new"] = false;
             $fp = fopen($fspath, "w");
-             bx_resources::setProperty($options["path"],"mime-type","bx","text/html");
+            $p['coll']->initResource($p['name'],$p['ext']);
+            
             return $fp;
         }
         
-        function getStreamType($path) {
-          
-          $extension = substr(trim($path),strrpos(trim($path),".")+1);
-          switch($extension) {
-              case "html":
-                include_once("popoon/streams/tidy.php");
-                stream_wrapper_register("tidy", "TidyStream");
-                return "tidy";
-                break;
-              case "sxw":
-                include_once("popoon/streams/ooo.php");
-                stream_wrapper_register("ooo", "OooStream");
-                return "ooo";
-              case "wiki":
-                include_once("popoon/streams/wiki.php");
-                stream_wrapper_register("wiki", "WikiStream");
-                return "wiki";  
-              default:
-                return null;
-          }
-              
+   
+    /**
+         * COPY method handler
+         *
+         * @param  array  general parameter passing array
+         * @return bool   true on success
+         */
+        function copy($options, $del=false) 
+        {
+            // TODO Property updates still broken (Litmus should detect this?)
+
+            
+            if(!empty($_SERVER["CONTENT_LENGTH"])) { // no body parsing yet
+                return "415 Unsupported media type";
+            }
+
+            // no copying to different WebDAV Servers yet
+            if(isset($options["dest_url"])) {
+                return "502 bad gateway";
+            }
+
+            $source = $this->base .$options["path"];
+            if(!file_exists($source)) return "404 Not found";
+
+            $dest = $this->base . $options["dest"];
+
+            $new = !file_exists($dest);
+            $existing_col = false;
+
+            if(!$new) {
+                if($del && is_dir($dest)) {
+                    if(!$options["overwrite"]) {
+                        return "412 precondition failed";
+                    }
+                    $dest .= basename($source);
+                    if(file_exists($dest.basename($source))) {
+                        $options["dest"] .= basename($source);
+                    } else {
+                        $new = true;
+                        $existing_col = true;
+                    }
+                }
+            }
+
+            if(!$new) {
+                if($options["overwrite"]) {
+                    $stat = $this->delete(array("path" => $options["dest"]));
+                    if($stat{0} != "2") return $stat; 
+                } else {                
+                    return "412 precondition failed";
+                }
+            }
+
+            if (is_dir($source)) {
+                // RFC 2518 Section 9.2, last paragraph
+                if ($options["depth"] != "infinity") {
+                    error_log("---- ".$options["depth"]);
+                    return "400 Bad request";
+                }
+                system(escapeshellcmd("cp -R ".escapeshellarg($source) ." " .  escapeshellarg($dest)));
+
+                if($del) {
+                    system(escapeshellcmd("rm -rf ".escapeshellarg($source)) );
+                }
+            } else {                
+                if($del) {
+                    @unlink($dest);
+                    $query = "DELETE FROM properties WHERE path = '$options[dest]'";
+                    $this->db->query($query);
+                    rename($source, $dest);
+                    $query = "UPDATE properties SET path = '$options[dest]' WHERE path = '$options[path]'";
+                    $this->db->query($query);
+                } else {
+                    if(substr($dest,-1)=="/") $dest = substr($dest,0,-1);
+                    copy($source, $dest);
+                }
+            }
+
+            return ($new && !$existing_col) ? "201 Created" : "204 No Content";         
         }
+
+              
         
         
     }
