@@ -38,4 +38,22 @@ class popoon_classes_externalinput {
         
         return $string;
     }
+    
+    static function removeMagicQuotes($data) {
+        
+        if (get_magic_quotes_gpc()) {
+            $newdata = array();
+            foreach ($data as $name => $value) {
+                $name = stripslashes($name);
+                if (is_array($value)) {
+                    $newdata[$name] = self::removeMagicQuotes($value);
+                } else {
+                    $newdata[$name] = stripslashes($value);
+                }
+            }
+            return $newdata;
+        }
+        return $data;
+        
+    }
 }   
