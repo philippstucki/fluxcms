@@ -194,6 +194,15 @@ class popoon_sitemap {
         $this->header[$name] = $value;
     }
     
+    /**
+    * Sets multiple headers which are merged into the existing ones. 
+    *
+    * @param array $value headers to be set
+    */
+    function setHeaders($headers) {
+        $this->header = array_merge($this->header, $headers);
+    }
+    
     function setUserData($name, $value) {
         $this->header['_'.$name] = $value;
     }
