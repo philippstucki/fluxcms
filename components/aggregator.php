@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: aggregator.php,v 1.15 2004/03/12 15:26:27 chregu Exp $
+// $Id$
 
 /**
 * Class for aggregating content
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: aggregator.php,v 1.15 2004/03/12 15:26:27 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 class popoon_components_aggregator extends popoon_component {
@@ -69,7 +69,7 @@ class popoon_components_aggregator extends popoon_component {
         }
         $stripRoot = false;
         if (isset($attribs["strip-root"])) {
-            $stripRoot = sitemap::translateScheme($attribs["strip-root"]);
+            $stripRoot = popoon_sitemap::translateScheme($attribs["strip-root"]);
         }
         
         if ($xmlInput)  {
