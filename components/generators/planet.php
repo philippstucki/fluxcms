@@ -97,7 +97,23 @@ class popoon_components_generators_planet extends popoon_components_generator {
             $xml .= $this->mdbResult2XML($res,"blog",array("link","title"));
             $xml .= "</blogs>";
         }
-        
+        $delicious = $this->getParameterDefault("deliciousRss");
+        if ($delicious) {
+            $simplecache = new popoon_helpers_simplecache();
+
+            $simplecache->cacheDir = BX_TEMP_DIR;
+            $uri = 'http://del.icio.us:80/rss/'.$delicious;
+
+            $t = $simplecache->simpleCacheHttpRead($uri,1600);
+            
+            $deldom = new domdocument();
+            
+            //del.ici.ous claims to be utf8, but it isn't..
+            if (@$deldom->loadXML(utf8_encode($t))) {
+                $xml .= preg_replace("#<\?xml[^>]*\?>#","",$deldom->saveXML());
+            }
+
+        }
         $xml .= "</planet>";
         return TRUE;
     }
