@@ -17,13 +17,13 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: sitemap.php,v 1.50 2004/03/12 15:26:27 chregu Exp $
+// $Id$
 
 /**
 * Class for doing the sitemap parsing stuff
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: sitemap.php,v 1.50 2004/03/12 15:26:27 chregu Exp $
+* @version  $Id$
 * @package  popoon
 */
 
@@ -376,39 +376,11 @@ class popoon_sitemap {
         if (is_string ($xmldoc))
         {
 
-            if (version_compare(phpversion(),"4.3.0") >= 0) {
-                // we have 4.3, so we can use the "nicer" errorsystem
-                $_xmldoc = xmldoc($xmldoc, 0,&$errors);
-                if ($errors) {
-                    print "<pre>";
-                    print "XML ERRORS!<br/>";
-                    print_r($errors);
-                    print "<hr>";
-                    print "The XML document was:";
-                    print "<hr>";
-                    print "<pre>";
-                    $xmldoc = explode ("\n",$xmldoc);
-                    $_len = count($xmldoc);
-                    foreach($errors as $error) {
-                        $lineerrors[$error['line']] = $error['col'];
-                    }
-                    for ($i=0; $i < $_len; $i++) {
-                        print htmlentities($xmldoc[$i]);
-                        print "\n";
-                        if (isset($lineerrors[$i + 1])) {
-                            print "<font color='red'>";
-                            print str_repeat("-",$lineerrors[$i + 1] -1);
-                            print "^";
-                            print "</font>\n";
-                        }
-                    }
-               }
-               $xmldoc = $_xmldoc;
-               unset ($_xmldoc);
-            }
-            else {
-                $xmldoc = xmldoc($xmldoc);
-            }
+            $xmldom = new DomDocument();
+            
+            $xmldom->loadXML($xmldoc);
+            $xmldoc=$xmldom;
+            
 
         }
         if ( strtolower(get_class($xmldoc)) != "domdocument")
