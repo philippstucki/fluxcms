@@ -147,7 +147,7 @@ class popoon_sitemap_outputcache {
         $content =  ob_get_contents();
         ob_end_clean();
         $etag =  md5($content);
-        $sitemap->setHeader("ETag", $etag);
+        $sitemap->setHeader("ETag", '"'.$etag.'"');
         if ($this->options->outputCacheSave !== 304) {
         $metadata = $this->cache->get($this->id.'.meta','outputcache.meta');
         $lastModified = null;
