@@ -86,7 +86,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
 
     private function stripScriptCDATA($xml) {
+	//strip empty (Whitespace only) CDATA
+	$xml = preg_replace("#<!\[CDATA\[\W*\]\]>#","",$xml);
+	// strip CDATA just after <script>
         $xml = preg_replace("#(<script[^>]*>)\W*<!\[CDATA\[#","$1",$xml);
+	// strip ]]> just before </script>
         return preg_replace("#\]\]>\W*(</script>)#","$1",$xml);
     }
     
