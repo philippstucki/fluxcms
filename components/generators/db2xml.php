@@ -45,7 +45,7 @@ class popoon_components_generators_db2xml extends popoon_components_generator {
 		$mode = $this->getAttrib("mode");
 
 		if ($mode) {
-    		$db2xml = new xml_db2xml($this->getAttrib("dsn"),"iba","$mode");
+    		$db2xml = new xml_db2xml($this->getAttrib("dsn"),"bx","$mode");
 		} else {
 			$db2xml = new xml_db2xml($this->getAttrib("dsn"));
 		}
@@ -72,11 +72,11 @@ class popoon_components_generators_db2xml extends popoon_components_generator {
 				  }
 			
 			}
-			$xml = $db2xml->getXMLObject();		
+			$xml = $db2xml->getXMLObject();
             
 		}
        
-        $db2xml->unlinkReferences();
+       // $db2xml->unlinkReferences();
         unset($db2xml);
         
         
