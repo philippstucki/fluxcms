@@ -225,10 +225,9 @@ class popoon_sitemap_outputcache {
 		        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip')) {	
 				return 'x-gzip';
 			}
-			//The Technorati Bot has some problems with our compression... don't know why..
-			 if (false === strpos($_SERVER['HTTP_USER_AGENT'],'Technorati')) {
+//			 if (false === strpos($_SERVER['HTTP_USER_AGENT'],'Technorati')) {
 				return 'gzip';
-			 }
+//			 }
 		}
         }
             
