@@ -181,7 +181,7 @@ Class MnogoSearch  {
 				$row = array();
 				foreach($this->ResField as $field) {
 					if($fval = udm_get_res_field($this->_result,$i,$field[1])) {
-						if ( $field[0] == 'text') {
+						if ( $field[0] == 'text' || $field[0] == 'title') {
 							$fval = $this->ParseDocText($fval);
 						}
 						$row[$field[0]] = $fval;
