@@ -7,19 +7,15 @@ class popoon_classes_externalinput {
     // use it whereever you get external input    
 
     static function basicClean($string) {
-        
         if (get_magic_quotes_gpc()) {
             $string = stripslashes($string);
         }
         $string = str_replace(array("&amp;","&lt;","&gt;"),array("&amp;amp;","&amp;lt;","&amp;gt;",),$string);
         
         $string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
-        $string = preg_replace('#</*(script|embed|object)[^>]*>#i',"",$string);
-        $string = preg_replace('#(<[^>]+)\son[^>]*>#iU',"$1>",$string);
-        $string = preg_replace('#([a-z]*)\s*=\s*([\'\"]*)\s*j\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\s*:#i','$1=$2nojavascript...',$string);
-        //convert & back to &amp; 
-       // $string = str_replace("&","&amp;",$string);
-        
-        return $string;
+        $string = preg_replace('#</*(script|embed|object|iframe)[^>]*>#i',"",$string);
+        $string = preg_replace('#(<[^>]+)[\s\r\n]on[^>]*>#iU',"$1>",$string);
+        $string = preg_replace('#([a-z]*)[\s\r\n]*=[\s\r\n]*([\'\"]*)[\s\r\n]*j[\s\r\n]*a[\s\r\n]*v[\s\r\n]*a[\s\r\n]*s[\s\r\n]*c[\s\r\n]*r[\s\r\n]*i[\s\r\n]*p[\s\r\n]*t[\s\r\n]*:#iU','$1=$2nojavascript...',$string);
+       return $string;
     }
 }
