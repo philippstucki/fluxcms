@@ -16,7 +16,9 @@ class popoon_classes_browser {
     
     static function init() {
         if (!self::$initialized) {
-            self::$UserAgent = $_SERVER['HTTP_USER_AGENT'];
+	    if (isset( $_SERVER['HTTP_USER_AGENT'])) {
+	            self::$UserAgent = $_SERVER['HTTP_USER_AGENT'];
+	    }
             self::$initialized = true;
         }
     }
