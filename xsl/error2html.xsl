@@ -20,12 +20,14 @@
         </title>
         <style>
           h1 { color: #336699; text-align: left; margin: 0px 0px 30px 0px; padding: 0px; border-width: 0px 0px 1px 0px; border-style: solid; border-color: #336699;}
-          p.message { padding: 10px 30px 10px 30px; font-weight: bold; font-size: 130%; border-width: 1px; border-style: dashed; border-color: #336699; }
+          .userInfo , p.message { padding: 10px 30px 10px 30px; font-weight: bold; font-size: 130%; border-width: 1px; border-style: dashed; border-color: #336699; }
           p.code { padding: 10px 30px 10px 30px; font-weight: bold; font-size: 130%; border-width: 1px; border-style: dashed; border-color: #336699; }
           
           p.location { padding: 10px 30px 20px 30px; border-width: 0px 0px 1px 0px; border-style: solid; border-color: #336699;}
           p.topped { padding-top: 10px; border-width: 1px 0px 0px 0px; border-style: solid; border-color: #336699; }
-          pre { font-size: 120%; }
+          pre { font-size: 100%; }
+          .userInfo {font-weight: normal; font-size: 100%;}
+          .description {  font-weight: bold; font-size: 130%;}
         </style>
       </head>
       <body>
@@ -40,9 +42,9 @@
         </p>
         
         <xsl:if test="error:extra[@description = 'userInfo']">
-        <p class="message">
-       <span class="description">userInfo: </span>
-       <xsl:value-of select="error:extra"/>
+        <p class="userInfo ">
+       <span class="description">userInfo: </span><br/>
+       <xsl:copy-of select="error:extra[@description = 'userInfo']"/>
       </p>
       </xsl:if>
         
