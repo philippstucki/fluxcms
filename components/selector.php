@@ -17,7 +17,7 @@
 // | Author: Christian Stocker <chregu@bitflux.ch>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: selector.php,v 1.10 2004/03/12 15:26:27 chregu Exp $
+// $Id$
 
 /**
 * This is the Base-Class for all selectors
@@ -28,14 +28,14 @@
 *   they don't return the hits, but nevermind :)
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id: selector.php,v 1.10 2004/03/12 15:26:27 chregu Exp $
+* @version  $Id$
 * @package  popoon
 * @module	selectors
 */
 class popoon_components_selector {
     
-	var $debug = False;
-	var $hit = False;
+	public $debug = False;
+	public $hit = False;
 
 	function __construct(&$sitemap) {
 		$this->sitemap = &$sitemap;
@@ -59,7 +59,7 @@ class popoon_components_selector {
 		}
     }
     
-	function match() {
+	function match($value) {
 	}
 
     
