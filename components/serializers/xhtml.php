@@ -79,6 +79,9 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         if ($this->getParameterDefault("stripBxAttributes") == "true") {
             $xml = $this->stripBxAttributes($xml);   
         }
+        if ($this->getParameterDefault("stripXMLDeclaration") == "true") {
+		$xml = preg_replace("#<\?xml[^>]*\?>\s*#","",$xml);
+        }
         return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
     }
 
