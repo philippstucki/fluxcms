@@ -102,6 +102,7 @@ class popoon_components_readers_resource extends popoon_components_reader {
             case "xml":
             case "xsl":
             case "xsd":
+            case "rng":
                 return "text/xml";
             case "js":
                 return "text/javascript";
