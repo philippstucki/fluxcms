@@ -21,6 +21,7 @@ class popoon_helpers_mimetypes {
             case "xsl":
             case "xsd":
             case "rng":
+            case "tal":
             return "text/xml";
             case "js":
             return "text/javascript";
