@@ -56,7 +56,8 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "wrap-attributes" => false,
             "alt-text" => "none",
             "doctype" => "loose",
-            "numeric-entities" => true
+            "numeric-entities" => true,
+	     "drop-proprietary-attributes" => true
             );
         
         $options = array_merge($options,$this->getParameter("default") );
@@ -69,11 +70,11 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
         $tidy->parseString($xml,$options,$options["char-encoding"]);
         $tidy->cleanRepair();
         $xml = (string) $tidy;
-	if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
-		$xml = str_replace('xmlns=""','',$xml);
-	}
-	
-}
+        if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
+            $xml = preg_replace('/xmlns="[^"]*"/','',$xml);
+        }
+        
+    }
 }
 
 
