@@ -40,7 +40,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $xml .= '<planet>';
         $xml .= '<search>';
         if ($search) {
-            $where = " where match(content_encoded , entries.description ) against('". $search . "')";
+            $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "')";
           
             $xml .= '<string>'.$search .'</string>';
            
