@@ -28,8 +28,8 @@
 */
 class popoon_components_serializers_xml extends popoon_components_serializer {
 
-	var $XmlFormat = "Own";
-    var $contentType = "text/xml";
+    public $XmlFormat = "Own";
+    protected $contentType = "text/xml";
     
 	function __construct (&$sitemap) {
 		$this->sitemap = &$sitemap;
