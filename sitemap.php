@@ -99,7 +99,7 @@ class popoon_sitemap {
     private $sm2phpincludes_xsl = "sitemap2phpincludes.xsl";
     
     
-    private $options;
+    public $options;
     
     /**
     * Construtor
@@ -180,8 +180,8 @@ class popoon_sitemap {
         return $pipelineHit;
     }
     
-    public function getOptions() {
-        return $this->options;   
+    public function getOptions($clone = false) {
+        return clone $this->options;   
     }
     
     /**

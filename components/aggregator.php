@@ -85,27 +85,35 @@ class popoon_components_aggregator extends popoon_component {
                 __FILE__, __LINE__,  null);
                 
             }
-            
+            $options = $this->sitemap->getOptions(true);
+            $options->internalRequest = true;
             ob_start();
             
-            $sitemap = new popoon_sitemap($this->sitemap->rootFile, $uri, $this->sitemap->getOptions());
+            $sitemap = new popoon_sitemap($this->sitemap->rootFile, $uri, $options);
  
             /* if the serializer thinks, its object in $sitemap->xml is the right one, it
             can set hasFinalDom to true and we can take just this and don't have to
             parse it again, otherwise get the outputtet content and parse it to a dom */
             
-            if (isset($sitemap->hasFinalDom) && $sitemap->hasFinalDom && get_class($sitemap->xml) == "domdocument") {
+            if (isset($sitemap->hasFinalDom) && $sitemap->hasFinalDom && $sitemap->xml instanceof  domdocument) {
+                
                 $xmldoc = $sitemap->xml;
             } else {
                 $xmldoc = new DomDocument();
-                $xmldoc->loadXML(ob_get_contents()); 
+                $err = $xmldoc->loadXML(ob_get_contents());
+                if (!$err) {
+                    $root = $xmldoc->createElement("popoon");
+                    $root->appendChild($xmldoc->createTextNode("XML Parsing Error for $src"));
+                    $xmldoc->appendChild($root);
+                }
+                    
             }
             ob_end_clean();
-        
         }
         // if protocol is http:// get it :)	
         
         else if (strpos($src,"http:") === 0 ) {
+            //FIXME: fopen_allow_url = Off safe ... (use http request from PEAR)
             $xmldoc = new DomDocument();
             $xmldoc->loadXML(implode("\n",file($src)));
             

@@ -38,6 +38,7 @@
       */
      private $values = array();
      
+     public $internalRequest = false;
      
      private $outputCacheCallback = null;
      /**

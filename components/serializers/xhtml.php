@@ -44,18 +44,29 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     function DomStart(&$xml)
     {
         parent::DomStart($xml);
+        if ($this->sitemap->options->internalRequest) {
+            if (is_object($xml)) {
+                $this->sitemap->hasFinalDom = true;
+            } else {
+                print $xml;
+            }
+            return true;
+        }
         
         if (is_object($xml)) {
-            $this->sitemap->hasFinalDom = false;
-            $xml = $xml->saveXML();
+            $this->sitemap->hasFinalDom = true;
+            $xmlstr = $xml->saveXML();
+        } else {
+            $xmlstr = $xml;
+            unlink ($xml);
         }
         if ($errhandler = $this->getParameterDefault("outputErrors")) {
             $err = $this->getErrorReporting($errhandler);
             if ($err) {
-                $xml = str_replace("</html>",$err."</html>",$xml);
+                $xmlstr = str_replace("</html>",$err."</html>",$xmlstr);
             }
         }
-        print $this->cleanXHTML($xml);
+        print $this->cleanXHTML($xmlstr);
         
     }
         
