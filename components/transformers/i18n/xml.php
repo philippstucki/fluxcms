@@ -51,6 +51,8 @@ class popoon_components_transformers_i18n_xml {
         }
 
         if($cat instanceof DOMDocument) {
+            // resolve xincludes
+            $cat->xinclude();
             $this->catctx = new DomXpath($cat);
         }
     }
