@@ -310,7 +310,7 @@
     
 
     <xsl:template match="map:pipeline//map:redirect-to">
-        $this->redirectTo('<xsl:value-of select="@uri"/>');
+        $this->redirectTo(<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text"  select="@uri"/></xsl:call-template>);
     </xsl:template>
 
 
