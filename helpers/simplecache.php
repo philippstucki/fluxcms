@@ -202,15 +202,25 @@ class popoon_helpers_simplecache {
     }
     
     public function simpleCacheRemoteArrayRead ($url, $expire = -1) {
-        $cacheFile = $this->simpleCacheGenerateName("simpleCacheRemoteArray",$url);
-   
-        if ($content = $this->simpleCacheCheck($url, "simpleCacheRemoteArray",null,"serialize",$expire)) {
+        
+        if ($content = $this->simpleCacheCheck($url, "simpleCacheRemote",null,"serialize",$expire)) {
             return $content;
         }
         $file = $this->simpleCacheHttpRead($url,$expire);
         $array = explode("\n",trim($file));
-        $this->simpleCacheWrite($url,"simpleCacheRemoteArray",null,$array,"serialize");
+        $this->simpleCacheWrite($url,"simpleCacheRemote",null,$array,"serialize");
         return $array;
+    }
+    
+    public function simpleCacheRemoteImplodeRead ($url, $implode = "|", $expire = -1) {
+       
+        if ($content = $this->simpleCacheCheck($url, "simpleCacheRemote",null,"plain",$expire)) {
+            return $content;
+        }
+        $file = $this->simpleCacheHttpRead($url,$expire);
+        $s = str_replace("\n",$implode,trim($file));
+        $this->simpleCacheWrite($url,"simpleCacheRemote",null,$s,"plain");
+        return $s;
     }
     
     
