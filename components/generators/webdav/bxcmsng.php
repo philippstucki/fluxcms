@@ -20,9 +20,11 @@
         {
             // get absolute fs path to requested resource
             $fspath = $this->base . $options["path"];
-            $coll = bx_collections::getCollection($options["path"]);
+            
+            $coll = bx_collections::getCollection($options["path"]."/index.html");
             // sanity check
             if (!$coll) {
+                error_log("404 " .  $options["path"]);
                 return false;
             }
             
@@ -31,33 +33,73 @@
             $files["files"] = array();
 
             // store information for the requested path itself
+//
             $files["files"][] = $this->fileinfo("", $coll);
-
      
             // information for contained resources requested?
+             
             if (!empty($options["depth"]))  { // TODO check for is_dir() first?
-                
                 // make sure path ends with '/'
                 if (substr($options["path"],-1) != "/") { 
                     $options["path"] .= "/";
                 }
 
                 foreach ($coll->getOutputChildren() as $child) {
-                    //error_log($);
+                   
                         $files["files"][] = $this->fileinfo($options["path"],$child);
                 }
-            }
+            } 
 
             // ok, all done
             return true;
-        } 
+        }
+        
+        
+           /**
+         * MKCOL method handler
+         *
+         * @param  array  general parameter passing array
+         * @return bool   true on success
+         */
+        function MKCOL($options) 
+        {           
+            $path = $this->base .$options["path"];
+            $parent = dirname($path);
+            $name = basename($path);
+
+            if(!file_exists($parent)) {
+                return "409 Conflict";
+            }
+
+            if(!is_dir($parent)) {
+                return "403 Forbidden";
+            }
+
+            if( file_exists($parent."/".$name) ) {
+                return "405 Method not allowed";
+            }
+
+            if(!empty($_SERVER["CONTENT_LENGTH"])) { // no body parsing yet
+                return "415 Unsupported media type";
+            }
+            
+            $stat = mkdir ($parent."/".$name,0777);
+            if(!$stat) {
+                return "403 Forbidden";                 
+            }
+            
+            copy($parent."/.config.xml",$parent."/".$name."/.config.xml");
+
+            return ("201 Created");
+        }
         
         function fileinfo($path, $res) 
         {
             // map URI path to filesystem path
             $fspath = $this->base . $path.$res->name;
             $path = $path.$res->rawname;
-               // create result array
+            //$path = str_replace("//","/",$path);
+            // create result array
             $info = array();
             $info["path"]  = $path;    
             $info["props"] = array();
@@ -75,7 +117,7 @@
                 // directory (WebDAV collection)
                 $info["props"][] = $this->mkprop("resourcetype", "collection");
                 $info["props"][] = $this->mkprop("getcontenttype", "httpd/unix-directory");             
-                $info["props"][] = $this->mkprop("getcontentlength", 0);
+               // $info["props"][] = $this->mkprop("getcontentlength", 0);
             } else {
                 // plain file (WebDAV resource)
                 $info["props"][] = $this->mkprop("resourcetype", "");
@@ -102,9 +144,9 @@
          */
         function PUT(&$options) 
         {
-            include_once("popoon/streams/bx.php");
+         /*   include_once("popoon/streams/bx.php");
             stream_wrapper_register("bx", "bxStream");
-
+*/
             $fspath =  $options["path"];
 /*
             if(!@is_dir(dirname($fspath))) {
@@ -112,13 +154,12 @@
             }
 */
             
-            $streamtype = $this->getStreamType($options["path"]);
+            //$streamtype = $this->getStreamType($options["path"]);
             
             
-            if ($streamtype) {
-                $fspath = "$streamtype:/".$fspath;
-            }
-
+            
+            $fspath = BX_DATA_DIR.$fspath;
+            
             //$options["new"] = ! file_exists($fspath);
             $options["new"] = false;
             $fp = fopen($fspath, "w");

@@ -60,6 +60,7 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
         */
         
         // strip slashes
+        error_log($_SERVER['REQUEST_METHOD']. " ".  $this->sitemap->uri);
         $webroot = preg_replace("#^/*#","",$this->getParameterDefault("webroot"));
         
         // strip webroot from uri and add it to PATH_INFO
@@ -76,8 +77,9 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
         }
         $w = new HTTP_WebDAV_Server_bxcmsng();
         $w->ServeRequest($this->getParameterDefault("fsroot"));
-        
+        //error_log("lll".$_SERVER["SCRIPT_NAME"]);
         $xml = ob_get_contents();
+        //error_log($xml);
        ob_end_clean();
         return True;
     }
