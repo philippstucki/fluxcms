@@ -66,7 +66,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         $lang = $this->getParameterDefault("locale");
         setlocale(LC_ALL,$lang);
 
-        $d = popoon_classes_i18n::getInstance($src, $lang, $this->getParameterDefault("driver"));
+        $d = popoon_classes_i18n::getDriverInstance($src, $lang, $this->getParameterDefault("driver"));
 
         $ctx = new domxpath($xml);
         $ctx->registerNamespace("i18n",I18NNS);

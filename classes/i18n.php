@@ -23,7 +23,7 @@ class popoon_classes_i18n {
 
     static protected $instances = array();
     
-    public static function getInstance($src, $lang, $driver = 'xml') {
+    public static function getDriverInstance($src, $lang, $driver = 'xml') {
         if(!isset(self::$instances[$driver][$lang][$src])) {
             $driverClass = "popoon_components_transformers_i18n_$driver"; 
             self::$instances[$driver][$lang][$src] = new $driverClass($src, $lang);       
