@@ -47,7 +47,7 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
     {
         
         ob_start();
-        include_once("popoon/components/generators/webdav/popoon.php");
+        include_once("popoon/components/generators/webdav/bxcmsng.php");
         
         //bad hacks for webdav server script
         
@@ -74,12 +74,11 @@ class popoon_components_generators_webdavfile extends popoon_components_generato
         } else {
             $_SERVER["SCRIPT_NAME"] = str_replace("/index.php","",$_SERVER["SCRIPT_NAME"]);
         }
-        $w = new HTTP_WebDAV_Server_Popoon();
+        $w = new HTTP_WebDAV_Server_bxcmsng();
         $w->ServeRequest($this->getParameterDefault("fsroot"));
         
         $xml = ob_get_contents();
-        
-        ob_end_clean();
+       ob_end_clean();
         return True;
     }
 
