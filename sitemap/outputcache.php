@@ -148,6 +148,7 @@ class popoon_sitemap_outputcache {
         ob_end_clean();
         $etag =  md5($content);
         $sitemap->setHeader("ETag", $etag);
+        if ($this->options->outputCacheSave !== 304) {
         $metadata = $this->cache->get($this->id.'.meta','outputcache.meta');
         $lastModified = null;
         if ($metadata) {
@@ -162,7 +163,9 @@ class popoon_sitemap_outputcache {
             $metadata['Last-Modified'] = $sitemap->header['Last-Modified'];
             $this->cache->container->save($this->id.'.meta', $metadata, 0 ,"outputcache.meta","" );
         }
-        
+        } else {
+		 $sitemap->setHeaderIfNotExists("Last-Modified", $sitemap->header['Last-Modified']);
+       }
         // we don't want phps cache-control stuff, when we do caching
         // there is a "problem" if session_start is used, then PHP adds no-cache http headers
         // we do not want that in outputCaching.
