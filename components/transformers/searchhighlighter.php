@@ -22,7 +22,12 @@
 include_once("popoon/components/transformer.php");
 
 /**
-* Transforms an XML-Document with the help of libxslt out of domxml
+* Highlights a search string inside a document
+*
+* Examines the HTTP referrer and checks for a URL parameter named q.
+* If present, the document is rewritten, all occurences of q are wrapped
+* into <span class="searchHighlight">, except if they occur inside one of the tags
+* listed in $tabooTagNames.
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
@@ -37,7 +42,7 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
     * @var array
     * @see highlightConditional()
     */
-    public $tabuTagNames = array('title', 'meta', 'script', 'style',);
+    public $tabooTagNames = array('title', 'meta', 'script', 'style',);
 
 
     function __construct(&$sitemap) {
@@ -48,7 +53,7 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
     {
         if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {
            if (isset($_GET['q'])) {
-		$query = $_GET['q'];
+	     	$query = $_GET['q'];
 	     }	else if (isset($_SERVER['HTTP_REFERER'])  && strpos($_SERVER['HTTP_REFERER'],"q=")) {
 
                 $ref = parse_url($_SERVER['HTTP_REFERER']);
@@ -78,7 +83,7 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
         $tagName = strtolower($matches[2]);
         $wanted  = $matches[3];
 
-        if(!in_array($tagName, $this->tabuTagNames)){
+        if(!in_array($tagName, $this->tabooTagNames)){
             return $beforeWanted . '<span class="searchHighlight">'.$wanted.'</span>';
         }
         else {
