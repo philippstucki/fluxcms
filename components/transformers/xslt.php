@@ -51,8 +51,10 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         
         $xslDom = new DomDocument();
         if (!$xslDom->load($xslfile)) {
-            if (!file_exists($xslfile)) {
+            if (!file_exists($xslfile) ) {
                 throw new PopoonFileNotFoundException($xslfile);
+            } else if (!is_file($xslfile)) {
+                  throw new PopoonIsNotFileException($xslfile);
             } else {
                 throw new PopoonXMLParseErrorException($xslfile);  
             }
