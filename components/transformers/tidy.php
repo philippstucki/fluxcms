@@ -54,7 +54,7 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "ascii-chars" => false,
             "char-encoding" => "utf8",
             "wrap-attributes" => false,
-            "alt-text" => "none",
+            "alt-text" => "",
             "doctype" => "loose",
             "numeric-entities" => true,
             "drop-proprietary-attributes" => true
