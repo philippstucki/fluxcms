@@ -60,7 +60,6 @@ class popoon_classes_browser {
     function parse(){
         
         if (!self::$parsed) {
-            bx_helpers_debug::webdump("parse");
             self::init();
             $agent = self::$UserAgent;
             // initialize properties
