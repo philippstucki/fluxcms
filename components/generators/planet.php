@@ -56,7 +56,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join feeds on entries.feedsID = feeds.ID
         left join blogs on feeds.blogsID = blogs.ID
         ';
-        
+
         $this->db->loadModule("extended");
         $count = $this->db->extended->getOne('select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'");
         
@@ -132,6 +132,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $xml = "";
         if(!MDB2::isError($res)) {
             while($row = $res->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+                if (empty($row['content_encoded'])) {
+                    $row['content_encoded'] = utf8_encode($row['description']);
+                }
                 $xml .= '<'.$rowField.'>';
                 foreach($row as $key => $value) {
                     $xml .= '<'.$key.'>';
