@@ -41,22 +41,18 @@ class popoon_components_actions_bxcmsadmin extends popoon_components_action {
     }
     
     function act() {
-        $fulluri = 'admin/' . $this->getAttrib("uri");
         
-        /*if (strpos($fulluri,".") === false) {
-            $fulluri .= "/index.html";   
-        }*/
+        // prepend admin/ to fulluri so getCollection is able to find the correct configuration files
+        $fulluri = 'admin/' . $this->getAttrib("uri");
         
         $parts = bx_collections::getCollectionAndFileParts($fulluri);
         $collection = $parts['coll'] ;
-        
-        var_dump($parts);
         
         $filename = $parts['name'];
         $ext = $parts['ext'];
       
         
-        if($collection === FALSE || !$collection->resourceExists($filename, $ext)) {
+        if($collection === FALSE) {
             print "not found";
             return array();
         } else {
