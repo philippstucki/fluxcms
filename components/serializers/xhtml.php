@@ -83,8 +83,8 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
 
     private function stripScriptCDATA($xml) {
-        $xml = preg_replace("#(<script[^>]+>)<!\[CDATA\[#","$1",$xml);
-        return preg_replace("#\]\]>(</script>)#","$1",$xml);
+        $xml = preg_replace("#(<script[^>]+>)\W*<!\[CDATA\[#","$1",$xml);
+        return preg_replace("#\]\]>\W*(</script>)#","$1",$xml);
     }
     
     private function stripBxAttributes($xml) {
