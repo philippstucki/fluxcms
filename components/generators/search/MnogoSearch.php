@@ -180,6 +180,7 @@ Class MnogoSearch  {
 			for($i=0; $i<$this->ResRows; $i++) {
 				$row = array();
 				foreach($this->ResField as $field) {
+//var_dump($field);
 					if($fval = udm_get_res_field($this->_result,$i,$field[1])) {
 						if ( $field[0] == 'text' || $field[0] == 'title') {
 							$fval = $this->ParseDocText($fval);
@@ -193,12 +194,16 @@ Class MnogoSearch  {
 				if (isset($row['mod'])) {
 					$row['date'] = date("d.m.y",$row['mod']);
 				}
-				
+                                if(!isset($row['title']) && !empty($row['url'])) {
+                                    $pInfo = pathinfo($row['url']);
+				    if(!empty($pInfo['basename'])) {
+                                        $row['title'] = '::'.$pInfo['basename'];
+                                    }
+                                }
 
 				array_push($this->Result,$row);	
 			}	
 		}
-		
 		return $this->Result;
 	}
 	
