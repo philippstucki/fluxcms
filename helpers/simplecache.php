@@ -191,7 +191,7 @@ class popoon_helpers_simplecache {
                     touch ($cacheFile);
                     return $this->readFile($cacheFile);
                 } else {
-                    return "<html><title>Could not load '$url': \n" . $e->getMessage()."</title></html>";
+                    return "<html><title>Could not load '".htmlspecialchars($url)."': \n" . htmlspecialchars($e->getMessage())."</title></html>";
                 }
             }
         }
