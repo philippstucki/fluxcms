@@ -53,8 +53,8 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join feeds on entries.feedsID = feeds.ID
         left join blogs on feeds.blogsID = blogs.ID
         ' . $where ;
-        
-        $count = $db->getOne('select count(entries.ID) ' . $from);
+        $db->loadModule("extended");
+        $count = $db->extended->getOne('select count(entries.ID) ' . $from);
         
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
