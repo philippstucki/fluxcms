@@ -113,7 +113,9 @@
             <map:parameter name="exception"/>
         </map:generate>
         <map:transform type="xslt" src="constant(BX_POPOON_DIR)/xsl/error2html.xsl"/>
-        <map:serialize type="xhtml"/>
+        <map:serialize type="xhtml">
+           <map:parameter type="header" name="HTTP" value="503 Service Temporarily Unavailable"/>
+          </map:serialize>
 
     </xsl:template>
 
