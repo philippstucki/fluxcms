@@ -86,6 +86,7 @@ class popoon_sitemap_outputcache {
     function __construct(popoon_classes_config $options = NULL) {
         require_once('Cache/Output.php');
         $this->options = $options;
+        $options->cacheParams['max_userdata_linelength'] = 0;
         $this->cache = new Cache_Output($options->cacheContainer, $options->cacheParams );
     }
     
