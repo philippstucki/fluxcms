@@ -130,7 +130,7 @@ class popoon_sitemap_outputcache {
     
     function check304($etag, $lastModified) {
         if (isset($_SERVER["HTTP_IF_NONE_MATCH"])) {
-            if ($etag == stripslashes($_SERVER["HTTP_IF_NONE_MATCH"])) {
+            if ($etag == stripslashes(str_replace(array('"',"'"),"",$_SERVER["HTTP_IF_NONE_MATCH"]))) {
                 return true;
             }
         }
