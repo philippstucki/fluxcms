@@ -50,10 +50,10 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     public $name = 'i18n';
     
     function __construct ($sitemap) {        
-         parent::__construct($sitemap);
-         if (!defined('I18NNS')) {
-             define('I18NNS', 'http://apache.org/cocoon/i18n/2.1');
-         }
+        parent::__construct($sitemap);
+        if (!defined('I18NNS')) {
+            define('I18NNS', 'http://apache.org/cocoon/i18n/2.1');
+        }
     }
     
     function init($attribs) {
@@ -65,92 +65,142 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
         setlocale(LC_ALL,$lang);
-
+        
         $d = popoon_classes_i18n::getDriverInstance($src, $lang, $this->getParameterDefault("driver"));
-
+        
         $ctx = new domxpath($xml);
         $ctx->registerNamespace("i18n",I18NNS);
         
-        //translate i18n:text 
-        $res = $ctx->query("//i18n:text");
-
-        foreach($res as $text) {
-            if ($text->hasAttributeNS(I18NNS,"key")) {
-                $key = $text->getAttributeNS(I18NNS,"key");   
-            } else {
-                $key = $text->nodeValue;
+        
+        //check all "normal" i18n: elements
+        $res = $ctx->query("//i18n:*");
+        foreach($res as $node) {
+            switch ($node->localName) {
+                    case 'text':
+                        $this->methodText($node,$d);
+                        break;
+                    case 'number':
+                        $this->methodNumber($node);
+                        break;
+                    case 'date-time':
+                        $this->methodDateTime($node);
+                        break;
             }
-            if (!$locText = $d->getText($key)) {
-                $locText = $key;
-            }
-            $text->parentNode->replaceChild($xml->createTextNode( $locText),$text);
         }
         
-        // translate i18n:attr
+        //check all i18n attributes
         $res = $ctx->query("//@i18n:attr");
         foreach($res as $node) {
             foreach (explode(" ",$node->value) as $attrName) {
                 if ($key = $node->parentNode->getAttribute($attrName)) {
-                      if (!$locText = $d->getText($key)) {
-                          $locText = $key;
-                      } 
-                      $node->parentNode->setAttribute($attrName,$locText);
+                    if (!$locText = $d->getText($key)) {
+                        $locText = $key;
+                    } 
+                    $node->parentNode->setAttribute($attrName,$locText);
                 }
             }
             $node->parentNode->removeAttributeNode($node);
         }
+
+        // check all i18n:translate elements
+        $res = $ctx->query("//i18n:translate");
+        foreach($res as $node) {
+            $this->methodTranslate($node,$ctx);     
+        }
         
-        // i18n:number
         
+        
+    }
+    protected function methodText($text,$d) {
+        if ($text->hasAttributeNS(I18NNS,"key")) {
+            $key = $text->getAttributeNS(I18NNS,"key");   
+        } else {
+            $key = $text->nodeValue;
+        }
+        if (!$locText = $d->getText($key)) {
+            $locText = $key;
+        }
+        $text->parentNode->replaceChild($text->ownerDocument->createTextNode( $locText),$text);
+    }    
+
+        //i18n:date-time
+        /* only i18n:date-time is supported right now
+        it uses the strftime format of PHP not the java date format, eg.
+        pattern should be "%d:%b:%Y" and not "dd:MMM:yyyy".
+        
+        short/medium/long/full are also not implemented. Use
+        %c, %x and %X as an alternative.
+        */
+
+
+    protected function methodDateTime($node) {
+        $pattern = $node->getAttribute("pattern");
+        $src = $node->getAttribute("src-pattern");
+        $value = $node->getAttribute("value");
+        if (!$value) {
+            $value = time();
+        }
+        else if ($src && function_exists("strptime")) {
+            $t = strptime($value,$src);
+            $value = mktime($t['tm_hour'],$t['tm_min'],$t['tm_sec'],$t['tm_mon'],$t['tm_mday'],$t['tm_year']);
+        } else {
+            $value = strtotime($value);
+        }
+        $value = strftime($pattern,$value);
+        $node->parentNode->replaceChild($node->ownerDocument->createTextNode($value),$node);
+        
+    }
+
         /* <i18n:number type="int-currency-no-unit" value="170374" />
-           <i18n:number type="int-currency" value="170374" />
-           and
-           <i18n:number type="percent" value="1.2" />
-           are not supported yet
-           */
-           $res = $ctx->query("//i18n:number");
-           foreach($res as $node) {
-               switch ($node->getAttribute("type")) {
-                   case "currency":
-                   if ($digits = $node->getAttribute("fraction-digits")) {
-                       $value = money_format("%.${digits}n",$node->getAttribute("value"));
-                   } else {
-                       $value = money_format("%n",$node->getAttribute("value"));
-                   }
-                   break;
-                   case "printf":
-                   $value = sprintf($node->getAttribute("pattern"),$node->getAttribute("value"));
-               }   
-               $node->parentNode->replaceChild($xml->createTextNode($value),$node);
-               
-           }
-           
-           //i18n:date-time
-           /* only i18n:date-time is supported right now
-                it uses the strftime format of PHP not the java date format, eg.
-                pattern should be "%d:%b:%Y" and not "dd:MMM:yyyy".
-                
-              short/medium/long/full are also not implemented. Use
-              %c, %x and %X as an alternative.
-           */
-           $res = $ctx->query("//i18n:date-time");
-           foreach($res as $node) {
-                $pattern = $node->getAttribute("pattern");
-                $src = $node->getAttribute("src-pattern");
-                $value = $node->getAttribute("value");
-                if (!$value) {
-                    $value = time();
-                }
-                else if ($src && function_exists("strptime")) {
-                    $t = strptime($value,$src);
-                    $value = mktime($t['tm_hour'],$t['tm_min'],$t['tm_sec'],$t['tm_mon'],$t['tm_mday'],$t['tm_year']);
-                } else {
-                    $value = strtotime($value);
-                }
-                $value = strftime($pattern,$value);
-                $node->parentNode->replaceChild($xml->createTextNode($value),$node);
-                    
-           }
+        <i18n:number type="int-currency" value="170374" />
+        and
+        <i18n:number type="percent" value="1.2" />
+        are not supported yet
+        */
+
+    protected function methodNumber($node) {
+        switch ($node->getAttribute("type")) {
+            case "currency":
+            if ($digits = $node->getAttribute("fraction-digits")) {
+                $value = money_format("%.${digits}n",$node->getAttribute("value"));
+            } else {
+                $value = money_format("%n",$node->getAttribute("value"));
+            }
+            break;
+            case "printf":
+            $value = sprintf($node->getAttribute("pattern"),$node->getAttribute("value"));
+        }   
+        $node->parentNode->replaceChild($node->ownerDocument->createTextNode($value),$node);
+    }
+    
+    /**
+    Example:    
+    
+    <i18n:translate>    
+        <i18n:text>Some {0} was inserted {foo}.</i18n:text>    
+        <i18n:param>text </i18n:param>     
+        <i18n:param name="foo"><i18n:text>here</i18n:text></i18n:param>
+    </i18n:translate>
+    
+    {1} and {foo} would be the same in the above example..
+    
+    **/
+    
+    protected function methodTranslate($node,$ctx) {
+        $resParam = $ctx->query("//i18n:param");
+        $params = array();
+        $i = 0;
+        foreach ($resParam as $paramNode) {
+            if ($name = $paramNode->getAttribute("name")) {
+                $params[$name] = $paramNode->nodeValue;
+            }
+            $params[$i] =  $paramNode->nodeValue;
+            $i++;
+            $node->removeChild($paramNode);
+        }
+        $value = $node->nodeValue;
+        $value = preg_replace("/\{([a-zA-Z0-9_]*)\}/e","\$params['$1']",$value);
+        $node->parentNode->replaceChild($node->ownerDocument->createTextNode($value),$node);
     }
     
 } 
