@@ -129,7 +129,9 @@ Class SwishE {
  		
 
     public function getResultParams() {
-        return array();
+        return array('found'    => $this->ResFound,
+                     'time'     => $this->ResTime
+                     );
     }
     
 	/** 
