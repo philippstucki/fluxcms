@@ -25,15 +25,8 @@
     </func:function>
 
     <xsl:template match="/">
-        <xslout:stylesheet version="1.0"
-           exclude-result-prefixes="xhtml bxf tal" 
-        >
-         <xslout:output 
-        encoding="utf-8" 
-        method="xml" 
-        doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" 
-        doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-    />
+        <xslout:stylesheet version="1.0" exclude-result-prefixes="xhtml bxf tal">
+            <xslout:output encoding="utf-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
 
 
             <xslout:template match="/">
@@ -41,7 +34,7 @@
                 <xsl:apply-templates/>
 
             </xslout:template>
-            <xslout:template match="xhtml:*">
+            <xslout:template match="*">
                 <xslout:copy>
                     <xslout:apply-templates select="@*"/>
                     <xslout:apply-templates/>
@@ -59,11 +52,11 @@
 
     <xsl:template match="xhtml:*[@tal:condition]" priority="10">
         <xslout:if test="{bxf:tales(@tal:condition)}">
-            <xsl:apply-templates />
+            <xsl:apply-templates/>
         </xslout:if>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="xhtml:*[@tal:content]">
 
         <xsl:copy>
@@ -95,10 +88,39 @@
     </xsl:template>
 
     <xsl:template match="@tal:attributes">
-        <xsl:variable name="attr" select="substring-before(.,' ')"/>
-        <xsl:variable name="value" select="substring-after(.,' ')"/>
+        <xsl:call-template name="talAttribute">
+        <xsl:with-param name="attr" select="."/>
+        </xsl:call-template>
 
-        <xslout:attribute name="{$attr}">
+    </xsl:template>
+
+    <xsl:template name="talAttribute">
+        <xsl:param name="attr"/>
+        <xsl:choose>
+            <xsl:when test="contains($attr,'; ')">
+            
+                <xsl:call-template name="talAttribute">
+                    <xsl:with-param name="attr" select="substring-after($attr,'; ')"/>
+                </xsl:call-template>
+                <xsl:call-template name="outputTalAttribute">
+                    <xsl:with-param name="attr" select="substring-before($attr,'; ')"/>
+                </xsl:call-template>
+            </xsl:when>
+
+            <xsl:otherwise>
+                <xsl:call-template name="outputTalAttribute">
+                    <xsl:with-param name="attr" select="$attr"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+
+    </xsl:template>
+  
+  <xsl:template name="outputTalAttribute">
+        <xsl:param name="attr"/>
+        <xsl:variable name="name" select="substring-before($attr,' ')"/>
+        <xsl:variable name="value" select="substring-after($attr,' ')"/>
+        <xslout:attribute name="{$name}">
             <xslout:value-of select="{bxf:tales($value)}"/>
         </xslout:attribute>
 

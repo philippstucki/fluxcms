@@ -15,16 +15,14 @@
                 <a href="http://ng.bitflux.org/">BxCMS Demo</a>
             </div>
             <div id="topnavi" tal:repeat="item plugin/navitree/collection/items/collection">
-                <span tal:condition="$item[@selected = 'selected']"><a  class="selected" tal:attributes="href $item/uri" tal:content="$item/title"/></span>
-                <span tal:condition="$item[not(@selected = 'selected')]"><a  tal:attributes="href $item/uri" tal:content="$item/title"/></span>
-                
-                
+                <span tal:condition="$item[@selected = 'selected']"><a class="selected" tal:attributes="href $item/uri; title $item/title" tal:content="$item/title"/></span>
+                <span tal:condition="$item[not(@selected = 'selected')]"><a tal:attributes="href $item/uri; title $item/title" tal:content="$item/title"/></span>
             </div>
 
             <div id="left">
                 <ul tal:repeat="item plugin/navitree/collection/items/collection[@selected = 'selected']/items/collection">
                     <li>
-                        <a href="$item/uri" tal:attributes="href $item/uri" tal:content="$item/title"/>
+                        <a href="$item/uri" tal:attributes="href $item/uri; title $item/title" tal:content="$item/title"/>
                     </li>
                 </ul>
             </div>
