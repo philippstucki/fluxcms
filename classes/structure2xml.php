@@ -30,8 +30,7 @@ class popoon_classes_structure2xml {
         if (is_null($this->queries)) {
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
-        
-        $sql2xml = new XML_db2xml($this->db,"bx","Extended");
+         $sql2xml = new XML_db2xml($this->db,"bx","Extended");
         
         if ($this->getParameter("contentIsXml")) {
             $sql2xml->setContentIsXml(true);
@@ -81,6 +80,7 @@ class popoon_classes_structure2xml {
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
                     $query["query"] = $this->replaceVarsInWhere($query["query"]);
+                    bx_log::log("stucture2xml: ".$query['query']);
                     if ( $this->parent->st2xmlCaching == "true" ) { 
                         if (! (isset($query["maxLastChanged"]) )) {
                             $this->db->loadModule('extended');
@@ -92,7 +92,6 @@ class popoon_classes_structure2xml {
                         } 
                         else {
                             $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
-                           
                             $sql2xml->add($query['query']);
                             $ctx = new DomXpath($sql2xml->Format->xmldoc);
                             $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
@@ -168,6 +167,9 @@ class popoon_classes_structure2xml {
         
         $configClass = bx_helpers_db::getConfigClass($configFile);
         $dbMainStructure = $configClass->getValues( $rootpath);
+        if (PEAR::isError($dbMainStructure)) {
+            throw new PopoonPEARException($dbMainStructure);
+        }
         if (is_array($dbMainStructure['children']))
         {
             
