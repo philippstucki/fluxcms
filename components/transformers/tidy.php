@@ -30,8 +30,8 @@ include_once("popoon/components/transformer.php");
 */
 class popoon_components_transformers_tidy extends popoon_components_transformer {
 
-    var $XmlFormat = "XmlString";
-	var $classname = "tidy";
+    public $XmlFormat = "XmlString";
+	public $classname = "tidy";
     
     
     function __construct(&$sitemap) {
@@ -48,22 +48,23 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
         $options = array(
             "output-xhtml" => true, 
             "clean" => true, 
-            "wrap" => 200, 
+            "wrap" => "350", 
             "indent" => true, 
             "indent-spaces" => 1,
-            "input-encoding" => "utf8",
-            "output-encoding" => "utf8",
+            "ascii-chars" => "no",
+            "char-encoding" => "utf8",
+            "wrap-attributes" => false,
             "alt-text" => "No Alt Text Defined"
             );
         
-        $options = array_merge($options,$this->getParameter("default"));
+        $options = array_merge($options,$this->getParameter("default") );
         
         $tidy = new tidy();
         
         if(!$tidy) {
             throw new Exception("Something went wrong with tidy initialisation");
         }
-        $tidy->parseString($xml,$options);
+        $tidy->parseString($xml,$options,$options["char-encoding"]);
         $tidy->cleanRepair();
         $xml = (string) $tidy;
 	if (isset($options['remove-xmlns']) && $options['remove-xmlns']) {
