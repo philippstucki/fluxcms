@@ -84,7 +84,9 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
             $xsl->setParameter("",$key,$value);
         }
         $xml = $xsl->transformToDoc($xml);
-        
+        if (!$xml) {
+            throw new Exception("Transformation with $xslfile did not work");
+        }
         
     }
 }
