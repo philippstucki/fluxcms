@@ -27,31 +27,31 @@
 * @package  popoon
 */
 class popoon_components_serializers_xml extends popoon_components_serializer {
-
+    
     public $XmlFormat = "Own";
     protected $contentType = "text/xml";
     
-	function __construct (&$sitemap) {
-		$this->sitemap = &$sitemap;
-	}
-
+    function __construct (&$sitemap) {
+        $this->sitemap = &$sitemap;
+    }
+    
     function init($attribs) {
         parent::init($attribs);
     }
-	
+    
     function DomStart(&$xml)
     {
         parent::DomStart($xml);
-    	if (is_object($xml))
+        if (is_object($xml))
         {
-			$this->sitemap->hasFinalDom = true;
-			print str_replace("HTML","html",$xml->saveXML());
-		}
+            $this->sitemap->hasFinalDom = true;
+            print str_replace("HTML","html",$xml->saveXML());
+        }
         else
         {	
-        	print $xml;
-		}
-	}
+            print $xml;
+        }
+    }
 }
 
 
