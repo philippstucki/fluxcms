@@ -33,6 +33,16 @@ class popoon_helpers_mimetypes {
             return "text/plain";
             case "pdf":
             return "application/pdf";
+            case "zip":
+            return "application/zip";
+            case "gz":
+            case "tgz":
+            return "application/x-gzip";
+            case "bz2":
+            return "application/x-bz2";
+            case "tar":
+            return "application/x-gtar";
+            
             
             default:
             
