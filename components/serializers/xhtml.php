@@ -44,6 +44,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     function DomStart(&$xml)
     {
         parent::DomStart($xml);
+        // if internal request, don't do the usual transformation, just "print" it
         if ($this->sitemap->options->internalRequest) {
             if (is_object($xml)) {
                 $this->sitemap->hasFinalDom = true;
@@ -58,7 +59,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             $xmlstr = $xml->saveXML();
         } else {
             $xmlstr = $xml;
-            unlink ($xml);
+            unset ($xml);
         }
         if ($errhandler = $this->getParameterDefault("outputErrors")) {
             $err = $this->getErrorReporting($errhandler);
