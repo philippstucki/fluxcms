@@ -344,13 +344,13 @@ class popoon_classes_structure2xml {
             
             if ("AND" == $_append_check || "OR " == $_append_check)
             {
-                $query .= " where (". $dbMasterValues["where"] ." " .$sqlOptions["where"].") $andcondition";
+                $query .= " where ((". $dbMasterValues["where"] .") " .$sqlOptions["where"].") $andcondition";
             }
             
             elseif ("AND" == $_append_check_dbMaster || "OR " == $_append_check_dbMaster)
             {
                 
-                $query .= " where (". $sqlOptions["where"] ." " .$dbMasterValues["where"].") $andcondition";
+                $query .= " where ((". $sqlOptions["where"] .") " .$dbMasterValues["where"].") $andcondition";
                 
             }
             
