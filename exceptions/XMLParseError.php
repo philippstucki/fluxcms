@@ -11,13 +11,12 @@ class PopoonXMLParseErrorException extends Exception {
         parent::__construct();
     }
     
-    public function errorHandler($errno, $errstr, $errfile, $errline) 
-    {
-        
-        $errstr = substr($errstr,strpos($errstr,"]:") + 2);
-        
+    public function errorHandler($errno, $errstr, $errfile, $errline) {
+        $pos = strpos($errstr,"]:") ;
+        if ($pos) {
+            $errstr = substr($errstr,$pos+ 2);
+        }
         $this->userInfo .="$errstr<br />\n";
-        
     }
 }
 ?>
