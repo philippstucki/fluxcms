@@ -196,7 +196,7 @@ class popoon_sitemap_outputcache {
             header( 'HTTP/1.1 304 Not Modified' );
             
             if ($this->options->outputCacheSave !== 304) {
-                $this->cache->extSave($this->id, $this->compressContent(content), serialize($sitemap->header), $expire ,$this->cacheGroup);
+                $this->cache->extSave($this->id, $this->compressContent($content), serialize($sitemap->header), $expire ,$this->cacheGroup);
             }
             die();
         } else {
