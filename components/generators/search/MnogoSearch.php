@@ -29,18 +29,18 @@
 
 Class MnogoSearch  {
 
-	var $dsn;
-	var $query;
-	var $apiversion;
-	var $DBAddr; 
-	var $DBMode;
-	var $MRes;
-	var $Result;
-	var $ResFound;
-	var $ResTime;
-	var $AgentParams = array();
-	var $ResField = array();
-	var $_result;
+	protected $dsn;
+	protected $query;
+    protected $apiversion;
+	protected $DBAddr; 
+	protected $DBMode;
+	protected $MRes;
+	protected $Result;
+	protected $ResFound;
+	protected $ResTime;
+	protected $AgentParams = array();
+	protected $ResField = array();
+	protected $_result;
 	
 								
 	/**
@@ -70,8 +70,12 @@ Class MnogoSearch  {
 				
 				$this->set_MaxResults($params['NumRows']);
 				$this->set_CurrPage($params['CurrPage']);
-				$this->set_SearchMode($params['SearchMode']);
-				$this->set_WeightFactor($params['WeightFactor']);
+				
+                $searchmode = (isset($params['SearchMode'])) ? $params['SearchMode'] : 'single';
+                $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 10;
+                
+                $this->set_SearchMode($searchmode);
+				$this->set_WeightFactor($weightfact);
 			}
 		}
 	}
@@ -124,7 +128,7 @@ Class MnogoSearch  {
 	*/ 	
 	function _parse_dsn() {
 		if(preg_match("/(.*\/)(\?dbmode=(.*))/i",$this->dsn,$match)) {
-			if($match[1]) {
+            if($match[1]) {
 				$this->set_DBAddr($match[1]);
 			}
 			
@@ -199,10 +203,9 @@ Class MnogoSearch  {
 	*/
 	function _query($query) {
 		$this->query = $this->_eval_query($query);
-		if (!empty($this->query) && is_resource($this->MRes)) {
-			if($this->_result = udm_find($this->MRes,$this->query)) {
-				
-				$this->_set_ResParam('ResRows',UDM_PARAM_NUM_ROWS);
+        if (!empty($this->query) && is_resource($this->MRes)) {
+            if($this->_result = udm_find($this->MRes,$this->query)) {
+                $this->_set_ResParam('ResRows',UDM_PARAM_NUM_ROWS);
 				$this->_set_ResParam('ResFound',UDM_PARAM_FOUND);
 				$this->_set_ResParam('ResTime',UDM_PARAM_SEARCHTIME);
 				$this->_set_ResParam('ResFDoc',UDM_PARAM_FIRST_DOC);
@@ -210,8 +213,10 @@ Class MnogoSearch  {
 				
 				return TRUE;
 			}
+            
             return array("error"=>"mnogosearch:" . udm_Error($this->MRes));;
-		} else {
+		
+        } else {
 
 			return FALSE;
 		}
@@ -235,7 +240,6 @@ Class MnogoSearch  {
 			$this->_parse_dsn($this->dsn);
 		}
 			
-		
 		// MnogoSearch <= 3.1.2 doesn't
 		// accepts dbmode in dsn
 		if ($this->apiversion <= 30130) {
