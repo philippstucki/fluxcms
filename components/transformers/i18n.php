@@ -51,6 +51,9 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     
     function __construct ($sitemap) {        
          parent::__construct($sitemap);
+         if (!defined('I18NNS')) {
+             define('I18NNS', 'http://apache.org/cocoon/i18n/2.1');
+         }
     }
     
     function init($attribs) {
@@ -68,12 +71,17 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         
 
         $ctx = new domxpath($xml);
-        $ctx->registerNamespace("i18n","http://apache.org/cocoon/i18n/2.1");
+        $ctx->registerNamespace("i18n",I18NNS);
         $res = $ctx->query("//i18n:text");
 
         foreach($res as $text) {
-            if (!$locText = $d->getText($text->nodeValue)) {
-                $locText = $text->nodeValue;
+            if ($text->hasAttributeNS(I18NNS,"key")) {
+                $key = $text->getAttributeNS(I18NNS,"key");   
+            } else {
+                $key = $text->nodeValue;
+            }                
+            if (!$locText = $d->getText($key)) {
+                $locText = $key;
             }
             $text->parentNode->replaceChild($xml->createTextNode( $locText),$text);;
         }
