@@ -8,18 +8,37 @@ If not patched, it still works, just doesn't show the exact error messages
 class PopoonXSLTParseErrorException extends Exception {
     
     public function __construct($filename) {
-        $dom = new DomDocument();
-        $xsl = new DomDocument();
-        $dom->load($filename);
-        $xsl->load($filename);
-        set_error_handler(array($this,"errorHandler"));
-        $proc = new XSLTProcessor();
-        $proc->importStyleSheet($xsl);
-        $proc->transformToDoc($dom);
-        restore_error_handler();
+         $this->message = "XSLT Error in $filename";
+          $this->userInfo = "";
+          
+          if (version_compare(phpversion(),"5.0.99",">") && function_exists("libxml_get_errors") && libxml_use_internal_errors()  ) {
+            $errors = libxml_get_errors();
+            if ($errors) {
+                foreach ($errors as $error) {
+                    
+                $this->userInfo .= $error->message;
+                if ($error->file) {
+                    $this->userInfo .= " in file ".$error->file ." line:".$error->line ;
+                }
+                $this->userInfo .= "<br/>";
+                }
+            }
+            libxml_clear_errors();
+        } else {
+        
+          $dom = new DomDocument();
+          $xsl = new DomDocument();
+          $dom->load($filename);
+          $xsl->load($filename);
+          set_error_handler(array($this,"errorHandler"));
+          $proc = new XSLTProcessor();
+          $proc->importStyleSheet($xsl);
+          $proc->transformToDoc($dom);
+          restore_error_handler();
+        }
         
         //FIXME: Give more info, what went wrong
-        $this->message = "XSLT Error in $filename";
+       
         parent::__construct();
         
     }
