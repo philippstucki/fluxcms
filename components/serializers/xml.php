@@ -47,7 +47,8 @@ class popoon_components_serializers_xml extends popoon_components_serializer {
             $this->sitemap->hasFinalDom = true;
             $xml = str_replace("HTML","html",$xml->saveXML());
         }
-        if ($this->getParameter("trickMozillaDisplay")) {
+        // Mozilla does not display the XML neatly, if there's a xhtml namespace in it, so we spoof it here (mainly used for XML=1 purposes)
+        if ($this->getParameterDefault("trickMozillaDisplay")) {
             print  str_replace("http://www.w3.org/1999/xhtml","http://www.w3.org/1999/xhtml#trickMozillaDisplay",$xml);
         } else {
             print $xml;
