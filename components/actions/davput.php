@@ -21,14 +21,12 @@
 
 include_once("popoon/components/action.php");
 /**
-* Class for generating xml document
-*
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
 * @package  popoon
 */
 
-class action_davput extends action {
+class popoon_components_actions_davput extends popoon_components_action {
 
     /**
     * Constructor
@@ -46,6 +44,7 @@ class action_davput extends action {
         
         
         // read data from php://input stream
+        if ($_SERVER['REQUEST_METHOD'] == "PUT") {
         $xml = "";
         $fd = fopen("php://input","r");
         while ($line = fread($fd,2048)) {
@@ -53,7 +52,7 @@ class action_davput extends action {
         }
         fclose($fd);
         $src = $this->getParameterDefault("src");
-        
+        error_log("src: ".$src);
         $fd=fopen($src,"w");
         
         fwrite($fd,$xml);
@@ -61,6 +60,9 @@ class action_davput extends action {
         // TODO: Error handling!
         $this->sitemap->setResponseCode(204);
         return array("message" => "Data saved");
+        }
+        return array("message" => "Not a PUT request");
+        
         
     }
 
