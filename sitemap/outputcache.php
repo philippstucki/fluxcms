@@ -183,8 +183,8 @@ class popoon_sitemap_outputcache {
             
             if ($this->options->outputCacheSave !== 304) {
                 $this->cache->container->save($this->id, $content, $expire ,$this->cacheGroup, serialize($sitemap->header));
-                die();
             }
+            die();
         } else {
             print $content;
             if ($this->options->outputCacheSave !== 304) {
