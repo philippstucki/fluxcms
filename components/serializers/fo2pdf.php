@@ -61,7 +61,7 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         if ($conf = $this->getParameterDefault("configFile")) {
             $cmd .= ' -c '.$conf;
         }
-        $returnstr =  system(escapeshellcmd($cmd . " $foname $pdfname"),$error);
+        $returnstr =  exec(escapeshellcmd($cmd . " $foname $pdfname"),$error);
         if ($error) {
 //            print $error;
         }
