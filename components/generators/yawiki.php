@@ -20,10 +20,36 @@
 // $Id$
 
 /**
-* This class reads an xml-file from the filesystem
+* This class integrates primitive yawiki support
 *
-*  Reads the xml-file stated in the "src" attribute in map:generate
+* First, get yawiki running by itself. It has heavy dependencies on
+*  a lot of PEAR Packages
 *
+* Copy Yawp.conf.php to your document root from your popoon installation
+*
+* Adjust the config-file. I had to write
+*   header     =  /usr/local/apache/htdocs/yawiki/tpl/header.tpl.php
+* as 
+*   header     =  %DOCUMENT_ROOT%yawiki/tpl/header.tpl.php
+* didn't work
+*
+* add this to your sitemap
+    <map:pipeline>
+        <map:match   type="uri" pattern="wiki/*">
+            <map:generate type="yawiki" src="{1}">
+                <map:parameter name="yawikiRoot" value="/usr/local/apache/htdocs/yawiki"/>
+            </map:generate>
+            <map:transform type="libxslt" src="BX_PROJECT_DIR://themes/{config://theme}/yawiki.xsl"/>
+            <map:serialize type="html">
+                <map:parameter name="obfuscateMail" value="true"/>
+            </map:serialize>
+         </map:match>
+     </map:pipeline>
+*
+*
+* Test, if it works, then
+* adjust the xsl/css to your needs
+* 
 * @author   Christian Stocker <chregu@bitflux.ch>
 * @version  $Id$
 * @package  popoon
