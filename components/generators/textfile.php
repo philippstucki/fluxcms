@@ -72,23 +72,23 @@ class popoon_components_generators_textfile extends popoon_components_generator 
                 throw new PopoonIsNotFileException($src);
             } 
         }
-        if ($this->getParameterDefault("escapeLTonly") == "true") {
-            if ($xml->loadXML( "<?xml version='1.0' encoding='utf-8' ?><text>".str_replace(array("<",">"),array("&lt;","&gt;"),$xmlstr)."</text>")) {
-                return true;
-            } else {
-             
-                throw new PopoonXMLParseErrorException($src);  
-            }   
 
-        } 
-        $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>";
-        
-         if (! $xml->loadXML($xmlstr)) {
-                throw new PopoonXMLParseErrorException($src);  
+        if($this->getParameterDefault("escapeLTonly") == "true" OR $this->getParameterDefault("escapeEntities") == "true") {
+            if($this->getParameterDefault("escapeEntities") == "true") {
+                // escape entities
+                $xmlstr = str_replace('&', '&amp;', $xmlstr);
+            }
+            if($this->getParameterDefault("escapeLTonly") == "true") {
+                $xmlstr = str_replace(array("<",">"),array("&lt;","&gt;"),$xmlstr);
+            }
+            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text>".$xmlstr."</text>";
+        } else {
+            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>";
         }
 
-        
-        //$xml = xmldocfile($this->getAttrib("src"));
+        if (! $xml->loadXML($xmlstr)) {
+            throw new PopoonXMLParseErrorException($src);  
+        }
         return True;
     }
 
