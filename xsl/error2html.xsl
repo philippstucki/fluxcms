@@ -39,11 +39,19 @@
           Code: <xsl:value-of select="error:code"/>
         </p>
         
+        <xsl:if test="error:extra[@description = 'userInfo']">
+        <p class="message">
+       <span class="description">userInfo: </span>
+       <xsl:value-of select="error:extra"/>
+      </p>
+      </xsl:if>
+        
         <p class="location">
           In File <xsl:value-of select="error:file"/>
           Line    <xsl:value-of select="error:line"/>
         </p>
-
+         
+        
 
         <xsl:apply-templates select="error:extra"/>
 
@@ -57,6 +65,9 @@
 
   <xsl:template match="error:extra">
     <xsl:choose>
+    <xsl:when test="@description = 'userInfo'">
+    
+    </xsl:when>
      <xsl:when test="contains(@description,'stacktrace')">
       <p class="stacktrace">
        <span class="description"><xsl:value-of select="@description"/></span>
@@ -66,8 +77,8 @@
       </p>
      </xsl:when>
      <xsl:otherwise>
-      <p class="extra">
-       <span class="description"><xsl:value-of select="@error:description"/>:&#160;</span>
+      <p class="message">
+       <span class="description"><xsl:value-of select="@description"/>: </span>
        <xsl:value-of select="."/>
       </p>
      </xsl:otherwise>

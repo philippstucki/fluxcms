@@ -63,7 +63,7 @@ class popoon_components_generators_error extends popoon_components_generator {
         
         $e= $this->getParameterDefault("exception");
         
-        $xml->loadXML('<?xml version="1.0"
+       $xmlstr = '<?xml version="1.0"
  encoding="UTF-8"?>
  
 <error:notify
@@ -77,11 +77,16 @@ class popoon_components_generators_error extends popoon_components_generator {
  <error:code>'.$e->getCode().'</error:code>
  
  <error:file>'.$e->getFile().'</error:file>
- <error:line>'.$e->getLine().'</error:line>
- 
- <error:extra description="stacktrace">'.$e->getTraceAsString().'</error:extra>
-</error:notify>
-');
+ <error:line>'.$e->getLine().'</error:line>';
+  if (isset ($e->userInfo)) {
+ $xmlstr  .= '<error:extra description="userInfo">'.$e->userInfo.'</error:extra>';
+ }
+
+ $xmlstr .= '<error:extra description="stacktrace">'.$e->getTraceAsString().'</error:extra>
+ </error:notify>';
+ $xml->loadXML($xmlstr);
+
+
         //$xml = xmldocfile($this->getAttrib("src"));
         return True;
     }
