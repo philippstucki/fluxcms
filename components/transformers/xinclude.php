@@ -19,7 +19,6 @@
 //
 // $Id$
 
-include_once("popoon/components/transformer.php");
 
 /**
 * Transforms an XML-Document with the help of libxslt out of domxml
@@ -28,13 +27,14 @@ include_once("popoon/components/transformer.php");
 * @version  $Id$
 * @package  popoon
 */
-class transformer_xinclude extends transformer {
+class popoon_components_transformers_xinclude extends popoon_components_transformer {
 
-    var $XmlFormat = "DomDocument";
-	var $classname = "xinclude";
-    function transformer_libxslt (&$sitemap) {
+    public $XmlFormat = "DomDocument";
+	public $classname = "xinclude";
+    
+    function __construct (&$sitemap) {
 
-		$this->transformer($sitemap);
+		parent::__construct($sitemap);
     }
 
     function DomStart(&$xml)
