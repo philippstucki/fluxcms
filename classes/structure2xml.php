@@ -7,6 +7,7 @@ class popoon_classes_structure2xml {
     
     function __construct($parent) {
         $this->parent = $parent;
+        $this->api = bx_helpers_simplecache::getInstance();
         $this->db = $this->parent->db;
     }
     
@@ -22,9 +23,6 @@ class popoon_classes_structure2xml {
     function showPage ($configXml,$PageOptions = array(), $returnDb2XmlObject = false) 
     {
         
-        
-        
-        $this->api = bx_helpers_simplecache::getInstance();
         // get the queries, either cached from file system or generated
         
         if (is_null($this->queries)) {
@@ -167,9 +165,11 @@ class popoon_classes_structure2xml {
         
         $configClass = bx_helpers_db::getConfigClass($configFile);
         $dbMainStructure = $configClass->getValues( $rootpath);
+        
         if (PEAR::isError($dbMainStructure)) {
             throw new PopoonPEARException($dbMainStructure);
         }
+        
         if (is_array($dbMainStructure['children']))
         {
             
@@ -535,7 +535,12 @@ class popoon_classes_structure2xml {
         } else {
             $requests = $_REQUEST;
         }
-        foreach ($requests as $key => $val)
+        return self::replaceVarsInWhereStatic($where,$requests);
+       
+    }
+    
+    static function replaceVarsInWhereStatic($where,$requests) {
+         foreach ($requests as $key => $val)
         {
             /* not so sure about that */
             
@@ -566,5 +571,6 @@ class popoon_classes_structure2xml {
         $where = str_replace(array("[[","]]"),"",$where);
         
         return $where;
+        
     }
 }
