@@ -25,6 +25,22 @@ class popoon_classes_browser {
         return( self::getName() == "mozilla");
     }
     
+    static function hasBadCss() {
+           self::init();
+           $name = self::getName();
+           $version = self::getVersion();
+           print "$name\n";
+           print "$version\n";
+           if ($name == "opera" && $version < 8) {
+               return true;
+           }
+           if ($name == "mozilla" && $version < 5) {
+               return true;
+           }
+           return false;
+           
+    }
+    
     static function isMSIEWin() {
         return( self::getName() == "msie" && self::getPlatform()=="windows");
     }
