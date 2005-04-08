@@ -55,11 +55,8 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join blogs on feeds.blogsID = blogs.ID
         ';
 
-        $this->db->loadModule("extended");
-	
 	$query = 'select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'";
         $count = $this->db->queryOne($query);
-        
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
         $xml .= '</search>';
