@@ -1,7 +1,0 @@
-phpt.*
-*.diff
-*.log
-*.exp
-*.out
-*.php
-tmp
