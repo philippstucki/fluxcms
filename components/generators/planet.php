@@ -106,7 +106,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
             $t = $simplecache->simpleCacheHttpRead($uri,1600);
             
             $deldom = new domdocument();
-	    $t = iconv("UTF-8","UTF-8//IGNORE",$t);            
+	    if (function_exists("iconv")) {
+		    $t = iconv("UTF-8","UTF-8//IGNORE",$t);            
+	    }
             if (@$deldom->loadXML($t)) {
                 $xml .= preg_replace("#<\?xml[^>]*\?>#","",$deldom->saveXML());
             }
