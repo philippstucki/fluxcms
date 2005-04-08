@@ -19,7 +19,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
     
     function DomStart(&$xml)
     {
-        include_once("MDB2.php");
+	include_once("MDB2.php");
         if (!isset($GLOBALS['BX_config']['webTimezone'])) {
             $GLOBALS['BX_config']['webTimezone'] = $GLOBALS['BX_config']['serverTimezone'];
         }
@@ -32,19 +32,18 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $startEntry = $this->getParameterDefault("startEntry");
         $search = $this->getParameterDefault("search");
         
-        
+
         $this->db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
 
         $xml = '<?xml version="1.0" encoding="utf-8"?>';
         $xml .= '<planet>';
         $xml .= '<search>';
-        if ($search) {
+	if ($search) {
             if (strlen($search) <= 3) {
                 $where = " where content_encoded LIKE '%$search%' or entries.description LIKE '%$search%' or entries.title LIKE '%$search%' ";
             } else {
-                $where = " where match(content_encoded , entries.description, entries.title ) against('". $search . "') ";
-            }
-            
+                $where = " where match(entries.description, entries.content_encoded, entries.title ) against('". $search . "') ";
+	}
             $xml .= '<string>'.$search .'</string>';
            
         } else {
@@ -57,7 +56,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
         ';
 
         $this->db->loadModule("extended");
-        $count = $this->db->extended->getOne('select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'");
+	
+	$query = 'select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'";
+        $count = $this->db->queryOne($query);
         
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
@@ -72,7 +73,6 @@ class popoon_components_generators_planet extends popoon_components_generator {
             $xml .= $this->getEntries( $from.$where, "default",$startEntry);    
             $xml .= $this->getEntries( $from." where 1=1", "releases",0);
         }
-            
         
         
         
@@ -110,7 +110,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
             
             $deldom = new domdocument();
 	    $t = iconv("UTF-8","UTF-8//IGNORE",$t);            
-            if ($deldom->loadXML($t)) {
+            if (@$deldom->loadXML($t)) {
                 $xml .= preg_replace("#<\?xml[^>]*\?>#","",$deldom->saveXML());
             }
 
@@ -121,8 +121,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
     
     function getEntries($from,$section,$startEntry) {
           
-        
-        $cdataFields = array("title","link","description","content_encoded","blog_title","blog_author");
+        $cdataFields = array("title","link","description","content_encoded","blog_title","blog_author","blog_link");
         $res = $this->db->query('
         SELECT entries.ID,
         entries.title,
@@ -161,7 +160,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
                     if (in_array($key,$cdataFields)) {
 			
 			  $value= preg_replace('#(<[^>]+[\s\r\n\"\'])on[^>]*>#iU',"$1>",$value);
-                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",str_replace("pre>","code>",($value)))).']]>';
+                        $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",$value)).']]>';
                     } else {
                         $xml .= $value;
                     }
