@@ -43,7 +43,7 @@ Class MnogoSearch  {
 	protected $_result;
 	protected $currPage;
 	protected $maxPages;							
-	
+    protected $defSearchMode='single';	
     /**
 	* Constructor
 	* Checks whether Mnogosearch extension is 
@@ -66,8 +66,8 @@ Class MnogoSearch  {
 		} else {
 			$this->set_apiversion();
 			$this->set_ResField();
-			
-			if($this->msAllocate($params['dsn'])) {
+		    
+            if($this->msAllocate($params['dsn'])) {
 
 		$this->set_AgentParam(UDM_PARAM_LOCAL_CHARSET,'UTF-8');
 		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_BROWSER_CHARSET,'UTF-8');
@@ -81,8 +81,10 @@ Class MnogoSearch  {
 				$this->set_CurrPage($params['CurrPage']);
 			    	
                 $searchmode = (isset($params['SearchMode'])) ? $params['SearchMode'] : 'single';
+                $this->set_SearchMode($searchmode); 
+			
+                
                 $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 11;
-                $this->set_SearchMode($searchmode);
 				$this->set_WeightFactor($weightfact);
 			}
 		}
@@ -135,7 +137,7 @@ Class MnogoSearch  {
 	* @access private
 	*/ 	
 	function _parse_dsn() {
-		if(preg_match("/(.*\/)(\?dbmode=(.*))/i",$this->dsn,$match)) {
+        if(preg_match("/(.*\/)(\?dbmode=(.*))/i",$this->dsn,$match)) {
             if($match[1]) {
 				$this->set_DBAddr($match[1]);
 			}
@@ -180,7 +182,6 @@ Class MnogoSearch  {
 			for($i=0; $i<$this->ResRows; $i++) {
 				$row = array();
 				foreach($this->ResField as $field) {
-//var_dump($field);
 					if($fval = udm_get_res_field($this->_result,$i,$field[1])) {
 						if ( $field[0] == 'text' || $field[0] == 'title') {
 							$fval = $this->ParseDocText($fval);
@@ -227,7 +228,7 @@ Class MnogoSearch  {
 				$this->_set_ResParam('ResFDoc',UDM_PARAM_FIRST_DOC);
 				$this->_set_ResParam('ResLDoc',UDM_PARAM_LAST_DOC);
                 $this->maxPages = ceil($this->ResFound / $this->NumRows);
-	                return TRUE;
+			return TRUE;
 			}
             
             return array("error"=>"mnogosearch:" . udm_Error($this->MRes));;
@@ -252,8 +253,8 @@ Class MnogoSearch  {
 		} else if (!extension_loaded('mnogosearch')) {
             return array("error" => 'mnogosearch extension is not loaded/installed.');
         } else {
-			$this->set_dsn($dsn);
-			$this->_parse_dsn($this->dsn);
+            $this->set_dsn($dsn);
+            $this->_parse_dsn($this->dsn);
 		}
 		// MnogoSearch <= 3.1.2 doesn't
 		// accepts dbmode in dsn
@@ -262,8 +263,9 @@ Class MnogoSearch  {
 				return array("error" => 'mnogosearch could not allocate Agent');
 			}
 		} else {
-			if(!$this->MRes = udm_alloc_agent_array(array($this->DBAddr."?dbmode=".$this->DBMode))) {
-				return array("error" => 'mnogosearch could not allocate Agent');
+            if(!$this->MRes = udm_alloc_agent_array(array($this->DBAddr."?dbmode=".$this->DBMode))) {
+				
+                return array("error" => 'mnogosearch could not allocate Agent');
 			}
 		}
 		return $this->MRes;
@@ -314,9 +316,9 @@ Class MnogoSearch  {
 		} elseif ($mode=='phrase') {
 			$mode = (int) UDM_MODE_PHRASE;
 		}
-		
-		$this->set_AgentParam(UDM_PARAM_SEARCH_MODE,$mode);
-		return TRUE;
+        $this->set_AgentParam(UDM_PARAM_SEARCH_MODE,$mode);
+		$this->DBMode = $mode;
+        return TRUE;
 	}
 	
 	
@@ -329,7 +331,13 @@ Class MnogoSearch  {
 	function set_dsn($dsn=NULL) {
 		if(is_string($dsn)&&$dsn != NULL) {
 			$this->dsn = $dsn;
-		}
+		} elseif (is_array($dsn)) {
+            $mode = (isset($dsn['searchmode']) && !empty($dsn['searchmode'])) ? $dsn['searchmode']:$this->defSearchMode;
+            $d = sprintf("%s://%s:%s@%s/%s/?dbmode=%s", $dsn['phptype'], $dsn['username'], $dsn['password'], $dsn['hostspec'], $dsn['database'], $mode);
+            if ($d) {
+                $this->dsn = $d;
+            } 
+        }
 		
 		return TRUE;
 	}
