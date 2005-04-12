@@ -2,11 +2,10 @@
 
 
 class popoon_helpers_mimetypes {
-    
-    
+
+
     static function getFromFileLocation($src) {
         $extension = strtolower(substr($src,strrpos($src,".")+1));
-        
         switch ($extension) {
             case "gif":
             return "image/gif";
@@ -22,6 +21,8 @@ class popoon_helpers_mimetypes {
             case "xsd":
             case "rng":
             case "tal":
+            case "configxml":
+            case "children":
             return "text/xml";
             case "js":
             return "text/javascript";
@@ -42,10 +43,10 @@ class popoon_helpers_mimetypes {
             return "application/x-bz2";
             case "tar":
             return "application/x-gtar";
-            
-            
+
+
             default:
-            
+
             if (strpos($src,"://") == false && file_exists($src)) {
                 $m =  `file -ib $src`;
                 return $m;
@@ -53,8 +54,8 @@ class popoon_helpers_mimetypes {
                 return "text/plain";
             }
         }
-        
-        
+
+
     }
-    
+
 }
