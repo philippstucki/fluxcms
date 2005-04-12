@@ -5,7 +5,7 @@ class popoon_helpers_mimetypes {
     
     
     static function getFromFileLocation($src) {
-        $extension = substr($src,strrpos($src,".")+1);
+        $extension = strtolower(substr($src,strrpos($src,".")+1));
         
         switch ($extension) {
             case "gif":
