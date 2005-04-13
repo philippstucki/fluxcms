@@ -45,11 +45,14 @@ class popoon_components_transformers_i18n_xml {
     protected $catctx = NULL;
     
     function __construct($src,$lang) {
+        if(defined('BX_OPEN_BASEDIR')) {
+            $src = BX_OPEN_BASEDIR.$src;
+        }
         if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
             $lang = substr($lang,0,-(strrpos($lang,"_")+1));
             if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
-            	 $cat = @domdocument::load($src.'.xml');
-	    }
+                $cat = @domdocument::load($src.'.xml');
+            }
         }
         if($cat instanceof DOMDocument) {
             // resolve xincludes
