@@ -45,7 +45,8 @@ class popoon_components_transformers_i18n_xml {
     protected $catctx = NULL;
     
     function __construct($src,$lang) {
-        if(defined('BX_OPEN_BASEDIR')) {
+	//cheap win and unix abs path check
+        if(defined('BX_OPEN_BASEDIR') && !(substr($src,0,1) == '/' || substr($src,1,1) == ":")) {
             $src = BX_OPEN_BASEDIR.$src;
         }
         if (!$cat = @domdocument::load($src.'_'.$lang.'.xml')) {
