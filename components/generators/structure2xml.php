@@ -48,6 +48,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     var $defaultExpires = 3600;
     var $db =false;
     var $dsn = "";
+    var $tablePrefix = "";
     
     function __construct (&$sitemap) {
         parent::__construct($sitemap);
@@ -57,7 +58,12 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
         parent::init($attribs);
         if ($this->dsn) {
             $this->db= bx_helpers_db::getDbFromDsn($this->dsn,$this->getParameterDefault("dboptions"));
+            if ($this->dsn['tableprefix']) {
+                   $this->tablePrefix = $this->dsn['tableprefix'];
+            }
+            
         }
+        
      
     }
     
@@ -65,7 +71,6 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
     {
         
         $xml = $this->showPage($this->getAttrib("src"));
-        
         return True;
     }
     
@@ -83,7 +88,6 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
         }
         
         $sql2xml = new XML_db2xml($this->db,"bx","Extended");
-        
         // i should add this for all options .... later maybe
         if (!(is_null($this->getAttrib("xml_seperator")) ))
         {
@@ -274,7 +278,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
         }
         $queryfields = $dbMasterValues['children'][0].".*";
         
-        $query = " from ".$dbMasterValues['children'][0];
+        $query = " from ".$this->tablePrefix.$dbMasterValues['children'][0]  . " as " . $dbMasterValues['children'][0];
         $name = $dbMasterValues['children'][0];
         
         $dbStructure = $configClass->getValues("$rootpath/$name");
@@ -347,7 +351,7 @@ class popoon_components_generators_structure2xml extends popoon_components_gener
                     
                     if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "id";}
                     if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "id";}
-                    $query = $query ." left join ".$name. " on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
+                    $query = $query ." left join ".$this->tablePrefix.$name. " as $name on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
                     if (isset($dbStructure["objectfield"]) )
                     {
                         $query = "$query and $parentname.".$dbStructure["objectfield"]." = '$name'";
