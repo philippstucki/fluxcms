@@ -46,13 +46,14 @@ class popoon_helpers_mimetypes {
 
 
             default:
-
+            
             if (strpos($src,"://") == false && file_exists($src)) {
                 $m =  `file -ib $src`;
-                return $m;
-            } else {
-                return "text/plain";
+                if ($m) {
+                    return $m;
+                }
             }
+            return "application/octet-stream";
         }
 
 
