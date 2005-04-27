@@ -43,8 +43,11 @@ class popoon_helpers_mimetypes {
             return "application/x-bz2";
             case "tar":
             return "application/x-gtar";
-
-
+            case "torrent":
+            return "application/x-bittorrent";
+            case "mp3":
+            return "audio/mpeg";
+            
             default:
             
             if (strpos($src,"://") == false && file_exists($src)) {
