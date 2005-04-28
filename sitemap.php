@@ -272,7 +272,12 @@ class popoon_sitemap {
             $this->setHeaderIfNotExists("Last-Modified",  $date ." GMT");
             $this->setHeader("Pragma","no-cache");
             $this->setHeader("Cache-Control","no-cache, post-check=0, pre-check=0");
+        } else {
+            //My Apache 2 sends max-age=10800, which is insanely high.. change that 
+            // here to 10 seconds (at least, we have something then, even if not that high)
+            $this->setHeaderIfNotExists("Cache-Control",  "public, max-age=10");
         }
+        
     }
     
     /**
