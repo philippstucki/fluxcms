@@ -31,7 +31,7 @@ include_once("popoon/components/serializer.php");
 class popoon_components_serializers_xhtml extends popoon_components_serializer {
 
     public $XmlFormat = "Own";
-    public $contentType = "text/html";
+    public $contentType = "text/html; charset=utf-8";
 
     function __construct (&$sitemap) {
         $this->sitemap = &$sitemap;
