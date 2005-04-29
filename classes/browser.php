@@ -16,15 +16,30 @@ class popoon_classes_browser {
     
     static function init() {
         if (!self::$initialized) {
-	    if (isset( $_SERVER['HTTP_USER_AGENT'])) {
-	            self::$UserAgent = $_SERVER['HTTP_USER_AGENT'];
-	    }
+            if (isset( $_SERVER['HTTP_USER_AGENT'])) {
+                self::$UserAgent = $_SERVER['HTTP_USER_AGENT'];
+            }
             self::$initialized = true;
         }
     }
+    
+    
     static function isMozilla() {
         return( self::getName() == "mozilla");
     }
+    
+    static function isMozillaAndHasMidas() {
+        if (self::getName() == "mozilla")
+        if (stripos(self::$UserAgent,"camino/0.8.")) {
+            return false;
+        } else {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
     
     static function hasBadCss() {
            self::init();
