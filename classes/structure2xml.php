@@ -581,7 +581,7 @@ class popoon_classes_structure2xml {
                 if (count($val) == 0) {
                     $val = '0';
                 } else {
-                    $val = "'".join("','",$val)."'";
+                    @$val = "'".join("','",$val)."'";
                 }
             }
             else {
