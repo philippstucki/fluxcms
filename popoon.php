@@ -146,7 +146,7 @@ class popoon {
 	*/
     function __construct ($sitemapFile = null, $uri = null,  $options = NULL) {
         //clean uri (remove //) 
-        $uri = preg_replace("#/{2,}#","/",$uri);
+        $uri = htmlspecialchars(preg_replace("#/{2,}#","/",$uri));
         if ($options == NULL) {
             $options = popoon_classes_config::getInstance();
         }
