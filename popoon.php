@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | popoon                                                               |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2001,2002,2003,2004 Bitflux GmbH                       |
+// | Copyright (c) 2001-2005 Bitflux GmbH                                 |
 // +----------------------------------------------------------------------+
 // | Licensed under the Apache License, Version 2.0 (the "License");      |
 // | you may not use this file except in compliance with the License.     |
