@@ -93,19 +93,17 @@ class popoon_classes_structure2xml {
                     bx_log::log("stucture2xml: ".$query['query']);
                     if ( $this->parent->st2xmlCaching == "true" ) { 
                         if (!(isset($query["maxResults"])) && isset($query['queryMaxResults'])) {
-                            $this->db->loadModule('extended'); 
-                            $query['maxResults'] = $this->db->extended->getOne($query['queryMaxResults']);
+                            $query['maxResults'] = $this->db->queryOne($query['queryMaxResults']);
                         }
                          
                         if (! (isset($query["maxLastChanged"]) )) {
-                            $this->db->loadModule('extended');
-                            $query["maxLastChanged"]  = $this->db->extended->getOne($query['queryLastChanged']);
-                                
-                            
+                            $query["maxLastChanged"]  = $this->db->queryOne($query['queryLastChanged']);
                         } 
+                        
                         if ( $cachedXML = $this->api->simpleCacheCheck("","st2xml_data",$query['query'],"file", $query["maxLastChanged"])) {
                             $sql2xml->addWithInput("File",$cachedXML);
                         } 
+                        
                         else {
                             $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
                             $sql2xml->add($query['query']);
