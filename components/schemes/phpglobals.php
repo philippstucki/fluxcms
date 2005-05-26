@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | popoon                                                               |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2001-2005 Bitflux GmbH                                 |
+// | Copyright (c) 2001,2002,2003,2004 Bitflux GmbH                       |
 // +----------------------------------------------------------------------+
 // | Licensed under the Apache License, Version 2.0 (the "License");      |
 // | you may not use this file except in compliance with the License.     |
@@ -30,23 +30,28 @@
 function scheme_phpglobals($value)
 {
     if (strpos($value,"[")) {
-        preg_match_all("/(.*)(\[['\"]*([^'\"]*)['\"]*\])+/U",$value,$matches);
+        preg_match_all("/(.*)(\[['\"]*([^'\"]*)['\"]*\])/U",$value,$matches);
+        preg_match("/\|(.*)$/", $value, $defaults);
         $depth = count($matches[3]);
+        $return = null;
         if ($matches[1][0] == '_SESSION') {
             session_start();
         }
         if ($depth == 1 && isset($GLOBALS[$matches[1][0]][$matches[3][0]])) {
-            return $GLOBALS[$matches[1][0]][$matches[3][0]];
-            
+            $return = $GLOBALS[$matches[1][0]][$matches[3][0]];
         } 
         else if ($depth == 2 && isset($GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]])) {
-            return $GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]];
+            $return = $GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]];
         } 
-        
-        else 
-        {
-            return null;
+         
+        if (($return == null || $return == (string) 0) && (isset($defaults[1]))) {
+            return $defaults[1];
+        } else {
+            
+            return $return;
         }
+
+        
     } else {
         return $GLOBALS[$value];
     }
