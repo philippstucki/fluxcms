@@ -5,6 +5,8 @@ class popoon_classes_structure2xml {
     private $queries = null;
     private $queryCacheOptions = null;
     private $db = null;
+    private $appendcounts = array(); 
+    private $structureRootPath = '/structure';
     
     function __construct($parent,$tablePrefix) {
         $this->tablePrefix = $tablePrefix;
@@ -18,6 +20,7 @@ class popoon_classes_structure2xml {
     }
     
     private function getAttrib($value) {
+        
         return $this->parent->getAttrib($value);
     }
     
@@ -46,8 +49,6 @@ class popoon_classes_structure2xml {
             $sql2xml->setOptions(array("user_options" => array("xml_seperator"=>$this->getAttrib("xml_seperator"))));
         }
         $sql2xml->setOptions(array("user_options" => array("print_empty_ids"=>False)));
-        
-        
         
         if (isset($PageOptions["All"]["user_options"])){
             $sql2xml->setOptions(array("user_options" => $PageOptions["All"]["user_options"]));
@@ -84,14 +85,23 @@ class popoon_classes_structure2xml {
                     
                     continue;
                 }
+             
                 $query['user_options']['result_root'] = $structureName;
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
                     $query["query"] = $this->replaceVarsInWhere($query["query"]);
                     bx_log::log("stucture2xml: ".$query['query']);
                     if ( $this->parent->st2xmlCaching == "true" ) { 
+                        if (!(isset($query["maxResults"])) && isset($query['queryMaxResults'])) {
+                            $this->db->loadModule('extended'); 
+                            $query['maxResults'] = $this->db->extended->getOne($query['queryMaxResults']);
+                        }
+                         
                         if (! (isset($query["maxLastChanged"]) )) {
-                            $query["maxLastChanged"]  = $this->db->queryOne($query['queryLastChanged']);
+                            $this->db->loadModule('extended');
+                            $query["maxLastChanged"]  = $this->db->extended->getOne($query['queryLastChanged']);
+                                
+                            
                         } 
                         if ( $cachedXML = $this->api->simpleCacheCheck("","st2xml_data",$query['query'],"file", $query["maxLastChanged"])) {
                             $sql2xml->addWithInput("File",$cachedXML);
@@ -102,8 +112,13 @@ class popoon_classes_structure2xml {
                             $ctx = new DomXpath($sql2xml->Format->xmldoc);
                             $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
                             
+                            if (isset($query['maxResults']) && $resultTree->item(0)) {
+                                $resultTree->item(0)->setAttribute('maxresults', $query['maxResults']);
+                            }
+                            
                             $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->saveXML($resultTree->item(0)),"file", $query["maxLastChanged"]);
                         }
+                        
                         $_maxLastChangedAll[] = $query["maxLastChanged"];
                         
                     }
@@ -144,7 +159,8 @@ class popoon_classes_structure2xml {
                     $sql2xml->add($query['query'],array("root"=> $structureName));
                 }
             }
-            $this->queries["_queryInfo"]["maxLastChanged"] = max ($_maxLastChangedAll);
+            
+            $this->queries["_queryInfo"]["maxLastChanged"] = max($_maxLastChangedAll);
             
             // send http cache headers so the sent page expires immediately 
             $lastChangedDate = gmdate("r", $this->queries["_queryInfo"]["maxLastChanged"]);
@@ -170,7 +186,6 @@ class popoon_classes_structure2xml {
     
     function Structures2Sql ($configFile,$sqlOptions=array(),$rootpath= "/structure")
     {
-        
         $configClass = bx_helpers_db::getConfigClass($configFile);
         $dbMainStructure = $configClass->getValues( $rootpath);
         
@@ -187,6 +202,11 @@ class popoon_classes_structure2xml {
                 if (PEAR::isError($dbStructure)) {
                     die($dbStructure->getUserinfo() .  "\n" . $dbStructure->getMessage());
                 }
+                
+                if (isset($dbStructure["appendcount"])) {
+                    $this->appendcounts[$structureName] = ($dbStructure["appendcount"]=="true") ? true:false;
+                }
+                
                 if (isset($dbStructure["expires"])) {
                     $allqueries[$structureName]['expires'] = time() - strtotime(preg_replace("#access\s+minus\s+#", "-",$dbStructure["expires"]));
                 } 
@@ -214,7 +234,6 @@ class popoon_classes_structure2xml {
                     */                 
                     $tableInfo= array();
                     if (!isset($sqlOptions[$structureName])) { $sqlOptions[$structureName] = array();} //E_ALL fix
-                    
                     $allqueries[$structureName]['query'] = $this->Structure2Sql($configClass,$tableInfo,$sqlOptions[$structureName],$rootpath."/".$structureName);
                     $allqueries[$structureName]['tableInfo'] = $tableInfo;
                     $allqueries[$structureName]['type'] = "dbquery";
@@ -241,6 +260,7 @@ class popoon_classes_structure2xml {
         {
             return Null;
         }
+        
         $queryfields = $dbMasterValues['children'][0].".*";
         $query = " from ".$this->tablePrefix.$dbMasterValues['children'][0] . " as " . $dbMasterValues['children'][0];
         $name = $dbMasterValues['children'][0];
@@ -250,7 +270,6 @@ class popoon_classes_structure2xml {
         $queryfields =  substr($queryfields,1);
         $andcondition = "";
         if (isset($dbMasterValues["recursive"]) && $dbMasterValues["recursive"] == "tree") {
-            
             include_once("bitlib/SQL/Tree.php");
             $t = new sql_tree($this->db);
             $t->tablename = $this->tablePrefix.$name;
@@ -290,7 +309,6 @@ class popoon_classes_structure2xml {
             $path = $rootpath;
             
             while (isset($dbStructure["children"]) &&  is_array($dbStructure["children"]))
-            
             {
                 
                 $path = $path."/".$name;
@@ -305,13 +323,8 @@ class popoon_classes_structure2xml {
                 $parentdbStructure = $dbStructure;
                 foreach($dbStructure["children"] as $child) {
                     $name = $child;
-                    
-                    
                     $dbStructure = $configClass->getValues( "$path/$name");
-                    
                     $queryfields = $queryfields. $this->getQueryFields($child,$dbStructure,$xmlparent,$tableInfo);
-                    
-                    
                     if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "id";}
                     if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "id";}
                     $query = $query ." left join ".$this->tablePrefix.$name. " as $name on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
@@ -420,7 +433,7 @@ class popoon_classes_structure2xml {
         
         if (isset($sqlOptions["limit"]))
         {
-            $query .= " LIMIT $sqlOptions[limit]";
+           $query .= " LIMIT $sqlOptions[limit]";
         }
         elseif (isset($dbMasterValues["limit"]))
         {
@@ -481,7 +494,6 @@ class popoon_classes_structure2xml {
     }
     
     function getQueries($configXml,$PageOptions) {
-        
         //here comes the new cache code
         
         $config = bx_helpers_db::getConfigClass($configXml);
@@ -514,16 +526,21 @@ class popoon_classes_structure2xml {
                 // get all the tables
                 // HINT: document2object and section2document are missing here... could maybe lead to wrong
                 //  updates, if you change one of that tables without changing any other table
+                $appendCount = (isset($this->appendcounts[$structureName]) && $this->appendcounts[$structureName]==true) ? true:false;
+                $appendCountTable = '';
+                $sectionStruct = $config->getValues($this->structureRootPath."/".$structureName);                        
+                
                 if ($query["type"] == "dbquery" && is_array($query["tableInfo"]["parent_table"] ) )
                 {
                     foreach($query["tableInfo"]["parent_table"] as $table => $parent) {
                         $_changedFields .= 'unix_timestamp('.$table .'.changed), ';
+                        if ($appendCount && $parent=='root') {
+                            $appendCountTable = $table;
+                        }
                     }
                     
-                    
                     // strip everything away before "from"
-                    $_cleanFrom = substr($query["query"], strpos($query["query"],"from"));
-                    
+                    $_cleanFrom = substr($query["query"], strpos($query["query"],"from "));
                     // strip group by away
                     $_checkGroupBy = strpos($_cleanFrom,"group by") ;                    
                     if ( $_checkGroupBy !== false) {
@@ -536,6 +553,21 @@ class popoon_classes_structure2xml {
                         $_cleanFrom = substr($_cleanFrom,0,$_checkOrderBy);
                     }
                     
+                    if ($appendCount) {
+                        $_checkLimit = strpos($_cleanFrom,"LIMIT");
+                        if ($_checkLimit !== false) {
+                            $_cleanFrom = substr($_cleanFrom,0,$_checkLimit);
+                        }
+                        
+                        if (isset($sectionStruct['idfield']) && !empty($sectionStruct['idfield'])) {
+                            $idfield = $sectionStruct['idfield'];    
+                        } else {
+                            $idfield = 'id';
+                        }
+                         
+                        $queries[$structureName]["queryMaxResults"] = 'select count('.$appendCountTable.'.'.$idfield.') as count '. $_cleanFrom;
+                    }
+                      
                     $queries[$structureName]["queryLastChanged"] = 'select max(greatest('. $_changedFields.'0)) ' .$_cleanFrom;
                 } 
             }
@@ -558,15 +590,53 @@ class popoon_classes_structure2xml {
         } else {
             $requests = $_REQUEST;
         }
-        return self::replaceVarsInWhereStatic($where,$requests);
+        
+        $where = self::replaceVarsInWhereStatic($where,$requests);
+        return self::replaceVarsInWhereExpr($where, $requests);
+        
        
+    }
+    
+    /* yet very primitive - only single expression with ints possible */
+    static function replaceVarsInWhereExpr($where, $requests) {
+        preg_match_all("/e([ifd]):(\d+)([\*\+\/\-])(\d+)/", $where, $exprs);
+        if (isset($exprs[0])&&sizeof($exprs[0])>0) { 
+            $regs=array();
+            $exps=array();
+            foreach($exprs[0] as $i=>$expr) {
+                $n=null;
+                switch($exprs[3][$i]) {
+                    case "*":
+                        $n=(int)$exprs[2][$i]*(int)$exprs[4][$i];
+                    break;
+                    case "+":
+                        $n=(int)$exprs[2][$i]+(int)$exprs[4][$i];
+                    break;
+                    case "-":
+                        $n=(int)$exprs[2][$i]-(int)$exprs[4][$i];
+                    break;
+                    case "/":
+                        $n=(int)$exprs[2][$i]/(int)$exprs[4][$i];
+                    break;
+                } 
+                
+                if ($n!==null) {
+                    $regs[] = $expr;
+                    $exps[] = $n;
+                }
+             
+            }
+
+            $where = str_replace($regs, $exps, $where);
+        } 
+        
+        return $where;
     }
     
     static function replaceVarsInWhereStatic($where,$requests) {
         $regs = array();
         $repl = array();
-        
-         foreach ($requests as $key => $val)
+        foreach ($requests as $key => $val)
         {
             /* not so sure about that */
             
@@ -579,7 +649,7 @@ class popoon_classes_structure2xml {
                 if (count($val) == 0) {
                     $val = '0';
                 } else {
-                    @$val = "'".join("','",$val)."'";
+                    $val = "'".join("','",$val)."'";
                 }
             }
             else {
