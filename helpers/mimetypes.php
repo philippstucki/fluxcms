@@ -6,6 +6,9 @@ class popoon_helpers_mimetypes {
 
     static function getFromFileLocation($src) {
         $extension = strtolower(substr($src,strrpos($src,".")+1));
+	if ($src == ".") {
+		return "httpd/unix-directory";
+	}
         switch ($extension) {
             case "gif":
             return "image/gif";
@@ -51,7 +54,8 @@ class popoon_helpers_mimetypes {
             default:
             
             if (strpos($src,"://") == false && file_exists($src)) {
-                $m =  `file -ib $src`;
+	       exec('file -ib $src', $out);
+		$m = array_shift($out);
                 if ($m) {
                     return $m;
                 }
