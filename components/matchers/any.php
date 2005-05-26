@@ -19,7 +19,7 @@
 //
 // $Id$
 
-include_once("popoon/components/matcher.php");
+//include_once("popoon/components/matcher.php");
 
 /**
 * Matches any popoon vars
@@ -33,11 +33,11 @@ include_once("popoon/components/matcher.php");
 * @version  $Id$
 * @package  popoon
 */
-class matcher_any extends matcher
+class popoon_components_matchers_any  extends popoon_components_matcher  
 {
-    function matcher_any (&$sitemap)
+    function __construct (&$sitemap)
     {
-		parent::matcher($sitemap);
+		parent::__construct($sitemap);
     }
 	function init($attribs) {
 		parent::init($attribs);
