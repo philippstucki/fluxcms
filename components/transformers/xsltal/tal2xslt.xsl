@@ -31,14 +31,14 @@
                     <xslout:apply-templates/>
                 </xslout:copy>
             </xslout:template>
-            
-            <!-- copy all attributes -->
+               <!-- copy all attributes -->
             <xslout:template match="@*">
                 <xslout:copy-of select="."/>
             </xslout:template>
         </xslout:stylesheet>
 
     </xsl:template>
+
 
     <xsl:template match="*[@tal:condition]" priority="10">
         <xslout:if test="{bxf:tales(@tal:condition)}">
@@ -214,4 +214,18 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
+    
+        
+    <xsl:template match="comment()">
+            <xslout:comment>
+                <xsl:value-of select="."/>
+            </xslout:comment>
+     </xsl:template>    
+     
+         
+    <xsl:template match="processing-instruction()">
+            <xslout:processing-instruction name="{name()}">
+                <xsl:value-of select="."/>
+            </xslout:processing-instruction>
+     </xsl:template>    
 </xsl:stylesheet>
