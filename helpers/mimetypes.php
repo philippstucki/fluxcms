@@ -54,7 +54,7 @@ class popoon_helpers_mimetypes {
             default:
             
             if (strpos($src,"://") == false && file_exists($src)) {
-                if (function_exists("fnfo_open")) {
+                if (function_exists("finfo_open")) {
                     $res = finfo_open(FILEINFO_MIME);
                     $m = finfo_file($res, $src);
                     finfo_close($res);
