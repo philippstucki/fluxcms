@@ -54,8 +54,8 @@ class popoon_helpers_mimetypes {
             default:
             
             if (strpos($src,"://") == false && file_exists($src)) {
-	       exec('file -ib $src', $out);
-		$m = array_shift($out);
+                exec(escapeshellcmd('file -ib '. escapeshellarg($src)), $out);
+                $m = array_shift($out);
                 if ($m) {
                     return $m;
                 }
