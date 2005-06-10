@@ -295,7 +295,11 @@
     
      //ArrayAccess interface
     function offsetGet($off) {
-       return $this->$off;
+	if (isset($this->$off)) {
+	       return $this->$off;
+	} else {
+		return null;
+	}
     }
     
     function offsetSet($off,$value) {
