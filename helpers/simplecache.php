@@ -362,6 +362,8 @@ class popoon_helpers_simplecache {
     /** creates a full path...
     */
     function mkpath($path) {
+	mkdir($path,0775,true);
+/*
         $dirs = explode("/",$path);
         $path = $dirs[0];
         for($i = 1;$i < count($dirs);$i++) {
@@ -370,6 +372,7 @@ class popoon_helpers_simplecache {
                 mkdir($path);
             }
         }
+*/
     }
     
     
