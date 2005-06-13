@@ -6,7 +6,7 @@ class PopoonDBException extends Exception {
         //don't leak username:password to the outside
         
         $this->userInfo =   preg_replace("#//([^:]*):([^\@^:]*)\@#","//*******:********@",$err->getUserInfo());
-         
+        $this->code = $err->getCode();
         parent::__construct();
     }
 }
