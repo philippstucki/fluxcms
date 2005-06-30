@@ -81,14 +81,14 @@ class popoon_components_generators_textfile extends popoon_components_generator 
             if($this->getParameterDefault("escapeLTonly") == "true") {
                 $xmlstr = str_replace(array("<",">"),array("&lt;","&gt;"),$xmlstr);
             }
-            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text>".$xmlstr."</text>";
-        } else {
-            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?><text><![CDATA[".$xmlstr."]]></text>";
-        }
 
+            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?>\n<text>".$xmlstr."</text>";
+        } else {
+            $xmlstr = "<?xml version='1.0' encoding='utf-8' ?>\n<text><![CDATA[".$xmlstr."]]></text>";
+        }
         if (! $xml->loadXML($xmlstr)) {
             throw new PopoonXMLParseErrorException($src);  
-        }
+        } 
         return True;
     }
 
