@@ -56,6 +56,7 @@ class popoon_components_transformers_tidy extends popoon_components_transformer 
             "wrap-attributes" => false,
             "alt-text" => "",
             "doctype" => "loose",
+            "hide-comments" => false,
             "numeric-entities" => true,
             "drop-proprietary-attributes" => true
             );
