@@ -69,6 +69,26 @@
                     throw new PopoonDBException($this->db);
                 }
                 return $this->db;
+             case "dbwrite":
+                 if (!isset($this->config->dsnwrite)) {
+                     if (!isset($this->db)) {
+                         $this->dbwrite = $this->__get("db");
+                     } else {
+                         $this->dbwrite = $this->db;
+                     }
+                     return $this->dbwrite;
+                 }
+                 require_once("MDB2.php");
+                 
+                 if (!isset($this->config->dboptionswrite)) {
+                     $this->config->dboptionswrite = NULL;
+                 }
+                 
+                 $this->dbwrite = MDB2::connect($this->config->dsnwrite,$this->config->dboptionswrite);
+                 if (MDB2::isError($this->dbwrite)) {
+                     throw new PopoonDBException($this->dbwrite);
+                 }
+                 return $this->dbwrite;
          }
          
      }
