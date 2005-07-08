@@ -297,7 +297,7 @@ class popoon_helpers_simplecache {
                     // check if modified date changed, if yes, save it and touch the lastmodified file
                     if ($lastmodified != $cacheFileLastModified_mtime) {
                         $this->simpleCacheWrite($cacheFile,"fullpath",null,$req->getResponseBody(),"plain");
-                        touch($cacheFileLastModified,$lastmodified);
+                        @	touch($cacheFileLastModified,$lastmodified);
                     }  
                     
                 } 
@@ -329,9 +329,7 @@ class popoon_helpers_simplecache {
                         touch($cacheFileLastModified,$lastmodified);
                     }
                 }
-                if (!touch($cacheFile, time())) {
-                    trigger_error("$cacheFile not touchable",E_USER_WARNING);
-                }
+                @touch($cacheFile, time());
                 return $lastmodified;
             } 
             // if a 304 came back, content didn't change... no need to get it, just touch the file
