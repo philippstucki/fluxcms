@@ -112,7 +112,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
     
     private function getErrorReporting($class) {
-        eval('$err = '.$class.'::getInstance();');
+        $err = call_user_func(array($class,'getInstance'));
         if ($err->hasErrors()) {
             return $err->getHtml();
         } else {
