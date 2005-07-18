@@ -60,8 +60,8 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         }
 
         $xsl = new XsltProcessor();
-
-        if ($this->getParameter("options","registerPhpFunctions")) {
+        $registerPhpFunctions = $this->getParameter("options","registerPhpFunctions");
+        if ( $registerPhpFunctions ) {
             
             if (($allowed = $this->getParameter("allowedPhpFunctions")) 
                  && (!(!is_array(reset($allowed)) && reset($allowed) == '__all__'))) {
@@ -98,7 +98,7 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         }
         $xml = $xsl->transformToDoc($xml);
         if (!$xml) {
-            throw new PopoonXSLTParseErrorException( $xslfile);
+            throw new PopoonXSLTParseErrorException( $xslfile,$registerPhpFunctions);
         }
         
     }

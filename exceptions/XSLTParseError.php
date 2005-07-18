@@ -7,7 +7,7 @@ If not patched, it still works, just doesn't show the exact error messages
 
 class PopoonXSLTParseErrorException extends Exception {
     
-    public function __construct($filename) {
+    public function __construct($filename, $registerPhpFunctions= false) {
          $this->message = "XSLT Error in $filename";
           $this->userInfo = "";
           
@@ -32,9 +32,13 @@ class PopoonXSLTParseErrorException extends Exception {
           $xsl->load($filename);
           set_error_handler(array($this,"errorHandler"));
           $proc = new XSLTProcessor();
+          if ($registerPhpFunctions) {
+              $proc->registerPHPFunctions("foo");
+          }
           $proc->importStyleSheet($xsl);
           $proc->transformToDoc($dom);
           restore_error_handler();
+              
         }
         
         //FIXME: Give more info, what went wrong
