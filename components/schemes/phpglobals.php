@@ -44,7 +44,7 @@ function scheme_phpglobals($value)
             $return = $GLOBALS[$matches[1][0]][$matches[3][0]][$matches[3][1]];
         } 
          
-        if (($return == null || $return == (string) 0) && (isset($defaults[1]))) {
+        if (($return == null) && (isset($defaults[1]))) {
             return $defaults[1];
         } else {
             
