@@ -13,7 +13,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </func:function>
-
     <xsl:template match="/">
         <xslout:stylesheet version="1.0" exclude-result-prefixes="xhtml bxf tal">
             <xslout:output encoding="utf-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"/>
@@ -157,6 +156,9 @@
             </xsl:when>
             <xsl:when test="$mode = 'text'">
                 <xslout:value-of select="{bxf:tales($spath)}"/>
+            </xsl:when>
+            <xsl:when test="$mode = 'text-escaped'">
+                <xslout:value-of select="{bxf:tales($spath)}" disable-output-escaping="yes"/>
             </xsl:when>
             <xsl:when test="$path = 'structure .'">
                 <xslout:copy>
