@@ -33,7 +33,6 @@ class popoon_classes_structure2xml {
     {
         
         // get the queries, either cached from file system or generated
-        
         if (is_null($this->queries)) {
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
@@ -90,7 +89,6 @@ class popoon_classes_structure2xml {
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
                     $query["query"] = $this->replaceVarsInWhere($query["query"]);
-                    bx_log::log("stucture2xml: ".$query['query']);
                     if ( $this->parent->st2xmlCaching == "true" ) { 
                         if (!(isset($query["maxResults"])) && isset($query['queryMaxResults'])) {
                             $query['maxResults'] = $this->db->queryOne($query['queryMaxResults']);
@@ -371,6 +369,7 @@ class popoon_classes_structure2xml {
         
         if (isset($sqlOptions["where"]))
         {
+            
             if (!isset($sqlOptions["where"])) { $sqlOptions["where"] = "";} //E_ALL fix
             if (!isset($dbMasterValues["where"])) { $dbMasterValues["where"] = "";} //E_ALL fix     
             $_append_check = strtoupper(substr($sqlOptions["where"],0,3));
@@ -397,8 +396,7 @@ class popoon_classes_structure2xml {
         
         elseif (isset($dbMasterValues["where"]))
         {
-            //            $_where = $this->replaceVarsInWhere($dbMasterValues["where"]);
-            $_where = $dbMasterValues["where"];
+            $_where = $this->replaceVarsInWhere($dbMasterValues["where"]);
             // if there is already a group by (coming from tree searches...)
             if (strpos($query,"group by"))
             {	
@@ -562,8 +560,9 @@ class popoon_classes_structure2xml {
                         } else {
                             $idfield = 'id';
                         }
-                         
-                        $queries[$structureName]["queryMaxResults"] = 'select count('.$appendCountTable.'.'.$idfield.') as count '. $_cleanFrom;
+                        
+                        $queries[$structureName]["queryMaxResults"] = 'select count( distinct '.$appendCountTable.'.'.$idfield.') as count '. $_cleanFrom;
+                        //echo "q: ".$queries[$structureName]["queryMaxResults"]."<br/>";
                     }
                       
                     $queries[$structureName]["queryLastChanged"] = 'select max(greatest('. $_changedFields.'0)) ' .$_cleanFrom;
@@ -653,6 +652,7 @@ class popoon_classes_structure2xml {
             else {
                 $val = trim($val);
             }
+            
             $regs[] ="\$$key";
             $repl[] = "$val";                
             $regs[] ="%$key";                
