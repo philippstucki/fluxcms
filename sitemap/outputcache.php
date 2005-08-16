@@ -222,6 +222,7 @@ class popoon_sitemap_outputcache {
     
     function getSupportedCompression() {
         // check what the client accepts
+	if (function_exists("gzcompress")) {
         if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {	
 	        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
 		        if (false !== strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip')) {	
@@ -230,6 +231,7 @@ class popoon_sitemap_outputcache {
 			return 'gzip';
 		}
         }
+	}
             
         // no compression
         return '';
