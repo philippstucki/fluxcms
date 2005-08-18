@@ -191,7 +191,9 @@ class popoon_classes_browser {
                 $val = explode("/",$val[0]);
                 $bd['browser'] = "Mozilla";
                 $bd['subbrowser'] = "Netscape";
-                $bd['version'] = $val[1];
+		if (isset($val[1])) {
+	                $bd['version'] = $val[1];
+		}
             }
             
             // clean up extraneous garbage that may be in the name
