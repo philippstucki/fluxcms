@@ -60,11 +60,17 @@
                 break;
              case "db":
                 require_once("MDB2.php");
+                
                 if (!isset($this->config->dboptions)) {
                     $this->config->dboptions = NULL;
                 }
-                
                 $this->db = MDB2::connect($this->config->dsn,$this->config->dboptions);
+                 
+                if (isset($this->config->portabilityoptions)) {
+                    $this->db->options['portability'] = $this->config->portabilityoptions;
+                }
+                
+                 
                 if (MDB2::isError($this->db)) {
                     throw new PopoonDBException($this->db);
                 }
@@ -81,10 +87,15 @@
                  require_once("MDB2.php");
                  
                  if (!isset($this->config->dboptionswrite)) {
-                     $this->config->dboptionswrite = NULL;
-                 }
+                     $this->config->dboptionswrite = $this->config->dboptions;
+                 } 
                  
                  $this->dbwrite = MDB2::connect($this->config->dsnwrite,$this->config->dboptionswrite);
+                 
+                 if (isset($this->config->portabilityoptions)) {
+                    $this->dbwrite->options['portability'] = $this->config->portabilityoptions;
+                 }
+                 
                  if (MDB2::isError($this->dbwrite)) {
                      throw new PopoonDBException($this->dbwrite);
                  }
