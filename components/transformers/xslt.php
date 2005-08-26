@@ -96,7 +96,12 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         foreach($params as $key => $value) {
             $xsl->setParameter("",$key,$value);
         }
-        $xml = $xsl->transformToDoc($xml);
+        if($this->getParameter("options","textOutput")) {
+            $xml = $xsl->transformToXml($xml);
+        } else {
+            $xml = $xsl->transformToDoc($xml);
+        }
+        
         if (!$xml) {
             throw new PopoonXSLTParseErrorException( $xslfile,$registerPhpFunctions);
         }
