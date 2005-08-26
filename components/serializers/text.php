@@ -26,7 +26,7 @@
 * @version  $Id$
 * @package  popoon
 */
-class popoon_components_serializers_xml extends popoon_components_serializer {
+class popoon_components_serializers_text extends popoon_components_serializer {
     
     public $XmlFormat = "Own";
     protected $contentType = "text";
