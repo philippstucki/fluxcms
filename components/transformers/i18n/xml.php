@@ -39,13 +39,15 @@
 * @package  popoon
 */
 
-
-class popoon_components_transformers_i18n_xml {
+class popoon_components_transformers_i18n_xml extends popoon_components_transformers_i18n_driver {
 
     protected $catctx = NULL;
+    public $generateKeys = NULL;
+    protected $keysDOM = NULL;
+    protected $keysXP = NULL;
     
     function __construct($src,$lang) {
-	//cheap win and unix abs path check
+        //cheap win and unix abs path check
         if(defined('BX_OPEN_BASEDIR') && !(substr($src,0,1) == '/' || substr($src,1,1) == ":")) {
             $src = BX_OPEN_BASEDIR.$src;
         }
@@ -60,6 +62,12 @@ class popoon_components_transformers_i18n_xml {
             $cat->xinclude();
             $this->catctx = new DomXpath($cat);
         }
+        
+    }
+    
+    function __destruct() {
+        if($this->keysDOM)
+            $this->keysDOM->save($this->generateKeys);
     }
 
     function getText($key) {
@@ -70,8 +78,32 @@ class popoon_components_transformers_i18n_xml {
         if($catres && $catres->length > 0) {
             return $catres->item(0)->nodeValue;
         }
+
+        if($this->generateKeys !== NULL) {
+            if($this->keysDOM === NULL) {
+                $this->keysDOM = new DOMDocument();
+                if(file_exists($this->generateKeys)) { 
+                    $this->keysDOM->load($this->generateKeys);
+                }
+
+                if(!$this->keysDOM->documentElement) {
+                    $this->keysDOM->appendChild($this->keysDOM->createElement('catalogue'));
+                }
+                
+                $this->keysXP = new DOMXPath($this->keysDOM);
+            }
+            
+            $ns = $this->keysXP->query('//message[@key="'.$key.'"]');
+            if($ns->length < 1) {
+                $msgNode = $this->keysDOM->createElement('message', ' ');
+                $msgNode->setAttribute('key', $key);
+                $this->keysDOM->documentElement->appendChild($msgNode);
+                $this->keysDOM->documentElement->appendChild($this->keysDOM->createTextNode("\n"));
+            }
+
+        }
+
         return false;
     }
-
 
 }

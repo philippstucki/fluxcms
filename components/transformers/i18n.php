@@ -70,7 +70,10 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         
         $ctx = new domxpath($xml);
         $ctx->registerNamespace("i18n",I18NNS);
-        
+
+        if($this->getParameterDefault('generateKeys') !== NULL) {
+            $d->generateKeys = $this->getParameterDefault('generateKeys');
+        }
         
         //check all "normal" i18n: elements
         $res = $ctx->query("//i18n:*");
