@@ -100,6 +100,16 @@
                      throw new PopoonDBException($this->dbwrite);
                  }
                  return $this->dbwrite;
+             case "i18nadmin":
+                if (!isset($this->config->i18nAdminSrc)) {
+                   $this->i18nadmin = NULL;
+                } else {
+                    $this->i18nadmin = popoon_classes_i18n::getDriverInstance($this->config->i18nAdminSrc, $this->config->getAdminLocale());
+                    if(isset($this->config->i18nAdminGenerateKeys))
+                        $this->i18nadmin->generateKeys = $this->config->i18nAdminGenerateKeys;
+                }
+                return $this->i18nadmin;
+                
          }
          
      }
