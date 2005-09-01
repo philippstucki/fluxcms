@@ -70,6 +70,10 @@ class popoon_classes_browser {
         return( self::getName() == "opera"  && self::getVersion() >= 8);
     }
     
+    static function isKonqueror34() {
+        return( self::getName() == "konqueror"  && self::getVersion() >= 3.4);
+    }
+    
     static function getName() {
         self::parse();
         return self::$BrowserName;
