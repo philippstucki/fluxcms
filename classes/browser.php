@@ -45,8 +45,6 @@ class popoon_classes_browser {
            self::init();
            $name = self::getName();
            $version = self::getVersion();
-           print "$name\n";
-           print "$version\n";
            if ($name == "opera" && $version < 8) {
                return true;
            }
@@ -66,6 +64,10 @@ class popoon_classes_browser {
     
     static function isSafari() {
         return( self::getName() == "safari" );
+    }
+    
+    static function isOpera8() {
+        return( self::getName() == "opera"  && self::getVersion() >= 8);
     }
     
     static function getName() {
