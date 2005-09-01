@@ -39,11 +39,37 @@ class popoon_components_transformers_i18n_driver {
     
     public function translate($text, $params = NULL) {
         $ret = $this->getText($text);
-        if($ret === FALSE)
+        if($ret === FALSE OR $ret == '')
             $ret = $text;
-
-        return preg_replace("/\{([a-zA-Z0-9_]*)\}/e", "\$params['$1']", $ret);
+        return $this->substitute($ret, $params);
         
+    }
+    
+    /**
+     *  DOCUMENT_ME
+     *
+     *  @param  type  $var descr
+     *  @access public
+     *  @return type descr
+     */
+    public function translate2($text, $params = NULL) {
+        $t = $this->getText($this->substitute($text, $params));
+        if($t === FALSE OR $t == '') {
+            return $this->translate($text, $params);
+        }
+        return $t;
+    }
+    
+    /**
+     *  Substitutes all references in $t with the given parameters.
+     *
+     *  @param  string  $t Text to process
+     *  @param  array  $params Parameters to substitute in $t
+     *  @access protected
+     *  @return string String with substituted references
+     */
+    protected function substitute($t, $params) {
+        return preg_replace("/\{([a-zA-Z0-9_]*)\}/e", "\$params['$1']", $t);
     }
     
 }
