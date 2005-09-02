@@ -40,7 +40,12 @@ class popoon_components_serializers_text extends popoon_components_serializer {
     }
     
     function DomStart(&$xml) {
-        print $xml;
+        
+        if (is_object($xml)) {
+           print preg_replace("#^<\?xml[^>]+\?>[\s\n\r]*#","",$xml->saveXML());
+        } else {
+            print $xml;
+        }
     }
 }
 
