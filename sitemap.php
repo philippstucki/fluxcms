@@ -287,6 +287,7 @@ class popoon_sitemap {
     */
     
     function printHeader() {
+        if (!headers_sent()) {
         $this->setHeader("Content-Type",$this->contentType);
         
         // flag for an already sent response header
@@ -304,6 +305,7 @@ class popoon_sitemap {
             }
             }
         }    
+        }
         
     }
     
