@@ -75,13 +75,13 @@ class popoon_components_generators_error extends popoon_components_generator {
  
  <error:title>'.get_class($e).'</error:title>
  
- <error:message>'.$e->getMessage().'</error:message>
+ <error:message>'.htmlspecialchars($e->getMessage()).'</error:message>
  <error:code>'.$e->getCode().'</error:code>
  
  <error:file>'.$e->getFile().'</error:file>
  <error:line>'.$e->getLine().'</error:line>';
   if (isset ($e->userInfo)) {
- $xmlstr  .= '<error:extra description="userInfo">'.$e->userInfo.'</error:extra>';
+ $xmlstr  .= '<error:extra description="userInfo">'.htmlspecialchars($e->userInfo).'</error:extra>';
  }
 
  $xmlstr .= '<error:extra description="stacktrace">'.$e->getTraceAsString().'</error:extra>
