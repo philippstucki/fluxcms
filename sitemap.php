@@ -266,13 +266,16 @@ class popoon_sitemap {
     * headers according to http://dclp-faq.de/q/q-http-caching.html
     */
     function setCacheHeaders ($noCache,$expireTime = 10) {
-        if ($noCache || $expireTime == 0) {
+        if ($noCache || $expireTime === 0) {
             $date = gmdate("D, d M Y H:i:s");
             $this->setHeader("Expires", $date . " GMT");
             $this->setHeaderIfNotExists("Last-Modified",  $date ." GMT");
             $this->setHeader("Pragma","no-cache");
             $this->setHeader("Cache-Control","no-cache, post-check=0, pre-check=0");
         } else {
+	    if (!$expireTime) {
+		$expireTime = 10;
+	    }
             //My Apache 2 sends max-age=10800, which is insanely high.. change that 
             // here to 10 seconds (at least, we have something then, even if not that high)
             $this->setHeaderIfNotExists("Cache-Control",  "public, max-age=$expireTime");
