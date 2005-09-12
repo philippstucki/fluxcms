@@ -61,7 +61,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     }
     
     function DomStart(&$xml) {
-        
+        //var_dump($xml->saveXML());die();
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
         setlocale(LC_ALL,$lang);
@@ -190,7 +190,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     **/
     
     protected function methodTranslate($node,$ctx) {
-        $resParam = $ctx->query("//i18n:param");
+        $resParam = $ctx->query("i18n:param",$node);
         $params = array();
         $i = 0;
         foreach ($resParam as $paramNode) {
