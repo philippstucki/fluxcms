@@ -40,7 +40,7 @@ abstract class popoon_components_serializer extends popoon_component {
     public function init($attribs) {
         parent::init($attribs);
         $this->sitemap->setContentType($this->contentType);
-        $this->sitemap->setCacheHeaders($this->getAttrib("noHttpCaching") == "true");
+        $this->sitemap->setCacheHeaders($this->getAttrib("noHttpCaching") == "true",$this->getAttrib("httpExpires") );
         foreach ($this->getParameter("header") as $key => $value) {
             if ($key == "HTTP") {
                 header("HTTP/1.0 ". $value);
