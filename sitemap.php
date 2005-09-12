@@ -278,7 +278,10 @@ class popoon_sitemap {
             }
             //My Apache 2 sends max-age=10800, which is insanely high.. change that 
             // here to 10 seconds (at least, we have something then, even if not that high)
+             
+             $this->setHeaderIfNotExists("Expires", gmdate("r", time() + $expireTime));
             $this->setHeaderIfNotExists("Cache-Control",  "public, max-age=$expireTime");
+            
         }
         
     }
