@@ -61,7 +61,6 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     }
     
     function DomStart(&$xml) {
-        //var_dump($xml->saveXML());die();
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
         setlocale(LC_ALL,$lang);
