@@ -71,7 +71,6 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
     }
 
     function getText($key) {
-        bx_log::log($key);
         if(!isset($this->catctx)) {
             return FALSE;
         }
