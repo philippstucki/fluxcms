@@ -1,13 +1,14 @@
 <?php
-
+    
 
 class popoon_classes_browser {
-    
+        
     static private $BrowserName = "Unknown";
     static private $BrowserSubName = "None";
     static private $Version = "Unknown";
     static private $Platform = "Unknown";
     static private $UserAgent = "Not reported";
+    static private $isMobile = null;
     
     static private $initialized = false;
     static private $parsed = false;
@@ -56,6 +57,24 @@ class popoon_classes_browser {
     }
     static function isPalm() {
         return (self::getPlatform()=="palm");
+    }
+    
+    static function isMobile() {
+        // creating the WURFL object
+        if (self::$isMobile === null) {
+            require_once(BX_INCLUDE_DIR.'/wurfl_config.php');
+            require_once(BX_INCLUDE_DIR.'/wurfl_class.php');
+            
+            $myDevice = new wurfl_class($wurfl, $wurfl_agents);
+            $myDevice->GetDeviceCapabilitiesFromAgent($_SERVER["HTTP_USER_AGENT"]);
+            if($myDevice->capabilities['xhtml_ui']['html_wi_w3_xhtmlbasic']){
+                self::$isMobile = true;
+            }
+            else{
+                self::$isMobile = false;
+            }
+        }
+        return self::$isMobile;
     }
     
     static function isMSIEWin() {
