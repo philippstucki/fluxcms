@@ -30,13 +30,19 @@ class popoon_classes_browser {
     }
     
     static function isMozillaAndHasMidas() {
-        if (self::getName() == "mozilla")
-        if (stripos(self::$UserAgent,"camino/0.8.")) {
-            return false;
-        } else {
-            return true;
+        if (self::getName() == "mozilla") {
+            if (stripos(self::$UserAgent,"camino/0.8.")) {
+                return false;
+            } else {
+                return true;
+            }
         }
         return false;
+    }
+    
+    static function hasContentEditable() {
+        return (self::isMozillaAndHasMidas() || self::isMSIEWin());
+           
     }
     
     
