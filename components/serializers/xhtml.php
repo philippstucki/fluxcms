@@ -81,6 +81,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         if ($this->getParameterDefault("stripScriptCDATA") == "true") {
             $xml = $this->stripScriptCDATA($xml);
         }
+
+        if ($this->getParameterDefault("stripDefaultPrefixes") == "true") {
+            $xml = $this->stripDefaultPrefixes($xml);
+        }
+
         if ($this->getParameterDefault("stripBxAttributes") == "true") {
             $xml = $this->stripBxAttributes($xml);   
         }
@@ -91,6 +96,9 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
     }
 
+    private function stripDefaultPrefixes($xml) {
+	return str_replace(array('<default:','</default:'),array('<','</'),$xml);
+    }
     private function stripScriptCDATA($xml) {
 	//strip empty (Whitespace only) CDATA
 	$xml = preg_replace("#<!\[CDATA\[\W*\]\]>#","",$xml);
