@@ -176,16 +176,16 @@ class popoon_helpers_simplecache {
     * @param int $expire an unixtime. If last-checked is < than this, it will be checked again
     *
     */
-    public function simpleCacheHttpRead ($url,$expire = -1) {
+    public function simpleCacheHttpRead ($url,$expire = -1, $cookies= array()) {
 
-        $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url);
+        $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url. serialize($cookies));
         // if expire is less than the above number, it's meant to be relative..
         if ($expire < 100000000) {
             $expire = time() - $expire;
         }
         if ($expire >= 0) {
             try {
-                $this->simpleCacheHttpLastModified($url, $expire);
+                $this->simpleCacheHttpLastModified($url, $expire, "",$cookies);
             } catch(Exception $e) {
                 if (file_exists($cacheFile)) {
                     //touch the file, so we don't have to read it on every request..
@@ -197,7 +197,7 @@ class popoon_helpers_simplecache {
             }
         }
         else if (!file_exists($cacheFile)){
-            $this->simpleCacheHttpLastModified($url, $expire);
+            $this->simpleCacheHttpLastModified($url, $expire,"",$cookies);
         }
         return $this->readFile($cacheFile);
     }
@@ -244,8 +244,8 @@ class popoon_helpers_simplecache {
     * @returns int unixtime of last modified
     */
 
-    public function simpleCacheHttpLastModified($url,  $expire = 1, $proxy = "") {
-        $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url);
+    public function simpleCacheHttpLastModified($url,  $expire = 1, $proxy = "",$cookies = array()) {
+        $cacheFile = $this->simpleCacheGenerateName("simpleCacheHttp",$url.serialize($cookies));
         $cacheFile_mtime = @ filemtime($cacheFile);
         $cacheFileLastModified = $cacheFile.".lastmodified";
         $cacheFileLastModified_mtime = @ filemtime($cacheFileLastModified);
@@ -268,7 +268,9 @@ class popoon_helpers_simplecache {
             include_once("HTTP/Request.php");
             $req = new HTTP_Request($url,array("timeout" => 5));
             $req->addHeader("User-Agent",$this->userAgent);
-
+            foreach($cookies as $key => $value) {
+                 $req->addCookie($key, $value);
+            }
             if ($cacheFileLastModified_mtime) {
                 $req->addHeader("If-Modified-Since",gmdate("D, d M Y H:i:s \G\M\T",$cacheFileLastModified_mtime));
             }
