@@ -58,7 +58,7 @@ class serializer_htmlwithmailobfuscator extends serializer {
                $xml = $xml->html_dump_mem();
         }
         else if ($this->getAttrib("mode") == "dom") {
-            sitemap::var2XMLObject($xml);
+            popoon_sitemap::var2XMLObject($xml);
                $xml = $xml->html_dump_mem();
         }
         // strlen is wrong, if we use transsid, because php adds SID after every link
