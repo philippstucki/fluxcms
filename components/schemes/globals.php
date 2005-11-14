@@ -29,6 +29,6 @@
 */
 function scheme_globals($value)
 {
-	return sitemap::getGlobalOptions($value);
+	return popoon_sitemap::getGlobalOptions($value);
 }
 	
