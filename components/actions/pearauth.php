@@ -147,7 +147,7 @@ class popoon_components_actions_pearauth extends popoon_components_action {
         
 	} else if (isset($_POST['password'])){
         
-        sitemap::setGlobalOptions("error", $this->getParameterDefault("errormessage"));
+        popoon_sitemap::setGlobalOptions("error", $this->getParameterDefault("errormessage"));
     }
 	if (! SID && (! isset($_COOKIE["username"]) || ($a->username && $_COOKIE["username"] != $a->username))) {
          setcookie("username",$a->username, time() + 5184000 ,"/" ); // 60days
