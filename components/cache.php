@@ -330,7 +330,7 @@ class componentCache{
             $content = ob_get_contents();
             ob_end_flush();
         }
-        // else{ sitemap::var2XMLString($content); }
+        // else{ popoon_sitemap::var2XMLString($content); }
         if ( strtolower(get_class($content)) == "domdocument")
         {
             $content = $content->dumpmem();
@@ -381,7 +381,7 @@ class componentCache{
      */
     function loadGlobals(){
 		if (isset($this->currentMetaObject["globals"] ) && $globals = $this->currentMetaObject["globals"] ) {
-			sitemap::setGlobalOptionsAll($globals);
+			popoon_sitemap::setGlobalOptionsAll($globals);
 		}
         return(true);
     }
@@ -427,7 +427,7 @@ class componentCache{
      * @see storeContent()
      */
     function storeGlobals() {
-		if (is_array($globals = sitemap::getGlobalOptionsAll())) {
+		if (is_array($globals = popoon_sitemap::getGlobalOptionsAll())) {
 		    $this->currentMetaObject["globals"] = $globals;
         } 
 		return true;

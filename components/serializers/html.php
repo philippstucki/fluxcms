@@ -48,7 +48,7 @@ class popoon_components_serializers_html extends popoon_components_serializer {
                $xml = $xml->saveHTML();
         }
         else if ($this->getAttrib("mode") == "dom") {
-            sitemap::var2XMLObject($xml);
+            popoon_sitemap::var2XMLObject($xml);
                $xml = $xml->saveHTML();
         }
         // strlen is wrong, if we use transsid, because php adds SID after every link
