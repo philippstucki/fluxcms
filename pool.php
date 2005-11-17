@@ -109,7 +109,13 @@
                         $this->i18nadmin->generateKeys = $this->config->i18nAdminGenerateKeys;
                 }
                 return $this->i18nadmin;
-                
+             case "versioning":
+                if (!isset($this->config->versioning)) {
+                    $this->versioning = null;;
+                } else {
+                    $this->versioning = bx_versioning::versioning($this->config->versioning);
+                }
+                return $this->versioning;
          }
          
      }
