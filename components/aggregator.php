@@ -71,7 +71,10 @@ class popoon_components_aggregator extends popoon_component {
         if (isset($attribs["strip-root"])) {
             $stripRoot = popoon_sitemap::translateScheme($attribs["strip-root"]);
         }
-        
+        $createElement = false;
+        if (isset($attribs["element"])) {
+            $createElement = popoon_sitemap::translateScheme($attribs["element"]);
+        }
         if ($xmlInput)  {
             $xmldoc = $xmlInput;
         }
@@ -130,6 +133,10 @@ class popoon_components_aggregator extends popoon_component {
             foreach ($children as $child) {
                 $this->xmlRoot->appendChild($this->xml->importNode($child,true));
             }
+        } elseif ($createElement != false) {
+            $newElement = $this->xml->createElement($createElement);
+            $newElement->appendChild($this->xml->importNode($root,true));
+            $this->xmlRoot->appendChild($newElement);
         } else {
             
             $this->xmlRoot->appendChild($this->xml->importNode($root,true));
