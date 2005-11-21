@@ -97,9 +97,9 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
             $xsl->setParameter("",$key,$value);
         }
         if($this->getParameter("options","textOutput")) {
-            $xml = $xsl->transformToXml($xml);
+            $xml = @$xsl->transformToXml($xml);
         } else {
-            $xml = $xsl->transformToDoc($xml);
+            $xml = @$xsl->transformToDoc($xml);
         }
         
         if (!$xml) {
