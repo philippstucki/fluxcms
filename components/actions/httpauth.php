@@ -19,7 +19,6 @@
 //
 // $Id$
 
-include_once("popoon/components/action.php");
 /**
 *
 * @author   Christian Stocker <chregu@bitflux.ch>
