@@ -369,6 +369,8 @@ class popoon_sitemap {
         //check if we have domxml/xslt
         
         $xslDom = new DomDocument();
+       $xslDom->resolveExternals = true;
+       $xslDom->substituteEntities = true;
         $xslDom->load($this->sm2php_xsl_dir."/".$this->sm2php_xsl);
         if (!class_exists("XsltProcessor")) {
             return popoon::raiseError("Popoon doesn't run without XSLT support in PHP.",POPOON_ERROR_FATAL,__FILE__,__LINE__);
@@ -381,6 +383,8 @@ class popoon_sitemap {
         $xslincludes = new XsltProcessor();
         $xslincludes->importStylesheet($xslincludesDom);
         $sm = new DomDocument();
+       $sm->resolveExternals = true;
+       $sm->substituteEntities = true;
         if (! $sm->load($sitemapRealPath)) {
             if (!file_exists($sitemapRealPath)) {
                 throw new PopoonFileNotFoundException($sitemapRealPath);
