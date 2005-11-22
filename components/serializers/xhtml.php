@@ -29,10 +29,10 @@ include_once("popoon/components/serializer.php");
 * @package  popoon
 */
 class popoon_components_serializers_xhtml extends popoon_components_serializer {
-
+    
     public $XmlFormat = "Own";
     public $contentType = "text/html; charset=utf-8";
-
+    
     function __construct (&$sitemap) {
         $this->sitemap = &$sitemap;
     }
@@ -40,7 +40,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     function init($attribs) {
         parent::init($attribs);
     }
-
+    
     function DomStart(&$xml)
     {
         parent::DomStart($xml);
@@ -56,10 +56,10 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         $encoding = $this->getParameterDefault("contentEncoding");
         
         if (is_object($xml)) {
-                if ($encoding) {
-                        $xml->encoding = $encoding;
-                }
-
+            if ($encoding) {
+                $xml->encoding = $encoding;
+            }
+            
             $this->sitemap->hasFinalDom = true;
             $xmlstr = $xml->saveXML();
         } else {
@@ -75,48 +75,48 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         print $this->cleanXHTML($xmlstr);
         
     }
-        
+    
     private function cleanXHTML($xml) {
         /* for some strange reasons, libxml makes an upercase HTML, which the w3c validator doesn't like */
         if ($this->getParameterDefault("stripScriptCDATA") == "true") {
             $xml = $this->stripScriptCDATA($xml);
         }
-
+        
         if ($this->getParameterDefault("stripDefaultPrefixes") == "true") {
             $xml = $this->stripDefaultPrefixes($xml);
         }
-
+        
         if ($this->getParameterDefault("stripBxAttributes") == "true") {
             $xml = $this->stripBxAttributes($xml);   
         }
         if ($this->getParameterDefault("stripXMLDeclaration") == "true") {
-		$xml = str_replace("&#13;","",$xml);
-		$xml = preg_replace("#<\?xml[^>]*\?>\s*#","",$xml);
+            $xml = str_replace("&#13;","",$xml);
+            $xml = preg_replace("#<\?xml[^>]*\?>\s*#","",$xml);
         }
         return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
     }
-
+    
     private function stripDefaultPrefixes($xml) {
-	return str_replace(array('<default:','</default:'),array('<','</'),$xml);
+        return str_replace(array('<default:','</default:'),array('<','</'),$xml);
     }
     private function stripScriptCDATA($xml) {
-	//strip empty (Whitespace only) CDATA
-	$xml = preg_replace("#<!\[CDATA\[\W*\]\]>#","",$xml);
-	// strip CDATA just after <script>
+        //strip empty (Whitespace only) CDATA
+        $xml = preg_replace("#<!\[CDATA\[\W*\]\]>#","",$xml);
+        // strip CDATA just after <script>
         $xml = preg_replace("#(<script[^>]*>)\W*<!\[CDATA\[#","$1",$xml);
-	// strip ]]> just before </script>
+        // strip ]]> just before </script>
         return preg_replace("#\]\]>\W*(</script>)#","$1",$xml);
     }
     
     private function stripBxAttributes($xml) {
         return preg_replace("#\sbx[a-zA-Z_]+=\"[^\"]+\"#","",$xml);  
     }
-        
+    
     private function obfuscateMail($xml) {
-	 if ($this->getParameter('default','obfuscateMail') == 'true') {
-                return str_replace('mailto:','&#109;&#97;&#105;&#108;&#116;&#111;&#58;',str_replace('@','&#64;',$xml));
+        if ($this->getParameter('default','obfuscateMail') == 'true') {
+            return preg_replace('#mailto:([^@]*)@([^"]+)#','&#109;&#97;&#105;&#108;&#116;&#111;&#58;$1&#64;$2',$xml);
         }
-	return $xml;
+        return $xml;
     }
     
     private function getErrorReporting($class) {
@@ -130,8 +130,8 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
 	
     
-
-        
+    
+    
 }
 
 
