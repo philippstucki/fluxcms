@@ -102,7 +102,7 @@ class generator_xmlrpc_server extends generator {
         $this->_server = &new XML_RPC_Server($this->_dispatchMap, FALSE);
 
         // create a global self-reference for doing callbacks
-        $GLOBALS['_popoon_generator_xmlrpc_server'][$this->_generatorID] = &$this;
+        //$GLOBALS['_popoon_generator_xmlrpc_server'][$this->_generatorID] = &$this;
     }    
 
     /**
@@ -130,7 +130,7 @@ class generator_xmlrpc_server extends generator {
     */
     function addDispatch($methodName, $functionName) {
         if(method_exists($this, $functionName)) {
-            $this->_dispatchMap[$methodName] =  array('function' => '$GLOBALS[\'_popoon_generator_xmlrpc_server\'][\''.$this->_generatorID.'\']->'.$functionName);
+            $this->_dispatchMap[$methodName] =  array('function' => array(&$this, $functionName));
             return TRUE;
         }
 
