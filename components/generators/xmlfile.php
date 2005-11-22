@@ -63,6 +63,12 @@ class popoon_components_generators_xmlfile extends popoon_components_generator {
     function DomStart(&$xml)
     {
         $xml = new DomDocument();
+        if ($this->getParameterDefault('resolveExternals') == "true") {
+          $xml->resolveExternals = true;
+        }
+        if ($this->getParameterDefault('substituteEntities') == "true") {
+          $xml->substituteEntities = true;
+        }
         $src = $this->getAttrib("src");
         if (! $xml->load($src)) {
             if (!file_exists($src) ) {
