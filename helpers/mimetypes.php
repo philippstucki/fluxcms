@@ -32,7 +32,7 @@ class popoon_helpers_mimetypes {
             case "html":
             case "htm":
             case "xhtml":
-            return "text/html";
+             return "text/html";
             case "txt":
             return "text/plain";
             case "pdf":
@@ -50,6 +50,12 @@ class popoon_helpers_mimetypes {
             return "application/x-bittorrent";
             case "mp3":
             return "audio/mpeg";
+            case "doc":
+            return "application/msword";
+            case "xls":
+            return "application/vnd.ms-excel";
+            case "ppt":
+            return "application/vnd.ms-powerpoint";
             
             default:
             
