@@ -63,7 +63,7 @@ class popoon_components_generators_empty extends popoon_components_generator {
     function DomStart(&$xml)
     {
         $xml = new DomDocument();
-	return รร$xml;
+	return $xml;
     }
 
     
