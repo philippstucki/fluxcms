@@ -19,7 +19,6 @@
 //
 // $Id$
 
-include_once("popoon/components/generator.php");
 include_once("XML/RPC.php");
 include_once("XML/RPC/Server.php");
 
@@ -64,7 +63,7 @@ include_once("XML/RPC/Server.php");
 * @package  popoon
 */
 
-class generator_xmlrpc_server extends generator {
+class popoon_componenets_generators_xmlrpc_server extends popoon_componenets_generator {
 
     /**
     * array containing dispatch map
