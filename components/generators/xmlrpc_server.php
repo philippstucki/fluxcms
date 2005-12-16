@@ -78,18 +78,8 @@ class popoon_componenets_generators_xmlrpc_server extends popoon_componenets_gen
     * @access private
     */
     var $_server;
-
-    /**
-    * generator id, used when creating a global self-reference.
-    * @var string
-    * @access private
-    */
-    var $_generatorID;
     
-    function generator_xmlrpc_server(&$sitemap) {
-        // generate generator id
-        $this->_generatorID = $this->_getGeneratorID();
-
+    function __construct($sitemap) {
         $this->generator($sitemap);
     }
     
@@ -98,19 +88,8 @@ class popoon_componenets_generators_xmlrpc_server extends popoon_componenets_gen
         parent::init($attribs);
 
         // create a new xmlrpc server
-        $this->_server = &new XML_RPC_Server($this->_dispatchMap, FALSE);
-
-        // create a global self-reference for doing callbacks
-        //$GLOBALS['_popoon_generator_xmlrpc_server'][$this->_generatorID] = &$this;
+        $this->_server = new XML_RPC_Server($this->_dispatchMap, FALSE);
     }    
-
-    /**
-    * create an id for this generator. used when creating a global self-reference.
-    * @return string generator id
-    */
-    function _getGeneratorID() {
-        return get_class($this);
-    }
     
     function DomStart(&$xml) {
         // parse request
@@ -128,8 +107,9 @@ class popoon_componenets_generators_xmlrpc_server extends popoon_componenets_gen
     * @return bool returns true when method has been added to the dispatch map
     */
     function addDispatch($methodName, $functionName) {
+
         if(method_exists($this, $functionName)) {
-            $this->_dispatchMap[$methodName] =  array('function' => array(&$this, $functionName));
+            $this->_dispatchMap[$methodName] =  array('function' => array($this, $functionName));
             return TRUE;
         }
 
