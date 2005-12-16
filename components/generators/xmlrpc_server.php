@@ -38,16 +38,16 @@ include_once("XML/RPC/Server.php");
 * how to implement your own server:
 *   you need to extend the base xmlrp_server generator class and add all 
 *   the methods you want to expose to the public to the extended class.
-*   finally you have to tell xmlrpc_server about which rpc methods match 
+*   finally you have to tell xmlrpcserver about which rpc methods match 
 *   which class methods. - that's all, your application now speaks xmlrpc. 
 *
 * here is an example of a very simple xmlrpc generator which implements the
 * obligatory hello world example :)
 
-*   class generator_xmlrpc_server_simple extends generator_xmlrpc_server {
+*   class generator_xmlrpcserver_simple extends generator_xmlrpcserver {
 *   
-*       function generator_xmlrpc_server_simple(&$sitemap) {
-*           parent::generator_xmlrpc_server($sitemap);
+*       function generator_xmlrpcserver_simple(&$sitemap) {
+*           parent::generator_xmlrpcserver($sitemap);
 *           
 *           $this->addDispatch('moblog.helloWorld', '_helloWorld');
 *       }
@@ -63,7 +63,7 @@ include_once("XML/RPC/Server.php");
 * @package  popoon
 */
 
-class popoon_components_generators_xmlrpc_server extends popoon_componenets_generator {
+class popoon_components_generators_xmlrpcserver extends popoon_componenets_generator {
 
     /**
     * array containing dispatch map
@@ -80,7 +80,7 @@ class popoon_components_generators_xmlrpc_server extends popoon_componenets_gene
     var $_server;
     
     function __construct($sitemap) {
-        $this->generator($sitemap);
+        parent::__construct($sitemap);
     }
     
     function init($attribs) {
