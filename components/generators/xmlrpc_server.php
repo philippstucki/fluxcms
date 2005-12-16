@@ -63,7 +63,7 @@ include_once("XML/RPC/Server.php");
 * @package  popoon
 */
 
-class popoon_componenets_generators_xmlrpc_server extends popoon_componenets_generator {
+class popoon_components_generators_xmlrpc_server extends popoon_componenets_generator {
 
     /**
     * array containing dispatch map
