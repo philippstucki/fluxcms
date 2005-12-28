@@ -31,7 +31,11 @@ class popoon_components_generators_planet extends popoon_components_generator {
         
         $startEntry = $this->getParameterDefault("startEntry");
         $search = $this->getParameterDefault("search");
-        
+        $section = $this->getParameterDefault("section");
+        if (!$section) {
+            $section = 'default';
+        }
+        $this->queryRestriction = $this->getParameterDefault("queryRestriction");
 
         $this->db = MDB2::Connect($GLOBALS['BX_config']['dsn']);
 
@@ -54,7 +58,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         left join blogs on feeds.blogsID = blogs.ID
         ';
 
-	$query = 'select count(entries.ID) ' . $from . $where ." and feeds.section = 'default'";
+	$query = 'select count(entries.ID) ' . $from . $where ." and feeds.section = '$section' ". $this->queryRestriction;
         $count = $this->db->queryOne($query);
         $xml .= '<count>'.$count.'</count>';
         $xml .= '<start>'.$startEntry.'</start>';
@@ -63,10 +67,11 @@ class popoon_components_generators_planet extends popoon_components_generator {
             case "rdf":
             case "rss":
             case "ato":
-            $xml .= $this->getEntries( $from.$where, "default",0);    
+            case "com":
+            $xml .= $this->getEntries( $from.$where, $section ,0);    
             break;
             default:
-            $xml .= $this->getEntries( $from.$where, "default",$startEntry);    
+            $xml .= $this->getEntries( $from.$where ." and not(entries.title like '%test%')", $section ,$startEntry);    
             $xml .= $this->getEntries( $from." where 1=1", "releases",0);
         }
         
@@ -82,16 +87,16 @@ class popoon_components_generators_planet extends popoon_components_generator {
 	    blogs.dontshowblogtitle  as dontshowblogtitle,
             blogs.author as author,
             unix_timestamp(max(entries.dc_date)) as maxDate,
-            unix_timestamp(date_sub(now(), INTERVAL 100 DAY)) as border
+            unix_timestamp(date_sub(now(), INTERVAL 30 DAY)) as border
 
             from blogs left join feeds on feeds.blogsID = blogs.ID
             left join entries on entries.feedsID = feeds.ID
-            where entries.dc_date > 0 and feeds.section = 'default'
+            where entries.dc_date > 0 and feeds.section = '$section'
+            ". $this->queryRestriction . "
             group by blogs.link
             order by maxDate DESC"
             
             );
-            
             $xml .= $this->mdbResult2XML($res,"blog",array("link","title","author"));
             $xml .= "</blogs>";
         }
@@ -124,6 +129,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         SELECT entries.ID,
         entries.title,
         entries.link,
+        entries.guid,
         entries.description,
         entries.content_encoded,
         DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
@@ -134,7 +140,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
 	blogs.author as blog_Author,
 	blogs.dontshowblogtitle as blog_dontshowblogtitle,
         if(length(blogs.title) > '. ($this->maxBlogTitleLength + 5) .' , concat(left(blogs.title,'. ($this->maxBlogTitleLength ) .')," ..."), blogs.Title) as blog_Title
-        ' . $from . ' and feeds.section = "'.$section.'"
+        ' . $from . ' and feeds.section = "'.$section.'" '.$this->queryRestriction . ' 
         order by entries.dc_date DESC 
         limit '.$startEntry . ',10');
 
@@ -156,7 +162,6 @@ class popoon_components_generators_planet extends popoon_components_generator {
                 foreach($row as $key => $value) {
                     $xml .= '<'.$key.'>';
                     if (in_array($key,$cdataFields)) {
-			
 			  $value= preg_replace('#(<[^>]+[\s\r\n\"\'])on[a-z][^>]*>#iU',"$1>",html_entity_decode(str_replace('&lt;','&amp;lt;',$value),ENT_COMPAT,"UTF-8"));
 			$value = str_replace("<?","&lt;?",$value);
 			$value = str_replace("<script","&lt;script",$value);
