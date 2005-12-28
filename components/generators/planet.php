@@ -87,7 +87,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
 	    blogs.dontshowblogtitle  as dontshowblogtitle,
             blogs.author as author,
             unix_timestamp(max(entries.dc_date)) as maxDate,
-            unix_timestamp(date_sub(now(), INTERVAL 30 DAY)) as border
+            unix_timestamp(date_sub(now(), INTERVAL 100 DAY)) as border
 
             from blogs left join feeds on feeds.blogsID = blogs.ID
             left join entries on entries.feedsID = feeds.ID
@@ -133,7 +133,7 @@ class popoon_components_generators_planet extends popoon_components_generator {
         entries.description,
         entries.content_encoded,
         DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%e.%c.%Y, %H:%i") as dc_date,
-        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i+00:00") as date_iso,
+        DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%Y-%m-%dT%H:%i:00Z") as date_iso,
         DATE_FORMAT(DATE_ADD(entries.dc_date, INTERVAL '.($GLOBALS['BX_config']['webTimezone'] ).' HOUR), "%a, %d %b %Y %T +0000") as date_rfc,
         
         blogs.link as blog_Link,
