@@ -40,15 +40,14 @@ class popoon_components_generators_planet extends popoon_components_generator {
         $xml .= '<search>';
 	if ($search) {
             if (strlen($search) <= 3) {
-                $where = " where content_encoded LIKE '%$search%' or entries.description LIKE '%$search%' or entries.title LIKE '%$search%' ";
+                $where = " where content_encoded LIKE ".$this->db->quote('%'.$search.'%') ." or entries.description LIKE ".$this->db->quote('%'.$search.'%') ."  or entries.title LIKE ".$this->db->quote('%'.$search.'%') ."  ";
             } else {
-                $where = " where match(entries.description, entries.content_encoded, entries.title ) against('". $search . "') ";
+                $where = " where match(entries.description, entries.content_encoded, entries.title ) against(". $this->db->quote($search) . ") ";
 	}
             $xml .= '<string>'.$search .'</string>';
            
         } else {
-            $where = "where  1=1 ";
-        }
+            $where = "where  1=1 ";        }
         
         $from = 'from entries
         left join feeds on entries.feedsID = feeds.ID
@@ -158,7 +157,9 @@ class popoon_components_generators_planet extends popoon_components_generator {
                     $xml .= '<'.$key.'>';
                     if (in_array($key,$cdataFields)) {
 			
-			  $value= preg_replace('#(<[^>]+[\s\r\n\"\'])on[^>]*>#iU',"$1>",$value);
+			  $value= preg_replace('#(<[^>]+[\s\r\n\"\'])on[a-z][^>]*>#iU',"$1>",html_entity_decode(str_replace('&lt;','&amp;lt;',$value),ENT_COMPAT,"UTF-8"));
+			$value = str_replace("<?","&lt;?",$value);
+			$value = str_replace("<script","&lt;script",$value);
                         $xml .= '<![CDATA['.str_replace("<![CDATA[","",str_replace("]]>","",$value)).']]>';
                     } else {
                         $xml .= $value;
