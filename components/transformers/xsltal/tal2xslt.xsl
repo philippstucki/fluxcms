@@ -101,7 +101,7 @@
     
     <xsl:template match="@metal:define-macro">
     </xsl:template>
-    <xsl:template match="*[@tal:content]">
+    <xsl:template match="*[@tal:content]" name="tal_content">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:call-template name="copy-value-apply">
@@ -130,6 +130,17 @@
         </xslout:for-each>
     </xsl:template>
 
+    <!-- special case of above if tal:repeat and tal:content are in the same element -->
+    <xsl:template match="*[@tal:repeat and @tal:content]">
+        <xsl:variable name="v" select="substring-before(@tal:repeat,' ')"/>
+        <xsl:variable name="x" select="substring-after(@tal:repeat,' ')"/>
+        <xslout:for-each select="{bxf:tales($x)}">
+            <xslout:variable name="{$v}" select="."/>
+            <xsl:call-template name="tal_content"/>
+        </xslout:for-each>
+    </xsl:template>
+    
+      
     <xsl:template match="@*">
         <xsl:if test="namespace-uri() != 'http://xml.zope.org/namespaces/tal'">
             <xsl:copy-of select="."/>
