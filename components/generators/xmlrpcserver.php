@@ -63,7 +63,7 @@ include_once("XML/RPC/Server.php");
 * @package  popoon
 */
 
-class popoon_components_generators_xmlrpcserver extends popoon_componenets_generator {
+class popoon_components_generators_xmlrpcserver extends popoon_components_generator {
 
     /**
     * array containing dispatch map
@@ -92,11 +92,9 @@ class popoon_components_generators_xmlrpcserver extends popoon_componenets_gener
     }    
     
     function DomStart(&$xml) {
-        // parse request
-        $r = $this->_server->parseRequest($GLOBALS['HTTP_RAW_POST_DATA']);
 
         // and serialize the result - that's it.
-        $xml = '<?xml version="1.0" ?>'.$r->serialize();
+        $xml = $this->_server->server_payload;
         $this->sitemap->setHeader('Content-length', strlen($xml));
     }
     
