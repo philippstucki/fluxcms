@@ -22,6 +22,8 @@
      
      private $configclass;
      
+     public $dbIsUtf8 = false;
+     
      /**
      * Gets a singleton instance of the this class
      *
@@ -69,12 +71,13 @@
                 if (isset($this->config->portabilityoptions)) {
                     $this->db->options['portability'] = $this->config->portabilityoptions;
                 }
-                
-                 
                 if (MDB2::isError($this->db)) {
                     throw new PopoonDBException($this->db);
                 }
+                
+                $this->checkForMysqlUtf8($this->config->dsn,$this->db);
                 return $this->db;
+                
              case "dbwrite":
                  if (!isset($this->config->dsnwrite)) {
                      if (!isset($this->db)) {
@@ -99,7 +102,10 @@
                  if (MDB2::isError($this->dbwrite)) {
                      throw new PopoonDBException($this->dbwrite);
                  }
+                 
+                 $this->checkForMysqlUtf8($this->config->dsnwrite,$this->dbwrite);
                  return $this->dbwrite;
+                 
              case "i18nadmin":
                 if (!isset($this->config->i18nAdminSrc)) {
                    $this->i18nadmin = NULL;
@@ -118,6 +124,22 @@
                 return $this->versioning;
          }
          
+     }
+     
+     function checkForMysqlUtf8($dsn,$db) {
+         if ( !$this->dbIsUtf8 && $dsn['phptype'] == "mysql") {
+             if ( version_compare(@mysql_get_server_info(),"4.1",">=")) {
+                 $u = $db->queryCol("show create database ".$dsn['database'],null,1);
+                 preg_match("#SET(.*)\*\/#",$u[0],$matches);
+                 if (isset($matches[1])) {
+                     $u = trim($matches[1]);
+                     if ($u == "utf8") {
+                         $this->dbIsUtf8 = true;
+                         $db->query("set names '".$u."'");
+                     }
+                 }
+             }
+         }
      }
      
  }
