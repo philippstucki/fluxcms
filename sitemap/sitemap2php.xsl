@@ -273,7 +273,7 @@
 			<xsl:with-param name="prefix">matcher</xsl:with-param>
 		</xsl:call-template>
 
-        if ($matcher->match("<xsl:value-of select="@pattern"/>"))
+        if ($matcher->match("<xsl:value-of select="@pattern"/>") !== False)
         {
         <xsl:apply-templates/>
         } 
