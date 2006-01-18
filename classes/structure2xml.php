@@ -28,15 +28,17 @@ class popoon_classes_structure2xml {
         return $this->parent->getParameter($value);
     }
     
-    
-    function showPage ($configXml,$PageOptions = array(), $returnDb2XmlObject = false) 
-    {
+    /**
+     * 
+     */
+    function showPage ($configXml,$PageOptions = array(), $returnDb2XmlObject = false) {
         
         // get the queries, either cached from file system or generated
         if (is_null($this->queries)) {
             $this->queries = $this->getQueries($configXml,$PageOptions);
         }
-         $sql2xml = new XML_db2xml($this->db,"bx","Extended");
+		        
+		$sql2xml = new XML_db2xml($this->db,"bx","Extended");
         
         if ($this->getParameter("contentIsXml")) {
             $sql2xml->setContentIsXml(true);
@@ -84,14 +86,17 @@ class popoon_classes_structure2xml {
                     
                     continue;
                 }
-             
+				//print_r($query);
+				
                 $query['user_options']['result_root'] = $structureName;
                 if ($query['type'] == "dbquery"){
                     //caching the sql2xml part
                     $query["query"] = $this->replaceVarsInWhere($query["query"]);
+					//print_r($query);
                     if ( $this->parent->st2xmlCaching == "true" ) { 
                         if (!(isset($query["maxResults"])) && isset($query['queryMaxResults'])) {
                             $query['maxResults'] = $this->db->queryOne($query['queryMaxResults']);
+							//print_r($query['maxResults']);
                         }
                          
                         if (! (isset($query["maxLastChanged"]) )) {
@@ -109,7 +114,9 @@ class popoon_classes_structure2xml {
                             $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
                             
                             if (isset($query['maxResults']) && $resultTree->item(0)) {
-                                $resultTree->item(0)->setAttribute('maxresults', $query['maxResults']);
+                                $resultTree->item(0)->setAttribute('maxresults',  $query['maxResults']  );
+								$resultTree->item(0)->setAttribute('maxpages', ceil( $query['maxResults']/$query['limit'] ) -1  );
+								$resultTree->item(0)->setAttribute('page', $_GET['p']);
                             }
                             
                             $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->saveXML($resultTree->item(0)),"file", $query["maxLastChanged"]);
@@ -193,12 +200,21 @@ class popoon_classes_structure2xml {
         {
             
             foreach ($dbMainStructure['children'] as $structureName) {
-                
+                				
                 $dbStructure = $configClass->getValues( "$rootpath/$structureName");
+				//print_r($dbStructure);
                 if (PEAR::isError($dbStructure)) {
                     die($dbStructure->getUserinfo() .  "\n" . $dbStructure->getMessage());
                 }
-                
+
+				if (isset($dbStructure["pager"])) {
+					//echo "<h1>$structureName</h1>";
+                    $this->appendcounts[$structureName] = ($dbStructure["pager"]=="true") ? true:false;
+                }  
+				if (isset($dbStructure["limit"])) {
+					//echo "<h1>$structureName</h1>";
+                    $allqueries[$structureName]['limit'] = $dbStructure["limit"];
+                } 				             
                 if (isset($dbStructure["appendcount"])) {
                     $this->appendcounts[$structureName] = ($dbStructure["appendcount"]=="true") ? true:false;
                 }
@@ -240,7 +256,7 @@ class popoon_classes_structure2xml {
 
             }
         }
-        // print "<pre>";print_r($allqueries);
+        //print "<pre>";print_r($allqueries);
         return $allqueries;
         
     }
@@ -433,7 +449,14 @@ class popoon_classes_structure2xml {
         }
         elseif (isset($dbMasterValues["limit"]))
         {
-            $query .= " LIMIT $dbMasterValues[limit]";
+			$limit = $dbMasterValues['limit'];
+			if(isset($dbMasterValues["pager"])){
+				$page = ( isset($_GET['p']) ) ? $_GET['p'] :0 ;
+				$query .= " LIMIT ".($page * $limit).",$limit";
+			}
+			else {
+				$query .= " LIMIT $limit";
+			}
         }
         
         //if we have the simplepermWhere attribute and a table named "Section" add this to the query...
@@ -444,6 +467,7 @@ class popoon_classes_structure2xml {
             
             $query = str_replace("where", "where $simplepermWhere and ", $query);
         }
+		//echo $query;
         return $query;
     }
     function getQueryFields($tablename,$dbStructure,$xmlparent,&$tableInfo)
@@ -497,6 +521,8 @@ class popoon_classes_structure2xml {
             $this->queryCacheOptions = $PageOptions;
         } 
         
+		// cache off
+		//if ( false &&  
         if ( false && $queries = $this->api->simpleCacheCheck($configXml,"st2xml_queries",$this->queryCacheOptions)) {
         } 
         // we don't have the queries cached, generate them..
@@ -516,12 +542,12 @@ class popoon_classes_structure2xml {
             // It doesn't matter if you use Mysql4 with query caching, but it's slightly slower without
             // To implement that, we would have to change structure2sql, which then should return an omptimized query
             // (to lazy to do that now)
-            
+			
             foreach ($queries as $structureName => $query) {                
                 $_changedFields = "";
                 // get all the tables
                 // HINT: document2object and section2document are missing here... could maybe lead to wrong
-                //  updates, if you change one of that tables without changing any other table
+                // updates, if you change one of that tables without changing any other table
                 $appendCount = (isset($this->appendcounts[$structureName]) && $this->appendcounts[$structureName]==true) ? true:false;
                 $appendCountTable = '';
                 $sectionStruct = $config->getValues($this->structureRootPath."/".$structureName);                        
@@ -550,6 +576,7 @@ class popoon_classes_structure2xml {
                     }
                     
                     if ($appendCount) {
+						
                         $_checkLimit = strpos($_cleanFrom,"LIMIT");
                         if ($_checkLimit !== false) {
                             $_cleanFrom = substr($_cleanFrom,0,$_checkLimit);
@@ -560,8 +587,9 @@ class popoon_classes_structure2xml {
                         } else {
                             $idfield = 'id';
                         }
-                        
-                        $queries[$structureName]["queryMaxResults"] = 'select count( distinct '.$appendCountTable.'.'.$idfield.') as count '. $_cleanFrom;
+                        $qTmp = 'select count( distinct '.$appendCountTable.'.'.$idfield.') as count '. $_cleanFrom;
+                        $qTmp = preg_replace("#where\s*\(\s*\)#"," where ( 1 = 1 ) ",$qTmp);
+						$queries[$structureName]["queryMaxResults"] = $qTmp;
                         //echo "q: ".$queries[$structureName]["queryMaxResults"]."<br/>";
                     }
                       
