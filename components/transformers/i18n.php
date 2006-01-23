@@ -120,7 +120,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
             $key = $text->nodeValue;
         }
         if (!$locText = $d->getText($key)) {
-            $locText = $key;
+            $locText = $text->nodeValue;
         }
         $text->parentNode->replaceChild($text->ownerDocument->createTextNode( $locText),$text);
     }    
