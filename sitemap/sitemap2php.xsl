@@ -374,6 +374,10 @@
             <xsl:when test="@name = 'exception'">
             $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',$e);
             </xsl:when>
+            <xsl:when test="@namevalues">
+                $<xsl:value-of select="$prefix"/>->setParameterMultiple('<xsl:value-of select="$type"/>',<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@namevalues"/></xsl:call-template>
+                <xsl:if test="@default">, <xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@default"/></xsl:call-template></xsl:if>);            
+            </xsl:when>
             <xsl:otherwise>
                 $<xsl:value-of select="$prefix"/>->setParameter('<xsl:value-of select="$type"/>','<xsl:value-of select="@name"/>',<xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@value"/></xsl:call-template>
                 <xsl:if test="@default">, <xsl:call-template name="escapeSingleQuotes"><xsl:with-param name="text" select="@default"/></xsl:call-template></xsl:if>);
