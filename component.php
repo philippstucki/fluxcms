@@ -132,9 +132,11 @@ abstract class popoon_component {
 	}
     
     public function setParameterMultiple($type,$namevalues) {
-        
-        foreach ($this->sitemap->translateScheme($namevalues) as $k => $v) {
-            $this->setParameter($type, $k, $v);
+        $namevalues = $this->sitemap->translateScheme($namevalues);
+        if (is_array($namevalues)) {
+            foreach ($this->sitemap->translateScheme($namevalues) as $k => $v) {
+                $this->setParameter($type, $k, $v);
+            }
         }
         
     }
