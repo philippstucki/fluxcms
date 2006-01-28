@@ -68,24 +68,36 @@ Class MnogoSearch  {
 			$this->set_ResField();
 		    
             if($this->msAllocate($params['dsn'])) {
-
-		$this->set_AgentParam(UDM_PARAM_LOCAL_CHARSET,'UTF-8');
-		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_BROWSER_CHARSET,'UTF-8');
-		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_CHARSET,'UTF-8');
-		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_DETECT_CLONES,UDM_DISABLED);				
-		Udm_Set_Agent_Param($this->MRes,UDM_PARAM_MIN_WORD_LEN,3);
-/*		 Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLBEG,"<i>");
-		 Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLEND,"</i>");
-*/
+                
+                $this->set_AgentParam(UDM_PARAM_LOCAL_CHARSET,'UTF-8');
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_BROWSER_CHARSET,'UTF-8');
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_CHARSET,'UTF-8');
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_DETECT_CLONES,UDM_DISABLED);				
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_MIN_WORD_LEN,3);
+                /*		 Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLBEG,"<i>");
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_HLEND,"</i>");
+                */
+                
 				$this->set_MaxResults($params['NumRows']);
 				$this->set_CurrPage($params['CurrPage']);
-			    	
+                
                 $searchmode = (isset($params['SearchMode'])) ? $params['SearchMode'] : 'single';
                 $this->set_SearchMode($searchmode); 
-			
+                
+                Udm_Set_Agent_Param($this->MRes,UDM_PARAM_MIN_WORD_LEN,3);
                 
                 $weightfact = (isset($params['WeightFactor'])) ? $params['WeightFactor'] : 11;
 				$this->set_WeightFactor($weightfact);
+                
+                if ($params['doLang'] == 'true') {
+                  Udm_Add_Search_Limit($this->MRes,UDM_LIMIT_LANG,$GLOBALS['POOL']->config->getOutputLanguage());
+                }/* else if ($params['doLangMnogo'] == 'true') {
+                    Udm_Add_Search_Limit($this->MRes,UDM_LIMIT_LANG,$GLOBALS['POOL']->config->getOutputLanguage());
+                }*/
+                if (isset($_GET['t'])) {
+                       Udm_Add_Search_Limit($this->MRes,UDM_LIMIT_TAG,$_GET['t']);
+                }
+                
 			}
 		}
 	}
@@ -220,6 +232,7 @@ Class MnogoSearch  {
 	function _query($query) {
 		$this->query = $this->_eval_query($query);
         if (!empty($this->query) && is_resource($this->MRes)) {
+            
 	Udm_Set_Agent_Param($this->MRes,UDM_PARAM_QUERY,$this->query);
             if($this->_result = udm_find($this->MRes,$this->query)) {
 				$this->_set_ResParam('ResRows',UDM_PARAM_NUM_ROWS);
