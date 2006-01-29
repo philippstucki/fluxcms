@@ -665,7 +665,7 @@ class popoon_classes_structure2xml {
         {
             /* not so sure about that */
             
-            if (is_null($val) or $val ===    false)
+            if (is_null($val) or $val === false )
             {
                 continue;
                 //$val = 0;
@@ -687,7 +687,12 @@ class popoon_classes_structure2xml {
             $repl[] = sql_regcase($val);                
             $regs[] ="+$key";
             $repl[] = "+".join(" +",explode(" ",$val));
+            if ($val != '') {
+                $regs[] ="\$:$key";
+                $repl[] = "$val";                
+            } 
         }
+        
         
         $where = str_replace($regs,$repl,$where);
         $where = preg_replace('#\[\[[^\]]*\$[^\]]+\]\]#',"",$where);
