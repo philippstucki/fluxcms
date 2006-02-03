@@ -127,7 +127,7 @@
      }
      
      function checkForMysqlUtf8($dsn,$db) {
-         if ( !$this->dbIsUtf8 && $dsn['phptype'] == "mysql") {
+         if ( !$this->dbIsUtf8 && ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli")) {
              if ( version_compare(@mysql_get_server_info(),"4.1",">=")) {
                  $u = $db->queryCol("show create database ".$dsn['database'],null,1);
                  preg_match("#SET(.*)\*\/#",$u[0],$matches);
@@ -135,6 +135,7 @@
                      $u = trim($matches[1]);
                      if ($u == "utf8") {
                          $this->dbIsUtf8 = true;
+                         $db->isUtf8 = true;
                          $db->query("set names '".$u."'");
                      }
                  }
