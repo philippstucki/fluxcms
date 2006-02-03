@@ -127,6 +127,7 @@
      }
      
      function checkForMysqlUtf8($dsn,$db) {
+         $db->isUtf8 = false;
          if ( !$this->dbIsUtf8 && ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli")) {
              if ( version_compare(@mysql_get_server_info(),"4.1",">=")) {
                  $u = $db->queryCol("show create database ".$dsn['database'],null,1);
