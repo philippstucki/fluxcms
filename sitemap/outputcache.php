@@ -92,6 +92,7 @@ class popoon_sitemap_outputcache {
         $this->options = $options;
         $options->cacheParams['max_userdata_linelength'] = 0;
         $this->cache = new Cache_Output($options->cacheContainer, $options->cacheParams );
+        
         if ($this->compression) {
             $this->compression = $this->getSupportedCompression();   
         }
@@ -132,7 +133,11 @@ class popoon_sitemap_outputcache {
                 header("X-Popoon-Cache-Status: true");
                 print $content;
                 die();
+            } else if ($this->options->outputCacheSave == 304) {
+                ob_start();
+                ob_implicit_flush(false);
             }
+                
         }
     }
     
@@ -152,8 +157,7 @@ class popoon_sitemap_outputcache {
     }
     
     function end(&$sitemap, $expire = 3600) {
-        $content =  ob_get_contents();
-        ob_end_clean();
+        $content =  ob_get_clean();
         $etag =  md5($content);
         $sitemap->setHeader("ETag", '"'.$etag.'"');
         if ($this->options->outputCacheSave !== 304) {
@@ -196,7 +200,6 @@ class popoon_sitemap_outputcache {
         }
         if (isset($sitemap->header['Last-Modified']) && $this->check304($etag, $sitemap->header['Last-Modified'])) {
             header( 'HTTP/1.1 304 Not Modified' );
-            
             if ($this->options->outputCacheSave !== 304) {
                 $this->cache->extSave($this->id, $this->compressContent($content), serialize($sitemap->header), $expire ,$this->cacheGroup);
             }
