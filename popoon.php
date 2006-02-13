@@ -436,5 +436,3 @@ function myErrorHandler ($errno, $errstr, $errfile, $errline) {
 	}
 }
 }
-
-?>

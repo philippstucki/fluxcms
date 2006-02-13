@@ -243,4 +243,3 @@ class popoon_classes_browser {
         }
     }
 }
-?>

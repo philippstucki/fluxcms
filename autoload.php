@@ -23,5 +23,3 @@ function __autoload($class) {
         //print("couldn't load $class from $incFile\n");
     }
 }
-    
- ?>

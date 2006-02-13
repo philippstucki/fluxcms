@@ -704,5 +704,3 @@ function sitemap_fixValue($value) {
      $value = "'".$value."'";
     return preg_replace(array("#\.''$#","#^''\.#","#\.''\.#"),"",$value);
 }
-
-?>

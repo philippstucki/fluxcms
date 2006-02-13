@@ -423,4 +423,3 @@ class popoon_helpers_simplecache {
     } // end func deleteDir
 
 }
-?>

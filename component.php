@@ -285,5 +285,3 @@ abstract class popoon_component {
 }
 
 
-
-?>
