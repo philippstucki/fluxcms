@@ -116,7 +116,8 @@ class popoon_classes_structure2xml {
                             if (isset($query['maxResults']) && $resultTree->item(0)) {
                                 $resultTree->item(0)->setAttribute('maxresults',  $query['maxResults']  );
 								$resultTree->item(0)->setAttribute('maxpages', ceil( $query['maxResults']/$query['limit'] ) -1  );
-								$resultTree->item(0)->setAttribute('page', $_GET['p']);
+								$page = isset($_GET['p'])? $_GET['p'] : 0 ;
+								$resultTree->item(0)->setAttribute('page', $page);
                             }
                             
                             $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->saveXML($resultTree->item(0)),"file", $query["maxLastChanged"]);
