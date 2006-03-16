@@ -64,11 +64,11 @@ class popoon_helpers_mimetypes {
                     $res = finfo_open(FILEINFO_MIME);
                     $m = finfo_file($res, $src);
                     finfo_close($res);
-                } else {
+                } elseif(!strpos(ini_get('disable_functions'),'exec')) {
                     exec(escapeshellcmd('file -ib '. escapeshellarg($src)), $out);
                     $m = array_shift($out);
                 }
-                if ($m) {
+                if (isset($m)) {
                     return $m;
                 }
             }
