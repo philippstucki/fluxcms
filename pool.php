@@ -129,7 +129,12 @@
      function checkForMysqlUtf8($dsn,$db) {
          $db->isUtf8 = false;
          if ( !$this->dbIsUtf8 && ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli")) {
-             if ( version_compare(@mysql_get_server_info(),"4.1",">=")) {
+             if ($dsn['phptype'] == 'mysqli') {
+                 $isFourOne = version_compare($db->connection->server_info,"4.1",">=");
+             } else {
+                 $isFourOne = version_compare(@mysql_get_server_info(),"4.1",">=");
+             }
+             if ($isFourOne) {
                  $u = $db->queryCol("show create database ".$dsn['database'],null,1);
                  preg_match("#SET(.*)\*\/#",$u[0],$matches);
                  if (isset($matches[1])) {
