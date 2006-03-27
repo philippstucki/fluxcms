@@ -32,8 +32,7 @@
 class popoon_components_serializers_fo2pdf extends popoon_components_serializer {
     
     public $XmlFormat = "XmlString";
-    //public $contentType = "application/pdf";
-    public $contentType = "text/html";
+    public $contentType = "application/pdf";
     
     function __construct ($sitemap) {
         
@@ -41,7 +40,6 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
     }
     
     public function init($attribs) {
-        
         parent::init($attribs);
     }
     
@@ -60,12 +58,11 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         }
         $cmd = $this->getAttrib("commandline");
         
-        /*if ($cmd) {
+        if ($cmd) {
             $this->doOnCommandLine($xml,$cmd);
-        } else {*/
-            
+        } else {
             $this->doWithFo2Pdf($xml);
-        //}
+        }
     }
     
     protected function doOnCommandLine ($xml, $cmd) {
@@ -91,7 +88,6 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         unlink($foname);
         
     }
-    
     
     protected function doWithFo2Pdf($xml) {
         
