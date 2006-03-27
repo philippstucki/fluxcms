@@ -50,7 +50,7 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
             
             $this->sc = popoon_helpers_simplecache::getInstance();
             $this->md5 = md5($xml);
-            if ($pdf = $this->sc->simpleCacheCheck($this->md5,"fo2pdf",null,"file",3600 * 24 * 7)) {
+            if ($pdf = $this->sc->simpleCacheCheck($this->md5,"fo2pdf",null,"file",3600 * 24)) {
 	        header("Content-Length: ".filesize($pdf));
                 readfile($pdf);
                 return true;
@@ -103,6 +103,9 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         // config file. Declare here the path to this file [optional]. 
         // More information about fonts and fop on the apache-fop webpage.
         if ($conf = $this->getParameterDefault("configFile")) {           
+               if (strpos($conf,"/") !== 0) {
+                       $conf = BX_PROJECT_DIR.$conf;
+               }
 	    $fop->setConfigFile($conf);
         }
 
