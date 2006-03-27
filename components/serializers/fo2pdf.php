@@ -50,7 +50,7 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
             
             $this->sc = popoon_helpers_simplecache::getInstance();
             $this->md5 = md5($xml);
-            if ($pdf = $this->sc->simpleCacheCheck($this->md5,"fo2pdf",null,"file",3600 * 24)) {
+            if ($pdf = $this->sc->simpleCacheCheck($this->md5,"fo2pdf",null,"file",3600 * 24 * 3)) {
 	        header("Content-Length: ".filesize($pdf));
                 readfile($pdf);
                 return true;
