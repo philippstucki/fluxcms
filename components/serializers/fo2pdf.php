@@ -102,7 +102,10 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         //If you want other fonts in your PDF, you need to declare them in a
         // config file. Declare here the path to this file [optional]. 
         // More information about fonts and fop on the apache-fop webpage.
-        
+        if ($conf = $this->getParameterDefault("configFile")) {           
+	    $fop->setConfigFile($conf);
+        }
+
         if (PEAR::isError($error = $fop->runFromString($xml)))
         {
             die("FOP ERROR: ". $error->getMessage());
@@ -113,7 +116,12 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         
         $fop->printPDF();
         //delete the temporary pdf file
-        $fop->deletePDF();
+        if ($this->doCache) {
+            $this->sc->simpleCacheWrite($this->md5,"fo2pdf",null,$fop->pdf,"moveFile");
+        } else {
+            $fop->deletePDF();
+        }
+
     }
     
 }
