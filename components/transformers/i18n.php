@@ -122,7 +122,14 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
         if (!$locText = $d->getText($key)) {
             $locText = $text->nodeValue;
         }
-        $text->parentNode->replaceChild($text->ownerDocument->createTextNode( $locText),$text);
+        
+        if ($locText instanceof DomDocumentFragment) {
+            $f = $text->ownerDocument->importNode($locText,true);
+        } else {
+            $f = $text->ownerDocument->createTextNode( $locText);
+        }
+    
+        $text->parentNode->replaceChild($f,$text);
     }    
 
         //i18n:date-time

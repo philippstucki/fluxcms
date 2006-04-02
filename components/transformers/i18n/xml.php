@@ -75,8 +75,15 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
             return FALSE;
         }
         $catres = $this->catctx->query('/catalogue/message[@key = "'.$key.'"]');
+        
+        
+            
         if($catres && $catres->length > 0) {
-            return $catres->item(0)->nodeValue;
+            if ($catres->item(0)->getAttribute("asXML") == "yes") {
+               return $this->getFragment($catres->item(0)->nodeValue, $catres->item(0)->ownerDocument);
+            } else {
+                return $catres->item(0)->nodeValue;
+            }
         }
 
         if($this->generateKeys !== NULL) {
@@ -104,6 +111,30 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
         }
 
         return false;
+    }
+    
+    function getFragment($frag,$dom) {
+        
+        if (version_compare(phpversion(), "5.1",">=")) {
+            $f = $dom->createDocumentFragment();
+            $f->appendXML($frag);
+            return $f;
+            
+        } else {
+            
+            $tmpdoc = new domdocument();
+            $tmpdoc->loadXML("<dummyroot>".$frag."</dummyroot>");
+            $f = $dom->createDocumentFragment();
+            $newnode = $f->ownerDocument->importNode($tmpdoc->documentElement,true);
+            $child = $newnode->firstChild;
+            while ($child) {
+                $nextChild = $child->nextSibling;
+                $f->appendChild($child);
+                $child = $nextChild;
+            }
+            return $f;
+        
+        }
     }
 
 }
