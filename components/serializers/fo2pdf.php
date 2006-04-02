@@ -116,15 +116,17 @@ class popoon_components_serializers_fo2pdf extends popoon_components_serializer 
         
         //print pdf to the outputbuffer,
         // including correct Header ("Content-type: application/pdf")
-        
+        $fs = filesize($fop->pdf);
+        header("Content-Length: ".$fs);
+
         $fop->printPDF();
         //delete the temporary pdf file
-        if ($this->doCache) {
+        // don't save if filesize < 20, since then sth went wrong
+        if ($this->doCache && $fs > 20) {
             $this->sc->simpleCacheWrite($this->md5,"fo2pdf",null,$fop->pdf,"moveFile");
         } else {
             $fop->deletePDF();
-        }
-
+        }     
     }
     
 }
