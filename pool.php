@@ -22,8 +22,6 @@
      
      private $configclass;
      
-     public $dbIsUtf8 = false;
-     
      /**
      * Gets a singleton instance of the this class
      *
@@ -127,8 +125,24 @@
      }
      
      function checkForMysqlUtf8($dsn,$db) {
-         $db->isUtf8 = false;
-         if ( !$this->dbIsUtf8 && ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli")) {
+        if ($this->config->dbIsUtf8 === null) {
+            if (self::isMysqlUtf8($dsn,$db)) {
+                    $this->config->dbIsUtf8 = true;
+            }
+        }
+        
+        if ($this->config->dbIsUtf8) {
+            $this->config->dbIsUtf8 = true;
+            $db->isUtf8 = true;
+            $db->query("set names 'utf8'");
+        } else {
+            $db->isUtf8 = false;
+            $this->config->dbIsUtf8 = false;
+        }
+     }
+    
+     static function isMysqlUTF8($dsn,$db) {
+         if ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli") {
              if ($dsn['phptype'] == 'mysqli') {
                  $isFourOne = version_compare($db->connection->server_info,"4.1",">=");
              } else {
@@ -136,17 +150,18 @@
              }
              if ($isFourOne) {
                  $u = $db->queryCol("show create database ".$dsn['database'],null,1);
-                 preg_match("#SET(.*)\*\/#",$u[0],$matches);
+                 bx_helpers_debug::webdump("query");
+                 preg_match("#SET\s*([^\s]*)#",$u[0],$matches);
                  if (isset($matches[1])) {
                      $u = trim($matches[1]);
                      if ($u == "utf8") {
-                         $this->dbIsUtf8 = true;
-                         $db->isUtf8 = true;
-                         $db->query("set names '".$u."'");
+                         return true;
                      }
                  }
              }
          }
+         return false;
+         
      }
      
  }

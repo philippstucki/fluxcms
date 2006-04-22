@@ -98,6 +98,9 @@
       */
      public $staticFileCache = false;
      
+     
+     public $dbIsUtf8 = null;
+     
      /**
       * The constructor
       * 
