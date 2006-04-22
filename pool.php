@@ -150,7 +150,6 @@
              }
              if ($isFourOne) {
                  $u = $db->queryCol("show create database ".$dsn['database'],null,1);
-                 bx_helpers_debug::webdump("query");
                  preg_match("#SET\s*([^\s]*)#",$u[0],$matches);
                  if (isset($matches[1])) {
                      $u = trim($matches[1]);
