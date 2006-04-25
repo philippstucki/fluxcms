@@ -127,6 +127,8 @@ class popoon_sitemap_outputcache {
                 if ($this->check304($etag, $header['Last-Modified'])) {
                     header('HTTP/1.1 304 Not Modified' );
                     header("X-Popoon-Cache-Status: 304");
+                    $this->sendExpires($header['Last-Modified']);
+                    
                     die();
                 }
                 
@@ -200,6 +202,8 @@ class popoon_sitemap_outputcache {
         }
         if (isset($sitemap->header['Last-Modified']) && $this->check304($etag, $sitemap->header['Last-Modified'])) {
             header( 'HTTP/1.1 304 Not Modified' );
+            
+            $this->sendExpires($sitemap->header['Last-Modified']);
             if ($this->options->outputCacheSave !== 304) {
                 $this->cache->extSave($this->id, $this->compressContent($content), serialize($sitemap->header), $expire ,$this->cacheGroup);
             }
@@ -240,5 +244,16 @@ class popoon_sitemap_outputcache {
         return '';
         
     } 
+    
+    function sendExpires($lastModified) {
+        if (strpos($_SERVER['HTTP_USER_AGENT'],"bot") > 0) {
+            $maxTime = 24 * 14 * 3600;
+            $t = strtotime($lastModified);
+            $expireTime = time() - $t;
+            if ($expireTime > $maxTime) {$expireTime = $maxTime;}
+            header("Expires: ". gmdate("r", time() + $expireTime));
+        }   
+        
+    }
     
 }
