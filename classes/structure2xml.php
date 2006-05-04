@@ -193,7 +193,7 @@ class popoon_classes_structure2xml {
         $configClass = bx_helpers_db::getConfigClass($configFile);
         $dbMainStructure = $configClass->getValues( $rootpath);
         
-        if (PEAR::isError($dbMainStructure)) {
+        if (@PEAR::isError($dbMainStructure)) {
             throw new PopoonPEARException($dbMainStructure);
         }
         
@@ -204,7 +204,7 @@ class popoon_classes_structure2xml {
                 				
                 $dbStructure = $configClass->getValues( "$rootpath/$structureName");
 				//print_r($dbStructure);
-                if (PEAR::isError($dbStructure)) {
+                if (@PEAR::isError($dbStructure)) {
                     die($dbStructure->getUserinfo() .  "\n" . $dbStructure->getMessage());
                 }
 
@@ -474,7 +474,7 @@ class popoon_classes_structure2xml {
     function getQueryFields($tablename,$dbStructure,$xmlparent,&$tableInfo)
     {
         $queryfields = ""; //E_ALL fix
-        if (PEAR::isError($dbStructure)) {
+        if (@PEAR::isError($dbStructure)) {
             $e = new PopoonPEARException($dbStructure);
             if (version_compare(phpversion(),"5.0.2",">") ) {
                 $e->userInfo = "There seems to be a problem with PHP 5.0.3.
