@@ -280,7 +280,7 @@ class popoon_sitemap {
             //My Apache 2 sends max-age=10800, which is insanely high.. change that 
             // here to 10 seconds (at least, we have something then, even if not that high)
         
-            if (strpos($_SERVER['HTTP_USER_AGENT'],"bot") > 0) {
+            if (!empty($_SERVER['HTTP_USER_AGENT']) && !empty($this->header['Last-Modified']) && strpos($_SERVER['HTTP_USER_AGENT'],"bot") > 0) {
                 $maxTime = 24 * 14 * 3600;
                 $t = strtotime($this->header['Last-Modified']);
                 $expireTime = time() - $t;
