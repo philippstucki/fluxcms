@@ -686,8 +686,12 @@ class popoon_classes_structure2xml {
             $repl[] = "$val";                
             $regs[] ="%$key";                
             $repl[] = sql_regcase($val);                
+            $regs[] ="\$+$key";
+            $repl[] = "+".join(" +",explode(" ",$val));
             $regs[] ="+$key";
             $repl[] = "+".join(" +",explode(" ",$val));
+            
+            
             if ($val != '') {
                 $regs[] ="\$:$key";
                 $repl[] = "$val";                
@@ -702,6 +706,7 @@ class popoon_classes_structure2xml {
         $where = preg_replace("#where\s*\(\s*\)#"," where ( 1 = 1 ) ",$where);
         //and delete an eventuall "and" only at the beginning
         $where = preg_replace("#where\s*\(\s*and#"," where (  ",$where);
+        
         return $where;
         
     }
