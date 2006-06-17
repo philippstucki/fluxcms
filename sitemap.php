@@ -289,6 +289,7 @@ class popoon_sitemap {
                      
             $this->setHeaderIfNotExists("Expires", gmdate("r", time() + $expireTime));
             $this->setHeaderIfNotExists("Cache-Control",  "public, max-age=$expireTime");
+            $this->setHeader("Pragma");
             
         }
         
