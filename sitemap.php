@@ -190,8 +190,14 @@ class popoon_sitemap {
     * @param string $name name of the header
     * @param string $value value of the header
     */
-    function setHeader($name, $value) {
-        $this->header[$name] = $value;
+    function setHeader($name, $value = null) {
+        if ($value) {
+            $this->header[$name] = $value;
+        } else {
+            if (isset($this->header[$name])) {
+                unset ($this->header[$name]);
+            }
+        }
     }
     
     /**
