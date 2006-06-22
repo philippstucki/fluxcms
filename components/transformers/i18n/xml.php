@@ -72,7 +72,7 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
 
     function getText($key) {
         if(!isset($this->catctx)) {
-            return FALSE;
+            return $key;
         }
         $catres = $this->catctx->query('/catalogue/message[@key = "'.$key.'"]');
         
@@ -110,7 +110,7 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
 
         }
 
-        return false;
+        return $key;
     }
     
     function getFragment($frag,$dom) {
