@@ -115,12 +115,15 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     }
     protected function methodText($text,$d) {
         if ($text->hasAttributeNS(I18NNS,"key")) {
-            $key = $text->getAttributeNS(I18NNS,"key");   
+            $key = $text->getAttributeNS(I18NNS,"key");
+            $locText = $d->getText($key) ;
+            //if key was not translated, take the text content...
+            if ($locText == $key && (trim((string) $text->nodeValue))) {
+                $locText = $text->nodeValue;
+            }
         } else {
             $key = $text->nodeValue;
-        }
-        if (!$locText = $d->getText($key)) {
-            $locText = $text->nodeValue;
+            $locText = $d->getText($key) ;
         }
         
         if ($locText instanceof DomDocumentFragment) {
