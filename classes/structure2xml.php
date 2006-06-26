@@ -98,12 +98,23 @@ class popoon_classes_structure2xml {
                             $query['maxResults'] = $this->db->queryOne($query['queryMaxResults']);
 							//print_r($query['maxResults']);
                         }
-                         
-                        if (! (isset($query["maxLastChanged"]) )) {
+                        $queryCountNow = $this->db->queryOne($query['queryCountId']);
+                        if (!$queryCountNow) {
+                            $queryCountNow = 1;
+                        }
+                        $_cache = true;
+                        
+                        $queryCountOld = $this->api->simpleCacheCheck($query['query'],"st2xml_count",$this->queryCacheOptions,"serialize",3600);
+                        if (empty($queryCountOld) || $queryCountNow != $queryCountOld) {
+                            $this->api->simpleCacheWrite($query['query'],"st2xml_count",$this->queryCacheOptions,$queryCountNow);
+                            $_cache = false;
+                        }
+                        if ($_cache && ! (isset($query["maxLastChanged"]) )) {
                             $query["maxLastChanged"]  = $this->db->queryOne($query['queryLastChanged']);
                         } 
                         
-                        if ( $cachedXML = $this->api->simpleCacheCheck("","st2xml_data",$query['query'],"file", $query["maxLastChanged"])) {
+                        
+                        if ($_cache &&  $cachedXML = $this->api->simpleCacheCheck("","st2xml_data",$query['query'],"file", $query["maxLastChanged"])) {
                             $sql2xml->addWithInput("File",$cachedXML);
                         } 
                         
@@ -479,8 +490,8 @@ class popoon_classes_structure2xml {
             if (version_compare(phpversion(),"5.0.2",">") ) {
                 $e->userInfo = "There seems to be a problem with PHP 5.0.3.
                         If you are using PHP 5.0.3 and see this message, 
-                        try down grading to 5.0.2 or upgrading to 5.0.4-dev, 
-                        until we find a solution. ";
+                        try down grading to 5.0.2 or upgrading to a higher version. 
+                        ";
                 
             }
             throw $e;    
@@ -524,7 +535,7 @@ class popoon_classes_structure2xml {
         
 		// cache off
 		//if ( false &&  
-        if ( false && $queries = $this->api->simpleCacheCheck($configXml,"st2xml_queries",$this->queryCacheOptions)) {
+        if (false &&   $queries = $this->api->simpleCacheCheck($configXml,"st2xml_queries",$this->queryCacheOptions)) {
         } 
         // we don't have the queries cached, generate them..
         else {
@@ -546,6 +557,7 @@ class popoon_classes_structure2xml {
 			
             foreach ($queries as $structureName => $query) {                
                 $_changedFields = "";
+                $_sumIdFields = "";
                 // get all the tables
                 // HINT: document2object and section2document are missing here... could maybe lead to wrong
                 // updates, if you change one of that tables without changing any other table
@@ -557,6 +569,7 @@ class popoon_classes_structure2xml {
                 {
                     foreach($query["tableInfo"]["parent_table"] as $table => $parent) {
                         $_changedFields .= 'unix_timestamp('.$table .'.changed), ';
+                        $_sumIdFields .= 'sum(if(isnull('.$table .'.id),0,'.$table .'.id)) + ';
                         if ($appendCount && $parent=='root') {
                             $appendCountTable = $table;
                         }
@@ -595,9 +608,11 @@ class popoon_classes_structure2xml {
                     }
                       
                     $queries[$structureName]["queryLastChanged"] = 'select max(greatest('. $_changedFields.'0)) ' .$_cleanFrom;
+                    $queries[$structureName]["queryCountId"] = 'select ('.$_sumIdFields.'0) as sum ' .$_cleanFrom;
+                    
                 } 
             }
-            $this->api->simpleCacheWrite($configXml,"st2xml_queries",$this->queryCacheOptions,$queries);
+           // $this->api->simpleCacheWrite($configXml,"st2xml_queries",$this->queryCacheOptions,$queries);
         }
         //that's it for caching the queries..
         return $queries;
