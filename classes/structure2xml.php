@@ -109,7 +109,7 @@ class popoon_classes_structure2xml {
                             $this->api->simpleCacheWrite($query['query'],"st2xml_count",$this->queryCacheOptions,$queryCountNow);
                             $_cache = false;
                         }
-                        if ($_cache && ! (isset($query["maxLastChanged"]) )) {
+                        if ( isset($query["maxLastChanged"]) ) {
                             $query["maxLastChanged"]  = $this->db->queryOne($query['queryLastChanged']);
                         } 
                         
