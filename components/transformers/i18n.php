@@ -118,7 +118,7 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
             $key = $text->getAttributeNS(I18NNS,"key");
             $locText = $d->getText($key) ;
             //if key was not translated, take the text content...
-            if ($locText == $key && (trim((string) $text->nodeValue))) {
+            if (! ($locText instanceof DomDocumentFragment) && $locText == $key && (trim((string) $text->nodeValue))) {
                 $locText = $text->nodeValue;
             }
         } else {

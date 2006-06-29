@@ -71,18 +71,21 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
     }
 
     function getText($key) {
+        
         if(!isset($this->catctx)) {
             return $key;
         }
         $catres = $this->catctx->query('/catalogue/message[@key = "'.$key.'"]');
         
-        
-            
         if($catres && $catres->length > 0) {
+            $value = $catres->item(0)->nodeValue;
+            if ($value == "") {
+                return $key;
+            }
             if ($catres->item(0)->getAttribute("asXML") == "yes") {
-               return $this->getFragment($catres->item(0)->nodeValue, $catres->item(0)->ownerDocument);
+               return $this->getFragment($value, $catres->item(0)->ownerDocument);
             } else {
-                return $catres->item(0)->nodeValue;
+                return $value;
             }
         }
 
