@@ -68,13 +68,13 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                     foreach ($res as $node) {
                         $z++;
                         $str = $xml->saveXML($node);
-                        $str = str_replace(array("'","@"),array("\'","%%%"),strrev($str));
+                        $str = strrev(str_replace(array("'","@","mailto:"),array("\'","%%%","schickzu:"),$str));
                         $scr = '<script type="text/javascript">';
                          
                         $scr .= '//<![CDATA[
 ';                       
                         if ($z == 1) {
-                            $scr .= 'function obfscml(t) { var s = ""; var i = t.length; while (i>0) { s += t.substring(i-1,i); i--; } document.write(s.replace(/%%%/g,"@")); }';
+                            $scr .= 'function obfscml(t) { var s = ""; var i = t.length; while (i>0) { s += t.substring(i-1,i); i--; } document.write(s.replace(/schickzu:/g,"mailto:").replace(/%%%/g,unescape("%40"))); }';
                         }
                         $scr .= "obfscml('".$str."')";
                         $scr .= '//]]></script>';
