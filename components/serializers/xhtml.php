@@ -59,7 +59,33 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             if ($encoding) {
                 $xml->encoding = $encoding;
             }
-            
+            if ($this->getParameter('default','obfuscateMailJS') == 'true') {
+                $xp = new domxpath($xml);
+                $xp->registerNamespace("xhtml","http://www.w3.org/1999/xhtml");
+                $res = $xp->query("/xhtml:html/xhtml:body//xhtml:a[starts-with(@href,'mailto:')]");
+                if ($res->length > 0) {
+                    $z = 0;
+                    foreach ($res as $node) {
+                        $z++;
+                        $str = $xml->saveXML($node);
+                        $str = str_replace(array("'","@"),array("\'","%%%"),strrev($str));
+                        $scr = '<script type="text/javascript">';
+                         
+                        $scr .= '//<![CDATA[
+';                       
+                        if ($z == 1) {
+                            $scr .= 'function obfscml(t) { var s = ""; var i = t.length; while (i>0) { s += t.substring(i-1,i); i--; } document.write(s.replace(/%%%/g,"@")); }';
+                        }
+                        $scr .= "obfscml('".$str."')";
+                        $scr .= '//]]></script>';
+                        $fr = bx_helpers_xml::getFragment($scr,$xml);
+                        $node->parentNode->replaceChild($fr,$node);
+                        
+                    }
+                }
+            }
+                
+                
             $this->sitemap->hasFinalDom = true;
             $xmlstr = $xml->saveXML();
         } else {
