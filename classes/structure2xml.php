@@ -680,8 +680,7 @@ class popoon_classes_structure2xml {
         foreach ($requests as $key => $val)
         {
             /* not so sure about that */
-            
-            if (is_null($val) or $val === false )
+            if (empty($val) or is_null($val) or $val === false )
             {
                 continue;
                 //$val = 0;
