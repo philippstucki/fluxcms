@@ -588,7 +588,7 @@ class popoon_classes_structure2xml {
                     if ( $_checkOrderBy !== false) {
                         $_cleanFrom = substr($_cleanFrom,0,$_checkOrderBy);
                     }
-                    
+   $_cleanFrom = str_replace("where ()","",$_cleanFrom);                    
                     if ($appendCount) {
 						
                         $_checkLimit = strpos($_cleanFrom,"LIMIT");
