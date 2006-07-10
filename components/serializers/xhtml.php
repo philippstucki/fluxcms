@@ -61,6 +61,8 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             }
             if ($this->getParameter('default','obfuscateMailJS') == 'true') {
                 $xp = new domxpath($xml);
+
+
                 $xp->registerNamespace("xhtml","http://www.w3.org/1999/xhtml");
                 $res = $xp->query("/xhtml:html/xhtml:body//xhtml:a[starts-with(@href,'mailto:')]");
                 if ($res->length > 0) {
@@ -68,7 +70,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                     foreach ($res as $node) {
                         $z++;
                         $str = $xml->saveXML($node);
-                        $str = strrev(str_replace(array("'","@","mailto:"),array("\'","%%%","schickzu:"),$str));
+                        $str = $this->utf8_strrev(str_replace(array("'","@","mailto:"),array("\'","%%%","schickzu:"),$str));
                         $scr = '<script type="text/javascript">';
                          
                         $scr .= '//<![CDATA[
@@ -101,6 +103,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         print $this->cleanXHTML($xmlstr);
         
     }
+
+	protected function utf8_strrev($str){
+   		preg_match_all('/./us', $str, $ar);
+   		return join('',array_reverse($ar[0]));
+	}
     
     private function cleanXHTML($xml) {
         /* for some strange reasons, libxml makes an upercase HTML, which the w3c validator doesn't like */
