@@ -109,7 +109,7 @@
       *
       * @see getInstance
       */
-     private function __construct() {
+     protected function __construct() {
          if (defined('BX_TEMP_DIR')) {
              $cd =  BX_TEMP_DIR . '/cache';
          } else {
