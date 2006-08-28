@@ -75,6 +75,7 @@ class popoon_components_transformers_i18n_xml extends popoon_components_transfor
         if(!isset($this->catctx)) {
             return $key;
         }
+  	$key = str_replace('"','&quot;',$key);
         $catres = $this->catctx->query('/catalogue/message[@key = "'.$key.'"]');
         
         if($catres && $catres->length > 0) {
