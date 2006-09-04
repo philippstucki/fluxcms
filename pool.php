@@ -64,6 +64,7 @@
                 if (!isset($this->config->dboptions)) {
                     $this->config->dboptions = NULL;
                 }
+                
                 $this->db = @MDB2::connect($this->config->dsn,$this->config->dboptions);
                  
                 if (isset($this->config->portabilityoptions)) {
@@ -72,7 +73,6 @@
                 if (@MDB2::isError($this->db)) {
                     throw new PopoonDBException($this->db);
                 }
-                
                 $this->checkForMysqlUtf8($this->config->dsn,$this->db);
                 return $this->db;
                 
@@ -126,41 +126,54 @@
      
      function checkForMysqlUtf8($dsn,$db) {
         if ($this->config->dbIsUtf8 === null) {
-            if (self::isMysqlUtf8($dsn,$db)) {
+            if (self::isMysqlFourOne($dsn,$db)) {
+                $this->config->dbIsFourOne = true;
+                if (self::isMysqlUtf8($dsn,$db,$isFourOne)) {
                     $this->config->dbIsUtf8 = true;
+                }   
             }
         }
         
         if ($this->config->dbIsUtf8) {
             $this->config->dbIsUtf8 = true;
             $db->isUtf8 = true;
-            $db->query("set names 'utf8'");
         } else {
             $db->isUtf8 = false;
             $this->config->dbIsUtf8 = false;
         }
+        
+        if ($this->config->dbIsFourOne) {
+            $db->query("set names 'utf8'");
+        }    
      }
     
      static function isMysqlUTF8($dsn,$db) {
-         if ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli") {
-             if ($dsn['phptype'] == 'mysqli') {
-                 $isFourOne = version_compare($db->connection->server_info,"4.1",">=");
-             } else {
-                 $isFourOne = version_compare(@mysql_get_server_info(),"4.1",">=");
-             }
-             if ($isFourOne) {
-                 $u = $db->queryCol("show create database ".$dsn['database'],null,1);
-                 preg_match("#SET\s*([^\s]*)#",$u[0],$matches);
-                 if (isset($matches[1])) {
-                     $u = trim($matches[1]);
-                     if ($u == "utf8") {
-                         return true;
-                     }
-                 }
+       
+         $u = $db->queryCol("show create database ".$dsn['database'],null,1);
+         preg_match("#SET\s*([^\s]*)#",$u[0],$matches);
+         if (isset($matches[1])) {
+             $u = trim($matches[1]);
+             if ($u == "utf8") {
+                 return true;
              }
          }
          return false;
          
      }
      
+     static function isMysqlFourOne($dsn,$db) {
+         if ($dsn['phptype'] == "mysql" || $dsn['phptype'] == "mysqli") {
+             if ($dsn['phptype'] == 'mysqli') {
+                 $isFourOne = version_compare($db->connection->server_info,"4.1",">=");
+             } else {
+                 $isFourOne = version_compare(@mysql_get_server_info(),"4.1",">=");
+             }
+         }
+         if ($isFourOne) {
+             return true;
+         } else {
+             return false;
+         }
+     }
+         
  }
