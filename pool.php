@@ -128,7 +128,7 @@
         if ($this->config->dbIsUtf8 === null) {
             if (self::isMysqlFourOne($dsn,$db)) {
                 $this->config->dbIsFourOne = true;
-                if (self::isMysqlUtf8($dsn,$db,$isFourOne)) {
+                if (self::isMysqlUtf8($dsn,$db)) {
                     $this->config->dbIsUtf8 = true;
                 }   
             }
