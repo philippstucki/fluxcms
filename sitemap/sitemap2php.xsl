@@ -8,27 +8,30 @@
 
     <xsl:output omit-xml-declaration="yes" indent="no" encoding="ISO-8859-1" method="xml"/>
 
-<xsl:variable name="ubercatch">
-<map:pipeline>
-   <map:generate type="error">
-            <map:parameter name="exception"/>
-        </map:generate>
-        <map:transform type="xslt" src="constant(BX_POPOON_DIR)/xsl/error2html.xsl"/>
-        <map:serialize type="xhtml">
-           <map:parameter type="header" name="HTTP" value="503 Service Temporarily Unavailable"/>
-          </map:serialize>    
-</map:pipeline>
-</xsl:variable>
+
+    <xsl:variable name="ubercatch">
+        <map:pipeline>
+            <map:generate type="error">
+                <map:parameter name="exception"/>
+            </map:generate>
+            <map:transform type="xslt" src="constant(BX_POPOON_DIR)/xsl/error2html.xsl"/>
+            <map:serialize type="xhtml">
+                <map:parameter type="header" name="HTTP" value="503 Service Temporarily Unavailable"/>
+            </map:serialize>
+        </map:pipeline>
+    </xsl:variable>
+
 
 
     <xsl:param name="popoonDir" />
+
     <xsl:template match="/map:sitemap"><xsl:processing-instruction name="php">
-try {
-            <xsl:apply-templates />
-} catch (Exception $e) {
-<xsl:comment> uebercatch </xsl:comment>
-	<xsl:apply-templates select="exslt:node-set($ubercatch)/*/node()"/>
-}
+    try {
+        <xsl:apply-templates />
+    } catch (Exception $e) {
+        <xsl:apply-templates select="exslt:node-set($ubercatch)/*/node()"/>
+    }
+    
     </xsl:processing-instruction></xsl:template>
     
     <xsl:template match="map:sitemap/map:pipelines">
