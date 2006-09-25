@@ -81,7 +81,7 @@ class popoon_components_generators_error extends popoon_components_generator {
  <error:file>'.$this->obfuscatePath($e->getFile()).'</error:file>
  <error:line>'.$e->getLine().'</error:line>';
   if (isset ($e->userInfo)) {
- $xmlstr  .= '<error:extra description="userInfo">'.htmlspecialchars($this->obfuscatePath($e->userInfo)).'</error:extra>';
+ $xmlstr  .= '<error:extra description="userInfo">'.str_replace("&lt;br/&gt;","<br/>",htmlspecialchars($this->obfuscatePath($e->userInfo))).'</error:extra>';
  }
 
  $xmlstr .= '<error:extra description="stacktrace">'.$this->obfuscatePath($e->getTraceAsString()).'</error:extra>
