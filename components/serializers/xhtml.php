@@ -69,6 +69,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                     $z = 0;
                     foreach ($res as $node) {
                         $z++;
+			if ($node->parentNode instanceof DOMElement) {
                         $str = $xml->saveXML($node);
                         $str = $this->utf8_strrev(str_replace(array("'","@","mailto:"),array("\'","%%%","schickzu:"),$str));
                         $scr = '<script type="text/javascript">';
@@ -81,7 +82,9 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                         $scr .= "obfscml('".$str."')";
                         $scr .= '//]]></script>';
                         $fr = bx_helpers_xml::getFragment($scr,$xml);
-                        $node->parentNode->replaceChild($fr,$node);
+
+                           $node->parentNode->replaceChild($fr,$node);
+			}
                         
                     }
                 }
