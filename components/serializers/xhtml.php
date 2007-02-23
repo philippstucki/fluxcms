@@ -71,13 +71,13 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                         $z++;
                         if ($node->parentNode instanceof DOMElement) {
                             $str = $xml->saveXML($node);
-                            $str = $this->utf8_strrev(str_replace(array("'","@","mailto:"),array("\'","%%%","schickzu:"),$str));
+                            $str = $this->utf8_strrev(str_replace(array("'","@","mailto:","<"),array("\'",'___',"schickzu:",'_lt_'),$str));
                             $scr = '<script type="text/javascript">';
                             
                             $scr .= '//<![CDATA[
                             ';                       
                             if ($z == 1) {
-                                $scr .= 'function obfscml(t) { var s = ""; var i = t.length; while (i>0) { s += t.substring(i-1,i); i--; } document.write(s.replace(/schickzu:/g,"mailto:").replace(/%%%/g,unescape("%40"))); }';
+                                $scr .= 'function obfscml(t) { var s = ""; var i = t.length; while (i>0) { s += t.substring(i-1,i); i--; } document.write(s.replace(/_lt_/g,unescape("%3C")).replace(/schickzu:/g,"mailto:").replace(/___/g,unescape("%40"))); }';
                             }
                             $scr .= "obfscml('".$str."')";
                             $scr .= '//]]></script>';
@@ -118,9 +118,9 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             $xml = $this->stripScriptCDATA($xml);
         }
         
-        if ($this->getParameterDefault("stripDefaultPrefixes") == "true") {
+        /*if ($this->getParameterDefault("stripDefaultPrefixes") == "true") {
             $xml = $this->stripDefaultPrefixes($xml);
-        }
+        }*/
         
         if ($this->getParameterDefault("stripBxAttributes") == "true") {
             $xml = $this->stripBxAttributes($xml);   
@@ -129,12 +129,12 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             $xml = str_replace("&#13;","",$xml);
             $xml = preg_replace("#<\?xml[^>]*\?>\s*#","",$xml);
         }
-        return $this->obfuscateMail(str_replace("DOCTYPE HTML","DOCTYPE html",$xml));
+        return $this->obfuscateMail(str_replace(array('<default:','</default:','xmlns:i18n="http://apache.org/cocoon/i18n/2.1"',"DOCTYPE HTML"),array('<','</',"","DOCTYPE html"),$xml));
     }
     
-    private function stripDefaultPrefixes($xml) {
+    /*private function stripDefaultPrefixes($xml) {
         return str_replace(array('<default:','</default:'),array('<','</'),$xml);
-    }
+    }*/
     private function stripScriptCDATA($xml) {
         //strip empty (Whitespace only) CDATA
         $xml = preg_replace("#<!\[CDATA\[\W*\]\]>#","",$xml);
