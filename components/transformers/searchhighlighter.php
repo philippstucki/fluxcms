@@ -52,7 +52,6 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
     function DomStart(&$xml)
     {
         
-        bx_helpers_debug::webdump("foo");
         if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {
            if (isset($_GET['q'])) {
 	     	$query = $_GET['q'];
