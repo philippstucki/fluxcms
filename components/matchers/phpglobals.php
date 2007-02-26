@@ -50,7 +50,7 @@ class popoon_components_matchers_phpglobals extends popoon_components_matcher
     {
 		$varname = $this->getAttrib("var");
 
-
+        $globalvar = "";
 		if (strpos($varname,"[")) {
 //			preg_match("/(.*)\[['\"]*([^'\"]*)['\"]*\]/",$varname,$matches);
 			preg_match_all("/(.*)(\[['\"]*([^'\"]*)['\"]*\])+/U",$varname,$matches);

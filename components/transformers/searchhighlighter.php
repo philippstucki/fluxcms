@@ -51,6 +51,8 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
 
     function DomStart(&$xml)
     {
+        
+        bx_helpers_debug::webdump("foo");
         if (isset($_SERVER['HTTP_REFERER']) || !isset($_GET['q'])) {
            if (isset($_GET['q'])) {
 	     	$query = $_GET['q'];
@@ -68,17 +70,15 @@ class popoon_components_transformers_searchhighlighter extends popoon_components
                     $search = array();
                     foreach ($strings as $st) {
                         $search[] = '#(<([^>\s/]+)>[^<]*)('.trim($st).')#i';
+                        
                     }
-
                     $xml = preg_replace_callback($search, array($this, 'highlightConditional') ,$xml);
                 }
-
         }
 
     }
 
     protected function highlightConditional($matches){
-
         $beforeWanted = $matches[1];
         $tagName = strtolower($matches[2]);
         $wanted  = $matches[3];

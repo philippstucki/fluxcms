@@ -421,11 +421,11 @@ class popoon_sitemap {
     function convertXML($object, &$xml) {
         if ($object->XmlFormat == "DomDocument")
         {
-            $this->var2XMLObject($xml);
+            self::var2XMLObject($xml);
         }
         elseif ($object->XmlFormat == "XmlString")
         {
-            $this->var2XMLString($xml);
+            self::var2XMLString($xml);
         }
         return True;
     }
@@ -437,7 +437,7 @@ class popoon_sitemap {
     * @return bool
     * @access private
     */
-    function var2XMLObject(&$xmldoc)
+    static public function var2XMLObject(&$xmldoc)
     {
         if (is_string ($xmldoc))
         {
@@ -470,7 +470,7 @@ class popoon_sitemap {
     * @return bool
     * @access private
     */
-    function var2XMLString(&$xmldoc)
+    static public function var2XMLString(&$xmldoc)
     {
         if ( strtolower(get_class($xmldoc)) == "domdocument")
         {
