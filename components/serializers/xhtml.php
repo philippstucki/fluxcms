@@ -129,7 +129,8 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
             $xml = str_replace("&#13;","",$xml);
             $xml = preg_replace("#<\?xml[^>]*\?>\s*#","",$xml);
         }
-        return $this->obfuscateMail(str_replace(array('<default:','</default:','xmlns:i18n="http://apache.org/cocoon/i18n/2.1"',"DOCTYPE HTML"),array('<','</',"","DOCTYPE html"),$xml));
+//        return $this->obfuscateMail(str_replace(array('<default:','</default:','xmlns:i18n="http://apache.org/cocoon/i18n/2.1"',"DOCTYPE HTML"),array('<','</',"","DOCTYPE html"),$xml));
+        return $this->obfuscateMail(str_replace(array('<default:','</default:',"DOCTYPE HTML"),array('<','</',"DOCTYPE html"),$xml));
     }
     
     /*private function stripDefaultPrefixes($xml) {
