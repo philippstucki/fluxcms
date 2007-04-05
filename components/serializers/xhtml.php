@@ -55,6 +55,10 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         }
         $encoding = $this->getParameterDefault("contentEncoding");
         
+        if (!is_object($xml) && $this->getParameter('default','obfuscateMailJS') == 'true') {
+                $xml = domdocument::loadXML($xml);
+        }
+        
         if (is_object($xml)) {
             if ($encoding) {
                 $xml->encoding = $encoding;
