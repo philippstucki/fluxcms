@@ -150,6 +150,7 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     }
     
     private function stripBxAttributes($xml) {
+        $xml = str_replace('xmlns:i18n="http://apache.org/cocoon/i18n/2.1"','',$xml);
         return preg_replace("#\sbx[a-zA-Z_]+=\"[^\"]+\"#","",$xml);  
     }
     
