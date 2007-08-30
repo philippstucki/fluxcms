@@ -190,10 +190,15 @@ class popoon_classes_structure2xml {
                 }
             }
         }
+        
         if ($returnDb2XmlObject) {
             return $sql2xml;   
         } else {
-            return $sql2xml->getXmlObject();
+            $dom = $sql2xml->getXmlObject();
+            if (isset($this->queries["_queryInfo"]["maxLastChanged"]) && $this->queries["_queryInfo"]["maxLastChanged"] > 0) {
+                $dom->documentElement->setAttribute("maxLastChanged", $this->queries["_queryInfo"]["maxLastChanged"]);
+            }
+            return $dom;
         }
         
     }
