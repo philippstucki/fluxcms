@@ -105,6 +105,9 @@ class popoon_classes_structure2xml {
                         $_cache = true;
                         
                         $queryCountOld = $this->api->simpleCacheCheck($query['query'],"st2xml_count",$this->queryCacheOptions,"serialize",3600);
+                        if (MDB2::isError($queryCountOld)) {
+                            throw new PopoonDBException($queryCountOld);
+                        }
                         if (empty($queryCountOld) || $queryCountNow != $queryCountOld) {
                             $this->api->simpleCacheWrite($query['query'],"st2xml_count",$this->queryCacheOptions,$queryCountNow);
                             $_cache = false;
