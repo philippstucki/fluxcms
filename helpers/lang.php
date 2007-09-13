@@ -26,9 +26,9 @@ class popoon_helpers_lang {
      *  and "de" is the same as "de-ch" (everyting after the - is stripped)
      */
     static function preferredBrowserLanguage ($possibleLangs, $default = null) {
-        $acceptedLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        if ($acceptedLang != "") {
+        if ( ! empty( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
             // form an array of preferred languages
+            $acceptedLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
             $languages = str_replace(" ", "", $acceptedLang);
             $languages = explode(",", $languages);
             foreach ($languages as $lang) {
@@ -53,3 +53,4 @@ class popoon_helpers_lang {
         return $possibleLangs[0];
     }
 }
+
