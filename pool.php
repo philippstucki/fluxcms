@@ -4,7 +4,7 @@
  * 
  *  Parameter about Caching et al. are also stored here
  *
- * @author   Christian Stocker <chregu@bitflux.ch>
+ * @author   Christian Stocker <chregu@liip.ch>
  * @version  $Id: config.php 838 2004-03-16 19:45:10Z  $
  * @example classes/config_cache.php
  * @package  popoon
@@ -16,16 +16,38 @@
      *
      * this is a singleton class, therefore we save the instance
      * in this static var
-     * @static popoon_classes_config
+     * @var popoon_pool
      */
      static $instance = null;
      
      private $configclass;
      
      /**
+      * DB read handler
+      *
+      * @var MDB2_Driver_mysqli
+      */
+     public $db;
+
+     /**
+      * DB write handler
+      *
+      * @var MDB2_Driver_mysqli
+      */
+     public $dbwrite;
+     
+     /**
+      * Config class
+      * 
+      * @var bx_config (could also be popoon_classes_config in a non Flux CMS environment)
+      */
+     
+     public $config;
+     
+     /**
      * Gets a singleton instance of the this class
      *
-     * @return popoon_classes_config an instance of this class
+     * @return popoon_pool an instance of this class
      */
      public static function getInstance ($configclass = "popoon_classes_config") {
          if (!popoon_pool::$instance) {
@@ -35,7 +57,6 @@
          else if (popoon_pool::$instance->configclass != $configclass) {
              throw new Exception("The Config Class $configclass is not the same as the initially defined one ". popoon_pool::$instance->configclass );
          }
-             
          return popoon_pool::$instance;
      }  
      
@@ -48,7 +69,10 @@
       * @see getInstance
       */
      private function __construct() {
-         
+         // This unsets the class vars, to make the __get work
+         unset($this->db);
+         unset($this->dbwrite);
+         unset($this->config);
      }
      
      public function __get($name) {
