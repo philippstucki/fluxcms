@@ -584,7 +584,7 @@ class popoon_classes_structure2xml {
                     }
                     
                     // strip everything away before "from"
-                    $_cleanFrom = substr($query["query"], strpos($query["query"],"from "));
+                    $_cleanFrom = substr($query["query"], strrpos($query["query"]," from ")) ." ";
                     // strip group by away
                     $_checkGroupBy = strpos($_cleanFrom,"group by") ;                    
                     if ( $_checkGroupBy !== false) {
