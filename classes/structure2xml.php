@@ -455,11 +455,11 @@ class popoon_classes_structure2xml {
         }
         if (isset($sqlOptions["orderby"]))
         {
-            $query .= " order by $sqlOptions[orderby]";
+            $query .= " order by ". $this->replaceVarsInWhere($sqlOptions['orderby']);
         }
         elseif (isset($dbMasterValues["orderby"]))
         {
-            $query .= " order by $dbMasterValues[orderby]";
+            $query .= " order by ".$this->replaceVarsInWhere($sqlOptions['orderby']);
         }
         
         
