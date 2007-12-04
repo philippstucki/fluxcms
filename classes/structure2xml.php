@@ -32,7 +32,6 @@ class popoon_classes_structure2xml {
      * 
      */
     function showPage ($configXml,$PageOptions = array(), $returnDb2XmlObject = false) {
-        
         // get the queries, either cached from file system or generated
         if (is_null($this->queries)) {
             $this->queries = $this->getQueries($configXml,$PageOptions);
@@ -356,10 +355,16 @@ class popoon_classes_structure2xml {
                 foreach($dbStructure["children"] as $child) {
                     $name = $child;
                     $dbStructure = $configClass->getValues( "$path/$name");
+                    
+                    if (isset($dbStructure['tablePrefix']) && !empty($dbStructure['tablePrefix'])) {
+                        $tablePrefix = $dbStructure['tablePrefix'];
+                    } else {
+                        $tablePrefix = $this->tablePrefix;
+                    }
                     $queryfields = $queryfields. $this->getQueryFields($child,$dbStructure,$xmlparent,$tableInfo);
                     if (! isset($dbStructure["thatfield"])) { $dbStructure["thatfield"] = "id";}
                     if (! isset($dbStructure["thisfield"])) { $dbStructure["thisfield"] = "id";}
-                    $query = $query ." left join ".$this->tablePrefix.$name. " as $name on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
+                    $query = $query ." left join ".$tablePrefix.$name. " as $name on ($name.".$dbStructure["thisfield"]." = $parentname.".$dbStructure["thatfield"];
                     if (isset($dbStructure["objectfield"]) )
                     {
                         $query = "$query and $parentname.".$dbStructure["objectfield"]." = '$name'";
@@ -455,20 +460,20 @@ class popoon_classes_structure2xml {
         }
         if (isset($sqlOptions["orderby"]))
         {
-            $_oderby = $this->replaceVarsInWhere($sqlOptions['orderby']);
+            $_orderby = $this->replaceVarsInWhere($sqlOptions['orderby']);
             if (trim($_orderby)) {
                 $query .= " order by ". $_orderby ;
             }
         }
         elseif (isset($dbMasterValues["orderby"]))
         {
-            $_oderby = $this->replaceVarsInWhere($dbMasterValues['orderby']);
+            $_orderby = $this->replaceVarsInWhere($dbMasterValues['orderby']);
+
             if (trim($_orderby)) {
                 $query .= " order by ". $_orderby ;
             }
             
         }
-        
         
         if (isset($sqlOptions["limit"]))
         {
