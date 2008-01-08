@@ -11,7 +11,8 @@ class popoon_classes_structure2xml {
     function __construct($parent,$tablePrefix) {
         $this->tablePrefix = $tablePrefix;
         $this->parent = $parent;
-        $this->api = popoon_helpers_simplecache::getInstance();
+        $this->parent->st2xmlCaching = 'false'; 
+	$this->api = popoon_helpers_simplecache::getInstance();
         if (isset($this->parent->db)) {
             $this->db = $this->parent->db;
         } elseif (isset($GLOBALS['POOL']->db)) {
