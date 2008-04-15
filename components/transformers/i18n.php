@@ -1,3 +1,4 @@
+
 <?php
 // +----------------------------------------------------------------------+
 // | popoon                                                               |
@@ -63,6 +64,10 @@ class popoon_components_transformers_i18n extends popoon_components_transformer 
     function DomStart(&$xml) {
         $src = $this->getAttrib("src");
         $lang = $this->getParameterDefault("locale");
+        if (!$lang) {
+            $lang = $GLOBALS['POOL']->config->getOutputLanguage();
+        }
+        
         setlocale(LC_ALL,$lang);
         
         $d = popoon_classes_i18n::getDriverInstance($src, $lang, $this->getParameterDefault("driver"));
