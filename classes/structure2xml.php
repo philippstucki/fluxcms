@@ -124,15 +124,8 @@ class popoon_classes_structure2xml {
                         else {
                             $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
                             $sql2xml->add($query['query']);
-                            $ctx = new DomXpath($sql2xml->Format->xmldoc);
-                            $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
-                            
-                            if (isset($query['maxResults']) && $resultTree->item(0)) {
-                                $resultTree->item(0)->setAttribute('maxresults',  $query['maxResults']  );
-								$resultTree->item(0)->setAttribute('maxpages', ceil( $query['maxResults']/$query['limit'] ) -1  );
-								$page = isset($_GET['p'])? $_GET['p'] : 0 ;
-								$resultTree->item(0)->setAttribute('page', $page);
-                            }
+
+                            $this->pagerInfos($sql2xml, $query, $structureName); 
                             
                             $this->api->simpleCacheWrite("","st2xml_data",$query['query'],"<?xml version='1.0' ?".">".$sql2xml->Format->xmldoc->saveXML($resultTree->item(0)),"file", $query["maxLastChanged"]);
                         }
@@ -145,7 +138,8 @@ class popoon_classes_structure2xml {
                         
                         $sql2xml->setOptions(array("user_tableInfo"=>$query['tableInfo'],"user_options"=>$query['user_options']));
                         $sql2xml->add($query['query']);
-                        
+
+                        $this->pagerInfos($sql2xml, $query, $structureName);                        
                     }
                 }
                 else if ( $query['type'] == "aggregate" ) {
@@ -204,6 +198,23 @@ class popoon_classes_structure2xml {
             return $dom;
         }
         
+    }
+    
+    function pagerInfos($sql2xml, $query, $structureName) {
+        if (!(isset($query["maxResults"])) && isset($query['queryMaxResults'])) {
+            $query['maxResults'] = $this->db->queryOne($query['queryMaxResults']);
+            //print_r($query['maxResults']);
+        }
+           
+        $ctx = new DomXpath($sql2xml->Format->xmldoc);
+        $resultTree = $ctx->query("$structureName",$sql2xml->Format->xmlroot );
+        
+        if (isset($query['maxResults']) && $resultTree->item(0)) {
+            $resultTree->item(0)->setAttribute('maxresults',  $query['maxResults']  );
+            $resultTree->item(0)->setAttribute('maxpages', ceil( $query['maxResults']/$query['limit'] ) -1  );
+            $page = isset($_GET['p'])? $_GET['p'] : 0 ;
+            $resultTree->item(0)->setAttribute('page', $page);
+        }         
     }
     
     
