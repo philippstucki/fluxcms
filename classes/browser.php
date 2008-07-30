@@ -83,6 +83,11 @@ class popoon_classes_browser {
         return self::$isMobile;
     }
     
+    static function supportedByFCK() {
+        
+        return (self::isMozilla() || self::isMSIEWin() || self::isSafari3() || self::isOpera95());
+    }
+
     static function isMSIEWin() {
         return( self::getName() == "msie" && self::getPlatform()=="windows");
     }
@@ -91,9 +96,17 @@ class popoon_classes_browser {
         return( self::getName() == "safari" );
     }
     
+    static function isSafari3() {
+        return( self::getName() == "safari" && self::getVersion() >= 3);
+    }
+    
     static function isOpera8() {
         return( self::getName() == "opera"  && self::getVersion() >= 8);
     }
+     static function isOpera95() {
+        return( self::getName() == "opera"  && self::getVersion() >= 9.5);
+    }
+    
     
     static function isKonqueror34() {
         return( self::getName() == "konqueror"  && self::getVersion() >= 3.4);
