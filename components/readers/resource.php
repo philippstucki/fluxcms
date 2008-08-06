@@ -69,7 +69,13 @@ class popoon_components_readers_resource extends popoon_components_reader {
         if ($mimetype) {
             $this->sitemap->setHeaderAndPrint("Content-Type","$mimetype");
         }
-        if (file_exists($src)) {
+        if (!file_exists($src)) {
+            $src = $this->getAttrib("fallback");
+        } else {
+            $exists = true;
+        }
+        
+        if ($exists || file_exists($src)) {
             $lastModified = filemtime($src);
             $this->sitemap->setHeaderAndPrint("Last-Modified",gmdate('D, d M Y H:i:s T',$lastModified));
             $this->sitemap->setUserData("file-location",$src);
