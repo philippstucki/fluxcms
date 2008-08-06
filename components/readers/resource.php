@@ -70,7 +70,7 @@ class popoon_components_readers_resource extends popoon_components_reader {
             $this->sitemap->setHeaderAndPrint("Content-Type","$mimetype");
         }
         if (!file_exists($src)) {
-            $src = $this->getAttrib("fallback");
+            $src = str_replace("..","",$this->getAttrib("fallback"));
         } else {
             $exists = true;
         }
