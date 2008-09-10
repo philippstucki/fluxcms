@@ -30,9 +30,9 @@ class popoon_classes_externalinput {
         if (get_magic_quotes_gpc()) {
             $string = stripslashes($string);
         }
-        
         //if the newer externalinput class exists, use this
         if (method_exists('lx_externalinput_clean','basic')) {
+
            return lx_externalinput_clean::basic($string);
         }
         $string = str_replace(array("&amp;","&lt;","&gt;"),array("&amp;amp;","&amp;lt;","&amp;gt;"),$string);
@@ -56,7 +56,7 @@ class popoon_classes_externalinput {
         $string = preg_replace('#(<[^>]+)style[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*).*behaviour[\x00-\x20\/]*\([^>]*>#iU',"$1>",$string);
         $string = preg_replace('#(<[^>]+)style[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*).*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:*[^>]*>#iUu',"$1>",$string);
         
-        s//remove namespaced elements (we do not need them...)
+        //remove namespaced elements (we do not need them...)
         $string = preg_replace('#</*\w+:\w[^>]*>#i',"",$string);
         //remove really unwanted tags
         
