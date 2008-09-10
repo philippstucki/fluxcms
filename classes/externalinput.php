@@ -50,11 +50,11 @@ class popoon_classes_externalinput {
         $string = preg_replace('#([a-z]*)[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*)[\x00-\x20\/]*-moz-binding[\x00-\x20]*:#Uu', '$1=$2nomozbinding...', $string);
         $string = preg_replace('#([a-z]*)[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*)[\x00-\x20\/]*data[\x00-\x20]*:#Uu', '$1=$2nodata...', $string);
         
+        //remove any style attributes, IE allows too much stupid things in them, eg.
         //<span style="width: expression(alert('Ping!'));"></span> 
-        // only works in ie...
-        $string = preg_replace('#(<[^>]+)style[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*).*expression[\x00-\x20\/]*\([^>]*>#iU',"$1>",$string);
-        $string = preg_replace('#(<[^>]+)style[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*).*behaviour[\x00-\x20\/]*\([^>]*>#iU',"$1>",$string);
-        $string = preg_replace('#(<[^>]+)style[\x00-\x20\/]*=[\x00-\x20\/]*([\`\'\"]*).*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:*[^>]*>#iUu',"$1>",$string);
+        // and in general you really don't want style declarations in your UGC
+
+        $string = preg_replace('#(<[^>]+[\x00-\x20\"\'\/])style[^>]*>#iUu', "$1>", $string);
         
         //remove namespaced elements (we do not need them...)
         $string = preg_replace('#</*\w+:\w[^>]*>#i',"",$string);
