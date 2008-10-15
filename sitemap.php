@@ -588,7 +588,7 @@ class popoon_sitemap {
         if (isset($attribs["uri-prefix"])) {
             $prefix = popoon_sitemap::translateScheme($attribs["uri-prefix"]);
             if ($prefix) {
-                $this->uri = preg_replace("#^/*$prefix/*#", "", $this->uri, $this->maps);
+                $this->uri = preg_replace("#^/*$prefix/*#", "", $this->uri);
             }
 
         }
