@@ -267,11 +267,11 @@ class popoon_sitemap {
     function setCacheHeaders($noCache, $expireTime = 10) {
 
         if ($noCache || $expireTime === 0) {
-            $date = gmdate("D, d M Y H:i:s");
+            $date = gmdate("D, d M Y H:i:s", time() - 10);
             $this->setHeader("Expires", $date . " GMT");
             $this->setHeaderIfNotExists("Last-Modified", $date . " GMT");
             $this->setHeader("Pragma", "no-cache");
-            $this->setHeader("Cache-Control", "no-cache, post-check=0, pre-check=0");
+            $this->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
         } else {
             if (! $expireTime) {
                 $expireTime = 10;
