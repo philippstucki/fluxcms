@@ -21,46 +21,45 @@
 
 
 /**
-* Base class for serializers
-*
-*	Serializers are used for outputting the actual data with <map:serializer>
-*
-* @author   Christian Stocker <chregu@bitflux.ch>
-* @version  $Id$
-* @package  popoon
-*/
+ * Base class for serializers
+ *
+ *	Serializers are used for outputting the actual data with <map:serializer>
+ *
+ * @author   Christian Stocker <chregu@bitflux.ch>
+ * @version  $Id$
+ * @package  popoon
+ */
 
 abstract class popoon_components_serializer extends popoon_component {
     protected $contentType = "text/xml";
 
-	protected function _construct($sitemap) {
-		parent::__construct($sitemap);
-	}
+    protected function _construct($sitemap) {
+        parent::__construct($sitemap);
+    }
 
     public function init($attribs) {
         parent::init($attribs);
         $this->sitemap->setContentType($this->contentType);
-        $this->sitemap->setCacheHeaders($this->getAttrib("noHttpCaching") == "true",$this->getAttrib("httpExpires") );
+        $this->sitemap->setCacheHeaders($this->getAttrib("noHttpCaching") == "true", $this->getAttrib("httpExpires"));
         foreach ($this->getParameter("header") as $key => $value) {
             if ($key == "HTTP") {
-                header("HTTP/1.0 ". $value);
+                header("HTTP/1.0 " . $value);
             } else {
-                $this->sitemap->setHeader($key,$value);
+                $this->sitemap->setHeader($key, $value);
             }
         }
-        
+
     }
 
-	protected function DomStart(&$xml) {
+    protected function DomStart(&$xml) {
     }
-    
 
     /* CACHING */
 
     /**
      * Generate valdityObject
      *
-     * ValidityObjects for serializer are made up from the last cacheKey and the 
+     * ValidityObjects for serializer are made up from the last cacheKey and the
      * modification time of the serializer itself and it's other attributes.
      * Like it is done now, all serializers are cachable by default, they implement the
      * 'cachable' interface.
@@ -70,13 +69,13 @@ abstract class popoon_components_serializer extends popoon_component {
      * @param   string $keyBefore
      * @author Hannes Gassert <hannes.gassert@unifr.ch>
      */
-    public function generateValidity(){
+    public function generateValidity() {
         $validityObject = $this->attribs;
-        
+
         /*
         $validityObject['filemtime'] = filemtime('popoon/components/serializers/'. $validityObject['type'].'.php'); //jesses! a hardcoded path! .)
         */
-        return($validityObject);
+        return ($validityObject);
     }
 
     /**
@@ -87,12 +86,12 @@ abstract class popoon_components_serializer extends popoon_component {
      *
      * @param  array  $validityObject needs to have a key 'filemtime'
      */
-    public function checkValidity($validityObject){
+    public function checkValidity($validityObject) {
         /*
         return(isset($validityObject['filemtime']) &&
                ($validityObject['filemtime'] >= filemtime('/path/topopoon/components/serializers/'. $validityObject['type'].'.php')));
         */
-        return(true);
+        return (true);
     }
 
     /**
@@ -102,9 +101,8 @@ abstract class popoon_components_serializer extends popoon_component {
      *
      * @return  string  $cacheKey
      */
-    public function generateKey($attribs, $keyBefore){
-        return($this->generateKeyDefault($attribs, $keyBefore));
+    public function generateKey($attribs, $keyBefore) {
+        return ($this->generateKeyDefault($attribs, $keyBefore));
     }
 
-    
 }
