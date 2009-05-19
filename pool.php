@@ -153,9 +153,7 @@ class popoon_pool {
         if ($this->config->dbIsUtf8 === null) {
             if (self::isMysqlFourOne($dsn, $db)) {
                 $this->config->dbIsFourOne = true;
-                if (self::isMysqlUtf8($dsn, $db)) {
-                    $this->config->dbIsUtf8 = true;
-                }
+                $this->config->dbIsUtf8 = true;
             }
         }
 
