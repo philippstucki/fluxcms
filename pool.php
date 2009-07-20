@@ -171,17 +171,7 @@ class popoon_pool {
     }
 
     static function isMysqlUTF8($dsn, $db) {
-
-        $u = $db->queryCol("show create database " . $db->quoteIdentifier($dsn['database']), null, 1);
-        preg_match("#SET\s*([^\s]*)#", $u[0], $matches);
-        if (isset($matches[1])) {
-            $u = trim($matches[1]);
-            if ($u == "utf8") {
-                return true;
-            }
-        }
-        return false;
-
+        return true;
     }
 
     static function isMysqlFourOne($dsn, $db) {
