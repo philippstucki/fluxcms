@@ -30,7 +30,7 @@ class popoon_helpers_simplecache {
     private $bxst = array();
     private $db = null;
     private $idField = "ID";
-    public $userAgent = 'Popoon HTTP Fetcher+Cacher $Rev$ (http://popoon.org)';
+    public $userAgent = 'Popoon HTTP Fetcher+Cacher $Rev$ (http://liip.to/popoon)';
 
     static function &getInstance()
     {
