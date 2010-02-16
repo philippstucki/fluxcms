@@ -125,7 +125,7 @@
                 </input>
                 <xsl:text> </xsl:text>
                 <input type="button" value="..." onclick="dbforms2_common.openCalendarPopup(dbforms2_globalObj['{@id}'],'{@id}');return false;" name="anchor_{@id}" id="anchor_{@id}"/>
-                <div id="caldiv" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
+                <div id="caldiv" style="z-index: {1000-position()} !important; position:absolute; visibility:hidden; background-color:white; layer-background-color:white;"></div>
             </td>
         </tr>
     </xsl:template>
@@ -200,31 +200,4 @@
         </tr>
     </xsl:template>
     
-    <!-- TODO: currently disbaled, to be fixed later
-    
-    <xsl:template match="listview" mode="fields">
-        <tr class="formRow">
-            <td colspan="2">
-                <div id="{@id}">
-                    <div class="listview">
-                        <div class="listviewResults" id="{@name}_lvresults">
-                            <table cellspacing="0" cellpadding="0" width="100%">
-                                <thead>
-                                    <tr noremove="1">
-                                        <th width="90%">Title</th>
-                                        <th width="10%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="{@name}_lvresultstable">
-                                </tbody>
-                                
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </xsl:template>
-    -->
-
 </xsl:stylesheet>
