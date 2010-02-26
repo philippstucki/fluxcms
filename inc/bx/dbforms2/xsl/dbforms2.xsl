@@ -89,7 +89,6 @@
                     formConfig['fields'] = new Array();
                     <xsl:apply-templates select="/form" mode="jsconfig"/>
                     var dbforms2_formConfig = formConfig;
-                    
                 </script>
 
             </head>
