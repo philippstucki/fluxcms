@@ -90,7 +90,6 @@ class popoon_pool {
                 }
 
                 $this->db = @MDB2::connect($this->config->dsn, $this->config->dboptions);
-
                 if (isset($this->config->portabilityoptions)) {
                     $this->db->options['portability'] = $this->config->portabilityoptions;
                 }
