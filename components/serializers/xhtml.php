@@ -163,12 +163,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
     
     private function getErrorReporting($class) {
         $err = call_user_func(array($class,'getInstance'));
-        if ($err->hasErrors()) {
+        if ($err->hasErrors() && $err->displayErrors()) {
             return $err->getHtml();
-        } else {
-            return null;
         }
         restore_error_handler();
+        return null;
     }
 	
     
