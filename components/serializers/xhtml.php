@@ -75,6 +75,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
                         $z++;
                         if ($node->parentNode instanceof DOMElement) {
                             $str = $xml->saveXML($node);
+
+                            //this str_replace is already called in method: cleanXHTML but it must be called once before saving the next javascript.
+                            //otherwise <default:a will be saved in the javascript and called again in the frontend
+                            $str = str_replace(array('<default:','</default:'),array('<','</'),$str);
+                      
                             $str = $this->utf8_strrev(str_replace(array("'","@","mailto:","<"),array("\'",'___',"schickzu:",'_lt_'),$str));
                             $scr = '<script type="text/javascript">';
                             
