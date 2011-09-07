@@ -48,8 +48,11 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         $xslfile = $this->getAttrib("src");
         
         if (!file_exists($xslfile)) {
-            $xslfile = str_replace("..","",$this->getAttrib("fallback"));
-        } 
+            $tmp = str_replace("..","",$this->getAttrib("fallback"));
+        }
+        if($tmp != '') {
+            $xslfile = $tmp;
+        }
         
         $xslDom = new DomDocument();
         if (!$xslDom->load($xslfile)) {
