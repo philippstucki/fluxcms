@@ -130,7 +130,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         /*if ($this->getParameterDefault("stripDefaultPrefixes") == "true") {
             $xml = $this->stripDefaultPrefixes($xml);
         }*/
-        
+	
+	if ($this->getParameterDefault("setHTML5Doctype") == "true") {
+	    $xml = $this->setHTML5Doctype($xml); 
+	}
+	         
         if ($this->getParameterDefault("stripBxAttributes") == "true") {
             $xml = $this->stripBxAttributes($xml);   
         }
@@ -140,6 +144,11 @@ class popoon_components_serializers_xhtml extends popoon_components_serializer {
         }
 //        return $this->obfuscateMail(str_replace(array('<default:','</default:','xmlns:i18n="http://apache.org/cocoon/i18n/2.1"',"DOCTYPE HTML"),array('<','</',"","DOCTYPE html"),$xml));
         return $this->obfuscateMail(str_replace(array('<default:','</default:',"DOCTYPE HTML"),array('<','</',"DOCTYPE html"),$xml));
+    }
+
+    private function setHTML5Doctype($xml) {
+	//$xml = str_replace('xmlns="http://www.w3.org/1999/xhtml"', "", $xml);
+        return preg_replace("#<\!DOCTYPE [^>]+>#", "<!DOCTYPE html>", $xml); 
     }
     
     /*private function stripDefaultPrefixes($xml) {
