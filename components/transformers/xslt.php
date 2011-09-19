@@ -46,7 +46,8 @@ class popoon_components_transformers_xslt extends popoon_components_transformer 
         parent::DomStart($xml);
         
         $xslfile = $this->getAttrib("src");
-        
+
+        $tmp = '';
         if (!file_exists($xslfile)) {
             $tmp = str_replace("..","",$this->getAttrib("fallback"));
         }
