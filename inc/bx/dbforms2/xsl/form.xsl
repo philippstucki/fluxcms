@@ -15,11 +15,14 @@
     -->
 
     <xsl:template match="form" mode="form">
+    
+        <xsl:variable name="isSubForm" select="local-name(parent::node()) = 'fields'"/>    
+
         <div id="formdiv_{@name}" class="form">
         
             <xsl:if test="@title != ''">
                 <xsl:choose>
-                    <xsl:when test="local-name(parent::node()) = 'fields'"><h3><a id="_form_{@name}_toggleLink" onclick="dbforms2_helpers.toggleSubForm(this, '_form_{@name}');">-</a><xsl:value-of select="@title"/></h3></xsl:when>
+                    <xsl:when test="local-name(parent::node()) = 'fields'"><h3><a id="_form_{@name}_toggleLink" onclick="dbforms2_helpers.toggleSubForm(this, '_form_{@name}');">+</a><xsl:value-of select="@title"/></h3></xsl:when>
                     <xsl:otherwise><h1><xsl:value-of select="@title"/></h1></xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
@@ -36,13 +39,20 @@
                 </xsl:call-template>
             </xsl:if>
             
-            <div id="_form_{@name}" style="display:block;">
+            <div id="_form_{@name}">
+                <xsl:attribute name="style">
+                    <xsl:choose>
+                        <xsl:when test="$isSubForm"><xsl:text>display:none</xsl:text></xsl:when>
+                        <xsl:otherwise><xsl:text>display:block;</xsl:text></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            
                 <form name="dbforms2_{@name}">
                     <!-- apply all hidden fields -->
                     <xsl:apply-templates select="fields/input[@type='hidden']" mode="hidden"/>
     
                     <!-- generate a toolbar when this is a subform -->
-                    <xsl:if test="local-name(parent::node()) = 'fields'">
+                    <xsl:if test="$isSubForm">
                         <div class="toolbar">
                             <span class="buttons">
                                 <input type="button" id="tb_{@name}_save" value="save"/>
