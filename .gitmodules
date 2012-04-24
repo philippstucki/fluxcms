@@ -1,0 +1,6 @@
+[submodule "inc/popoon"]
+	path = inc/popoon
+	url = git://github.com/philippstucki/popoon.git
+[submodule "webinc/bxe"]
+	path = webinc/bxe
+	url = git://github.com/philippstucki/bxe.git
