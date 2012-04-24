@@ -235,11 +235,7 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
     
     this.init = function() {
         var wev_keyPress = new ContextFixer(this.e_keyPress, this);
-        if(_BX_HELPERS_IS_IE) {
-            bx_helpers.addEventListener(this.DOMNode, 'keydown', wev_keyPress.execute);
-        } else if(_BX_HELPERS_IS_MOZ){
-            bx_helpers.addEventListener(this.DOMNode, 'keypress', wev_keyPress.execute);
-        }
+        bx_helpers.addEventListener(this.DOMNode, 'keydown', wev_keyPress.execute);
 
         var wev_keyUp = new ContextFixer(this.e_keyUp, this);
         bx_helpers.addEventListener(this.DOMNode, 'keyup', wev_keyUp.execute);
@@ -310,42 +306,54 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
     }
     
     this.e_keyPress = function(event) {
-        if (event.keyCode == 40 ) { // KEY DOWN
+        if (event.keyCode == 40 ) {
+            // CURSOR DOWN
             if(this.chooser.results.hidden) {
                 this.chooser.results.show();
             } else {
                 this.chooser.results.focusNextEntry();
             }
             
-        } else if (event.keyCode == 38 ) {  // KEY UP
+        } else if (event.keyCode == 38 ) {
+            // CURSOR UP
             if(this.chooser.results.hidden) {
                 this.chooser.results.show();
             } else {
                 this.chooser.results.focusPreviousEntry();
             }
             
-        } else if (event.keyCode == 27) {   // ESC
-            this.chooser.results.hide();
+        } else if (event.keyCode == 27) {
+            // ESC
+            if(jQuery(this.DOMNode).val() === '') {
+                this.chooser.results.hide();
+            } else {
+                jQuery(this.DOMNode).val('');
+            }
             
-        } else if(event.keyCode == 33 && this.chooser.enablePager) {    // PAGE UP
+        } else if(event.keyCode == 33 && this.chooser.enablePager) {
+            // PAGE UP
             // don't do the default action on the textfield
             event.preventDefault();
             this.chooser.showPreviousPage();
             
-        } else if(event.keyCode == 34 && this.chooser.enablePager) {    // PAGE DOWN
+        } else if(event.keyCode == 34 && this.chooser.enablePager) {
+            // PAGE DOWN
             // don't do the default action on the textfield
             event.preventDefault();
             this.chooser.showNextPage();
             
-        } else if(event.keyCode == 36 && this.chooser.enablePager) {    // HOME
+        } else if(event.keyCode == 36 && this.chooser.enablePager) {
+            // HOME
             event.preventDefault();
             this.chooser.showFirstPage();
             
-        } else if(event.keyCode == 35 && this.chooser.enablePager) {    // END
+        } else if(event.keyCode == 35 && this.chooser.enablePager) {
+            // END
             event.preventDefault();
             this.chooser.showLastPage();
 
-        } else if (event.keyCode == 13 || event.keyCode == 14) {    // ENTER & RETURN
+        } else if (event.keyCode == 13 || event.keyCode == 14) {
+            // ENTER & RETURN
             if(this.chooser.results.hidden) {
                 this.chooser.results.show();
             } else {
@@ -353,7 +361,8 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
                 this.chooser.results.hide();
             }
 
-        } else if(event.keyCode == 46) {    // DELETE
+        } else if(event.keyCode == 46) {
+            // DELETE
             this.chooser.onDelete(this.chooser.results.entries[this.chooser.results.entryFocus]);
 
         }
