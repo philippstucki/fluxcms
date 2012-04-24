@@ -90,23 +90,23 @@ function dbforms2_field(DOMNode) {
      *
      */
     this.e_onFocus = function() {
-        this.DOMNode.className = 'hasfocus';
+        jQuery(this.DOMNode).addClass('hasfocus');
         this.hasFocus = true;
         this.form.updateFocus(this);
     }
 
     this.e_onBlur = function() {
-        this.DOMNode.className = '';
+        jQuery(this.DOMNode).removeClass('hasfocus');
         this.hasFocus = false;
     }
     
     this.e_onMouseOver = function() {
-        this.DOMNode.className = 'hasfocus';
+        jQuery(this.DOMNode).addClass('hasfocus');
     }
 
     this.e_onMouseOut = function() {
         if(!this.hasFocus)
-            this.DOMNode.className = '';
+            jQuery(this.DOMNode).removeClass('hasfocus');
     }
     
     this.e_onChange = function() {

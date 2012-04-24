@@ -17,9 +17,10 @@ dbforms2_common.openFileBrowser = function(field) {
 
     var currentFile = field.getValue();
     
-    if (currentFile == '' && dbforms2_fBrowserLastLocation) {
+    if (currentFile === '' && dbforms2_fBrowserLastLocation) {
         currentFile = dbforms2_fBrowserLastLocation;
     }
+    
     var filesDir = '/files';
     sParentFolderPath = currentFile.substring(filesDir.length, currentFile.lastIndexOf('/', currentFile.length - 2) + 1);
 
