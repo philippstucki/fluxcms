@@ -26,9 +26,8 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
 
     public function __construct($name) {
         parent::__construct($name);
-        $this->XMLName = 'select';
-        $this->type = 'relation_n2m';
-        
+        $this->XMLName ='select';
+        $this->type ='relation_n2m';
     }
 
     /**
@@ -38,11 +37,12 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
      *  @return array Field attributes
      */
     public function getConfigAttributes() {
-        $ret =  parent::getConfigAttributes();
+        $ret = parent::getConfigAttributes();
         $ret['relationtable'] = 'string';
         $ret['thisidfield'] = 'string';
         $ret['thatidfield'] = 'string';
         $ret['linktothat'] = 'string';
+        $ret['indexfield'] = 'string';
         return $ret;
     }
     
@@ -61,7 +61,9 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
         $tablePrefix = $GLOBALS['POOL']->config->getTablePrefix();
         $db = $GLOBALS['POOL']->db;
         
-        $query = 'select '. $this->attributes['thatidfield'] . ' as _idfield from '. $tablePrefix.$this->attributes['relationtable'] .' where ' . $this->attributes['thisidfield'] .' = '.$db->quote($id);
+        $indexField = $db->quoteIdentifier($this->attributes['indexfield']);
+
+        $query ='SELECT '. $this->attributes['thatidfield'] . ' AS _idfield FROM '. $tablePrefix.$this->attributes['relationtable'] .' WHERE ' . $this->attributes['thisidfield'] .' = '.$db->quote($id)." ORDER BY {$indexField}";
         $res = $db->query($query);
         $v = array();
         if (!MDB2::isError($res)) {
@@ -110,9 +112,48 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
     protected function _deleteQuery($id) {
         $tablePrefix = $GLOBALS['POOL']->config->getTablePrefix();
         $db = $GLOBALS['POOL']->dbwrite;
-         $query = "delete from ".$tablePrefix.$this->attributes['relationtable'] .' where '. $this->attributes['thisidfield'] . ' = '. $id ;
+         $query = "DELETE FROM ".$tablePrefix.$this->attributes['relationtable'] .' WHERE '. $this->attributes['thisidfield'] . ' = '. $id ;
          $res = $db->query($query);
          return null;
+    }
+
+
+    protected function _updateInsertQuery( $id ) {
+        $tablePrefix = $GLOBALS['POOL']->config->getTablePrefix();
+        $db = $GLOBALS['POOL']->dbwrite;
+        $ids = $this->value;
+
+        $query = 'select ' . $this->attributes['thatidfield'] .' from '.$tablePrefix.$this->attributes['relationtable'].' where ' . $this->attributes['thisidfield'] .' = '. $id;
+        $res = $db->query($query);
+        $current = $res->fetchCol();
+
+        $todelete = array_diff( $current , $ids );
+        $toinsert = array_diff( $ids , $current );
+        $toupdate = array_intersect( $ids , $current );
+        
+        $indexField = $db->quoteIdentifier($this->attributes['indexfield']);
+
+        // delete entries which are not associated anymore
+        if( !empty( $todelete ) ) {
+            $query = 'DELETE FROM '.$tablePrefix.$this->attributes['relationtable'] .' WHERE ' . $this->attributes['thisidfield'] .' = '. $db->quote($id) . ' AND ' . $this->attributes['thatidfield'] ." IN ('" . implode( "','" , $todelete)."' ) ";
+            $res = $db->query($query);
+        }
+
+        // insert new assocations
+        foreach( $toinsert as $i => $value ) {
+            $seqid = $db->nextID( $GLOBALS['POOL']->config->getTablePrefix() . "_sequences" );
+            $query = 'INSERT INTO '.$tablePrefix.$this->attributes['relationtable']  .'(id, '. $this->attributes['thisidfield'] . ' , '. $this->attributes['thatidfield'] . " , {$indexField} ) VALUES ({$seqid}," . $db->quote($id) . "," . $db->quote($value).",". $db->quote($i) ." )";
+            $res = $GLOBALS['POOL']->db->query($query);
+        }
+
+        // update order on existing associations
+        foreach( $toupdate as $i => $uid ) {
+            $query = "UPDATE ".$tablePrefix.$this->attributes['relationtable'];
+            $query.= " SET {$indexField}=".$db->quote($i);
+            $query.= " WHERE ".$this->attributes['thisidfield'].' = '.$db->quote($id);
+            $query.= " AND ".$this->attributes['thatidfield'].' = '.$db->quote($uid);
+            $res = $GLOBALS['POOL']->db->query($query);
+        }
     }
     
     /**
@@ -122,24 +163,28 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
      *  @access public
      *  @return type descr
      */
-    protected function _updateInsertQuery($id) {
+    protected function __updateInsertQuery($id) {
         $tablePrefix = $GLOBALS['POOL']->config->getTablePrefix();
         $db = $GLOBALS['POOL']->dbwrite;
         $ids = array_keys($this->value);
+
         //delete not choosen ids
         if (count($ids) > 0) {
             $query = 'delete from '.$tablePrefix.$this->attributes['relationtable'] .' where ' . $this->attributes['thisidfield'] .' = '. $db->quote($id) . ' and not( ' . $this->attributes['thatidfield'] .' in (\''.implode("','",$ids).'\'))';
             $res = $db->query($query);
+
             //get old categories
             $query = 'select ' . $this->attributes['thatidfield'] .' from '.$tablePrefix.$this->attributes['relationtable'].' where ' . $this->attributes['thisidfield'] .' = '. $id .' and ( ' . $this->attributes['thatidfield'] .' in (\''.implode("','",$ids).'\'))';
             
             $res = $db->query($query);
             $oldids = $res->fetchCol();
+
         } else {
             $query = "delete from ".$tablePrefix.$this->attributes['relationtable'] .' where '. $this->attributes['thisidfield'] . ' = '. $db->quote($id) ;
             $res = $db->query($query);
             $oldids = array();
         }
+
         // add new categories
         foreach ($ids as $value) {
             if (!(in_array($value,$oldids))) {

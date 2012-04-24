@@ -83,6 +83,7 @@
                     var DBFORMS2_IMG_PREVIEW_SMALL_DIR = BX_WEBROOT + 'dynimages/0,30,scale/';
                     var DBFORMS2_IMG_PREVIEW_LARGE_DIR = BX_WEBROOT + 'dynimages/200/';
                     var DBFORMS2_IMG_NULLIMG = '<xsl:value-of select="$DBFORMS2_IMG_NULLIMG"/>';
+                    var DBFORMS2_IMG_ROOT = '<xsl:value-of select="concat($webroot, 'themes/standard/admin/images/dbforms2/')"/>';
 
                     var _configStack = new Array();
                     var formConfig = new Array();

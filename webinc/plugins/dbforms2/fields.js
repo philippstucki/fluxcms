@@ -398,7 +398,7 @@ function dbforms2_field_relation_n2m(DOMNode) {
     this.init = function(DOMNode) {
         this.initField(DOMNode);
 
-        this.divElement = document.getElementById(this.DOMNode.id+"_values");
+        this.valuesNode = document.getElementById(this.DOMNode.id+"_values");
         
         var cf_onLiveChoose = new ContextFixer(this.onLiveChoose, this);
         this.liveSelect = new dbforms2_liveselect();
@@ -414,7 +414,7 @@ function dbforms2_field_relation_n2m(DOMNode) {
 	this.setValue = function(values) {
 		this.resetFieldValues();
 		for (var i in values) {
-			this.addFieldValue(i,values[i]);
+			this.addFieldValue( values[i].id , values[i].value );
 		}
 	}
     
@@ -423,56 +423,52 @@ function dbforms2_field_relation_n2m(DOMNode) {
         this.changed = true;
     }
 	
-	this.addFieldValue = function(id, title) {
-		if (id != 0)  {
-			var div = document.createElement("div");
-			var span = document.createElement("span");
-			var del = document.createElement("a");
-            div.className = 'n2mvalue';
-			del.appendChild(document.createTextNode("x"));
-			del.setAttribute("style","cursor: pointer;");
-			if (this.linktothat) {
-				//span.setAttribute("onclick", 'window.location.href="' + BX_WEBROOT +'admin/dbforms2/' + this.linktothat + '/?id=' + id + '"');
-				span.setAttribute("onclick", 'dbforms2.openSubForm(\'' + this.linktothat + '\', '+id+')');
-                span.setAttribute("style","cursor: pointer; text-decoration: underline");
-			}
-            var wev = new bx_helpers_contextfixer(this.removeFieldValue, this, id);
-            bx_helpers.addEventListener(del, 'click', wev.execute);
-			
-			div.appendChild(del);
-			div.appendChild(document.createTextNode(" "));
-			
-			span.appendChild(document.createTextNode(title));
-			span = div.appendChild(span);
-			
-			div.setAttribute("_value_id", id);
-			div.setAttribute("id", this.DOMNode.id+"_value_id_"+id);
-			this.divElement.appendChild(div);
-		}
-	}
+    this.addFieldValue = function( id , title ) {
+        if( id !== 0 ) {
+            var $values = $( this.valuesNode );
+            var $li = $( '<li><img src="' + DBFORMS2_IMG_ROOT + 'delete.png" class="delete"><img src="' + DBFORMS2_IMG_ROOT + 'table_edit.png" class="edit">' + title + '</li>' );
+            $li.attr( 'class' , 'n2mvalue' );
+            $li.attr( '_value_id' , id );
+
+            var that = this;
+
+            $li.find('.delete').click( function () {
+                that.changed = true;
+                $(this).parent().remove();
+            });
+            
+            $li.find('.edit').click( function () {
+                dbforms2.openSubForm(that.linktothat, id);
+            });
+
+            $values.append($li);
+            $values.sortable({
+                'update' : function() {
+                    that.changed = true;
+                }
+                });
+        }
+    }
     
     this.removeFieldValue = function(id) {
         if(id != null) {
             this.changed = true;
-            this.divElement.removeChild(document.getElementById(this.DOMNode.id+"_value_id_"+id));
+            this.valuesNode.removeChild(document.getElementById(this.DOMNode.id+"_value_id_"+id));
         }
     }
 	
 	this.getValue = function() {
 		var values = new Array();
-		var child = this.divElement.firstChild;
-		while (child) {
-			if (child.nodeType == 1) {
-				values[child.getAttribute("_value_id")] = child.childNodes[0].data;
-			}
-			child = child.nextSibling;
-		}
-		
+
+        $(this.valuesNode).find('li').each( function() {
+            values.push($(this).attr('_value_id'));
+        });
+
 		return values;
 	}
 	
 	this.resetFieldValues = function() {
-		this.divElement.innerHTML = "";
+		this.valuesNode.innerHTML = "";
 	}
     
     this.enable = function() {

@@ -109,7 +109,8 @@
                 </xsl:if>
                 
                 <input type="hidden" id="{@id}"/>
-                <div class="n2mvalues" id="{@id}_values"></div>
+                <ul class="n2mvalues" id="{@id}_values">
+                </ul>
 
             </td>
         </tr>

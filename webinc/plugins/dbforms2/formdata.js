@@ -56,7 +56,10 @@ function dbforms2_formData() {
 					var child = childNode.firstChild;
 					while (child) {
 						if(typeof child.childNodes[0] != 'undefined') {
-                            values[child.getAttribute("id")] = child.childNodes[0].data;
+                            values.push({
+                                'id' : child.getAttribute('id'),
+                                'value' : child.childNodes[0].data
+                            });
                         }
 						child = child.nextSibling;
 					}
