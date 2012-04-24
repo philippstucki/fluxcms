@@ -81,13 +81,6 @@ dbforms2.init = function(formConfig) {
     this.chooser = new dbforms2_liveselect();
     this.chooser.onChooseAction = cf_onLiveChoose.execute;
     
-    /* FIXME: This makes use of the delete key, which is already used in the queryfield to
-       edit the currenty query ... 
-       
-    var wev = new ContextFixer(this.deleteEntryByID, this);
-    this.chooser.onDeleteAction = wev.execute;
-    */
-    
     this.chooser.showSelectedEntry = true;
     this.chooser.enablePager = true;
 
@@ -98,14 +91,15 @@ dbforms2.init = function(formConfig) {
     this.mainform.toolbar.unlockButton('save');
     this.mainform.toolbar.unlockButton('new');
     dbforms2.statusText('Ready.');
-    if (window.console  && window.console.firebug ) {
+    
+    if (window.console && window.console.firebug ) {
         var mozillaRvMinorVersion = navigator.userAgent.match(/rv:1.([[0-9a-z\.]*)/)[1];
         // 9 = 1.9 = Firefox 3.0
         // Firefox 3.6 has Version 9.2 = 1.9.2
         // Firefox 3.1 has Version 9.1 = 1.9.1
         // Firefox 2.0 has Version 8
         if (parseFloat(mozillaRvMinorVersion) == 9) {
-            dbforms2.statusText('There are known issues with Firefox 3.0 and Firebug. Please disable it!',true);
+            dbforms2.statusText('There are known issues with Firefox 3.0 and Firebug. Please disable it!', true);
         }
     }
     dbforms2_log.log('dbforms2 initialized');

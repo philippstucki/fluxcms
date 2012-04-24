@@ -18,8 +18,10 @@ dbforms2_toolbar = function() {
     }
     
     this.unlockButton = function(bname) {
+        /*
         this.buttons[bname].disabled = false;
         this.buttons[bname].className = '';
+        */
     }
     
     this.lockAllButtons = function() {

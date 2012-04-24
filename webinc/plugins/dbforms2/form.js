@@ -16,6 +16,7 @@ function dbforms2_form() {
     this.lastFocus = null;
     this.parentForm = null;
     this.toolbar = null;
+    this.hasSections = false;
 
     this.thisidfield = null;
     this.thatidfield = null;
@@ -41,6 +42,8 @@ function dbforms2_form() {
         this.thisidfield = formConfig['thisidfield'];
         this.thatidfield = formConfig['thatidfield'];
 
+        this.hasSections = (typeof formConfig['hasSections'] !== 'undefined' && formConfig['hasSections'] === true) ? true : false;
+        
         if(formConfig['onSaveJS']) {
             this.eventHandlers['onSaveJS'] = formConfig['onSaveJS'];
         }
@@ -57,19 +60,22 @@ function dbforms2_form() {
                 this.fields[fieldID] = this.initGroup(fieldID, fields[fieldID]);
             
             } else if(fields[fieldID]['isForm']) {
-                //dbforms2_log.log(fieldID + ' is a form.');
                 var form = this.initForm(fieldID, fields[fieldID]['config']);
                 this.fields[fieldID] = form;
                 this.forms[fieldID] = form;
             
             } else {
-                //dbforms2_log.log(fieldID + '.init()...');
                 // field is a regular field
                 this.fields[fieldID] = this.initField(fieldID, fields[fieldID]);
             }
         }
         
         this.formData.tablePrefix = this.tablePrefix;
+        
+        if(this.hasSections === true) { 
+            jQuery("#formdiv_"+this.name).tabs();
+        }
+        
         this.resetValues();
         this.focusFirstField();
     }
@@ -303,6 +309,8 @@ function dbforms2_form() {
         var wev = new bx_helpers_contextfixer(this.e_reload_click, this);
         this.toolbar.addButtonEventHandler('reload', wev.execute);
         
+        //jQuery("#controls input").button();
+        
     }
     
     /**
@@ -368,8 +376,6 @@ function dbforms2_form() {
      */
     this.saveFormData = function(fromLastChild) {
         
-        dbforms2_log.log( this.name + '.saveFormData()');
-
         if(this.parentForm == null && (typeof fromLastChild  == 'undefined')) {
 
             var hasSaved = false;
@@ -389,9 +395,7 @@ function dbforms2_form() {
             
         }
         
-        dbforms2_log.log('saving ' + this.name);
         if(!this.hasChanged()) {
-            dbforms2_log.log(this.name + ' has no changes');
             return false;
         }
         
@@ -462,7 +466,6 @@ function dbforms2_form() {
         
         // pass original entry id to the server
         if(this.parentForm == null && this.currentID == 0 && this.originalID != 0) {
-            dbforms2_log.log('OriginalID' + this.originalID  );
             xml.documentElement.setAttribute('originalID', this.originalID);
             this.originalID = 0;
         }
@@ -783,12 +786,11 @@ function dbforms2_form() {
      */
     this.startTransportTimeout = function() {
         if(this.transportTimeout) {
-            //dbforms2_log.log('killed an old transport timeout!');
             this.stopTransportTimeout();
         }
         
         var wrappedCallback = new ContextFixer(this._transportTimeoutCallback, this);
-        this.transportTimeout = window.setTimeout(wrappedCallback.execute, 10000);
+        this.transportTimeout = window.setTimeout(wrappedCallback.execute, 5000);
         
     }
     

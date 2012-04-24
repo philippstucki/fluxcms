@@ -22,22 +22,30 @@
         
             <xsl:if test="@title != ''">
                 <xsl:choose>
-                    <xsl:when test="local-name(parent::node()) = 'fields'"><h3><a id="_form_{@name}_toggleLink" onclick="dbforms2_helpers.toggleSubForm(this, '_form_{@name}');">+</a><xsl:value-of select="@title"/></h3></xsl:when>
+                    <xsl:when test="$isSubForm"><h3><a id="_form_{@name}_toggleLink" onclick="dbforms2_helpers.toggleSubForm(this, '_form_{@name}');">+</a><xsl:value-of select="@title"/></h3></xsl:when>
                     <xsl:otherwise><h1><xsl:value-of select="@title"/></h1></xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
             
             <!-- display the relation controls in the form header so they don't collapse -->
-            <xsl:if test="fields/relation[@type='relation_n21']">
-                <xsl:call-template name="doLiveSelect">
-                    <xsl:with-param name="ls" select="fields/relation[@type='relation_n21'][1]"/>
-                </xsl:call-template>
+            <xsl:if test="$isSubForm">
+                <xsl:if test="fields/relation[@type='relation_n21']">
+                    <xsl:call-template name="doLiveSelect">
+                        <xsl:with-param name="ls" select="fields/relation[@type='relation_n21'][1]"/>
+                    </xsl:call-template>
+                </xsl:if>
+                <xsl:if test="fields/listview[@type='listview_12n']">
+                    <xsl:call-template name="doListview">
+                        <xsl:with-param name="lv" select="fields/listview[@type='listview_12n'][1]"/>
+                    </xsl:call-template>
+                </xsl:if>
             </xsl:if>
-            <xsl:if test="fields/listview[@type='listview_12n']">
-                <xsl:call-template name="doListview">
-                    <xsl:with-param name="lv" select="fields/listview[@type='listview_12n'][1]"/>
-                </xsl:call-template>
-            </xsl:if>
+            
+            <ul>
+                <xsl:for-each select="sections/section">
+                    <li><a href="#section-{position()}"><xsl:value-of select="@descr"/></a></li>
+                </xsl:for-each>
+            </ul>
             
             <div id="_form_{@name}">
                 <xsl:attribute name="style">
@@ -61,25 +69,44 @@
                                 <input type="button" id="tb_{@name}_saveasnew" value="save as new"/>
                                 <input type="button" id="tb_{@name}_delete" value="delete"/>
                                 <input type="button" id="tb_{@name}_reload" value="reload"/>
-                                
                             </span>
                         </div>
                     </xsl:if>
                     
-                    <!-- apply all other fields -->
-                    <table cellpadding="0" cellspacing="0">
-                        <xsl:attribute name="width">
-                            <xsl:choose>
-                                <xsl:when test="local-name(parent::node()) = 'fields'">100%</xsl:when>
-                                <xsl:otherwise>700</xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:attribute>
-                        <xsl:apply-templates select="*" mode="fields"/>
-                    </table>
-                
+                    <xsl:choose>
+                        <xsl:when test="sections/section">
+                            <xsl:apply-templates select="sections/section" mode="form"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="fields" mode="form"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    
                 </form>
             </div>
         </div>
+    </xsl:template>
+    
+    <xsl:template match="section" mode="form">
+        <xsl:variable name="sname" select="@name"/>
+        <div class="section" id="section-{position()}">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <xsl:apply-templates select="/form/fields/*[@section=$sname]" mode="fields"/>
+            </table>
+            
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="fields" mode="form">
+        <table cellpadding="0" cellspacing="0">
+            <xsl:attribute name="width">
+                <xsl:choose>
+                    <xsl:when test="local-name(parent::node()) = 'fields'">100%</xsl:when>
+                    <xsl:otherwise>700</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates select="*" mode="fields"/>
+        </table>
     </xsl:template>
     
     <xsl:template match="form" mode="fields">
@@ -116,6 +143,9 @@
         formConfig['liveSelectRootURI']     = '<xsl:value-of select="concat($baseURI,'/liveselect')"/>';
         formConfig['listViewRootURI']       = '<xsl:value-of select="concat($baseURI,'/listview')"/>';
         formConfig['tablePrefix']           = '<xsl:value-of select="$tablePrefix"/>';
+        <xsl:if test="sections/section and not($isSubform)">
+        formConfig['hasSections']           = true;
+        </xsl:if>
 
         formConfig['onSaveJS']              = '<xsl:value-of select="php:functionString('addslashes', @onsavejs)"/>';
         formConfig['onLoadJS']              = '<xsl:value-of select="php:functionString('addslashes', @onloadjs)"/>';

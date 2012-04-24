@@ -36,6 +36,8 @@ class bx_dbforms2_field {
      */
     public $name = '';
     
+    public $section = '';
+
     /**
      *  The default value
      *  @var value
@@ -256,7 +258,8 @@ class bx_dbforms2_field {
             'type' => $this->type,
             'name' => $this->name,
             'descr' => $this->attributes['descr'],
-            'id' => $this->parentForm->name.'_'.$this->name,
+            'id' => $this->getId(),
+            'section' => $this->section->name,
         );
         
         if(isset($this->attributes['onkeyup'])) {
@@ -272,6 +275,10 @@ class bx_dbforms2_field {
         }
         
         return $ret;
+    }
+    
+    public function getId() {
+        return $this->parentForm->name.'_'.$this->name;
     }
     
     /**
@@ -308,6 +315,7 @@ class bx_dbforms2_field {
         $node = $dom->createElement($this->XMLName);
 
         $attributes = array_merge($this->getStandardXMLAttributes(), $this->getXMLAttributes());
+        
         foreach($attributes as $attr => $value) {
             $node->setAttribute($attr, $value);
         }

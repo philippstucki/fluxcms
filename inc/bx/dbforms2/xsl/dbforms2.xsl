@@ -30,13 +30,13 @@
     <xsl:template match="/">
         <html>
             <head>
-                <link href="{$webroot}webinc/js/jquery-ui/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" media="screen" type="text/css"/>
+                <link href="{$webroot}webinc/js/jquery-ui/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" media="screen" type="text/css"/>
                 <link href="{$webroot}themes/standard/admin/css/dbforms2.css" rel="stylesheet" media="screen" type="text/css"/>
 
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.4.js'"/></xsl:call-template>
 
                 <!-- jquery, jquery ui -->
-                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.1.min.js'"/></xsl:call-template>
+                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.2.min.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery-ui/jquery-ui-1.7.2.custom.min.js'"/></xsl:call-template>
                 
                 <xsl:if test="/form/fields//textarea[@type='text_wysiwyg']">
@@ -96,12 +96,12 @@
                 <div id="controls">
                     <div class="toolbar">
                         <span class="buttons">
-                            <input type="button" id="tb_{$formName}_save" accesskey="s" value="save"/>
+                            <input type="button" id="tb_{$formName}_save" accesskey="s" value="Save"/>
                             &#160;
-                            <input type="button" id="tb_{$formName}_new" accesskey="n" value="new"/>
-                            <input type="button" id="tb_{$formName}_saveasnew" value="save as new"/>
-                            <input type="button" id="tb_{$formName}_delete" accesskey="d" value="delete"/>
-                            <input type="button" id="tb_{$formName}_reload" accesskey="r" value="reload"/>
+                            <input type="button" id="tb_{$formName}_new" accesskey="n" value="New"/>
+                            <input type="button" id="tb_{$formName}_saveasnew" value="Save as New"/>
+                            <input type="button" id="tb_{$formName}_delete" accesskey="d" value="Delete"/>
+                            <input type="button" id="tb_{$formName}_reload" accesskey="r" value="Reload"/>
                         </span>
                         <div style="position:absolute; top:3px; left: 350px">
                             <div class="liveselect">

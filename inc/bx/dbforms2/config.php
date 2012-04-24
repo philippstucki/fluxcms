@@ -117,26 +117,43 @@ class bx_dbforms2_config {
      *  @access public
      *  @return array All fields of the form, including child forms.
      */
-    public function getFields($fieldsNode, $parentForm) {
+    public function getFields($fieldsNode, $parentForm, $section = '') {
         $fields = array();
         // get nodeset which contains all fields of the current form
-        $fieldsNS = $this->xpath->query('dbform:field|dbform:group|dbform:nofield|dbform:form', $fieldsNode);
+        $fieldsNS = $this->xpath->query('dbform:field|dbform:group|dbform:nofield|dbform:form|dbform:section', $fieldsNode);
 
         foreach($fieldsNS as $field) {
 
             switch($field->localName) {
-                case 'form';
-                $name = $field->getAttribute('name');
-                $form = $this->getForm($field);
-                $fields[$name] = $form;
+                case 'form':
+                    $name = $field->getAttribute('name');
+                    $form = $this->getForm($field);
+                    $form->section = $section;
+                    $form->isSubform = TRUE;
+                    $fields[$name] = $form;
                 break;
 
+                case 'section':
+                    $sName = $field->getAttribute('name');
+                    $sDescr = $field->getAttribute('descr');
+                    $section = new bx_dbforms2_section($sName, $sDescr);
+                    $parentForm->sections[] = $section;
+                    
+                    $sectionFields = $this->getFields($field, $parentForm, $section);
+                    $fields = array_merge($fields, $sectionFields);
+
+                    $fieldIds = array();
+                    
+                break;
+                
                 // field, nofield and group are subclasses of bx_dbforms2_field
                 case 'field':
                 case 'group':
                 case 'nofield':
+                    
                     $type = $field->getAttribute('type');
                     $name = $field->getAttribute('name');
+                    
                     if($field->localName == 'field') {
                         $fieldInstance = $this->getFieldInstance($type, $name);
                     } else if($field->localName == 'group') {
@@ -152,6 +169,7 @@ class bx_dbforms2_config {
                         $attributes = $this->getNodeAttributes($field, $attributeSet);
 
                         $fieldInstance->setAttributes($attributes);
+                        $fieldInstance->section = $section;
 
                         // check if this field has values from the config file
                         if($fieldInstance->hasConfigValues()) {
@@ -312,8 +330,6 @@ class bx_dbforms2_config {
         $fieldsNode = $fieldsNS->item(0);
 
         $form = new bx_dbforms2_form();
-        $form->fields = $this->getFields($fieldsNode, $form);
-        $form->chooser = $this->getChooser($formNode);
 
         $formName = $formNode->getAttribute('name');
         if(!empty($formName)) {
@@ -321,6 +337,9 @@ class bx_dbforms2_config {
         } else {
             $form->name = $this->name;
         }
+
+        $form->fields = $this->getFields($fieldsNode, $form);
+        $form->chooser = $this->getChooser($formNode);
 
         $form->tableName = $this->getTableName($formNode);
         $form->tablePrefix = $this->getTablePrefix($formNode);

@@ -31,6 +31,16 @@ class bx_dbforms2_form {
     public $fields = array();
 
     /**
+     *  All form sections
+     *  @var fields
+     */
+    public $sections = array();
+
+    public $section = '';
+
+    public $isSubform = FALSE;
+    
+    /**
      *  Chooser object of this form
      *  @var chooser
      */
@@ -114,6 +124,11 @@ class bx_dbforms2_form {
         
         $dom->documentElement->setAttribute('name', $this->name);
         $dom->documentElement->setAttribute('title', $this->title);
+        
+        if($this->isSubform) {
+            $dom->documentElement->setAttribute('section', $this->section->name);
+        }
+        
         $dom->documentElement->setAttribute('thisidfield', $this->attributes['thisidfield']);
         $dom->documentElement->setAttribute('thatidfield', $this->attributes['thatidfield']);
         $dom->documentElement->setAttribute('idfield', $this->attributes['idfield']);
@@ -122,6 +137,15 @@ class bx_dbforms2_form {
         foreach($this->attributes as $name => $value) {
             $dom->documentElement->setAttribute($name, $value);
         }
+        
+        // serialize sections
+        $sectionsNode = $dom->createElement('sections');
+        if(!$this->isSubform) {
+            foreach($this->sections as $s) {
+                $sectionsNode->appendChild($s->serializeToDOMNode($dom));
+            }
+        }
+        $dom->documentElement->appendChild($sectionsNode);
         
         // serialize all fields
         $fieldsNode = $dom->createElement('fields');

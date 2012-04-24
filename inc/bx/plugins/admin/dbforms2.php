@@ -140,7 +140,7 @@ class bx_plugins_admin_dbforms2 extends bx_plugins_admin implements bxIplugin {
                     $form->callEventHandlers(bx_dbforms2::EVENT_UPDATE_PRE);
                     $query = bx_dbforms2_sql::getUpdateQueryByForm($form);
                 }
-
+                
                 // give it a go
                 $res = $db->query($query);
 
@@ -207,9 +207,8 @@ class bx_plugins_admin_dbforms2 extends bx_plugins_admin implements bxIplugin {
             return $this->getDataByForm($form);
 
         } else if ($mode == 'form') {
-    
             $dom = $form->serializeToDOMObject();
-            if (isset($_GET['XML']) && $_GET['XML'] == 1.1) {
+            if (isset($_GET['XML']) && $_GET['XML'] === '1.1') {
                 return $dom;
             }
     
