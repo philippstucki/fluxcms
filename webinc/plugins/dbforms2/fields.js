@@ -429,10 +429,8 @@ function dbforms2_field_relation_n2m(DOMNode) {
 			del.appendChild(document.createTextNode("x"));
 			del.setAttribute("style","cursor: pointer;");
 			if (this.linktothat) {
-				
 				span.setAttribute("onclick", 'window.location.href="' + BX_WEBROOT +'admin/dbforms2/' + this.linktothat + '/?id=' + id + '"');
 				span.setAttribute("style","cursor: pointer; text-decoration: underline");
-
 			}
             var wev = new bx_helpers_contextfixer(this.removeFieldValue, this, id);
             bx_helpers.addEventListener(del, 'click', wev.execute);

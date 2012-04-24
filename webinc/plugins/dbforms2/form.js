@@ -444,8 +444,6 @@ function dbforms2_form() {
             } else if(this.thatidfield != '' && this.thisidfield != '') {
                 // relation: n -> m
             }
-            
-            
         }
         
         this.saveFocus();
@@ -696,7 +694,6 @@ function dbforms2_form() {
         
         this.enable();
         this.toolbar.unlockAllButtons();
-        this.focusFirstField();
         
         dbforms2.statusText('Data loaded. (id = ' + this.currentID + ')');
     }
