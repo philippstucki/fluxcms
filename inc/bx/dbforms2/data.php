@@ -114,37 +114,8 @@ class bx_dbforms2_data {
                             }
                         }
                     }
-                
-                } else {
-                    /*
-                    
-                    Silvan: What's this for? It doubles all entries on the save return :)
-                    ----
-                    $value = $field->getValue();
-                
-                    if ($value && !empty($value)) {
-                    
-                        $res = $xp->query("/data/$dataNodeName/$dataNodeName/".$field->name);
-                        if ($res->length == 0) {
-                            $parent =  $xp->query("/data/$dataNodeName/$dataNodeName");   
-                            if ($parent->item(0) && $parent->item(0) instanceof DOMElement) {
-                                $p = $parent->item(0);   
-                                $node = $xml->createElement($field->name);
-                                $p->appendChild($node);
-                            }
-                        } else {
-                            $node = $res->item(0);    
-                        }
-                    
-                        if ($node instanceof DOMElement) { 
-                            $node->appendChild($xml->createTextNode(html_entity_decode($value, ENT_COMPAT, 'UTF-8')));
-                        }
-                    }*/
                 }
             }
-
-            
-            
         }
 
         return $xml;
@@ -158,7 +129,7 @@ class bx_dbforms2_data {
      */
     public static function doAdditionalQueries($form) {
         foreach($form->fields as $field) {
-            if($field instanceof bx_dbforms2_field)  {
+            if($field instanceof bx_dbforms2_field) {
                 $field->doAdditionalQuery($form->currentID);
             }
         }
