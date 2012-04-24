@@ -829,6 +829,5 @@ function dbforms2_form() {
         this.reloadEntry();
     }
 
-
 }
 

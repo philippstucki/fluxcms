@@ -104,6 +104,10 @@
                     </div>
                 </div>
                 
+                <xsl:if test="@linktothat != ''">
+                    <a onclick="dbforms2.openSubForm('{@linktothat}');" style="margin-left: 415px; cursor: pointer; text-decoration:underline;">Create New Entry</a>
+                </xsl:if>
+                
                 <input type="hidden" id="{@id}"/>
                 <div class="n2mvalues" id="{@id}_values"></div>
 

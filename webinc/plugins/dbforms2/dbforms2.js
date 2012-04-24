@@ -145,3 +145,14 @@ dbforms2.getFormByConfig = function(formConfig) {
     form.init(formConfig);
     return form;
 }
+
+/**
+ *  Opens the given subform in a popup window
+ *
+ */
+dbforms2.openSubForm = function(formname, id) {
+    if(formname !== '') {
+        window.open(BX_WEBROOT +'admin/dbforms2/' + formname + (typeof id !== 'undefined' ? '?id='+id : '' ), 'dbf2_subform', 'width=1000,height=700,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no');
+    }
+}
+
