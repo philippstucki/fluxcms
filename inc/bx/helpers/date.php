@@ -75,4 +75,18 @@ class bx_helpers_date {
         $ts = strtotime($date);
         return date($format,$ts);
     }
+
+    static function getDate($ts = NULL) {
+        if( $ts === NULL ) {
+            $ts = time();
+        }
+
+        $d = getdate($ts);
+
+        return Array(
+            'mday' => $d['mday'],
+            'month' => $d['mon'],
+            'year' => $d['year'],
+        );
+    }
 }
