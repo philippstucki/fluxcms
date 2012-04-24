@@ -21,6 +21,15 @@ class bx_helpers_globals {
 
     }
 
+    static function SERVER($name,$default = "") {
+        if (isset($_SERVER[$name])) {
+            return popoon_classes_externalinput::basicClean($_SERVER[$name]);
+        } else {
+            return $default;
+        }
+
+    }
+
     static function SESSION($name,$default = "") {
         if (isset($_SESSION[$name])) {
             return popoon_classes_externalinput::basicClean($_SESSION[$name]);
