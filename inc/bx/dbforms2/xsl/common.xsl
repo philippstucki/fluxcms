@@ -28,16 +28,7 @@
         <div id="{$lv/@id}">
             <div class="listview">
                 <div class="listviewResults" id="{$lv/@name}_lvresults">
-                    <table cellspacing="0" cellpadding="0" width="100%">
-                        <thead>
-                            <tr noremove="1">
-                                <th width="90%">Title</th>
-                                <th width="10%"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="{$lv/@name}_lvresultstable">
-                        </tbody>
-                    </table>
+                    <ul id="{$lv/@name}_lvresultstable" class="n2mvalues"/>
                 </div>
             </div>
         </div>

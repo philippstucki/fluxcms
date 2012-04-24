@@ -376,6 +376,7 @@ class bx_plugins_admin_dbforms2 extends bx_plugins_admin implements bxIplugin {
         $mode = 'form';
         $elements = explode('/', substr($id, 1));
         if (!empty($elements[1])) {
+
             if ($elements[1] == 'subform' && sizeof($elements > 3)) {
                 $elements = array_slice($elements, 2, 2);
             }

@@ -273,6 +273,7 @@ function dbforms2_form() {
      *
      */
     this.callInternalEventHandlers = function(event) {
+        dbforms2_log.log('internal event: ' + event);
         if(this.internalEventHandlers[event] != undefined) {
             for(e in this.internalEventHandlers[event]) {
                 var handler = this.internalEventHandlers[event][e];
@@ -411,6 +412,7 @@ function dbforms2_form() {
         for (fieldID in this.fields) {
             field = this.getFieldByID(fieldID);
             value = field.getValue();
+            console.log( fieldID + ':' + value );
             this.formData.setValueByFieldID(fieldID, value);
         }
         // set current id

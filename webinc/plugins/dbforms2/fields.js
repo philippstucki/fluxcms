@@ -721,10 +721,12 @@ function dbforms2_field_listview(DOMNode) {
 
         var cf_onChoose = new bx_helpers_contextfixer(this.onChoose, this);
         var cf_onDelete = new bx_helpers_contextfixer(this.onDelete, this);
+        var cf_onUpdateOrder = new bx_helpers_contextfixer(this.onUpdateOrder, this);
         
         this.listview = new dbforms2_listview();
         this.listview.onChooseAction = cf_onChoose.execute;
         this.listview.onDeleteAction = cf_onDelete.execute;
+        this.listview.onUpdateOrderAction= cf_onUpdateOrder.execute;
         this.listview.dataURI = this.form.listViewRootURI + '/' + this.id;
         this.listview.init(document.getElementById(this.id + '_lvresultstable'));
         
@@ -744,6 +746,14 @@ function dbforms2_field_listview(DOMNode) {
     this.onDelete = function(entry) {
         this.listview.results.removeEntry(entry);
         this.form.deleteEntryByID(entry.id);
+    }
+    
+    this.onUpdateOrder = function(entries) {
+        var orderfield = this.form.parentForm.getFieldByID( this.form.name + '_entry_order' );
+        if( typeof orderfield !== 'undefined' ) {
+            orderfield.setValue( entries );
+            orderfield.changed = true;
+        }
     }
     
     this.eventFormSavePost = function() {
