@@ -6,4 +6,4 @@ This is a fork of the original SVN-Repository residing at the following location
 
 It has been extended and might not be fully backwards compatible.
 
-See http://wiki.bitflux.org/ for further information about Flux CMS
+See https://fosswiki.liip.ch/display/FLX/Home for further information about Flux CMS
