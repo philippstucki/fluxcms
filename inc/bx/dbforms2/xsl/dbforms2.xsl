@@ -35,10 +35,6 @@
 
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.4.js'"/></xsl:call-template>
 
-                <!-- YUI JS -->
-                <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js&amp;3.0.0/build/oop/oop-min.js&amp;3.0.0/build/event-custom/event-custom-base-min.js&amp;3.0.0/build/io/io-base-min.js">
-                </script>
-
                 <!-- jquery, jquery ui -->
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.1.min.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery-ui/jquery-ui-1.7.2.custom.min.js'"/></xsl:call-template>

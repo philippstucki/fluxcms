@@ -7,60 +7,50 @@ function dbforms2_transport() {
     this.onSaveCallback = null;
     
     this.loadXML = function(dataURI) {
-        this.data = Sarissa.getDomDocument();
-    
-       
-        
         
         dbforms2_log.log('loading ' + dataURI + '...')
         this.dataLoaded = false;
-         //IE has some problems with YUI.io (no idea why), so we
-        // use the old sarissa if IE.
-        if (typeof this.data.onreadystatechange == "unknown") {
-            var wrappedCallback = new ContextFixer(this._sarissaOnLoadCallback, this);
-            this.data.onreadystatechange = wrappedCallback.execute;
-            this.data.load(dataURI);
-        } else {
-            var thisObject = this;
+
+        jQuery.ajax({
+            url: dataURI,
+            context: this,
+            success: function(d, s, xhr) {
+                this.dataLoaded = true;
+                
+                this.data = xhr.responseXML;
     
-            // Create a YUI instance using io-base module.
-            YUI().use("io-base", function(Y) {
-                Y.on('io:complete', thisObject._YUIOnLoadCallback , thisObject, []);
-                var request = Y.io(dataURI);
-                }
-            );
-        }
-    }
-    
-    this.loadXMLSync = function(dataURI) {
-        this.data = new XMLHttpRequest();
-        this.data.open('GET', dataURI, false);
-        
-        response = new dbforms2_response();
-    
-        dbforms2_log.log('loading ' + dataURI + '...')
-        
-        try {
-            this.data.send('');
-            response.responseData = this.data.responseXML;
-            response.responseCode = 0;
-        } catch (e) { 
-            response.responseText = 'Unable to establish a connection to the server.';
-        }
-        
-        return response;
+                // call document ready callback when the document has been loaded
+                if (this.onLoadCallback != null && typeof this.onLoadCallback == "function")
+                    this.onLoadCallback();
+            }
+        });
         
     }
     
     this.saveXML = function(dataURI, xml) {
-        this.data = new XMLHttpRequest();
-
-        var wrappedCallback = new ContextFixer(this._sarissaOnSaveCallback, this);
-        this.data.onreadystatechange = wrappedCallback.execute;
         
+        dbforms2_log.log('saving ' + dataURI + '...')
         this.dataSaved = false;
-        this.data.open('POST', dataURI);
-        this.data.send(xml);
+        
+        jQuery.ajax({
+            type: 'POST',
+            url: dataURI,
+            processData: false,
+            contentType: 'text/xml',
+            data: xml,
+            context: this,
+            success: function(d, s, xhr) {
+                this.dataSaved = true;
+
+                response = new dbforms2_response();
+                response.setXML(xhr.responseXML);
+                
+                // call document ready callback when the document has been saved
+                if (this.onSaveCallback != null && typeof this.onSaveCallback == "function")
+                    this.onSaveCallback(response);
+            }
+        });
+        
     }
     
     this.saveXMLSync = function(dataURI, xml) {
@@ -77,48 +67,6 @@ function dbforms2_transport() {
         
         return response;
         
-    }
-    
-    this._YUIOnLoadCallback = function(a,xhr,options) {
-        if(xhr.readyState == 4 && !this.dataLoaded && xhr.responseXML && xhr.responseXML.documentElement) {
-            dbforms2_log.log('data loaded');
-            this.dataLoaded = true;
-            this.data = xhr.responseXML;
-            // call document ready callback when the document has been loaded
-            if (this.onLoadCallback != null && typeof this.onLoadCallback == "function")
-                this.onLoadCallback();
-        }
-    }
-        
-    this._sarissaOnLoadCallback = function() {
-        //dbforms2_log.log('dbforms2_loader::_sarissaOnLoadCallback');
-
-        if(this.data.readyState == 4 && !this.dataLoaded && this.data.documentElement) {
-            dbforms2_log.log('data loaded');
-            this.dataLoaded = true;
-
-            // call document ready callback when the document has been loaded
-            if (this.onLoadCallback != null && typeof this.onLoadCallback == "function")
-                this.onLoadCallback();
-        }
-    }
-
-    this._sarissaOnSaveCallback = function() {
-        //dbforms2_log.log('dbforms2_loader::_sarissaOnSaveCallback');
-        
-        if(this.data.readyState == 4 && !this.dataSaved) {
-            dbforms2_log.log('data saved');
-            this.dataSaved = true;
- 
-            response = new dbforms2_response();
-            response.setXML(this.data.responseXML);
-            
-            dbforms2_log.log('response = ' + dbforms2_common.serializeToString(this.data.responseXML));
-
-            // call document ready callback when the document has been saved
-            if (this.onSaveCallback != null && typeof this.onSaveCallback == "function")
-                this.onSaveCallback(response);
-        }
     }
 
 }

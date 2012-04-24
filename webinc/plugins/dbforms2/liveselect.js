@@ -69,33 +69,21 @@ function dbforms2_liveselect() {
             uri = uri + '&p=' + this.currentPage;
         }
         uri = uri + get;
-        
-        this.data = Sarissa.getDomDocument();
+
         this.dataLoaded = false;
-        //IE has some problems with YUI.io (no idea why), so we
-        // use the old sarissa if IE.
-        if (typeof this.data.onreadystatechange == "unknown") {
-            var wrappedCallback = new ContextFixer(this._sarissaOnLoadCallback, this);
-            this.data.onreadystatechange = wrappedCallback.execute;
-            this.data.load(uri);
-        } else {
         
-            var thisObject = this;
-            
-            // Create a YUI instance using io-base module.
-            YUI().use("io-base", function(Y) {
-                Y.on('io:complete', thisObject._YUIOnLoadCallback , thisObject, []);
-                var request = Y.io(uri);
-                }
-            );
-        }
+        jQuery.ajax({
+            url: uri,
+            context: this,
+            success: function(d, s, xhr) {
+                this.data = xhr.responseXML;
+                this.loadEntriesFromXML();
+            }
+        });
 
     }
     
-    this.loadEntriesFromXML = function(isYui) {
-       if (!isYui) {
-           this.data = Sarissa.fixFirefox3Permissions(this.data);
-       }
+    this.loadEntriesFromXML = function() {
        var entry = this.data.documentElement.firstChild.firstChild;
         
         this.results.removeAllEntries();
@@ -149,21 +137,6 @@ function dbforms2_liveselect() {
         
     }
     
-    this._sarissaOnLoadCallback = function() {
-        if(this.data.readyState == 4 && !this.dataLoaded && this.data.documentElement) {
-            this.dataLoaded = true;
-            this.loadEntriesFromXML();
-        }
-    }
-    
-    this._YUIOnLoadCallback = function(a,xhr,options) {
-        if(xhr.readyState == 4 && !this.dataLoaded && xhr.responseXML && xhr.responseXML.documentElement) {
-            this.dataLoaded = true;
-            this.data = xhr.responseXML;
-            this.loadEntriesFromXML(true);
-        }
-    }
-
     this.onChoose = function(entry) {
         this.results.hide();
         this.currentEntry = entry;
