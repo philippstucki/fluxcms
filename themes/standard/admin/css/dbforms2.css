@@ -130,7 +130,7 @@ td.formInput {
 
 .liveselect input {
     border: 1px solid #333;
-    background: #fff url('/themes/standard/admin/images/dbforms2/liveselect_arrowd.gif') no-repeat scroll top right;
+    background: #fff url('/themes/standard/admin/images/dbforms2/liveselect_arrowd.png') no-repeat scroll top right;
     margin: 0px;
     padding: 0px;
     z-index: 0;
