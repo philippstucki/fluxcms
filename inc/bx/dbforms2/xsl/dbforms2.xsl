@@ -30,16 +30,19 @@
     <xsl:template match="/">
         <html>
             <head>
+                <link href="{$webroot}webinc/js/jquery-ui/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" media="screen" type="text/css"/>
                 <link href="{$webroot}themes/standard/admin/css/dbforms2.css" rel="stylesheet" media="screen" type="text/css"/>
 
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.4.js'"/></xsl:call-template>
 
-                <!-- JS -->
+                <!-- YUI JS -->
                 <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js&amp;3.0.0/build/oop/oop-min.js&amp;3.0.0/build/event-custom/event-custom-base-min.js&amp;3.0.0/build/io/io-base-min.js">
                 </script>
 
-
-
+                <!-- jquery, jquery ui -->
+                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.1.min.js'"/></xsl:call-template>
+                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery-ui/jquery-ui-1.7.2.custom.min.js'"/></xsl:call-template>
+                
                 <xsl:if test="/form/fields//textarea[@type='text_wysiwyg']">
                     <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/fck/fckeditor.js'"/></xsl:call-template>
                     <script type="text/javascript">
@@ -47,16 +50,6 @@
                     </script>
                 </xsl:if>
 
-                <xsl:if test="/form/fields//input[@type='date']">
-                    <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/CalendarPopup.js'"/></xsl:call-template>
-                    <script type="text/javascript">
-                        document.write(getCalendarStyles());
-                        var cal = new CalendarPopup('caldiv');
-                        cal.showYearNavigation();
-                        cal.setWeekStartDay(1);
-                    </script>
-                </xsl:if>
-                
                 <xsl:if test="/form/fields//input[@type='color']">
                     <script type="text/javascript">
                         colorPicker_spacerImage = "<xsl:value-of select="$webroot"/>webinc/js/spacer.gif";

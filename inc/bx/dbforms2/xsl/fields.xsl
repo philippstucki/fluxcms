@@ -127,9 +127,6 @@
                     <xsl:apply-templates select="@*[name() != 'descr']" mode="xhtml"/>
                     <xsl:apply-templates mode="xhtml"/>
                 </input>
-                <xsl:text> </xsl:text>
-                <input type="button" value="..." onclick="dbforms2_common.openCalendarPopup(dbforms2_globalObj['{@id}'],'{@id}');return false;" name="anchor_{@id}" id="anchor_{@id}"/>
-                <div id="caldiv" style="z-index: {1000-position()} !important; position:absolute; visibility:hidden; background-color:white; layer-background-color:white;"></div>
             </td>
         </tr>
     </xsl:template>
