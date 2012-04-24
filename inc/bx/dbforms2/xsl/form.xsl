@@ -94,12 +94,21 @@
     
     <xsl:template match="form" mode="jsconfig">
     
+        <xsl:variable name="isSubform" select="local-name(parent::node())='fields'"/>
+    
         <xsl:variable name="baseURI">
             <xsl:choose>
-                <xsl:when test="local-name(parent::node()) = 'fields'"><xsl:value-of select="concat($webroot,'admin/dbforms2/',../../@name,'/subform/',@name)"/></xsl:when>
+                <xsl:when test="$isSubform"><xsl:value-of select="concat($webroot,'admin/dbforms2/',../../@name,'/subform/',@name)"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="concat($webroot,'admin/dbforms2/',@name)"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+
+        <xsl:if test="$isSubform">
+        // save current form to the stack
+        _configStack.push(formConfig);
+        var formConfig = new Array();
+        formConfig['fields'] = new Array();
+        </xsl:if>
         
         formConfig['name']                  = '<xsl:value-of select="@name"/>';
         formConfig['dataURI']               = '<xsl:value-of select="concat($baseURI,'/data')"/>';
@@ -113,58 +122,52 @@
         
         formConfig['thisidfield']           = '<xsl:value-of select="php:functionString('addslashes', @thisidfield)"/>';
         formConfig['thatidfield']           = '<xsl:value-of select="php:functionString('addslashes', @thatidfield)"/>';
-        <xsl:for-each select="fields/*">
-            <xsl:choose>
-            
-                <xsl:when test="local-name() = 'group'">
-                    var group = new Array();
-                    group['fields'] = new Array();
-                    group['isGroup'] = true;
-                    group['type'] = '<xsl:value-of select="@type"/>';
-                    <xsl:for-each select="fields/*[local-name() != 'nofield']">
-                        <xsl:apply-templates select="." mode="jsconfig"/>
-                        group['fields']['<xsl:value-of select="@name"/>'] = field;
-                    </xsl:for-each>
-                    formConfig['fields']['<xsl:value-of select="@name"/>'] = group;
-                </xsl:when>
-                
-                <xsl:when test="local-name() = 'nofield'">
-                </xsl:when>
-                
-                <xsl:when test="local-name() = 'form'">
-                    // save current form to the stack
-                    _configStack.push(formConfig);
-                    var formConfig = new Array();
-                    formConfig['fields'] = new Array();
 
-                    <xsl:apply-templates select="." mode="jsconfig"/>
-
-                    // pop the old form back and save the child form 
-                    var form = new Array();
-                    form['type'] = 'form';
-                    form['isForm'] = true;
-                    form['config'] = formConfig;
-                    
-                    formConfig = _configStack.pop();
-                    formConfig['fields']['<xsl:value-of select="@name"/>'] = form;
-                    
-                </xsl:when>
-                
-                <xsl:otherwise>
-                    var field = new Array();
-                    field['type'] ='<xsl:value-of select="@type"/>';
-                    field['default'] ='<xsl:value-of select="php:functionString('addslashes', default)"/>';
-                    <xsl:if test="@linktothat">
-                        field['linktothat'] ='<xsl:value-of select="php:functionString('addslashes', @linktothat)"/>';
-                    </xsl:if>
-                    field['disabled'] = '<xsl:value-of select="@disabled"/>';
-                    formConfig['fields']['<xsl:value-of select="@name"/>'] = field;
-                    
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+        <xsl:apply-templates select="fields/*" mode="jsconfig"/>
         
+        <xsl:if test="$isSubform">
+        // pop the old form back and save the child form 
+        var form = new Array();
+        form['type'] = 'form';
+        form['isForm'] = true;
+        form['config'] = formConfig;
+        formConfig = _configStack.pop();
+        formConfig['fields']['<xsl:value-of select="@name"/>'] = form;
+        </xsl:if>
+
+    </xsl:template>
+        
+
+    <xsl:template match="section" mode="jsconfig">
+        <xsl:text>// section </xsl:text><xsl:value-of select="@name"/>
+        <xsl:apply-templates select="fields/*" mode="jsconfig"/>
+    </xsl:template>
+        
+    <xsl:template match="nofield" mode="jsconfig">
+        <xsl:text>// nofield</xsl:text>
+    </xsl:template>
+        
+    <xsl:template match="group" mode="jsconfig">
+        var group = new Array();
+        group['fields'] = new Array();
+        group['isGroup'] = true;
+        group['type'] = '<xsl:value-of select="@type"/>';
+        <xsl:for-each select="fields/*[local-name() != 'nofield']">
+            <xsl:apply-templates select="." mode="jsconfig"/>
+            group['fields']['<xsl:value-of select="@name"/>'] = field;
+        </xsl:for-each>
+        formConfig['fields']['<xsl:value-of select="@name"/>'] = group;
     </xsl:template>
     
+    <xsl:template match="*" mode="jsconfig">
+        var field = new Array();
+        field['type'] ='<xsl:value-of select="@type"/>';
+        field['default'] ='<xsl:value-of select="php:functionString('addslashes', default)"/>';
+        <xsl:if test="@linktothat">
+            field['linktothat'] ='<xsl:value-of select="php:functionString('addslashes', @linktothat)"/>';
+        </xsl:if>
+        field['disabled'] = '<xsl:value-of select="@disabled"/>';
+        formConfig['fields']['<xsl:value-of select="@name"/>'] = field;
+    </xsl:template>
 
 </xsl:stylesheet>
