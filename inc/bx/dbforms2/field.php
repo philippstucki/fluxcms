@@ -248,11 +248,11 @@ class bx_dbforms2_field {
      */
     protected function getStandardXMLAttributes() {
         
-        if(!isset($this->attributes['descr']))
+        if(!isset($this->attributes['descr'])) {
             $this->attributes['descr'] = $this->name;
-            
+        }
         
-        $ret =  array(
+        $ret = array(
             'type' => $this->type,
             'name' => $this->name,
             'descr' => $this->attributes['descr'],
