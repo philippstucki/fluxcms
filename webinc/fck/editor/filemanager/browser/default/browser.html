@@ -77,6 +77,7 @@ var oConnector = new Object() ;
 oConnector.CurrentFolder	= '/' ;
 
 var sConnUrl = GetUrlParam( 'Connector' ) ;
+oConnector.rootPath = GetUrlParam( 'RootPath' ) 
 
 // Gecko has some problems when using relative URLs (not starting with slash).
 if ( sConnUrl.substr(0,1) != '/' && sConnUrl.indexOf( '://' ) < 0 )
