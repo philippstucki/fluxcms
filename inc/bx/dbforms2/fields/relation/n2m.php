@@ -156,47 +156,6 @@ class bx_dbforms2_fields_relation_n2m extends bx_dbforms2_field {
         }
     }
     
-    /**
-     *  DOCUMENT_ME
-     *
-     *  @param  type  $var descr
-     *  @access public
-     *  @return type descr
-     */
-    protected function __updateInsertQuery($id) {
-        $tablePrefix = $GLOBALS['POOL']->config->getTablePrefix();
-        $db = $GLOBALS['POOL']->dbwrite;
-        $ids = array_keys($this->value);
-
-        //delete not choosen ids
-        if (count($ids) > 0) {
-            $query = 'delete from '.$tablePrefix.$this->attributes['relationtable'] .' where ' . $this->attributes['thisidfield'] .' = '. $db->quote($id) . ' and not( ' . $this->attributes['thatidfield'] .' in (\''.implode("','",$ids).'\'))';
-            $res = $db->query($query);
-
-            //get old categories
-            $query = 'select ' . $this->attributes['thatidfield'] .' from '.$tablePrefix.$this->attributes['relationtable'].' where ' . $this->attributes['thisidfield'] .' = '. $id .' and ( ' . $this->attributes['thatidfield'] .' in (\''.implode("','",$ids).'\'))';
-            
-            $res = $db->query($query);
-            $oldids = $res->fetchCol();
-
-        } else {
-            $query = "delete from ".$tablePrefix.$this->attributes['relationtable'] .' where '. $this->attributes['thisidfield'] . ' = '. $db->quote($id) ;
-            $res = $db->query($query);
-            $oldids = array();
-        }
-
-        // add new categories
-        foreach ($ids as $value) {
-            if (!(in_array($value,$oldids))) {
-                $seqid = $db->nextID($GLOBALS['POOL']->config->getTablePrefix()."_sequences");
-                $query = 'insert into '.$tablePrefix.$this->attributes['relationtable']  .'(id, '. $this->attributes['thisidfield'] . ' , '. $this->attributes['thatidfield'] . " ) VALUES ($seqid,".$db->quote( $id).", ".$db->quote($value).")";
-                $res = $GLOBALS['POOL']->db->query($query);
-            }
-        }
-        
-        return null;     
-    }
-    
     protected function getXMLAttributes() {
         if (empty($this->attributes['linktothat'])) {
                return array('linktothat' => "");
