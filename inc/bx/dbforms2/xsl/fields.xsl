@@ -98,10 +98,8 @@
                 <div class="liveselectcontainer" style="z-index: {1000-position()} !important;">
                     <div class="liveselect">
                         <input type="text" id="{@name}_lsqueryfield" size="40"/>
-                        <div class="liveselectResultsShadow">
-                            <div class="liveselectResults" id="{@name}_lsresults">
-                                <ul></ul>
-                            </div>
+                        <div class="liveselectResults" id="{@name}_lsresults">
+                            <ul></ul>
                         </div>
                     </div>
                 </div>

@@ -395,8 +395,9 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
     }
     
     this.e_onMouseUpImage = function(event) {
-        //this.DOMNode.focus();
         if(this.chooser.results.hidden) {
+            this.hasFocus = true;
+            this.sendCurrentQuery();
             this.chooser.results.show();
         } else {
             this.chooser.results.hide();

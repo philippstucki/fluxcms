@@ -92,7 +92,7 @@ dbforms2.init = function(formConfig) {
     this.chooser.enablePager = true;
 
     this.chooser.dataURI = formConfig['chooserDataURI'];
-    this.chooser.init(document.getElementById('chooserQueryField'), document.getElementById('chooserResults'), document.getElementById('chooserImg'), document.getElementById('chooserPagerDisplay'));
+    this.chooser.init(document.getElementById('chooserQueryField'), document.getElementById('chooserResults'), null, document.getElementById('chooserPagerDisplay'));
 
     // we're ready to go now.
     this.mainform.toolbar.unlockButton('save');

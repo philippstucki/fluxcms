@@ -118,12 +118,9 @@
                         <div style="position:absolute; top:3px; left: 350px">
                             <div class="liveselect">
                                 <input type="text" id="chooserQueryField" size="40" accesskey="c"/>
-                                <img id="chooserImg" src="{$webroot}themes/standard/admin/images/dbforms2/liveselect_arrowd.gif" border="0"/>
-                                <div class="liveselectResultsShadow">
-                                    <div class="liveselectResults" id="chooserResults">
-                                        <ul><li>Loading...</li></ul>
-                                        <div id="chooserPagerDisplay" class="liveselectPager">...</div>
-                                    </div>
+                                <div class="liveselectResults" id="chooserResults">
+                                    <ul><li>Loading...</li></ul>
+                                    <div id="chooserPagerDisplay" class="liveselectPager">...</div>
                                 </div>
                             </div>
                         </div>

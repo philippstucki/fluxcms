@@ -130,7 +130,7 @@ td.formInput {
 
 .liveselect input {
     border: 1px solid #333;
-    background-color: #fff;
+    background: #fff url('/themes/standard/admin/images/dbforms2/liveselect_arrowd.gif') no-repeat scroll top right;
     margin: 0px;
     padding: 0px;
     z-index: 0;
@@ -140,14 +140,13 @@ td.formInput {
 
 .liveselectResults {
     position: relative;
-    bottom: 3px;
-    right: 3px;
     margin: 0px;
     display: none;
     border: 1px solid #333;
+    border-top: 0px;
     padding: 1px;
     background-color: #fff;
-    width: 420px;
+    width: 403px;
     z-index: 2000;
     cursor: pointer;
     max-height: 500px;
