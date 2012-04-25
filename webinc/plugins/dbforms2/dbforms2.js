@@ -92,16 +92,6 @@ dbforms2.init = function(formConfig) {
     this.mainform.toolbar.unlockButton('new');
     dbforms2.statusText('Ready.');
     
-    if (window.console && window.console.firebug ) {
-        var mozillaRvMinorVersion = navigator.userAgent.match(/rv:1.([[0-9a-z\.]*)/)[1];
-        // 9 = 1.9 = Firefox 3.0
-        // Firefox 3.6 has Version 9.2 = 1.9.2
-        // Firefox 3.1 has Version 9.1 = 1.9.1
-        // Firefox 2.0 has Version 8
-        if (parseFloat(mozillaRvMinorVersion) == 9) {
-            dbforms2.statusText('There are known issues with Firefox 3.0 and Firebug. Please disable it!', true);
-        }
-    }
     dbforms2_log.log('dbforms2 initialized');
 }
 

@@ -33,7 +33,7 @@
                 <link href="{$webroot}webinc/js/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet" media="screen" type="text/css"/>
                 <link href="{$webroot}themes/standard/admin/css/dbforms2.css" rel="stylesheet" media="screen" type="text/css"/>
 
-                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.4.js'"/></xsl:call-template>
+                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.5.js'"/></xsl:call-template>
 
                 <!-- jquery, jquery ui -->
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.2.min.js'"/></xsl:call-template>
