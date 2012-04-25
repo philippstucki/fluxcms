@@ -234,7 +234,7 @@ td.formInput {
     font-size : 10px;
 }
 
-.n2mvalues , ó {
+.n2mvalues {
     margin-top: 10px;
     padding-left: 0;
     min-height: 10px;
@@ -245,7 +245,7 @@ td.formInput {
     padding: 3px 0px 2px 0px;
     margin-bottom: 2px;
     border: 1px solid #ddd;
-    width: 30%;
+    width: 60%;
     background-color: #fff;
     line-height: 16px;
     cursor: pointer;
