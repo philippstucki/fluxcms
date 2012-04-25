@@ -412,7 +412,6 @@ function dbforms2_form() {
         for (fieldID in this.fields) {
             field = this.getFieldByID(fieldID);
             value = field.getValue();
-            console.log( fieldID + ':' + value );
             this.formData.setValueByFieldID(fieldID, value);
         }
         // set current id
