@@ -45,10 +45,13 @@ class bx_dynimage_filters_gd_megacrop extends bx_dynimage_filters_gd {
         return isset($this->parameters['clipping']) && $this->parameters['clipping'] == '1' ? TRUE : FALSE;
     }
     
+    protected function isAutorotateSet() {
+        return isset($this->parameters['autorotate']) && $this->parameters['autorotate'] == '1' ? TRUE : FALSE;
+    }
+
     public function start($imgIn) {
         
         $imgOut = imagecreatetruecolor($this->imageEndSize['w'], $this->imageEndSize['h']);
-
         
         // create image background if needed
         if(!$this->isClippingSet() && !empty($this->parameters['background-color'])) {
@@ -63,7 +66,18 @@ class bx_dynimage_filters_gd_megacrop extends bx_dynimage_filters_gd {
             
             imagefilledrectangle($imgOut, 0, 0, $this->imageEndSize['w'], $this->imageEndSize['h'], $bgColor);
         }
-        
+
+        $oProp = $this->imageOriginalSize['w']/$this->imageOriginalSize['h'];
+        $eProp = $this->imageEndSize['w']/$this->imageEndSize['h'];
+
+        if ($this->isAutorotateSet() && (($oProp <= 1 && $eProp >= 1) || $oProp >= 1 && $eProp <= 1)) {
+            $imgIn = imagerotate($imgIn, -90, 0);
+            $this->imageOriginalSize['w'] = imagesx($imgIn);
+            $this->imageOriginalSize['h'] = imagesy($imgIn);
+            $oProp = $this->imageOriginalSize['w']/$this->imageOriginalSize['h'];
+            $eProp = $this->imageEndSize['w']/$this->imageEndSize['h'];
+        }
+
         $srcWidth = $this->imageOriginalSize['w'];
         $srcHeight = $this->imageOriginalSize['h'];
         
@@ -76,8 +90,6 @@ class bx_dynimage_filters_gd_megacrop extends bx_dynimage_filters_gd {
         $endX = 0;
         $endY = 0;
         
-        $oProp = $this->imageOriginalSize['w']/$this->imageOriginalSize['h'];
-        $eProp = $this->imageEndSize['w']/$this->imageEndSize['h'];
         
         // p => ls (or p => p or ls => ls)
         if(
