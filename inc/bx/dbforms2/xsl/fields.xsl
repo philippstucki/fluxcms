@@ -100,6 +100,7 @@
                         <input type="text" id="{@name}_lsqueryfield" size="40"/>
                         <div class="liveselectResults" id="{@name}_lsresults">
                             <ul></ul>
+                            <div id="{@name}_lspager" class="liveselectPager"></div>
                         </div>
                     </div>
                 </div>

@@ -404,10 +404,16 @@ function dbforms2_field_relation_n2m(DOMNode) {
         this.liveSelect = new dbforms2_liveselect();
         
         // init live select
+        this.liveSelect.enablePager = true;
         this.liveSelect.onChooseAction = cf_onLiveChoose.execute;
         this.liveSelect.dataURI = dbforms2.liveSelectRootURI + '/' + this.id;
         this.liveSelect.autoExpandResultsOnFocus = false;
-        this.liveSelect.init(document.getElementById(this.id + '_lsqueryfield'), document.getElementById(this.id + '_lsresults'));
+        this.liveSelect.init(
+            document.getElementById(this.id + '_lsqueryfield') ,
+            document.getElementById(this.id + '_lsresults') ,
+            null ,
+            document.getElementById(this.id + '_lspager') 
+        );
         
     }
 	
