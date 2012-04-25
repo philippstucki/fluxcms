@@ -15,7 +15,7 @@ function dbforms2_formData() {
         for(valueName in this.values) {
             value = this.values[valueName];
 			
-			if (typeof value == "object" ) {
+			if ( value !== null && typeof value == "object" ) {
 				if (value.constructor == Array) {
 					var valueTN = xml.createElement("values");
 					for (var i in value) {
