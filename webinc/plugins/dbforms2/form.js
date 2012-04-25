@@ -103,6 +103,9 @@ function dbforms2_form() {
 		if (fieldConfig['linktothat']) {
 			field.linktothat = fieldConfig['linktothat'];
 		}
+		if (typeof fieldConfig['multiple'] !== 'undefined') {
+			field.multiple = fieldConfig['multiple'];
+		}
         field.disabled = fieldConfig['disabled'] ? true : false;
         
         _registerObj(fieldNode.id, field);

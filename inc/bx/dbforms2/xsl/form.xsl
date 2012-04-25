@@ -196,6 +196,9 @@
         <xsl:if test="@linktothat">
             field['linktothat'] ='<xsl:value-of select="php:functionString('addslashes', @linktothat)"/>';
         </xsl:if>
+        <xsl:if test="@multiple='multiple'">
+            field['multiple'] =true;
+        </xsl:if>
         field['disabled'] = '<xsl:value-of select="@disabled"/>';
         formConfig['fields']['<xsl:value-of select="@name"/>'] = field;
     </xsl:template>

@@ -274,7 +274,6 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
     }
     
     this.eFCK_OnAfterSetHTML = function(einstance) {
-        //console.log('OnAfterSetHTML');
         if(this.valueSet) {
             this.resetChanged();
             this.valueSet = false;
@@ -346,6 +345,34 @@ dbforms2_field_text_area_small.prototype = new dbforms2_field();
  *
  */
 function dbforms2_field_select(DOMNode) {
+
+    this.init = function(DOMNode) {
+		this.initField(DOMNode);
+    };
+
+    this.getValue = function() {
+        var nodeValue = jQuery(this.DOMNode).val();
+
+        if (nodeValue !== null && typeof nodeValue === 'object') {
+            value = '';
+            for (var i=0; i<nodeValue.length; i++) {
+                value = value + nodeValue[i] + ',';
+            }
+            value = value.substring(0, value.length - 1);
+        } else {
+            value = nodeValue;
+        }
+        return value;
+    }
+
+    this.setValue = function(value) {
+        this.value = value;
+        if (this.multiple === true) {
+            jQuery(this.DOMNode).val(value.split(','));
+        } else {
+            this.updateDOMNodeValue();
+        }
+    }
 }
 dbforms2_field_select.prototype = new dbforms2_field();
 

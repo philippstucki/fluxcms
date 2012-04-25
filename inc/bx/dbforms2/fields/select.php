@@ -29,12 +29,29 @@ class bx_dbforms2_fields_select extends bx_dbforms2_field {
         
         $this->type = 'select';
         $this->XMLName = 'select';
+
+        $this->attributes['multiple'] = false;
+        $this->attributes['size'] = 10;
     }
     
+    public function getConfigAttributes() {
+        $ret =  parent::getConfigAttributes();
+        $ret['multiple'] = 'boolean';
+        $ret['size'] = 'int';
+        return $ret;
+    }
+
+    protected function getXMLAttributes() {
+        $r = array();
+        if ($this->attributes['multiple'] === true) {
+            $r['multiple'] = 'multiple';
+            $r['size'] = $this->attributes['size'];
+        }
+        return $r;
+    }
+
     public function hasConfigValues() {
         return TRUE;
     }
     
 }
-
-?>
