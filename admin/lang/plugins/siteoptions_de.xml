@@ -14,7 +14,7 @@
     <message key="ICBM">ICMB</message>
     <message key="outputLanguages">Ausgabe-Sprache</message>
     <message key="defaultLanguage">Standard-Sprache</message>
-    <message key="detectBrowserLanguage">Browser-Sprach erkennen</message>
+    <message key="detectBrowserLanguage">Browser-Sprache erkennen</message>
     <message key="image_allowed_sizes">Erlaubte Bildgrössen</message>
     <!--message key="Resource /dgdfg.en.xhtml"></message-->
     <!-- siteoptions helps-->
