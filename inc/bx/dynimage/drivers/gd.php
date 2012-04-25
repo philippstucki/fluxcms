@@ -22,7 +22,7 @@
  * @category 
  * @author Liip AG      <contact@liip.ch>
  */
-class bx_dynimage_drivers_gd {
+class bx_dynimage_drivers_gd extends bx_dynimage_driver {
     
     public $name = 'gd';
     protected $supportedImgTypes = array(
@@ -48,7 +48,7 @@ class bx_dynimage_drivers_gd {
     public function saveImage($image, $filename, $imgType) {
         switch($imgType) {
             case IMAGETYPE_JPEG:
-                return imagejpeg($image, $filename, 90);
+                return imagejpeg($image, $filename, (int) $this->parameters['quality']);
             case IMAGETYPE_PNG:
                 return imagepng($image, $filename);
             case IMAGETYPE_GIF:

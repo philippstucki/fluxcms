@@ -24,5 +24,9 @@
  */
 class bx_dynimage_driver {
 
+    public $parameters = array(
+        'quality' => 90,
+    );
+
 }
 

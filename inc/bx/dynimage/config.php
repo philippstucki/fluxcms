@@ -73,6 +73,7 @@ class bx_dynimage_config {
             if($this->checkDriver($driver)) {
                 $class = "bx_dynimage_drivers_$driver";
                 $this->driver = new $class();
+                $this->driver->parameters = array_merge($this->driver->parameters, $this->getDriverParameters());
             }
         }
         
@@ -103,15 +104,24 @@ class bx_dynimage_config {
             $fName = $fN->getAttribute('type');
             $class = 'bx_dynimage_filters_'.$driver.'_'.$fName;
             $filter = new $class();
-            $filterParameters = $this->getFilterParameters($fN);
+            $filterParameters = $this->getNodeParameters($fN);
             $filter->setParameters($filterParameters);
             $filters[] = $filter;
             
         }
         return $filters;
     }
+
+    public function getDriverParameters() {
+        $ns = $this->xpath->query("/config/pipelines/pipeline[@name='".$this->pipeline."']/driver");
+        if($ns->length > 0) {
+            return $this->getNodeParameters($ns->item(0));
+        } else {
+            return array();
+        }
+    }
     
-    protected function getFilterParameters($node) {
+    protected function getNodeParameters($node) {
         $parameters = array();
         $pNS = $this->xpath->query("parameter", $node);
         $dynamicParameters = bx_dynimage_request::getParametersByRequest($this->request);
