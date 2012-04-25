@@ -55,7 +55,7 @@
                     </xsl:choose>
                 </xsl:attribute>
             
-                <form name="dbforms2_{@name}">
+                <form name="dbforms2_{@name}" onsubmit="return false;">
                     <!-- apply all hidden fields -->
                     <xsl:apply-templates select="fields/input[@type='hidden']" mode="hidden"/>
     

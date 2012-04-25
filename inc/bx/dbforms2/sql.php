@@ -45,8 +45,7 @@ class bx_dbforms2_sql {
                     if ($field->getAttribute('nosql')==false) {
                         $name = $field->getSQLName();
                         if ($name) {
-                            //$fields[] = $db->quoteIdentifier($name);
-                            $fields[] = $name;
+                            $fields[] = $db->quoteIdentifier($name);
                         }
                     }
                 }
