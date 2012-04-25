@@ -367,7 +367,7 @@ function dbforms2_field_select(DOMNode) {
 
     this.setValue = function(value) {
         this.value = value;
-        if (this.multiple === true) {
+        if (value !== null && typeof value === 'string' && this.multiple === true) {
             jQuery(this.DOMNode).val(value.split(','));
         } else {
             this.updateDOMNodeValue();
