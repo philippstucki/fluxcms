@@ -359,8 +359,8 @@ function dbforms2_field_date(DOMNode) {
     this.init = function(DOMNode) {
         this.initField(DOMNode);
         jQuery(DOMNode).datepicker({
-            duration: '',
-            yearRange: '-30:30',
+            duration: 'fast',
+            yearRange: '-30:+30',
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true            
