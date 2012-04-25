@@ -87,8 +87,12 @@ class popoon_components_actions_bxcms extends popoon_components_action {
             }
 
             $mo = (strpos($fulluri, '/mo/') === 0);
+
             if ($GLOBALS['POOL']->config->mobileMode == 'true') {
-                if ($mo || (isset($_COOKIE['isMobile']) && $_COOKIE['isMobile'] == "true")) {
+                if ($mo ||
+                    (isset($_COOKIE['isMobile']) && $_COOKIE['isMobile'] == "true")
+                    || popoon_classes_browser::isMobile())
+                {
                     if (isset($_GET['isMobile']) && $_GET['isMobile'] == "false") {
                         setcookie("isMobile", false, 0, "/");
                     } else {
