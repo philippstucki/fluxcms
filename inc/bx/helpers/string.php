@@ -184,6 +184,7 @@ class bx_helpers_string {
         $newValue = preg_replace("/[ùú]/u", "u", $newValue);
         $newValue = preg_replace("/[òó]/u", "o", $newValue);
         $newValue = preg_replace("/[ß]/u", "ss", $newValue);
+        $newValue = preg_replace("/[ç]/u", "c", $newValue);
 
         $newValue = preg_replace("/[\n\r]+/u", "", $newValue);
 
