@@ -75,7 +75,13 @@ class bx_dbforms2_datasource_sql {
         if(MDB2::isError($res)) {
             return array();
         }
+        
         $result = array();
+        
+        if( isset($args['addEmpty'] ) ) {
+            $result[0] = "None";
+        }
+
         while ($row = $res->fetchRow()) {
                $result[$row[0]] = $row[1];
         }
@@ -86,4 +92,3 @@ class bx_dbforms2_datasource_sql {
     
 }
 
-?>
