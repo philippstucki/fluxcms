@@ -290,6 +290,7 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
     this.e_focus = function() {
         this.hasFocus = true;
         this.hideCurrentEntry();
+        this.sendCurrentQuery();
         if(this.chooser.autoExpandResultsOnFocus) {
             this.chooser.results.show();
         }
@@ -387,11 +388,15 @@ function dbforms2_liveselect_queryfield(DOMNode, chooser) {
         event.preventDefault();
     }
     
+    this.sendCurrentQuery = function() {
+        this.chooser.currentPage = 0;
+        this.chooser.query(this.currentQuery);
+    }
+    
     this._onKeyUpTimeout = function() {
         if(this.currentQuery != this.DOMNode.value) {
             this.currentQuery = this.DOMNode.value
-            this.chooser.currentPage = 0;
-            this.chooser.query(this.currentQuery);
+            this.sendCurrentQuery();
         }
     }
     
