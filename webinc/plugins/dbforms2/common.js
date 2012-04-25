@@ -39,7 +39,8 @@ dbforms2_common.openFileBrowser = function(field) {
     
     SetUrl = function(url) {
         if(dbforms2_fBrowserField != null) {
-            dbforms2_fBrowserField.setUrl(url);
+            var decodedUrl = decodeURI( url.replace('%23','#') );
+            dbforms2_fBrowserField.setUrl( decodedUrl );
             dbforms2_fBrowserLastLocation = url;
         }
         dbforms2_fBrowserField = null;
