@@ -130,7 +130,7 @@ class bx_dbforms2_liveselect {
         
         $table = $this->tablePrefix.$this->tableName;
         
-        $whereFields = explode(',', $this->whereFields);
+        $whereFields = explode(' , ', $this->whereFields);
         $where = '(0 ';
         foreach($whereFields as $field) {
             $where.= "OR $field like '%$q%' ";
