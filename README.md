@@ -35,4 +35,4 @@ which are not fully backwards compatible to existing forms.
 - Replaced YUI with jQuery
 
 # List of Other New Features
-- **dynimage**: new filter _megacrop_ featuring auto crop, auto center, auto rotation and more
+- **dynimage**: new filter _megacrop_ featuring auto crop, auto center, auto rotation and more s. [the source](blob/master/inc/bx/dynimage/filters/gd/megacrop.php) for more information.
