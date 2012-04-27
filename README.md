@@ -21,7 +21,7 @@ First clone the git repository, cd into the repository, then do the following:
 
 Then launch the installer located at /install.
 
-# Braking Changes in DBForms2
+# Breaking Changes in DBForms2
 
 The dbforms2 part of this fork has been notably extended and introduces changes
 which are not fully backwards compatible to existing forms.
