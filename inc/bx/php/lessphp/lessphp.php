@@ -18,7 +18,12 @@ if (
     include('lessc.inc.php');
     $less = new lessc($absCssFilename);
     try {
-        $output = $less->parse();
+        $output = $less->parse(
+            null,
+            array(
+                'fluxcms-themeRoot' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'",
+            )
+        );
         file_put_contents($cacheFilename, $output);
     } catch (exception $e) {
         echo $e->getMessage();
