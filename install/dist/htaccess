@@ -37,6 +37,9 @@ RewriteEngine On
 #RewriteCond  %{REQUEST_URI} !^/*##DIR##admin/
 #RewriteRule ^(.*\.(css|js))$ /inc/minify/minify.php?files=$1 [L,NC]
 
+# lessphp filter
+RewriteCond %{REQUEST_URI} !^/*##DIR##admin/
+RewriteRule ^/*lessphp/[^/]+/(.*)$ ./inc/bx/php/lessphp/lessphp.php?input=$1 [L]
 
 RewriteCond     %{REQUEST_URI}  !^/*##DIR##themes/standard/.*
 RewriteRule ^/*themes/admin/(.+)$ ./themes/standard/admin/$1 [L]
