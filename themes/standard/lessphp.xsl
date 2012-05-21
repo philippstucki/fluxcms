@@ -12,7 +12,7 @@
         <xsl:param name="lessFile" select="''"/>
         <xsl:variable name="targetFile" select="concat('themes/',$theme,'/',$lessFile)"/>
         <xsl:attribute name="href">
-            <xsl:value-of select="concat($webroot, 'lessphp/',php:functionString('bx_helpers_lessphp::getFileVersion', $targetFile), '/', $targetFile)"/>
+            <xsl:value-of select="concat($webroot, $targetFile, '?', php:functionString('bx_helpers_lessphp::getFileVersion', $targetFile))"/>
         </xsl:attribute>
     </xsl:template>
 

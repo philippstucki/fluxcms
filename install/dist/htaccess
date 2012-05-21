@@ -39,8 +39,7 @@ RewriteEngine On
 
 # lessphp filter
 RewriteCond %{REQUEST_URI} !^/*##DIR##admin/
-RewriteRule ^/*lessphp/[^/]+/(.*)$ ./inc/bx/php/lessphp/lessphp.php?input=$1 [L]
-RewriteRule ^/*##DIR##themes/.*less$ - [F]
+RewriteRule ^/*##DIR##(themes/.*/[^.]+.less)$ ./inc/bx/php/lessphp/lessphp.php?input=$1 [L]
 
 RewriteCond     %{REQUEST_URI}  !^/*##DIR##themes/standard/.*
 RewriteRule ^/*themes/admin/(.+)$ ./themes/standard/admin/$1 [L]
