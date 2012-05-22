@@ -21,6 +21,7 @@ class popoon_pool {
     static $instance = null;
 
     private $configclass;
+    private $customDb = array();
 
     /**
      * DB read handler
@@ -73,6 +74,30 @@ class popoon_pool {
         unset($this->db);
         unset($this->dbwrite);
         unset($this->config);
+    }
+
+    public function getDb($dsnName) {
+
+        if (isset($this->customDb[$dsnName])) {
+            return $this->customDb[$dsnName];
+        }
+
+        require_once ("MDB2.php");
+
+        if (! isset($this->config->dboptions)) {
+            $this->config->dboptions = NULL;
+        }
+
+        $db = @MDB2::connect($this->config->{$dsnName}, $this->config->dboptions);
+        if (isset($this->config->portabilityoptions)) {
+            $db->options['portability'] = $this->config->portabilityoptions;
+        }
+        if (@MDB2::isError($db)) {
+            throw new PopoonDBException($db);
+        }
+        $this->checkForMysqlUtf8($this->config->dsn, $this->db);
+        $this->customDb[$dsnName] = $db;
+        return $db;
     }
 
     public function __get($name) {
