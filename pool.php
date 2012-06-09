@@ -95,7 +95,7 @@ class popoon_pool {
         if (@MDB2::isError($db)) {
             throw new PopoonDBException($db);
         }
-        $this->checkForMysqlUtf8($this->config->dsn, $this->db);
+        $this->checkForMysqlUtf8($this->config->{$dsnName}, $db);
         $this->customDb[$dsnName] = $db;
         return $db;
     }
