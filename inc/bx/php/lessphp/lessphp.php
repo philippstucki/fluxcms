@@ -3,6 +3,9 @@
 include_once("../../../../inc/bx/init.php");
 bx_init::start('./conf/config.xml', '../../../../');
 
+$conf = bx_config::getInstance();
+$confvars = $conf->getConfProperty('permm');
+$permObj = bx_permm::getInstance($confvars);
 
 $relCssFilename = $_GET['input'];
 $absCssFilename = BX_PROJECT_DIR.$relCssFilename;
@@ -12,6 +15,7 @@ if (
     is_readable($cacheFilename)
     && is_readable($absCssFilename)
     && filemtime($absCssFilename) < filemtime($cacheFilename)
+    && !$permObj->isAllowed('/', array('admin'))
 ) {
     $output = file_get_contents($cacheFilename);
 } else {
