@@ -41,6 +41,10 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI} !^/*##DIR##admin/
 RewriteRule ^/*##DIR##(themes/.*/[^.]+.less)$ ./inc/bx/php/lessphp/lessphp.php?input=$1 [L]
 
+# jsmin filter
+RewriteCond  %{REQUEST_URI}  ^/*/jsmin/.*
+RewriteRule ^(.*)$ ./inc/bx/php/jsmin/jsmindir.php [L]
+
 RewriteCond     %{REQUEST_URI}  !^/*##DIR##themes/standard/.*
 RewriteRule ^/*themes/admin/(.+)$ ./themes/standard/admin/$1 [L]
 
