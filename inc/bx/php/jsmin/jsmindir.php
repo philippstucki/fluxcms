@@ -2,12 +2,14 @@
 
 include_once("../../init.php");
 bx_init::start('./conf/config.xml', '../../../../');
+$conf = bx_config::getInstance();
 
-define('MINIFY', true);
 define('BX_JS_DIR', BX_THEMES_DIR.$GLOBALS['POOL']->config->theme.'/js/');
 define('FILE_SEPARATOR', "\n\n");
 
-if(MINIFY) {
+$doMinify = $conf->environment === 'dev' ? false : true;
+
+if($doMinify) {
     include('jsmin.php');
 }
 
@@ -25,7 +27,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(BX_JS_DIR.
 ksort($items);
 
 foreach ($items as $item) {
-    if(MINIFY && substr($item->getFileName(), -7, -3) !== '.min') {
+    if($doMinify && substr($item->getFileName(), -7, -3) !== '.min') {
         $relPathname = substr($item->getPathname(), strlen(BX_JS_DIR));
         $cacheFilename = BX_TEMP_DIR."jsmin_".str_replace(DIRECTORY_SEPARATOR, '_', $relPathname);
 
