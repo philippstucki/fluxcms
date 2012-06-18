@@ -29,7 +29,7 @@ foreach ($items as $item) {
         $relPathname = substr($item->getPathname(), strlen(BX_JS_DIR));
         $cacheFilename = BX_TEMP_DIR."jsmin_".str_replace(DIRECTORY_SEPARATOR, '_', $relPathname);
 
-        if(is_readable($cacheFilename) && $item->getMTime() < filemtime($cacheFilename)) {
+        if (is_readable($cacheFilename) && $item->getMTime() < filemtime($cacheFilename)) {
             $js .= file_get_contents($cacheFilename);
         } else {
             $jsMin = JSMin::minify(file_get_contents($item->getPathname())).FILE_SEPARATOR;
@@ -38,7 +38,7 @@ foreach ($items as $item) {
         }
 
     } else {
-        if(is_readable($item->getPathname())) {
+        if (is_readable($item->getPathname())) {
             $js .= file_get_contents($item->getPathname()).FILE_SEPARATOR;
         }
     }
