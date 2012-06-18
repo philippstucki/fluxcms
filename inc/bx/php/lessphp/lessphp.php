@@ -15,7 +15,7 @@ if (
     is_readable($cacheFilename)
     && is_readable($absCssFilename)
     && filemtime($absCssFilename) < filemtime($cacheFilename)
-    && !$permObj->isAllowed('/', array('admin'))
+    && $conf->environment !== 'dev'
 ) {
     $output = file_get_contents($cacheFilename);
 } else {
