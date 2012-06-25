@@ -390,7 +390,8 @@ function dbforms2_field_date(DOMNode) {
             yearRange: '-30:+30',
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
-            changeYear: true            
+            changeYear: true,
+            showOn: 'button'
         });
     }
 }
