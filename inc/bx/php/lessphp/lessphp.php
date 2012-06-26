@@ -21,6 +21,13 @@ if (
 } else {
     include('lessc.inc.php');
     $less = new lessc($absCssFilename);
+
+    if ($conf->environment === 'dev') {
+        $less->setFormatter('indent');
+    } else {
+        $less->setFormatter('compressed');
+    }
+
     try {
         $output = $less->parse(
             null,
