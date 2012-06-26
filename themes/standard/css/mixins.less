@@ -1,0 +1,27 @@
+.border-radius(@radius) {
+    -webkit-border-radius: @radius + 0em;
+    -moz-border-radius: @radius + 0em;
+    border-radius: @radius + 0em;
+}
+
+.opacity(@opacity:0.6) {
+    @opacity-percentage: @opacity*100;
+    -ms-filter: "alpha(opacity=@{opacity-percentage})";
+	filter: ~"alpha(opacity=@{opacity-percentage})";
+	opacity: @opacity;
+}
+
+.transition(@property, @duration: @default-transition-duration) {
+    transition: @property @duration + 0s ease-in-out;
+    -moz-transition: @property @duration + 0s ease-in-out;
+    -webkit-transition: @property @duration + 0s ease-in-out;
+}
+
+.rotate(@angle) {
+    @rotAngle: @angle + 0deg;
+    -webkit-transform:rotate(@rotAngle);
+    -moz-transform:rotate(@rotAngle);
+    -o-transform:rotate(@rotAngle);
+    /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
+    -ms-transform:rotate(@rotAngle);
+}
