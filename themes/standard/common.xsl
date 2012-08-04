@@ -75,6 +75,17 @@
 <xsl:template match="xhtml:br/@type" mode="xhtml">
 </xsl:template>
 
+    <xsl:template match="xhtml:a[starts-with(@href,'mailto:')]" mode="xhtml">
+        <xsl:element name="a">
+            <xsl:attribute name="href">
+                <xsl:text>mailto:</xsl:text><xsl:value-of select="php:function('bx_helpers_xsl::obfuscateEmail', string(substring-after(@href,'mailto:')))"/>
+            </xsl:attribute>
+            <xsl:attribute name="class">obfe</xsl:attribute>
+            <xsl:apply-templates select="@*[not(name()='href')]" mode="xhtml"/>
+            <xsl:value-of select="php:function('bx_helpers_xsl::obfuscateEmail', string(substring-after(@href,'mailto:')))"/>
+        </xsl:element>
+    </xsl:template>
+
  <xsl:template name="littleLogin">
     <xsl:variable name="username" select="php:functionString('bx_helpers_perm::getUsername')"/>
     <xsl:choose>
