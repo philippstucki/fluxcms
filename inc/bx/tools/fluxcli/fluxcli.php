@@ -16,7 +16,7 @@
 // $Id$
 
 ini_set('html_errors', 0);
-define('ID', '$Id$');
+$_SERVER['HTTP_HOST'] = '';
 
 $commands = array(
     'collectioncreate',
@@ -41,7 +41,7 @@ $db = $GLOBALS['POOL']->db;
 
 
 function printHelp() {
-    echo "Flux CMS Command Line Interface, ".ID."\n";
+    echo "Flux CMS Command Line Interface\n";
     echo "Usage: fluxcli.php [options] <command> [parameters]
 
 create a new collection:
@@ -134,7 +134,7 @@ function _command_propertyset($options, $arguments) {
        }
     }
     
-    $res->setProperty($arguments[1], bx_helpers_string::utf2entities(utf8_encode($arguments[2])), $ns);
+    $res->setProperty($arguments[1], bx_helpers_string::utf2entities($arguments[2]), $ns);
     echo "property successfully set.\n";
     return TRUE;
 }
@@ -143,7 +143,7 @@ function _command_propertyset($options, $arguments) {
 function _command_makeuri($options, $arguments) {
     checkArgumentCount($arguments, 1);    
 
-    $uri = bx_helpers_string::makeUri(utf8_encode($arguments[0]));
+    $uri = bx_helpers_string::makeUri($arguments[0]);
     if(!empty($uri) && $uri != 'none') {
         echo "$uri\n";
         return TRUE;
