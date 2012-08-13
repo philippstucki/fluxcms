@@ -40,4 +40,5 @@ if (
 }
 
 header('Content-type: text/css');
+header('Cache-Control: public');
 echo $output;

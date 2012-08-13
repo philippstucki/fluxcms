@@ -47,4 +47,5 @@ foreach ($items as $item) {
 }
 
 header('Content-type: application/x-javascript');
+header('Cache-Control: public');
 echo $js;
