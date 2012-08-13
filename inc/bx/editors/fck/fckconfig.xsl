@@ -189,8 +189,8 @@ FCKConfig.SmileyWindowWidth		= 320 ;
 FCKConfig.SmileyWindowHeight	= 240 ;
 </xsl:text>
 
-FCKConfig.EditorAreaCSS = '<xsl:value-of select="concat($webroot,'themes/',$theme,'/css/',$themeCss)"/>';
-FCKConfig.StylesXmlPath = '<xsl:value-of select="concat($webroot,'admin/fck/fckstyles.xml')"/>';
+FCKConfig.EditorAreaCSS = '<xsl:value-of select="concat($webroot,'themes/',$theme,'/css/',$themeCss,'?',php:functionString('time'))"/>';
+FCKConfig.StylesXmlPath = '<xsl:value-of select="concat($webroot,'admin/fck/fckstyles.xml?',php:functionString('time'))"/>';
 FCKConfig.DefaultLanguage = '<xsl:value-of select="$lang"/>';
 
 </xsl:template>
