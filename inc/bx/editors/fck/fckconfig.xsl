@@ -95,6 +95,7 @@ FCKConfig.ToolbarSets["patforms"] = [
 
 FCKConfig.ToolbarSets["fluxfck"] = [
 	['Source'],
+    ['Templates'],
 	['Cut','Copy','Paste','PasteText','PasteWord','insertExcelData','-','Print','SpellCheck'],
 	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
 	['OrderedList','UnorderedList','-','Outdent','Indent'],
@@ -127,7 +128,6 @@ FCKConfig.FontNames		= 'Arial;Comic Sans MS;Courier New;Tahoma;Times New Roman;V
 FCKConfig.FontSizes		= '1/xx-small;2/x-small;3/small;4/medium;5/large;6/x-large;7/xx-large' ;
 FCKConfig.FontFormats	= 'p;div;h1;h2;h3;h4;pre' ;
 
-FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
 FCKConfig.SpellChecker			= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
 FCKConfig.IeSpellDownloadUrl	= 'http://www.iespell.com/rel/ieSpellSetup211325.exe' ;
@@ -192,6 +192,7 @@ FCKConfig.SmileyWindowHeight	= 240 ;
 FCKConfig.EditorAreaCSS = '<xsl:value-of select="concat($webroot,'themes/',$theme,'/css/',$themeCss,'?',php:functionString('time'))"/>';
 FCKConfig.StylesXmlPath = '<xsl:value-of select="concat($webroot,'admin/fck/fckstyles.xml?',php:functionString('time'))"/>';
 FCKConfig.DefaultLanguage = '<xsl:value-of select="$lang"/>';
+FCKConfig.TemplatesXmlPath	= '<xsl:value-of select="concat($webroot,'admin/fck/fcktemplates.xml?',php:functionString('time'))"/>';
 
 </xsl:template>
 

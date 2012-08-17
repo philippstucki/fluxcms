@@ -26,6 +26,14 @@
         </map:pipeline>
 
         <map:pipeline>
+            <map:match type="uri" pattern="fck/fcktemplates.xml*">
+             <map:read type="resource" src="constant(BX_PROJECT_DIR)conf/fck/fcktemplates.xml" 
+                 fallback="constant(BX_PROJECT_DIR)webinc/fck/fcktemplates.xml"
+                 mime-type="auto"/>
+            </map:match>
+        </map:pipeline>
+
+        <map:pipeline>
             <map:match type="uri" pattern="*">
                 <map:include label="standardPipeline"/>
             </map:match>
