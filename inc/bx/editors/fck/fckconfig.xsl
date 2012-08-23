@@ -60,6 +60,8 @@ FCKConfig.IgnoreEmptyParagraphValue = true ;
 FCKConfig.AutoDetectPasteFromWord = true ;
 FCKConfig.ToolbarLocation = 'In' ;
 
+FCKConfig.TemplateReplaceAll = false;
+FCKConfig.TemplateReplaceCheckbox = false;
 
 /*
 var sOtherPluginPath = '/webinc/editors/fck/plugins/' ;
