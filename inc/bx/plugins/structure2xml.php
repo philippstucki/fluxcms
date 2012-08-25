@@ -64,7 +64,12 @@ class bx_plugins_structure2xml extends bx_plugin implements bxIplugin {
     }
     
     public function isRealResource($path , $id) {
-        return true;
+        $noRealResource = $this->getParameter($path, 'noRealResource');
+        if ($noRealResource === 'true') {
+            return false;
+        } else {
+            return true;
+        }
     }
     
     function stripRoot() {
