@@ -87,14 +87,14 @@ class bx_collection implements bxIresource {
     }
 
     public function resourceExistsByRequest($filename,$ext) {
-         $map = $this->getPluginMapByRequest($filename,$ext);
-         if (count($map) > 0) {
-             foreach ($map as $p) {
-                 if (isset($p['plugin']) && $p['plugin']->isRealResource($this->uri,$p['id'])) {
-                     return true;
-                 }
-             }
-         }
+        $map = $this->getPluginMapByRequest($filename,$ext);
+        if (count($map) > 0) {
+            foreach ($map as $p) {
+                if (isset($p['plugin']) && $p['plugin']->isRealResource($this->uri,$p['id'])) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
