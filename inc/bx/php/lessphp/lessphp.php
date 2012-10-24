@@ -20,6 +20,20 @@ if (
     include('lessc.inc.php');
     $less = new lessc($absCssFilename);
 
+    $less->registerFunction("fontsize-set", function($arg, $ctx) {
+        list($type, $value) = $arg;
+        list($fst, $fsv) = $ctx->get('@font-size');
+        $ctx->set('@font-size', array('px', $value));
+        $ctx->set('@em', array('em', 1/$value));
+        return array('em', $value/$fsv);
+    });
+
+    $less->registerFunction("em", function($arg, $ctx) {
+        list($type, $value) = $arg;
+        list($pxt, $pxv) = $ctx->get('@em');
+        return array('em', $value*$pxv);
+    });
+
     if ($conf->environment === 'dev') {
         $less->setFormatter('indent');
     } else {
@@ -31,6 +45,8 @@ if (
             null,
             array(
                 'fluxcms-themeRoot' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'",
+                'font-size' => '16px',
+                'em' => '1/16em',
             )
         );
         file_put_contents($cacheFilename, $output);
