@@ -68,7 +68,7 @@ class bx_filters_patforms extends bx_filter {
                 
             }
 
-            $formDOM = new DomDocument();
+            $formDOM = new DomDocument('1.0', 'UTF-8');
             $formNode = $formDOM->importNode($formNS->item(0)->parentNode, TRUE);
             $formDOM->appendChild($formNode);
 
