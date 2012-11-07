@@ -24,7 +24,6 @@ class bx_plugins_xhtml extends bx_plugin implements bxIplugin {
 
     public function getPermissionList() {
     	return array(
-    					"xhtml-back-edit_bxe",
     					"xhtml-back-edit_fck",
     					"xhtml-back-edit_kupu",
                         "xhtml-back-edit_assets",

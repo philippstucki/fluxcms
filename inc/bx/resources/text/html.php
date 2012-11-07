@@ -119,9 +119,6 @@ class bx_resources_text_html extends bx_resource {
         	if($perm->isAllowed($localUri,array('xhtml-back-edit_kupu'))) {
         		array_unshift($e, 'kupu');
     		}	
-        	if($perm->isAllowed($localUri,array('xhtml-back-edit_bxe'))) {
-        		array_unshift($e, 'bxe');
-    		}	
         }
         else if (popoon_classes_browser::isMSIEWin()) {
         	if($perm->isAllowed($localUri,array('xhtml-back-edit_kupu'))) {
