@@ -1,10 +1,10 @@
 
 function editloaded() {
-	
+
 	var edit = document.getElementById('edit');
 	//FIXME for IE
 	//alert(edit.contentDocument);
-	
+
 	edit.onload = editloaded;
 	var loc = edit.contentWindow.location;
 	if (loc.search) {
@@ -15,9 +15,9 @@ function editloaded() {
 			var p = _params[param].split("=");
 			if (typeof p[1] != "undefined") {
 				params[p[0]] = p[1];
-			} 
+			}
 		}
-		
+
 		if (params['updateTree'] && params['updateTree'] != "parent") {
 			var commonPath = "";
 			var updateTree = params['updateTree'].split(";");
@@ -37,10 +37,10 @@ function editloaded() {
 						}
 					}
 				}
-				
-				 
+
+
 			}
-			
+
 			if (commonPath.length > 1) {
 				window.navi.expandAndReload(commonPath);
 				window.navi.Navitree.reload(commonPath);
@@ -52,15 +52,15 @@ function editloaded() {
 			}
 		}
 	}
-	
-	
+
+
 }
 function framesetloaded() {
 	var edit = document.getElementById('edit');
 	edit.onload = editloaded;
-    
+
     i18n = new bx_i18n(null);
-    
+
     // load the xml translations using sarissa
     var oDomDoc = Sarissa.getDomDocument();
     oDomDoc.async = true;
@@ -73,7 +73,7 @@ function framesetloaded() {
             }
         }
     }
-	
+
     oDomDoc.onreadystatechange = i18nLoaded;
     oDomDoc.load('i18n/js.xml');
 }
