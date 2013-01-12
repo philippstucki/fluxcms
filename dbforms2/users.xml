@@ -1,36 +1,18 @@
 <?xml version="1.0"?>
-<dbform:form 
+<dbform:form
     xmlns:dbform="http://bitflux.org/dbforms2/1.0"
->
+    >
 
     <dbform:fields table="users">
 
         <dbform:field name="user_login" type="text" descr="Login Name"/>
-        <dbform:field name="user_pass" type="password_md5" descr="Password"/>
+        <dbform:field name="user_pass" type="text" descr="Password"/>
         <dbform:field name="user_email" type="text" descr="Email"/>
         <dbform:field name="user_fullname" type="text" descr="Full Name"/>
-        <!--<dbform:field name="user_gupi" type="text" descr="GUPI"/>
-        <dbform:field name="user_gid" type="text" descr="GID"/>-->
+        <!--<dbform:field name="user_gupi" type="text" descr="GUPI"/>-->
+        <!--<dbform:field name="user_gid" type="text" descr="GID"/>-->
 
-        <dbform:field 
-            name="name"
-            type="relation_n2m" 
-            relationtable="users2groups" 
-            thisidfield="fk_user"
-            thatidfield="fk_group"
-            descr="Groups">
-            
-            <dbform:datasource type="foreign" namefield="name" idfield="id" table="groups" />
-            <dbform:liveselect 
-                namefield="name" 
-                idfield="id" 
-                wherefields="name" 
-                table="groups" 
-                where="name != 'anonymous' AND name != 'authenticated'"/>
-
-        </dbform:field>
-
-    </dbform:fields>    
-    <dbform:chooser namefield="concat(user_login,' (',id,')')" wherefields="user_login,user_email,user_fullname" limit="20"/>    
+    </dbform:fields>
+    <dbform:chooser namefield="concat(user_login,' (',id,')')" wherefields="user_login , user_email , user_fullname" limit="20"/>
 
 </dbform:form>
