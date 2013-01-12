@@ -14,9 +14,9 @@
 }
 
 .transition(@property, @duration: @default-transition-duration) {
-    transition: @property @duration + 0s ease-in-out;
-    -moz-transition: @property @duration + 0s ease-in-out;
-    -webkit-transition: @property @duration + 0s ease-in-out;
+    transition: e(@property) @duration + 0s ease-in-out;
+    -moz-transition: e(@property) @duration + 0s ease-in-out;
+    -webkit-transition: e(@property) @duration + 0s ease-in-out;
 }
 
 .rotate(@angle) {

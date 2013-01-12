@@ -44,7 +44,7 @@ if (
         $output = $less->parse(
             null,
             array(
-                'fluxcms-themeRoot' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'",
+                'fluxcms-theme-root' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'",
                 'font-size' => '16px',
                 'em' => '1/16em',
             )

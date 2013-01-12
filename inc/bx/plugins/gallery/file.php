@@ -50,7 +50,7 @@ class bx_plugins_gallery_file {
                 } else if ($file->isImage) {
                     if(($options['mode']=='image' ) || ($options['numberOfImages'] + 1 > ($options['currentPage'] - 1) * $options['imagesPerPage']) && ($options['numberOfImages'] + 1<= ($options['currentPage']) * $options['imagesPerPage'])) {
                         $node = $this->dom->createElement('image');
-                        $node->setAttribute('href', $name);
+                        $node->setAttribute('href', urlencode($name));
                         $node->setAttribute('id', $name);
                         //bx_helpers_debug::webdump($options['path'].$name);
                         /* this code would allow captions and title in overviews as well... */
