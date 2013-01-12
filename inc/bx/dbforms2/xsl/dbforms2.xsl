@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0" 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
-    xmlns:php="http://php.net/xsl" 
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:php="http://php.net/xsl"
     exclude-result-prefixes="php xhtml"
 >
 
@@ -26,7 +26,7 @@
     <xsl:variable name="chooserDataURI" select="concat($webroot,'admin/dbforms2/',$formName,'/chooser')"/>
     <xsl:variable name="liveSelectRootURI" select="concat($webroot,'admin/dbforms2/',$formName,'/liveselect')"/>
     <xsl:variable name="DBFORMS2_IMG_NULLIMG" select="concat($webroot, 'themes/standard/admin/images/dbforms2/null.gif')"/>
-    
+
     <xsl:template match="/">
         <html>
             <head>
@@ -38,11 +38,11 @@
                 <!-- jquery, jquery ui -->
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.2.min.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery-ui/jquery-ui-1.8.10.custom.min.js'"/></xsl:call-template>
-                
+
                 <xsl:if test="/form/fields//textarea[@type='text_wysiwyg']">
                     <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/fck/fckeditor.js'"/></xsl:call-template>
                     <script type="text/javascript">
-                        var fckBasePath	= "<xsl:value-of select="$webroot"/>webinc/fck/"; 
+                        var fckBasePath	= "<xsl:value-of select="$webroot"/>webinc/fck/";
                     </script>
                 </xsl:if>
 
@@ -51,12 +51,12 @@
                         colorPicker_spacerImage = "<xsl:value-of select="$webroot"/>webinc/js/spacer.gif";
                     </script>
                     <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/colorpicker.js'"/></xsl:call-template>
-                </xsl:if>                
+                </xsl:if>
 
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/bx/tooltip.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/bx/helpers.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/bx/string.js'"/></xsl:call-template>
-                
+
                 <xsl:call-template name="importDBF2Js"><xsl:with-param name="href" select="'common.js'"/></xsl:call-template>
                 <xsl:call-template name="importDBF2Js"><xsl:with-param name="href" select="'dbforms2.js'"/></xsl:call-template>
                 <xsl:call-template name="importDBF2Js"><xsl:with-param name="href" select="'toolbar.js'"/></xsl:call-template>
@@ -77,7 +77,7 @@
                 </xsl:for-each>
 
                 <script type="text/javascript">
-                
+
                     var bx_webroot = "<xsl:value-of select="$webroot"/>";
                     var BX_WEBROOT = bx_webroot;
                     var DBFORMS2_IMG_PREVIEW_SMALL_DIR = BX_WEBROOT + 'dynimages/0,30,scale/';
@@ -122,7 +122,7 @@
                 <div class="mainformcontainer">
                     <xsl:apply-templates select="/form" mode="form"/>
                 </div>
-                
+
             </body>
         </html>
     </xsl:template>
@@ -140,38 +140,35 @@
             <xsl:text> </xsl:text>
         </script>
     </xsl:template>
-    
+
     <xsl:template match="group" mode="fields">
         <xsl:apply-templates select="fields/*" mode="xhtml"/>
     </xsl:template>
-    
+
     <xsl:template match="nofield" mode="fields">
- 
-    
-    <tr class="formRow">
+        <tr class="formRow">
             <td class="formHeader">
                 &#160;
             </td>
             <td class="formInput">
-               <strong><xsl:value-of select="@descr"/></strong>
+                <strong><xsl:value-of select="@descr"/></strong>
             </td>
         </tr>
     </xsl:template>
 
-       <xsl:template match="nofield[@type='html']" mode="fields">
- 
-    
-    <tr class="formRow">
-             <td class="formHeader">
+    <xsl:template match="nofield[@type='html']" mode="fields">
+
+
+        <tr class="formRow">
+            <td class="formHeader">
                 &#160;
             </td>
             <td class="formInput">
                 <xsl:value-of select="default/text()" disable-output-escaping="yes"/>
-                
             </td>
         </tr>
     </xsl:template>
-    
+
     <xsl:template match="default|script" mode="xhtml"></xsl:template>
 
     <xsl:template match="*" mode="xhtml">
@@ -184,5 +181,5 @@
     <xsl:template match="@*" mode="xhtml">
         <xsl:copy-of select="."/>
     </xsl:template>
-    
+
 </xsl:stylesheet>
