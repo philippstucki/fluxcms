@@ -2,8 +2,6 @@
 function editloaded() {
 
 	var edit = document.getElementById('edit');
-	//FIXME for IE
-	//alert(edit.contentDocument);
 
 	edit.onload = editloaded;
 	var loc = edit.contentWindow.location;
@@ -55,29 +53,14 @@ function editloaded() {
 
 
 }
+
 function framesetloaded() {
-	var edit = document.getElementById('edit');
-	edit.onload = editloaded;
-
-    i18n = new bx_i18n(null);
-
-    // load the xml translations using sarissa
-    var oDomDoc = Sarissa.getDomDocument();
-    oDomDoc.async = true;
-
-    function i18nLoaded() {
-        if(oDomDoc.readyState == 4) {
-            if(oDomDoc.documentElement) {
-                i18n.xml = oDomDoc;
-                i18n.init();
-            }
-        }
-    }
-
-    oDomDoc.onreadystatechange = i18nLoaded;
-    oDomDoc.load('i18n/js.xml');
+    $.get('i18n/js.xml', function (data, ts, jqxhr) {
+        var i18n = new bx_i18n(data);
+        i18n.init();
+        window.i18n = i18n;
+    });
 }
-
 
 function BX_debug(object)
 {

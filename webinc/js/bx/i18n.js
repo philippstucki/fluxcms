@@ -5,7 +5,6 @@ function bx_i18n (xml) {
     this.messages = new Array();
     
     this.init = function() {
-        this.xml = Sarissa.fixFirefox3Permissions(this.xml);
         var msg = this.xml.documentElement.getElementsByTagName('message')[0];
         while(msg != null) {
             // skip text nodes (1 == ELEMENT_NODE)
