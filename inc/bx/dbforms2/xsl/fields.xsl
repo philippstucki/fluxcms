@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0" 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
-    xmlns:php="http://php.net/xsl" 
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:php="http://php.net/xsl"
     exclude-result-prefixes="php xhtml"
 >
     <xsl:attribute-set name="standardInputElement">
@@ -13,7 +13,7 @@
         <xsl:attribute name="onchange">if(dbforms2_globalObj[this.id]) dbforms2_globalObj[this.id].e_onChange();</xsl:attribute>
         <xsl:attribute name="class"></xsl:attribute>
     </xsl:attribute-set>
-    
+
     <xsl:template match="input" mode="fields">
         <tr class="formRow">
             <td class="formHeader">
@@ -29,7 +29,7 @@
             </td>
         </tr>
     </xsl:template>
-    
+
     <xsl:template match="input[@type='hidden']" mode="fields"/>
 
     <xsl:template match="input[@type='hidden']" mode="hidden">
@@ -85,7 +85,7 @@
             </td>
         </tr>
     </xsl:template>
-    
+
 
     <xsl:template match="select[@type='relation_n2m']" mode="fields">
         <tr class="formRow">
@@ -104,11 +104,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <xsl:if test="@linktothat != ''">
                     <a onclick="dbforms2.openSubForm('{@linktothat}');" style="margin-left: 415px; cursor: pointer; text-decoration:underline;">Create New Entry</a>
                 </xsl:if>
-                
+
                 <input type="hidden" id="{@id}"/>
                 <ul class="n2mvalues" id="{@id}_values">
                 </ul>
@@ -150,7 +150,7 @@
                 <span style="width: 40px;" id="anchor_{@id}" ><img src="{$DBFORMS2_IMG_NULLIMG}" height="15" width="80"/></span>
             </td>
         </tr>
-    </xsl:template>    
+    </xsl:template>
 
     <!-- in fact this is fields_file and not fields_upload -->
     <xsl:template match="input[@type='upload']" mode="fields">
@@ -168,7 +168,7 @@
                 <xsl:text> </xsl:text>
 
                 <input type="button" onclick="openUploadIframe('{@name}')" value="..."/>
-                
+
                 <span id="{@id}_previewLarge" class="pic">
                     <img id="{@id}_previewSmall" src="{$DBFORMS2_IMG_NULLIMG}" border="0"/>
                 </span>
@@ -198,9 +198,9 @@
                         <img id="{@id}_previewSmall" src="{$DBFORMS2_IMG_NULLIMG}" border="0"/>
                     </span>
                 </xsl:if>
-                
+
             </td>
         </tr>
     </xsl:template>
-    
+
 </xsl:stylesheet>
