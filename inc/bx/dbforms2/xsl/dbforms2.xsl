@@ -36,7 +36,7 @@
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/sarissa_0.9.9.5.js'"/></xsl:call-template>
 
                 <!-- jquery, jquery ui -->
-                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery-1.4.2.min.js'"/></xsl:call-template>
+                <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery/jquery.min.js'"/></xsl:call-template>
                 <xsl:call-template name="importJs"><xsl:with-param name="href" select="'webinc/js/jquery-ui/jquery-ui-1.8.10.custom.min.js'"/></xsl:call-template>
 
                 <xsl:if test="/form/fields//textarea[@type='text_wysiwyg']">
