@@ -7,14 +7,14 @@ function dbforms2_formData() {
 
     this.getXML = function() {
         xml = Sarissa.getDomDocument('', 'data');
-        
+
         tableNodeName = this.tablePrefix + this.formName;
         tableNode = xml.createElement(tableNodeName);
         entryNode = xml.createElement(tableNodeName);
-        
+
         for(valueName in this.values) {
             value = this.values[valueName];
-			
+
 			if ( value !== null && typeof value == "object" ) {
 				if (value.constructor == Array) {
 					var valueTN = xml.createElement("values");
@@ -35,17 +35,17 @@ function dbforms2_formData() {
 
             entryNode.appendChild(valueNode);
         }
-        
+
         tableNode.appendChild(entryNode);
         xml.documentElement.appendChild(tableNode);
-        
+
         return xml;
     }
 
     this.setXML = function(xml) {
         this.xml = xml;
     }
-    
+
     this.getValueByFieldID = function(fieldID) {
         tagNS = this.xml.getElementsByTagName(fieldID);
 		if (tagNS[0] && tagNS[0].childNodes.length == 1) {
@@ -67,7 +67,7 @@ function dbforms2_formData() {
 				} else {
 					return childNode;
 				}
-			} 
+			}
 		}
 		if (tagNS[0] && tagNS[0].childNodes[0]) {
             if (tagNS[0].childNodes[0].nextSibling) {
@@ -80,18 +80,18 @@ function dbforms2_formData() {
                         break;
                     }
                 }
-                
+
                 return str;
             }
-            
+
             return tagNS[0].childNodes[0].data;
-		
-        
+
+
         } else {
 			return null;
 		}
     }
-	
+
 	this.getValueNodeByFieldID = function(fieldID) {
 		if(this.xml) {
 			tagNS = this.xml.getElementsByTagName(fieldID);
