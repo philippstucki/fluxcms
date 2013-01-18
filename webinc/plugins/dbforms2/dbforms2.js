@@ -10,6 +10,7 @@
  */    
 
 dbforms2_globalObj = new Array();
+dbforms2_fckEditors = new Array();
 dbforms2_objID = 1;
 
 dbforms2_saveCount = 0;

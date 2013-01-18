@@ -237,6 +237,7 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
     var valueSet = false;
     var height = 0;
     var fckId = null;
+    var delayedSetValue = null;
 
     this.init = function(DOMNode) {
 		this.initField(DOMNode);
@@ -245,9 +246,10 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 
         this.lastValue = this.defaultValue;
 
-        dbforms2_fckEditors[this.id] = new Array();
-        dbforms2_fckEditors[this.id]['context'] = this;
-        dbforms2_fckEditors[this.id]['method'] = this.eFCK_OnComplete;
+        dbforms2_fckEditors[this.fckId] = {
+            context : this,
+            method : this.eFCK_OnComplete
+        };
 
         var oFCKeditor = new FCKeditor(this.fckId);
         oFCKeditor.BasePath	= fckBasePath;
@@ -271,6 +273,11 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
         var wev = new bx_helpers_contextfixer(this.eFCK_OnAfterSetHTML, this);
         einstance.Events.AttachEvent('OnAfterSetHTML', wev.execute);
         this.editorInstance = einstance;
+        console.log('complete: ', this.id, this.fckId);
+        if (this.delayedSetValue === true) {
+            this.setValue(this.value);
+            console.log('delayed set: ', this.value);
+        }
     }
 
     this.eFCK_OnAfterSetHTML = function(einstance) {
@@ -282,12 +289,12 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 
 	this.setValue = function(value) {
 		// Get the editor instance that we want to interact with.
-		if (typeof FCKeditorAPI  != "undefined") {
+		if (typeof FCKeditorAPI  !== 'undefined') {
 			var oEditor = FCKeditorAPI.GetInstance(this.fckId) ;
 
             // Set the editor contents (replace the actual one).
-			if (oEditor.SetHTML) {
-                if(value == null) {
+			if (oEditor.Status === FCK_STATUS_COMPLETE && oEditor.SetHTML) {
+                if(value === null) {
                     value = '';
                 }
 				oEditor.SetHTML(value);
@@ -296,10 +303,16 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 				this.DOMNode.value = value;
 			}
 
+            if (oEditor.Status !== FCK_STATUS_COMPLETE) {
+                this.delayedSetValue = true;
+                console.log('set later:', this.id);
+            }
+
 		} else {
 			this.DOMNode.value = value;
 		}
         this.lastValue = value;
+        this.value = value;
 	}
 
 	this.getValue = function(value) {
