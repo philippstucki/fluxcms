@@ -1,5 +1,5 @@
 function dbforms2_form() {
-    
+
     this.fields = new Array();
     this.forms = new Array();
     this.name = '';
@@ -20,18 +20,18 @@ function dbforms2_form() {
 
     this.thisidfield = null;
     this.thatidfield = null;
-    
+
     this.eventHandlers = new Array();
     this.internalEventHandlers = new Array();
-    
+
     this.changed = false;
-    
+
     /**
      *  Initializes the form.
      *
      */
     this.init = function(formConfig) {
-        
+
         this.dataURI = formConfig['dataURI'];
         this.liveSelectRootURI = formConfig['liveSelectRootURI'];
         this.listViewRootURI = formConfig['listViewRootURI'];
@@ -43,7 +43,7 @@ function dbforms2_form() {
         this.thatidfield = formConfig['thatidfield'];
 
         this.hasSections = (typeof formConfig['hasSections'] !== 'undefined' && formConfig['hasSections'] === true) ? true : false;
-        
+
         if(formConfig['onSaveJS']) {
             this.eventHandlers['onSaveJS'] = formConfig['onSaveJS'];
         }
@@ -54,32 +54,32 @@ function dbforms2_form() {
         var fieldID;
         var fields = formConfig['fields'];
         for(fieldID in fields) {
-            
+
             if(fields[fieldID]['isGroup']) {
                 // field is a group
                 this.fields[fieldID] = this.initGroup(fieldID, fields[fieldID]);
-            
+
             } else if(fields[fieldID]['isForm']) {
                 var form = this.initForm(fieldID, fields[fieldID]['config']);
                 this.fields[fieldID] = form;
                 this.forms[fieldID] = form;
-            
+
             } else {
                 // field is a regular field
                 this.fields[fieldID] = this.initField(fieldID, fields[fieldID]);
             }
         }
-        
+
         this.formData.tablePrefix = this.tablePrefix;
-        
-        if(this.hasSections === true) { 
+
+        if(this.hasSections === true) {
             jQuery("#formdiv_"+this.name).tabs();
         }
-        
+
         this.resetValues();
         this.focusFirstField();
     }
-    
+
     /**
      *  Initializes a newly created field.
      *
@@ -92,7 +92,7 @@ function dbforms2_form() {
         try {
             eval("field = new "+fieldClass+"();");
         } catch (e) {
-            field = new dbforms2_field(fieldNode); 
+            field = new dbforms2_field(fieldNode);
         }
 
         field.defaultValue = fieldConfig['default'];
@@ -107,11 +107,11 @@ function dbforms2_form() {
 			field.multiple = fieldConfig['multiple'];
 		}
         field.disabled = fieldConfig['disabled'] ? true : false;
-        
+
         _registerObj(fieldNode.id, field);
         return field;
     }
-    
+
     /**
      *  Initializes a newly created group.
      *
@@ -123,15 +123,15 @@ function dbforms2_form() {
         eval("group = new "+groupClass+"();");
         group.id = groupID;
         group.init();
-        
+
         for(fieldID in groupConfig['fields']) {
             field = this.initField(fieldID, groupConfig['fields'][fieldID]);
             group.fields[fieldID] = field;
         }
         return group;
-        
+
     }
-    
+
     /**
      *  Initializes a newly created subform.
      *
@@ -139,10 +139,10 @@ function dbforms2_form() {
     this.initForm = function(formID, formConfig) {
         form = dbforms2.getFormByConfig(formConfig);
         form.parentForm = this;
-        
+
         form.toolbar = new dbforms2_toolbar();
         form.initToolbar();
-        
+
         return form;
     }
 
@@ -153,14 +153,14 @@ function dbforms2_form() {
      */
     this.setValue = function(value) {
     }
-    
+
     /**
      *  Sets the current value.
      *
      */
     this.getValue = function() {
     }
-    
+
     /**
      *  Resets the value to the default value.
      *
@@ -170,7 +170,7 @@ function dbforms2_form() {
             this.fields[fieldID].resetValue();
         }
     }
-    
+
     /**
      *  Tells whether this field is valid.
      *
@@ -178,35 +178,35 @@ function dbforms2_form() {
     this.isValid = function() {
         return true;
     }
-    
+
     /**
      *  Visually enable this field.
      *
      */
     this.enable = function() {
     }
-    
+
     /**
      *  Visually disable this field.
      *
      */
     this.disable = function() {
     }
-    
+
     /**
      *  Visually show this field.
      *
      */
     this.show = function() {
     }
-    
+
     /**
      *  Visually hide this field.
      *
      */
     this.hide = function() {
     }
-    
+
     /**
      *  Tells whether the contents of this field has changed.
      *
@@ -215,7 +215,7 @@ function dbforms2_form() {
 
         if(this.changed == true) {
             return true;
-        } 
+        }
 
         // check all fields for changes
         for (fieldID in this.fields) {
@@ -223,26 +223,26 @@ function dbforms2_form() {
                 return true;
             }
         }
-        
+
         // check all subforms for changes
         for (formID in this.forms) {
             if(this.forms[formID].hasChanged() == true) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      *  Resets the changed property of this field.
      *
      */
     this.resetChanged = function() {
     }
-    
+
     // .. / field interface
-    
+
     // used by subforms only
     /**
      *  Used by parent forms to set the current id of the parent form.
@@ -256,7 +256,7 @@ function dbforms2_form() {
             field.setParentFormId(id);
         }
     }
-    
+
     /**
      *  Registers an internal handler for the given event.
      *
@@ -270,7 +270,7 @@ function dbforms2_form() {
         eh['handler'] = handler;
         this.internalEventHandlers[event].push(eh);
     }
-    
+
     /**
      *  Calls all internal handlers for the given event.
      *
@@ -283,9 +283,9 @@ function dbforms2_form() {
                 handler['handler'].apply(handler['context']);
             }
         }
-        
+
     }
-    
+
     /**
      *  Initializes the toolbar of this form.
      *
@@ -312,11 +312,11 @@ function dbforms2_form() {
         this.toolbar.setButton('reload', document.getElementById('tb_'+this.name+'_reload'));
         var wev = new bx_helpers_contextfixer(this.e_reload_click, this);
         this.toolbar.addButtonEventHandler('reload', wev.execute);
-        
+
         //jQuery("#controls input").button();
-        
+
     }
-    
+
     /**
      *  Requests a new id from the server for this form.
      *
@@ -325,18 +325,18 @@ function dbforms2_form() {
         if(this.currentID != 0) {
             return false;
         }
-        
+
 		this.toolbar.lockAllButtons();
         this.disable();
-		
+
 		this.formData.formName = this.name;
-        
+
 		var wev = new ContextFixer(this._dataGetNewIdCallback, this);
 		this.transport.onSaveCallback = wev.execute;
-        
+
 		var xml = this.formData.getXML();
 		xml.documentElement.setAttribute('getnewid', 'true');
-		
+
         response = this.transport.saveXMLSync(this.dataURI, xml);
         var newID = 0;
         if(!response.isError()) {
@@ -347,68 +347,68 @@ function dbforms2_form() {
         // save the new ID for later but don't overwrite currentID
         this.insertID = newID;
         return newID;
-        
+
     }
-    
+
     /**
      *  Loads an entry specified by the given id.
      *
      */
     this.loadFormDataByID = function(id) {
-        
+
         if(id == 0 || id == null) {
             return false;
         }
-    
+
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_LOAD_PRE);
 
         var uri =  this.dataURI + '?id=' + id;
         this.disable();
         dbforms2.statusText('Loading Data ...');
-        
+
         var wrappedCallback = new ContextFixer(this._dataLoadedCallback, this);
         this.transport.onLoadCallback = wrappedCallback.execute;
-        
+
         this.startTransportTimeout();
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_LOAD_POST);
         this.transport.loadXML(uri);
     }
-    
+
     /**
      *  Saves the current form data.
      *
      */
     this.saveFormData = function(fromLastChild) {
-        
+
         if(this.parentForm == null && (typeof fromLastChild  == 'undefined')) {
 
             var hasSaved = false;
             // first save all child forms
-            for (var formID in this.forms) { 	 
+            for (var formID in this.forms) {
                 if(this.forms[formID].saveFormData() == true) {
                     hasSaved = true;
                 }
             }
-        
+
             // return if this is the parent form, because the last child callback
             // will call this method again. Don't do this, if none of the child forms
             // have started a save.
             if(hasSaved !== false) {
                 return;
             }
-            
+
         }
-        
+
         if(!this.hasChanged()) {
             return false;
         }
-        
+
         if(this.parentForm != null) {
             dbforms2_saveCount++;
-        }        
-        
+        }
+
         var uri =  this.dataURI;
-        
+
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_SAVE_PRE);
         this.formData.formName = this.name;
 
@@ -419,10 +419,10 @@ function dbforms2_form() {
         }
         // set current id
         this.formData.setValueByFieldID(this.idField, this.currentID);
-        
+
         // if this is a subform, set the corresponding relation field ...
         if(this.parentForm != null) {
-            
+
             if(this.thatidfield != '' && this.thisidfield == '') {
 
                 // relation: 1 -> n
@@ -439,21 +439,21 @@ function dbforms2_form() {
                 } else {
                     parentID = this.parentForm.currentID;
                 }
-                
+
                 if(parentID != 0 && this.thatidfield != '') {
                     this.formData.setValueByFieldID(this.thatidfield, parentID);
                 } else {
                     return false;
                 }
-                
+
             } else if(this.thatidfield == '' && this.thisidfield != '') {
                 // relation: n -> 1
-                
+
             } else if(this.thatidfield != '' && this.thisidfield != '') {
                 // relation: n -> m
             }
         }
-        
+
         this.saveFocus();
         this.disable();
         dbforms2.statusText('Saving Data ...');
@@ -462,44 +462,44 @@ function dbforms2_form() {
         this.transport.onSaveCallback = wrappedCallback.execute;
 
 		var xml = this.formData.getXML();
-		
+
         if(this.currentID == 0 && this.insertID != 0) {
             xml.documentElement.setAttribute('insertid', this.insertID);
         }
 
-        
+
         // pass original entry id to the server
         if(this.parentForm == null && this.currentID == 0 && this.originalID != 0) {
             xml.documentElement.setAttribute('originalID', this.originalID);
             this.originalID = 0;
         }
-        
+
         this.startTransportTimeout();
 		this.transport.saveXML(uri, xml);
-        
+
         // returning true means this form has started to save
         return true;
     }
 
     /**
-     *  Resets the current id and then saves the form's data. This creates 
+     *  Resets the current id and then saves the form's data. This creates
      *  a new entry.
      *
      */
     this.saveFormDataAsNew = function() {
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_SAVEASNEW_PRE);
-        
+
         // keep current id to enable for recognition of a copied entry on the server side
         this.originalID = this.currentID
-        
+
         // reset current id and then save => will create a new record
         this.currentID = 0;
         this.changed = true;
         this.saveFormData();
-        
+
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_SAVEASNEW_POST);
     }
-    
+
     /**
      *  Delete the entry specified by the given id.
      *
@@ -508,20 +508,20 @@ function dbforms2_form() {
 		var uri =  this.dataURI;
 
         this.callInternalEventHandlers(DBFORMS2_EVENT_FORM_DELETE_PRE);
-		
+
 		this.toolbar.lockAllButtons();
         this.disable();
 		dbforms2.statusText('Deleting Data ...');
-		
+
 		this.formData.formName = this.name;
-		
+
 		for (fieldID in this.fields) {
 			field = this.getFieldByID(fieldID);
 			value = field.getValue();
 			this.formData.setValueByFieldID(fieldID, value);
 		}
 		this.formData.setValueByFieldID(this.idField, id);
-		
+
 		var wrappedCallback = new ContextFixer(this._dataDeletedCallback, this);
 		this.transport.onSaveCallback = wrappedCallback.execute;
 		var xml = this.formData.getXML();
@@ -529,7 +529,7 @@ function dbforms2_form() {
         this.startTransportTimeout();
 		this.transport.saveXML(uri, xml);
     }
-	
+
     /**
      *  Deletes the currently edited entry.
      *
@@ -543,7 +543,7 @@ function dbforms2_form() {
 		}
         this.deleteEntryByID(this.currentID);
 	}
-	
+
     /**
      *  Creates a new entry.
      *
@@ -554,7 +554,7 @@ function dbforms2_form() {
         this.resetValues();
 
         dbforms2.chooser.queryField.clearCurrentEntry();
-        
+
         // notify all child forms' fields
         for (var fieldID in this.forms) {
             this.fields[fieldID].createNewEntry();
@@ -570,7 +570,7 @@ function dbforms2_form() {
         //window.scrollTo(0,0);
         this.focusFirstField();
     }
-    
+
     /**
      *  Reloads the current entry.
      *
@@ -578,7 +578,7 @@ function dbforms2_form() {
     this.reloadEntry = function() {
         this.loadFormDataByID(this.currentID);
     }
-    
+
     /**
      *  Saves the currently focused field.
      *
@@ -587,16 +587,16 @@ function dbforms2_form() {
         if(this.lastFocus)
             this.savedFocus = this.lastFocus;
     }
-    
+
     /**
      *  Restores the focus from a previously saved field.
      *
      */
     this.restoreFocus = function() {
-        if(this.savedFocus) 
+        if(this.savedFocus)
             this.savedFocus.focus();
     }
-    
+
     /**
      *  Focuses the first field of the form.
      *
@@ -607,7 +607,7 @@ function dbforms2_form() {
             break;
         }
     }
-    
+
     /**
      *  Saves the currently focused field. This method is called by form fields.
      *  Use saveFocus to save the currently focused field.
@@ -616,7 +616,7 @@ function dbforms2_form() {
     this.updateFocus = function(field) {
         this.lastFocus = field;
     }
-    
+
     /**
      *  Enables the form.
      *
@@ -626,7 +626,7 @@ function dbforms2_form() {
             this.getFieldByID(fieldID).enable();
         }
     }
-    
+
     /**
      *  Disables the form.
      *
@@ -638,7 +638,7 @@ function dbforms2_form() {
             field.disable();
         }
     }
-    
+
     /**
      *  Resets all field values.
      *
@@ -649,7 +649,7 @@ function dbforms2_form() {
             field.resetValue();
         }
     }
-    
+
     /**
      *  Returns a field by its id.
      *
@@ -657,7 +657,7 @@ function dbforms2_form() {
     this.getFieldByID = function(id) {
         return this.fields[id];
     }
-    
+
     /**
      *  Sets all field values using the given xml document.
      *
@@ -674,7 +674,7 @@ function dbforms2_form() {
         this.currentID = this.formData.getValueByFieldID(this.idField);
         this.insertID = 0;
     }
-    
+
     /**
      *  Reloads all subforms.
      *
@@ -684,7 +684,7 @@ function dbforms2_form() {
             this.fields[fieldID].setParentFormId(this.currentID);
         }
     }
-    
+
     /**
      *  Internal handler which is called when data is returned by the server.
      *
@@ -692,16 +692,16 @@ function dbforms2_form() {
     this._dataLoadedCallback = function() {
         this.stopTransportTimeout();
         this.loadFieldValuesByXML(this.transport.data);
-        
+
         // call correspondig event handler on successsfull save
         if(this.eventHandlers['onLoadJS']) {
             eval(this.eventHandlers['onLoadJS']);
         }
         this.reloadSubForms();
-        
+
         this.enable();
         this.toolbar.unlockAllButtons();
-        
+
         dbforms2.statusText('Data loaded. (id = ' + this.currentID + ')');
     }
 
@@ -714,13 +714,13 @@ function dbforms2_form() {
         this.stopTransportTimeout();
         if(response.isError()) {
             alert("error saving data!\n---\nReason: "+response.getResponseText()+"\nCode: "+response.getResponseCode());
-            
+
             dbforms2.statusText('Error saving data: ' + response.getResponseText());
             this.toolbar.unlockButtons(['save', 'new']);
 
         } else {
             dbforms2.statusText('Data saved. (' + response.getResponseText() + ')');
-            
+
             // reload the returned data
             this.loadFieldValuesByXML(response.responseData);
 
@@ -733,11 +733,11 @@ function dbforms2_form() {
             if(this.eventHandlers['onSaveJS']) {
 				eval(this.eventHandlers['onSaveJS']);
             }
-            
+
             this.toolbar.unlockAllButtons();
-            
+
             //console.log(dbforms2_saveCount);
-            
+
             if(this.parentForm != null) {
                 if(dbforms2_saveCount > 1) {
                     dbforms2_saveCount--;
@@ -749,19 +749,19 @@ function dbforms2_form() {
                 this.reloadSubForms();
             }
             //console.log(dbforms2_saveCount);
-            
+
         }
         this.enable();
         this.restoreFocus();
     }
-	
+
     /**
      *  Internal handler which is called when data is returned by the server.
      *
      */
 	this._dataDeletedCallback = function(response) {
         this.stopTransportTimeout();
-		
+
 		if(response.isError()) {
 			alert("error saving data!\n---\nReason: "+response.getResponseText()+"\nCode: "+response.getResponseCode());
 			dbforms2.statusText('Error deleting data: ' + response.getResponseText());
@@ -773,7 +773,7 @@ function dbforms2_form() {
 
 			// reload chooser results
 			dbforms2.chooser.reloadCurrentQuery();
-			
+
 			// call correspondig event handler on successsfull save
 			if(this.eventHandlers['onDeleteJS']) {
 				eval(this.eventHandlers['onDeleteJS']);
@@ -783,7 +783,7 @@ function dbforms2_form() {
 		this.createNewEntry();
 		this.enable();
 	}
-	
+
     /**
      *  Starts a transport timeout.
      *
@@ -792,12 +792,12 @@ function dbforms2_form() {
         if(this.transportTimeout) {
             this.stopTransportTimeout();
         }
-        
+
         var wrappedCallback = new ContextFixer(this._transportTimeoutCallback, this);
         this.transportTimeout = window.setTimeout(wrappedCallback.execute, 5000);
-        
+
     }
-    
+
     /**
      *  Stops the currently running transport timeout.
      *
@@ -805,7 +805,7 @@ function dbforms2_form() {
     this.stopTransportTimeout = function() {
         window.clearTimeout(this.transportTimeout);
     }
-    
+
     /**
      *  Callback for the transport timeout.
      *
@@ -813,24 +813,24 @@ function dbforms2_form() {
     this._transportTimeoutCallback = function(action) {
         alert('Timeout while trying to communicate with the server.');
     }
-    
+
     /* toolbar events */
     this.e_save_click = function() {
         this.saveFormData();
     }
-    
+
     this.e_new_click = function() {
         this.createNewEntry();
     }
-    
+
     this.e_saveasnew_click = function() {
         this.saveFormDataAsNew();
     }
-    
+
     this.e_delete_click = function() {
         this.deleteEntry();
     }
-    
+
     this.e_reload_click = function() {
         this.reloadEntry();
     }
