@@ -73,7 +73,15 @@ function dbforms2_form() {
         this.formData.tablePrefix = this.tablePrefix;
 
         if(this.hasSections === true) {
-            jQuery("#formdiv_"+this.name).tabs();
+            jQuery("#formdiv_" + this.name).tabs({
+                activate: function (e, ui) {
+                    var $panel;
+                    $panel = ui.newTab.closest('div.ui-tabs').find('#' + ui.newTab.find('a').attr('href').substring(1));
+                    $panel.find('iframe[id$="__Frame"]:not(.height-fix)').each( function() {
+                        $(this).height($(this).height() + 1).addClass('height-fix');
+                    });
+                }
+            });
         }
 
         this.resetValues();
