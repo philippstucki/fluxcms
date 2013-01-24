@@ -237,7 +237,7 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
     var valueSet = false;
     var height = 0;
     var fckId = null;
-    var delayedSetValue = null;
+    var delayedSetValue;
 
     this.init = function(DOMNode) {
 		this.initField(DOMNode);
@@ -265,7 +265,6 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
         oFCKeditor.Config['CustomConfigurationsPath'] = bx_webroot + 'webinc/plugins/dbforms2/fckconfig.js';
         oFCKeditor.ToolbarSet = 'BxCMS';
         oFCKeditor.ReplaceTextarea();
-
     }
 
     this.eFCK_OnComplete = function(einstance) {
@@ -273,10 +272,9 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
         var wev = new bx_helpers_contextfixer(this.eFCK_OnAfterSetHTML, this);
         einstance.Events.AttachEvent('OnAfterSetHTML', wev.execute);
         this.editorInstance = einstance;
-        console.log('complete: ', this.id, this.fckId);
         if (this.delayedSetValue === true) {
+            this.delayedSetValue = false;
             this.setValue(this.value);
-            console.log('delayed set: ', this.value);
         }
     }
 
@@ -298,6 +296,7 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
                     value = '';
                 }
 				oEditor.SetHTML(value);
+
                 this.valueSet = true;
 			} else {
 				this.DOMNode.value = value;
@@ -305,12 +304,14 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 
             if (oEditor.Status !== FCK_STATUS_COMPLETE) {
                 this.delayedSetValue = true;
-                console.log('set later:', this.id);
             }
 
 		} else {
 			this.DOMNode.value = value;
+            this.delayedSetValue = true;
 		}
+
+        this.delayedSetValue = true;
         this.lastValue = value;
         this.value = value;
 	}
