@@ -21,7 +21,7 @@ class popoon_components_generators_admintree extends popoon_components_reader {
         if (!empty($this->requestUri)) {
             
             $strpos = strpos($this->requestUri,"/admin/navi/tree");
-            $path = substr($this->requestUri,$strpos+16);
+            $path = rawurldecode(substr($this->requestUri,$strpos+16));
             if (!$path) {
                 $path = '/';
             }
