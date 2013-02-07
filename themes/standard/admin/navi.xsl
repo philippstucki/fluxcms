@@ -63,12 +63,6 @@
     webFXTreeConfig.pathStore = new Array();
     var tree = new WebFXLoadTree(" home ","../navi/tree/" ,"<xsl:value-of select="$webroot"/>admin/overview/");
 
-
-    /*tree.add(new WebFXTreeItem("Tree Item 1"));
-    tree.add(new WebFXLoadTreeItem("Tree Item 2", "tree.xml"));
-    tree.add(rti = new WebFXLoadTreeItem("Tree Item 3 (Reload)", "date.xml.pl"));
-    tree.add(new WebFXTreeItem("Tree Item 4"));
-    */
     var bx_webroot = '<xsl:value-of select="$webroot"/>';
 
     document.write(tree);
