@@ -87,7 +87,7 @@ var webFXTreeHandler = {
 	select    : function (oItem) { this.all[oItem.id.replace('-icon','')].select(); },
 	focus     : function (oItem) { this.all[oItem.id.replace('-anchor','')].focus(); },
 	blur      : function (oItem) { this.all[oItem.id.replace('-anchor','')].blur(); },
-	reload      : function (oItem) { this.all[oItem.id.replace('-icon','').replace('-anchor','')].reload(); },	
+	reload      : function (oItem) { this.all[oItem.id.replace('-icon','').replace('-anchor','')].reload(); },
 	keydown   : function (oItem, e) { return this.all[oItem.id].keydown(e.keyCode); },
 	cookies   : new WebFXCookie(),
 	insertHTMLBeforeEnd	:	function (oElement, sHTML) {
@@ -116,9 +116,9 @@ var webFXTreeHandler = {
             activeItem.setAttribute('style', 'background-color:' + webFXTreeConfig.itemActiveBgColor + ';');
             this.activeItemId = id;
        }
-       
+
        return;
-    
+
     }
 };
 
@@ -156,7 +156,7 @@ function WebFXTreeAbstractNode(sText, sAction, sIconAction, sTitle, sTags) {
 	this.id     = webFXTreeHandler.getId();
 	this.text   = sText || webFXTreeConfig.defaultText;
 	this.action = sAction || webFXTreeConfig.defaultAction;
-	this.iconAction = sIconAction || "alert('default')";	
+	this.iconAction = sIconAction || "alert('default')";
 	this.title = sTitle || "";
 	this.tags = sTags || new Array();
 //	alert("ia" + this.iconAction);
@@ -315,7 +315,7 @@ function WebFXTree(sText, sAction, sBehavior, sIcon, sOpenIcon, sIconAction, sTi
 	this.icon      = sIcon || webFXTreeConfig.rootIcon;
 	this.openIcon  = sOpenIcon || webFXTreeConfig.openRootIcon;
 	this.iconAction  = sIconAction || "";
-	this.title  = sTitle || "";	
+	this.title  = sTitle || "";
 	this.tags = sTags || new Array();
 	/* Defaults to open */
 	if (webFXTreeConfig.usePersistence)
@@ -389,7 +389,7 @@ WebFXTree.prototype.toString = function() {
 	}
 	str += "id=\"" + this.id + "\"  ondblclick=\"webFXTreeHandler.toggle(this);\" class=\"webfx-tree-item\" onkeydown=\"return webFXTreeHandler.keydown(this, event)\">";
 	str += "<img id=\"" + this.id + "-icon\" class=\"webfx-tree-icon\" src=\"" + ((webFXTreeHandler.behavior == 'classic' && this.open)?this.openIcon:this.icon) + "\" onclick=\"testopen('/',this); \" oncontextmenu=\"try{if (event) {event.preventDefault()};testopen('/',this);} catch(e){}\" href=\"" + this.action + "\" id=\"" + this.id + "-anchor\" onfocus=\"webFXTreeHandler.focus(this);\" onblur=\"webFXTreeHandler.blur(this);\"> <a oncontextmenu=\"try{if (event) {event.preventDefault()};testopen('/',this);} catch(e){}\" target=\"edit\" href=\"" + this.action + "\" title=\""+this.title+"\"  id=\"" + this.id + "-anchor\" onfocus=\"webFXTreeHandler.focus(this);\" onclick=\"webFXTreeHandler.activateItem('"+this.id+"', 1);\" onblur=\"webFXTreeHandler.blur(this);\">" + this.text + "</a></div>";
-	
+
 	str += "<div id=\"" + this.id + "-cont\" class=\"webfx-tree-container\" style=\"display: " + ((this.open)?'block':'none') + ";\">";
 	for (var i = 0; i < this.childNodes.length; i++) {
 		str += this.childNodes[i].toString(i, this.childNodes.length);
@@ -415,9 +415,9 @@ function WebFXTreeItem(sText, sAction, eParent, sIcon, sOpenIcon, sIconAction, s
 	if (sOpenIcon) { this.openIcon = sOpenIcon; }
 	if (eParent) { eParent.add(this); }
 	if (sIconAction) { this.iconAction = sIconAction;}
-	if (sTitle) { this.title = sTitle;}	
+	if (sTitle) { this.title = sTitle;}
 	if (sTags) { this.tags = sTags;
-	}		
+	}
 	else {
 	this.tags = new Array();}
 }
@@ -555,17 +555,17 @@ WebFXTreeItem.prototype.toString = function (nItem, nItemCount) {
 	else if (!this.icon) { this.icon = webFXTreeConfig.fileIcon; }
 	var label = this.text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	var str = "<div "
-         
-        //alert(this.action.match(webFXTreeConfig.requestPath)); 
+
+        //alert(this.action.match(webFXTreeConfig.requestPath));
         if (this.tags["style"]) {
 		    str+="style=\""+ this.tags["style"] + "\" ";
-        }	
-        
+        }
+
         isActiveNode = this.action.match(webFXTreeConfig.requestPath);
         if (isActiveNode != null && isActiveNode != "/") {
             str+="class=\""+webFXTreeConfig.itemActiveClass+"\" ";
         }
-   
+
 
 	str += "id=\"" + this.id + "\" ondblclick=\"webFXTreeHandler.toggle(this);\" class=\"webfx-tree-item\" onkeydown=\"return webFXTreeHandler.keydown(this, event)\">";
 	str += indent;
