@@ -63,7 +63,7 @@ class popoon_components_generators_admintree extends popoon_components_reader {
             switch ($entry->getProperty("output-mimetype")) {
                 case "httpd/unix-directory":
                 
-                    $el->setAttribute('iconAction',"testopen('".$coll->uri.$p['rawname'].$entry->getBaseName()."/',this)");
+                    $el->setAttribute('iconAction',"testopen(".json_encode($coll->uri.$p['rawname'].$entry->getBaseName().'/').",this)");
                     $el->setAttribute('icon', BX_WEBROOT.'admin/webinc/img/icons/fileicon_folder.gif');
                     $el->setAttribute('openIcon', BX_WEBROOT.'admin/webinc/img/icons/fileicon_folder.gif');
                     $el->setAttribute('title',$entry->getDisplayName());
