@@ -52,6 +52,12 @@
 |-----------------------------------------------------------------------------|
 | Created 2001-09-27 | All changes are in the log above. | Updated 2002-10-10 |
 \----------------------------------------------------------------------------*/
+
+// http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
+RegExp.escape= function(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+};
+
 var treeNodeName='item';
 
 webFXTreeConfig.loadingText = "Loading...";
@@ -300,7 +306,7 @@ function _xmlFileLoaded(oXmlDoc, jsParentNode, expandSrc) {
 					relRequestPath = "/"+jsChildNode.src.replace(webFXTreeConfig.webroot, "");
 					relRequestPath = relRequestPath.replace(webFXTreeConfig.naviTreePath, "");
 					relRequestPath = relRequestPath.replace("//","/");
-					reqMatch = webFXTreeConfig.requestPath.match(relRequestPath);
+					reqMatch = webFXTreeConfig.requestPath.match(RegExp.escape(relRequestPath));
 					webFXTreeConfig.pathStore[relRequestPath] = jsChildNode;
 					if (reqMatch != '/' && reqMatch != null) {
 						jsChildNode.expand();
