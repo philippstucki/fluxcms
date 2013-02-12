@@ -232,9 +232,7 @@ dbforms2_field_text_area.prototype = new dbforms2_field();
  */
 function dbforms2_field_text_wysiwyg(DOMNode) {
 
-    var lastValue = null;
     var editorInstance = null;
-    var valueSet = false;
     var height = 0;
     var fckId = null;
     var delayedSetValue;
@@ -243,8 +241,6 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 		this.initField(DOMNode);
 
         this.fckId = this.form.name+'_'+this.id;
-
-        this.lastValue = this.defaultValue;
 
         dbforms2_fckEditors[this.fckId] = {
             context : this,
@@ -268,20 +264,10 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
     }
 
     this.eFCK_OnComplete = function(einstance) {
-        // register the 'OnAfterSetHTML' event
-        var wev = new bx_helpers_contextfixer(this.eFCK_OnAfterSetHTML, this);
-        einstance.Events.AttachEvent('OnAfterSetHTML', wev.execute);
         this.editorInstance = einstance;
         if (this.delayedSetValue === true) {
             this.delayedSetValue = false;
             this.setValue(this.value);
-        }
-    }
-
-    this.eFCK_OnAfterSetHTML = function(einstance) {
-        if(this.valueSet) {
-            this.resetChanged();
-            this.valueSet = false;
         }
     }
 
@@ -296,8 +282,7 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
                     value = '';
                 }
 				oEditor.SetHTML(value);
-
-                this.valueSet = true;
+                oEditor.ResetIsDirty();
 			} else {
 				this.DOMNode.value = value;
 			}
@@ -312,7 +297,6 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 		}
 
         this.delayedSetValue = true;
-        this.lastValue = value;
         this.value = value;
 	}
 
@@ -322,21 +306,14 @@ function dbforms2_field_text_wysiwyg(DOMNode) {
 		return oEditor.GetXHTML(true);
 	}
 
-    this.resetChanged = function() {
-        if(this.editorInstance != null) {
-            this.lastValue = this.editorInstance.GetXHTML(true);
-        }
-    }
-
     this.hasChanged = function() {
-		if (typeof FCKeditorAPI  != "undefined") {
-            var oEditor = FCKeditorAPI.GetInstance(this.fckId);
-            var value = oEditor.GetXHTML(true);
-            if(value != this.lastValue) {
-                return true;
-            }
+        var oEditor;
+        if (typeof FCKeditorAPI  !== "undefined") {
+            oEditor = FCKeditorAPI.GetInstance(this.fckId);
+            return oEditor.IsDirty();
+        } else {
+            return true;
         }
-        return false;
     }
 
 }
