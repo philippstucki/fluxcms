@@ -1,5 +1,6 @@
 <?php
 
+
 include_once("../../../../inc/bx/init.php");
 bx_init::start('./conf/config.xml', '../../../../');
 
@@ -18,37 +19,24 @@ if (
     $output = file_get_contents($cacheFilename);
 } else {
     include('lessc.inc.php');
-    $less = new lessc($absCssFilename);
 
-    $less->registerFunction("fontsize-set", function($arg, $ctx) {
-        list($type, $value) = $arg;
-        list($fst, $fsv) = $ctx->get('@font-size');
-        $ctx->set('@font-size', array('px', $value));
-        $ctx->set('@em', array('em', 1/$value));
-        return array('em', $value/$fsv);
-    });
-
-    $less->registerFunction("em", function($arg, $ctx) {
-        list($type, $value) = $arg;
-        list($pxt, $pxv) = $ctx->get('@em');
-        return array('em', $value*$pxv);
-    });
+    $less = new lessc();
 
     if ($conf->environment === 'dev') {
-        $less->setFormatter('indent');
+        $less->setFormatter('classic');
     } else {
         $less->setFormatter('compressed');
     }
 
     try {
-        $output = $less->parse(
-            null,
+
+        $less->setVariables(
             array(
-                'fluxcms-theme-root' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'",
-                'font-size' => '16px',
-                'em' => '1/16em',
+                'fluxcms-theme-root' => "'".BX_WEBROOT_THEMES.bx_helpers_config::getOption('theme')."/'"
             )
         );
+
+        $output = $less->compileFile($absCssFilename);
         file_put_contents($cacheFilename, $output);
     } catch (exception $e) {
         echo $e->getMessage();
