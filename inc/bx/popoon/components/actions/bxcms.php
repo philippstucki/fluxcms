@@ -41,11 +41,6 @@ class popoon_components_actions_bxcms extends popoon_components_action {
     }
 
     function act() {
-        // set YADIS Header
-        if ($this->getParameterDefault("noAdminDisclosure") != "true") {
-            $this->sitemap->setHeader("X-XRDS-Location", BX_WEBROOT . "admin/openid/xrds.xml");
-        }
-
         // set X-PoweredBy
         if ($this->getParameterDefault("noPoweredBy") != "true") {
             $this->sitemap->setHeader("X-CMS-Powered-By", "Flux CMS " . BXCMS_VERSION.'/'.BXCMS_BUILD_DATE ." <http://flux-cms.org>");

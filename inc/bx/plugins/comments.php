@@ -427,46 +427,6 @@ class bx_plugins_comments extends bx_plugin implements bxIplugin {
                $xml .= '
                </tr>';
                
-               if(isset($_COOKIE['openid_enabled']) && $_COOKIE['openid_enabled']) {
-                    if(isset($_SESSION['flux_openid_url']) && $_SESSION['flux_openid_url']) {
-                        //continue();
-                    } else {
-                        if(isset($_SESSION['flux_openid_immediate_checked']) && $_SESSION['flux_openid_immediate_checked']) {
-                            $immediate = false;
-                        } else {
-                            $immediate = true;
-                        }
-                        $_SESSION['flux_openid_immediate_checked'] = true;
-                    }
-                }
-               if(isset($immediate) && $immediate == true) {
-                   $xml .= '<iframe id="foo"  style="display: none;"/>';
-                   
-                   $process_url = BX_WEBROOT.'inc/bx/php/openid/finish_auth.php';
-                   $trust_root = BX_WEBROOT;
-                   $store_path = BX_TEMP_DIR."_php_consumer_test";
-                   
-                   require_once "Auth/OpenID/Consumer.php";
-                   
-                   require_once "Auth/OpenID/FileStore.php";
-                   $store = new Auth_OpenID_FileStore($store_path);
-                   
-                   $consumer = new Auth_OpenID_Consumer($store, null,true);
-
-                   // Begin the OpenID authentication process.
-                   list($status, $info) = $consumer->beginAuth($_COOKIE['openid_enabled']);
-                   // Handle failure status return values.
-                   if ($status != Auth_OpenID_SUCCESS) {
-                       $error = "Authentication error.";
-                       //include 'index.php';
-                   }
-                   // Redirect the user to the OpenID server for authentication.  Store
-                   // the token for this authentication so we can verify the response.
-                   $_SESSION['openid_token'] = $info->token;
-                   $redirect_url = $consumer->constructRedirect($info, $process_url, $trust_root);
-                   
-                   $xml .= '<tr><td></td><td><iframe src="'.$redirect_url.'" style="display: block; height:35px;" /></td></tr>';
-               }
                $xml .= '<tr>
                <td valign="top"><i18n:text i18n:key="blogCommentComment">Comment</i18n:text>*</td>
                <td><textarea rows="10" cols="40" name="comments">'.$data['comments'].'</textarea></td>

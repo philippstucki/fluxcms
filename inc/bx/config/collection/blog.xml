@@ -2,11 +2,11 @@
 
 <bxcms xmlns="http://bitflux.org/config">
 
- <variable name="blogid" value="1"/>
- <variable name="postsperpage" value="10"/>
- <variable name="blogxsl" value="blog.xsl"/>
- 
- <plugins inGetChildren="false">
+    <variable name="blogid" value="1"/>
+    <variable name="postsperpage" value="10"/>
+    <variable name="blogxsl" value="blog.xsl"/>
+
+    <plugins inGetChildren="false">
         <extension type="xml"/>
         <file preg="#plugin=trackback#"/>
         <parameter type="pipeline" name="xslt" value="../standard/plugins/blog/trackback.xsl"/>
@@ -36,9 +36,9 @@
         </plugin>
 
     </plugins>
-    
 
-    
+
+
     <plugins>
         <extension type="html"/>
         <parameter type="pipeline" name="xslt" value="$blogxsl"/>
@@ -49,7 +49,7 @@
         <plugin type="navitree"></plugin>
     </plugins>
 
-    
+
     <plugins inGetChildren="false">
         <extension type="xml"/>
         <file preg="#rss$#"/>
@@ -60,8 +60,8 @@
             <parameter name="blogid" value="$blogid"/>
         </plugin>
     </plugins>
-    
-    
+
+
     <plugins inGetChildren="false">
         <extension type="xml"/>
         <file name="atom"/>
@@ -84,8 +84,8 @@
             <parameter name="blogid" value="$blogid"/>
         </plugin>
     </plugins>
-    
-    
+
+
     <plugins inGetChildren="false">
         <extension type="txt"/>
         <file name="microsummary"/>
@@ -97,23 +97,23 @@
         </plugin>
 
     </plugins>
-    
+
     <plugins inGetChildren="false">
         <extension type="xml"/>
         <file name="osd"/>
         <parameter name="output-mimetype" type="pipeline" value="text/xml"/>
         <parameter type="pipeline" name="xslt" value="../standard/plugins/blog/osd.xsl"/>
         <plugin type="empty">
-            
+
         </plugin>
 
     </plugins>
-    
-    
+
+
     <plugins inGetChildren="false">
-	    <extension type="xml"/>
+        <extension type="xml"/>
         <file name="xmlrpc"/>
-         
+
         <parameter type="pipeline" name="xslt" value="../standard/copy.xsl"/>
         <parameter name="output-mimetype" type="pipeline" value="text/xml"/>
 
@@ -121,12 +121,12 @@
 
         </plugin>
     </plugins>
-    
-   <plugins inGetChildren="false">
-	    <extension type="rsd"/>
+
+    <plugins inGetChildren="false">
+        <extension type="rsd"/>
 
         <file name="xmlrpc"/>
-         
+
         <parameter type="pipeline" name="xslt" value="../standard/copy.xsl"/>
         <parameter name="output-mimetype" type="pipeline" value="text/xml"/>
 
@@ -134,11 +134,11 @@
 
         </plugin>
     </plugins>
-    
-    
-   <!-- catch all -->
+
+
+    <!-- catch all -->
     <plugins>
-        
+
         <parameter type="pipeline" name="xslt" value="$blogxsl"/>
         <plugin type="blog">
             <parameter name="blogid" value="$blogid"/>

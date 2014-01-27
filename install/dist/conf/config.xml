@@ -46,8 +46,6 @@
          Requires SimplePerm activated.
      -->
      <blogEditOwnOnly>0</blogEditOwnOnly>        
-        
-    <openIdEnabled allowFromDB="true">false</openIdEnabled>
     
     <!-- If you want to get mail notification when a comment is rejected by the Flux CMS
             comment spam detection, set this to true. Moderated and approved comments
