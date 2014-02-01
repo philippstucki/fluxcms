@@ -39,10 +39,12 @@ class bx_init {
             bx_config_generate::generateCachedConfigFile($configfile, self::$bxdir, self::$tmpdir );
         }
 
-
         include_once($configCachedFile);
 
         require_once(BX_LIBS_DIR.'autoload.php');
+        if (is_readable(BX_PROJECT_DIR.'/vendor/autoload.php')) {
+            require(BX_PROJECT_DIR.'/vendor/autoload.php');
+        }
 
         $GLOBALS['POOL'] = popoon_pool::getInstance("bx_config");
         $GLOBALS['POOL']->debug = false;
