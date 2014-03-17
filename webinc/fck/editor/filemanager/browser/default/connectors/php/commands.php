@@ -104,7 +104,7 @@ function CreateFolder( $resourceType, $currentFolder )
 
 	if ( isset( $_GET['NewFolderName'] ) )
 	{
-		$sNewFolderName = $_GET['NewFolderName'] ;
+		$sNewFolderName = bx_helpers_string::makeUri($_GET['NewFolderName']);
 
 		if ( strpos( $sNewFolderName, '..' ) !== FALSE )
 			$sErrorNumber = '102' ;		// Invalid folder name.
