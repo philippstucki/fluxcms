@@ -55,6 +55,13 @@ oListManager.Clear = function()
 	this.TableRows = new Object() ;
 }
 
+function ProtectPath(path)
+{
+    path = path.replace( /\\/g, '\\\\');
+    path = path.replace( /'/g, '\\\'');
+    return path ;
+}
+
 oListManager.AddItem = function( folderName, folderPath )
 {
 	// Create the new row.
@@ -62,7 +69,7 @@ oListManager.AddItem = function( folderName, folderPath )
 	oRow.className = 'FolderListFolder' ;
 
 	// Build the link to view the folder.
-	var sLink = '<a href="#" onclick="OpenFolder(\'' + folderPath + '\');return false;">' ;
+	var sLink = '<a href="#" onclick="OpenFolder(\'' + ProtectPath(folderPath) + '\');return false;">' ;
 
 	// Add the folder icon cell.
 	var oCell = oRow.insertCell(-1) ;
