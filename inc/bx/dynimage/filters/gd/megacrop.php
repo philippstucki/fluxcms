@@ -54,7 +54,7 @@ class bx_dynimage_filters_gd_megacrop extends bx_dynimage_filters_gd {
         $imgOut = imagecreatetruecolor($this->imageEndSize['w'], $this->imageEndSize['h']);
         
         // create image background if needed
-        if(!$this->isClippingSet() && !empty($this->parameters['background-color'])) {
+        if(!empty($this->parameters['background-color'])) {
             $bgColorH = hexdec($this->parameters['background-color']);
     
             $bgColor = imagecolorallocate(
