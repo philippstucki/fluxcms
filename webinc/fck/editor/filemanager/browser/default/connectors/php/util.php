@@ -32,6 +32,6 @@ function RemoveFromEnd( $sourceString, $charToRemove )
 
 function ConvertToXmlAttribute( $value )
 {
-	return mb_detect_encoding($value, 'UTF-8') === 'UTF-8' ? $value : utf8_encode( htmlspecialchars( $value ) );
+	return mb_detect_encoding($value, 'UTF-8') === 'UTF-8' ? htmlspecialchars($value) : utf8_encode( htmlspecialchars( $value ) );
 }
 ?>
